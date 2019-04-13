@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 左右对齐 -->
+    <declare-styleable name="LetterSpacing">
+        <!--文字间距 1个中文4个间距-->
+        <attr name="letterSpace" format="float"/>
+        <attr name="letterAlignLength" format="float"/>
+        <attr name = "text" format = "string" />
+    </declare-styleable>
+
+    <!-- 圆角view -->
+    <declare-styleable name="RoundView">
+        <!--圆角-->
+        <attr name="radius" format="dimension"/>
+        <attr name="radiuTopLeft" format="dimension"/>
+        <attr name="radiuTopRight" format="dimension"/>
+        <attr name="radiuBottomLeft" format="dimension"/>
+        <attr name="radiuBottomRight" format="dimension"/>
+        <attr name="borderColor" format="color"/>
+        <attr name="borderSize" format="dimension"/>
+    </declare-styleable>
+
+    <!-- 左右滑动删除 -->
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="swipeEnable" format="boolean"/>
+        <attr name="ios" format="boolean"/>
+        <attr name="leftSwipe" format="boolean"/>
+    </declare-styleable>
+
+    <!-- 流动布局-->
+    <declare-styleable name="TagFlowLayout">
+        <attr name="max_select" format="integer"></attr>
+        <attr name="tag_gravity">
+            <enum name="left" value="-1"/>
+            <enum name="center" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="round_imageview">
+        <attr name="border_color" format="color"/>
+        <attr name="border_width" format="dimension"/>
+        <attr name="circle" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="WheelView">
+        <attr name="unitHeight" format="dimension" />
+        <attr name="itemNumber" format="integer"/>
+
+        <attr name="normalTextColor" format="color" />
+        <attr name="normalTextSize" format="dimension" />
+        <attr name="selectedTextColor" format="color" />
+        <attr name="selectedTextSize" format="dimension" />
+        <attr name="isCyclic" format="boolean" />
+
+        <attr name="lineColor" format="color" />
+        <attr name="lineHeight" format="dimension" />
+
+        <attr name="noEmpty" format="boolean"/>
+        <attr name="isEnable" format="boolean"/>
+
+        <attr name="maskDarkColor" format="color" />
+        <attr name="maskLightColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="Custom_Round_Image_View">
+        <attr name="round_radius" format="dimension"/>
+        <attr name="left_top_radius" format="dimension"/>
+        <attr name="right_top_radius" format="dimension"/>
+        <attr name="right_bottom_radius" format="dimension"/>
+        <attr name="left_bottom_radius" format="dimension"/>
+    </declare-styleable>
+
+</resources>

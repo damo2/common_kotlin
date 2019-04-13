@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="common_gray">#808080</color>
+    <color name="common_textgray">#999999</color>
+    <color name="common_blank">#333333</color>
+    <color name="common_transparent">#00000000</color>
+    <color name="common_lineColor">#E5E5E5</color>
+    <!--指示器颜色-->
+    <color name="common_bg_indicator_point_normal">#D8D8D8</color>
+    <color name="common_bg_indicator_point_selected">#A6A6A6</color>
+    <color name="common_toastBg">#99000000</color>
+
+    <color name="common_loadBg">#66333333</color>
+</resources>

@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+//kotlin
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    releaseImplementation "io.objectbox:objectbox-android:2.3.1"
+    debugImplementation "io.objectbox:objectbox-android-objectbrowser:2.3.1"
+    kapt "io.objectbox:objectbox-processor:2.3.1"
+    // 一些有用的Kotlin扩展函数
+    implementation "io.objectbox:objectbox-kotlin:2.3.1"
+    //Rxjava
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    //
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation project(path: ':common')
+}
+//放在最后 不然会出错More than one file was found with OS independent path 'lib/x86_64/libobjectbox-jni.so'
+apply plugin: 'io.objectbox'

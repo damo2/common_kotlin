@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BaseDialogFragment" parent="Theme.AppCompat.Light.Dialog">
+    </style>
+
+    <style name="BottomDialog" parent="BaseDialogFragment">
+        <!--<item name="android:windowAnimationStyle">@style/BottomDialogAnimation</item>-->
+    </style>
+</resources>

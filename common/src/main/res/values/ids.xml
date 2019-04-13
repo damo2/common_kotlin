@@ -1,0 +1,4 @@
+<resources>
+    <item type="id" name="idTriggerLastTime"/>
+    <item type="id" name="idTriggerDelay"/>
+</resources>

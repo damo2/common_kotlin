@@ -1,0 +1,30 @@
+package com.app.common.utils
+
+/**
+ * Created by wr
+ * Date: 2019/2/14  16:56
+ * mail: 1902065822@qq.com
+ * describe: 带参数的单例封装，双重检查锁定,不需要参数时，只需使用lazy的属性委托
+ *
+例子：
+class Manager constructor(context: Context) {
+init {
+// Init using context argument
+}
+companion object : SingleHolder<Manager, Context>(::Manager)
+}
+调用
+Manager.getInstance(context)
+ */
+open class SingleHolder<out T, in A>(private var creator: (A) -> T) {
+    //volatile不保证原子操作，所以，很容易读到脏数据。在两个或者更多的线程访问的成员变量上使用volatile
+    @Volatile
+    private var instance: T? = null
+
+    fun getInstance(arg: A): T =
+            instance ?: synchronized(this) {
+                instance ?: creator(arg).apply { instance = this }
+            }
+}
+
+
