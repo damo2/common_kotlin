@@ -68,22 +68,12 @@ object GsonConvert {
     }
 
     class ParameterizedTypeImpl(private val raw: Class<*>, args: Array<Type>?) : ParameterizedType {
-        private val args: Array<Type>
+        private val args: Array<Type> = args ?: arrayOf()
 
-        init {
-            this.args = args ?: arrayOf()
-        }
+        override fun getActualTypeArguments(): Array<Type> = args
 
-        override fun getActualTypeArguments(): Array<Type> {
-            return args
-        }
+        override fun getRawType(): Type = raw
 
-        override fun getRawType(): Type {
-            return raw
-        }
-
-        override fun getOwnerType(): Type? {
-            return null
-        }
+        override fun getOwnerType(): Type? = null
     }
 }

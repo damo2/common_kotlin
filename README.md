@@ -1,2 +1,4 @@
+kotlin
 
-classpath "io.objectbox:objectbox-gradle-plugin:2.3.1"
+libdb           objectbox数据库缓存
+libimgcompre    图片压缩

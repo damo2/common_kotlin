@@ -1,3 +1,4 @@
+数据库缓存
 
 项目build.gradle 添加
 classpath "io.objectbox:objectbox-gradle-plugin:2.3.1"

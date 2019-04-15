@@ -19,11 +19,7 @@ import com.app.common.extensions.setOnClickExtNoFast
 import com.bumptech.glide.Glide
 
 class ViewHolder(private val mContext: Context, val convertView: View) : RecyclerView.ViewHolder(convertView) {
-    private val mViews: SparseArray<View>
-
-    init {
-        mViews = SparseArray()
-    }
+    private val mViews: SparseArray<View> = SparseArray()
 
     /**
      * 通过viewId获取控件

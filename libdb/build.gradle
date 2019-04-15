@@ -39,7 +39,6 @@ dependencies {
 
     //
     implementation 'com.google.code.gson:gson:2.8.2'
-    implementation project(path: ':common')
 }
 //放在最后 不然会出错More than one file was found with OS independent path 'lib/x86_64/libobjectbox-jni.so'
 apply plugin: 'io.objectbox'

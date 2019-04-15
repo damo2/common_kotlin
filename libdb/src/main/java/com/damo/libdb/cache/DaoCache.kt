@@ -1,7 +1,7 @@
 package com.damo.libdb.cache
 
-import com.app.common.json.GsonConvert
-import com.app.common.logger.Logger
+
+import com.damo.libdb.cache.GsonConvert.jsonToBeanList
 import com.damo.libdb.objectbox.bean.CacheInfoBean
 import com.damo.libdb.objectbox.ope.CacheInfoBoxOpe
 import com.google.gson.Gson
@@ -9,6 +9,8 @@ import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
 
 /**
  * 缓存数据和取缓存数据
@@ -35,6 +37,7 @@ object DaoCache : ICache {
             })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
+
     //查询
     private fun <I> getQueryCacheCommonObservable(cacheKey: String?, change: (result: String) -> I): Observable<I> =
             Observable.create(ObservableOnSubscribe<String> { emitter ->
@@ -44,7 +47,6 @@ object DaoCache : ICache {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .map {
-                        Logger.d("map")
                         change(it)
                     }
 
@@ -66,11 +68,13 @@ object DaoCache : ICache {
     //查询
     override fun getString(key: String?) =
             getQueryCacheCommonObservable(key, { it })
+
     override fun <I> getBean(key: String?, type: Class<I>) =
             getQueryCacheCommonObservable(key, { Gson().fromJson(it, type) })
 
     override fun <I> getBeanList(key: String?, type: Class<I>) =
             getQueryCacheCommonObservable(key, { GsonConvert.jsonToBeanList(it, type) })
+
     //删除
     override fun delete(key: String?) =
             getDeleteCacheCommonObservable(key)
@@ -96,7 +100,34 @@ object DaoCache : ICache {
 
     override fun <I> getBeanSync(key: String?, type: Class<I>): I = Gson().fromJson(getStringSync(key), type)
 
-    override fun <I> getBeanListSync(key: String?, type: Class<I>): List<I>? = GsonConvert.jsonToBeanList(getStringSync(key), type)
+    override fun <I> getBeanListSync(key: String?, type: Class<I>): List<I>? = jsonToBeanList(getStringSync(key), type)
 
     override fun deleteSync(key: String?) = CacheInfoBoxOpe.deleteByKey(key ?: "") > 0
+}
+
+private object GsonConvert {
+
+    fun <T> jsonToBeanList(json: String?, classType: Class<T>): List<T>? {
+        val listType = ParameterizedTypeImpl(List::class.java, arrayOf(classType))
+        return Gson().fromJson<List<T>>(json, listType)
+    }
+
+    @Deprecated("  val resultData = GsonConvert.fromJsonToBeanDataList(result,BaseBean::class.java,SelectTypeTwoBean::class.java) as BaseBean<List<SelectTypeTwoBean>>")
+    fun <T> fromJsonToBeanDataList(json: String?, classType: Class<*>, clazz: Class<T>): Any? {
+        // 生成List<T> 中的 List<T>
+        val listType = ParameterizedTypeImpl(List::class.java, arrayOf(clazz))
+        // 根据List<T>生成完整的Result<List<T>>
+        val type = ParameterizedTypeImpl(classType, arrayOf(listType))
+        return Gson().fromJson<Any>(json, type)
+    }
+
+    class ParameterizedTypeImpl(private val raw: Class<*>, args: Array<Type>?) : ParameterizedType {
+        private val args: Array<Type> = args ?: arrayOf()
+
+        override fun getActualTypeArguments(): Array<Type> = args
+
+        override fun getRawType(): Type = raw
+
+        override fun getOwnerType(): Type? = null
+    }
 }
