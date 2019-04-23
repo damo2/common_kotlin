@@ -15,7 +15,7 @@ class LoadingDialogFragment : AppBaseDialogFragment() {
     override fun bindLayout(): Int = R.layout.common_dialog_loading
     override fun initTop() {
         super.initTop()
-        dialog.window?.attributes?.gravity = Gravity.CENTER
+        dialog?.window?.attributes?.gravity = Gravity.CENTER
         dialog?.setCanceledOnTouchOutside(false)
     }
 

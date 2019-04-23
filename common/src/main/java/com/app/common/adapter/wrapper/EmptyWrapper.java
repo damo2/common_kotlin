@@ -1,7 +1,7 @@
 package com.app.common.adapter.wrapper;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import com.app.common.adapter.util.ViewHolder;

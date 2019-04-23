@@ -1,8 +1,8 @@
 package com.app.common.logger
 
 import LoggerPrinter
-import android.support.annotation.NonNull
-import android.support.annotation.Nullable
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
 
 class PrettyFormatStrategy(builder: Builder) : FormatStrategy {
 
@@ -161,7 +161,8 @@ class PrettyFormatStrategy(builder: Builder) : FormatStrategy {
         return -1
     }
 
-    @Nullable private fun formatTag(@Nullable tag: String?): String {
+    @Nullable
+    private fun formatTag(@Nullable tag: String?): String {
         return if (this.tag != tag) {
             this.tag + "-" + tag
         } else this.tag
@@ -171,8 +172,10 @@ class PrettyFormatStrategy(builder: Builder) : FormatStrategy {
         internal var methodCount = 2
         internal var methodOffset = 0
         internal var showThreadInfo = true
-        @Nullable internal var logStrategy: LogStrategy? = null
-        @Nullable internal var tag = "PRETTY_LOGGER"
+        @Nullable
+        internal var logStrategy: LogStrategy? = null
+        @Nullable
+        internal var tag = "PRETTY_LOGGER"
 
         @NonNull
         fun methodCount(methodCount: Int) = apply { this.methodCount = methodCount }

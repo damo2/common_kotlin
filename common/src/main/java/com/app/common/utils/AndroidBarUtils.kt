@@ -6,11 +6,11 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
-import android.support.v4.widget.DrawerLayout
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
+import androidx.drawerlayout.widget.DrawerLayout
 
 /**
  * @author zsl

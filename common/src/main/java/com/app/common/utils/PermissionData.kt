@@ -1,8 +1,6 @@
 package com.app.common.utils
 
 import android.Manifest
-import android.os.Build
-import android.support.annotation.RequiresApi
 
 /**
  * Created by wangru

@@ -1,8 +1,8 @@
 package com.app.common.logger
 
 import android.os.HandlerThread
-import android.support.annotation.NonNull
-import android.support.annotation.Nullable
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
 import com.app.common.utils.StorageUtils
 import java.text.SimpleDateFormat
 import java.util.*

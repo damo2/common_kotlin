@@ -6,13 +6,13 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
-import android.support.annotation.Nullable
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
-import android.support.v4.content.res.ResourcesCompat
 import android.util.TypedValue
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.Nullable
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.core.content.res.ResourcesCompat
 import com.app.common.utils.StorageUtils
 import java.io.File
 
@@ -107,11 +107,9 @@ fun Context.getExternalCachePath(childPath: String): String? {
 /*
 ---------------------------     获取资源start        --------------------------------
  */
-fun Context.getDrawableExt(@DrawableRes id: Int, @Nullable theme: Resources.Theme?)
-        = ResourcesCompat.getDrawable(resources, id, theme)
+fun Context.getDrawableExt(@DrawableRes id: Int, @Nullable theme: Resources.Theme?) = ResourcesCompat.getDrawable(resources, id, theme)
 
-fun Context.getDrawableExt(@DrawableRes id: Int)
-        = ContextCompat.getDrawable(this, id)
+fun Context.getDrawableExt(@DrawableRes id: Int) = ContextCompat.getDrawable(this, id)
 
 fun Context.getColorExt(@ColorRes id: Int) = ContextCompat.getColor(this, id)
 
@@ -119,7 +117,7 @@ fun Context.getColorExt(@ColorRes id: Int, theme: Resources.Theme?) =
         ResourcesCompat.getColor(this.resources, id, theme)
 
 //getColorStateList过时方法处理
-fun Context.getColorStateListExt(@ColorRes id: Int): ColorStateList =
+fun Context.getColorStateListExt(@ColorRes id: Int): ColorStateList? =
         ContextCompat.getColorStateList(this, id)
 
 //getColorStateList过时方法处理

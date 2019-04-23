@@ -15,7 +15,7 @@ import java.security.MessageDigest
  * describe:
  */
 
-class GlideRoundedCornersTransform(var context: Context, var mRadius: Float, var mCornerType: CornerType) : CenterCrop(context) {
+class GlideRoundedCornersTransform(var context: Context, var mRadius: Float, var mCornerType: CornerType) : CenterCrop() {
 
     enum class CornerType {
         ALL,

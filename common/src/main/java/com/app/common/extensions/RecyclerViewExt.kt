@@ -1,6 +1,6 @@
 package com.app.common.extensions
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 /**
@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
  */
 fun RecyclerView.addScrollPauseLoadExt(){
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             when (newState) {
                 RecyclerView.SCROLL_STATE_IDLE -> Glide.with(getContext()).resumeRequests()

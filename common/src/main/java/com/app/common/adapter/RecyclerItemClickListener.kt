@@ -1,8 +1,8 @@
 package com.app.common.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.OnItemTouchListener
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -40,7 +40,7 @@ class RecyclerItemClickListener// 点击回调
         })
     }
 
-    override fun onInterceptTouchEvent(view: RecyclerView?, e: MotionEvent?): Boolean {
+    override fun onInterceptTouchEvent(view: RecyclerView, e: MotionEvent): Boolean {
         if (view == null || e == null) {
             return false
         }

@@ -1,7 +1,7 @@
 package com.app.common.utils
 
 import android.app.Activity
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import com.app.common.logger.Logger
 import java.util.*
 

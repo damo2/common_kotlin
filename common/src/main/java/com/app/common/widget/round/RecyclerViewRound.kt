@@ -3,7 +3,7 @@ package com.app.common.widget.round
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import com.app.common.widget.round.util.RoundViewDelegate
 
 /**

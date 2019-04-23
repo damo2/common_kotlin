@@ -2,8 +2,8 @@ package com.app.common.base
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.app.common.api.util.LifeCycleEvent
 import com.app.common.utils.FixMemLeak
 import com.app.common.view.LoadingDialogFragment
@@ -69,7 +69,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
         if (!mLoadingDialog.isShowing()) {
             mIsShowLoading = true
             mLoadingDialog.setIsBackCanceled(isCanCancel)
-            mLoadingDialog.show(supportFragmentManager, "loading", isResume)
+            mLoadingDialog.showDialog(supportFragmentManager, "loading", isResume)
         }
     }
 

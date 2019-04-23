@@ -30,7 +30,7 @@ import com.app.common.R;
  *
  * @author venshine
  */
-public class RoundImageView extends android.support.v7.widget.AppCompatImageView {
+public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     /**
      * 边框颜色

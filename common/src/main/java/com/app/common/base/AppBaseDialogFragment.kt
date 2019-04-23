@@ -4,10 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.annotation.Nullable
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.DialogFragment
 import android.view.*
+import androidx.annotation.Nullable
+import androidx.fragment.app.FragmentManager
 import com.app.common.R
 import com.app.common.logger.Logger
 
@@ -43,7 +43,7 @@ abstract class AppBaseDialogFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //去除标题栏
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         initTop()
         mRootView = inflater.inflate(bindLayout(), container, false)
         return mRootView
@@ -69,9 +69,9 @@ abstract class AppBaseDialogFragment : DialogFragment() {
     override fun onStart() {
         super.onStart()
         //设置 dialog 的宽高
-        dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         //设置 dialog 的背景为 null
-        dialog.window?.setBackgroundDrawable(null)
+        dialog?.window?.setBackgroundDrawable(null)
     }
 
     protected abstract fun bindLayout(): Int
@@ -81,7 +81,7 @@ abstract class AppBaseDialogFragment : DialogFragment() {
     protected open fun initData() {}
     protected open fun initListener() {}
 
-    fun show(manager: FragmentManager?, tag: String = mTag, isResume: Boolean = true) {
+    fun showDialog(manager: FragmentManager?, tag: String = mTag, isResume: Boolean = true) {
         Logger.d("show#tag=${tag}")
         if (manager == null) return
         if (!isShowing()) {
@@ -118,7 +118,7 @@ abstract class AppBaseDialogFragment : DialogFragment() {
     }
 
     fun isShowing(): Boolean {
-        return dialog != null && dialog.isShowing
+        return dialog != null && dialog!!.isShowing
     }
 
     /**
@@ -148,7 +148,7 @@ abstract class AppBaseDialogFragment : DialogFragment() {
 
     //设置外面透明
     fun setOutBackgroundTransparent() {
-        dialog.window?.let {
+        dialog?.window?.let {
             val windowParams = it.attributes
             windowParams.dimAmount = 0.0f
             it.attributes = windowParams
@@ -160,7 +160,7 @@ abstract class AppBaseDialogFragment : DialogFragment() {
         mIsBackCancelable = isBackCancelable
     }
 
-    override fun onDismiss(dialog: DialogInterface?) {
+    override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
     }
 

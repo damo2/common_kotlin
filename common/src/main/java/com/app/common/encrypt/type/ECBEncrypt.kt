@@ -1,6 +1,6 @@
 package com.app.common.encrypt.type
 
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import com.app.common.encrypt.IEncrypt
 import java.io.UnsupportedEncodingException
 import java.security.InvalidKeyException

@@ -1,6 +1,7 @@
 package com.app.common.file;
 
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
+
 
 /**
  * 获取和判断文件头信息

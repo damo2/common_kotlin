@@ -1,7 +1,7 @@
 package com.app.common.extensions
 
-import android.support.design.widget.TabLayout
 import android.widget.LinearLayout
+import com.google.android.material.tabs.TabLayout
 import java.lang.reflect.Field
 
 /**

@@ -1,6 +1,6 @@
 package com.app.common.adapter.util
 
-import android.support.v4.util.SparseArrayCompat
+import androidx.collection.SparseArrayCompat
 
 
 /**
@@ -81,11 +81,12 @@ class ItemViewDelegateManager<T> {
     }
 
 
-    fun getItemViewDelegate(viewType: Int): ItemViewDelegate<T> {
-        return delegates.get(viewType)
+    fun getItemViewDelegate(viewType: Int): ItemViewDelegate<T>{
+        //todo
+        return delegates.get(viewType)!!
     }
 
-    fun getItemViewLayoutId(viewType: Int): Int {
+    fun getItemViewLayoutId(viewType: Int): Int? {
         return getItemViewDelegate(viewType).getItemViewLayoutId()
     }
 

@@ -3,10 +3,10 @@ package com.app.common.base
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.app.common.base.function.Functions
 import com.app.common.logger.Logger
 import com.app.common.view.LoadingDialogFragment
@@ -67,7 +67,7 @@ abstract class AppBaseFragment : Fragment(), IBase {
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         this.mIsVisible = !hidden
-        if (!activity.isFinishing && !activity.isDestroyed) {
+        if (activity != null && !activity!!.isFinishing && !activity!!.isDestroyed) {
             if (mIsVisible) onVisibleToUser() else onInVisibleToUser()
         }
     }
@@ -106,9 +106,10 @@ abstract class AppBaseFragment : Fragment(), IBase {
      * @param isCanCancel 是否能被取消
      */
     fun showLoadingDialog(isCanCancel: Boolean = true) {
-        if (!mLoadingDialog.isShowing()) {
+        val activityIsRun = activity != null && !activity!!.isFinishing && !activity!!.isDestroyed;
+        if (activityIsRun && !mLoadingDialog.isShowing()) {
             mLoadingDialog.isCancelable = isCanCancel
-            mLoadingDialog.show(activity.supportFragmentManager, "loading", isResumed)
+            mLoadingDialog.showDialog(activity!!.supportFragmentManager, "loading", isResumed)
         }
     }
 

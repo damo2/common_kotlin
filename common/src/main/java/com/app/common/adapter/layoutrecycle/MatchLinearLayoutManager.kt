@@ -1,11 +1,12 @@
 package com.app.common.adapter.layoutrecycle
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.OrientationHelper
-import android.support.v7.widget.PagerSnapHelper
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+
 /**
  * 满屏滑动一个 防抖音
  * Created by Administrator on 2018/6/24.
@@ -39,12 +40,12 @@ class MatchLinearLayoutManager : LinearLayoutManager {
      * @param state
      */
     override fun onScrollStateChanged(state: Int) {
-        if (state == RecyclerView.SCROLL_STATE_IDLE){
+        if (state == RecyclerView.SCROLL_STATE_IDLE) {
             val viewIdle = mPagerSnapHelper.findSnapView(this)
-            if(viewIdle!=null) {
+            if (viewIdle != null) {
                 val positionIdle = getPosition(viewIdle)
                 mOnViewPagerListener?.let {
-                    if(childCount == 1) {
+                    if (childCount == 1) {
                         mOnViewPagerListener!!.onPageSelected(positionIdle, positionIdle == itemCount - 1)
                     }
                 }
@@ -95,7 +96,7 @@ class MatchLinearLayoutManager : LinearLayoutManager {
         }
     }
 
-    interface OnViewPagerListener{
+    interface OnViewPagerListener {
         /*释放的监听*/
         fun onPageRelease(isNext: Boolean, position: Int)
 

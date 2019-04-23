@@ -1,6 +1,6 @@
 package com.app.common.logger
 
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 
 interface Printer {
 
