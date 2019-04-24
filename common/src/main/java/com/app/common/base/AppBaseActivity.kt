@@ -31,7 +31,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
         lifecycleSubject.onNext(LifeCycleEvent.CREATE)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         initTop()
-        bindLayout()?.let {
+        bindLayout().let {
             setContentView(it)
         }
         initData()
@@ -40,7 +40,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
         initListener()
     }
 
-    abstract fun bindLayout(): Int?
+    abstract fun bindLayout(): Int
     override fun initTop() {}
     override fun initView() {}
     override fun initValue() {}

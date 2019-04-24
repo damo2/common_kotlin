@@ -42,7 +42,6 @@ abstract class AppBaseFragment : Fragment(), IBase {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 //        mContext = App.instance
         mRootView = inflater.inflate(bindLayout(), container, false)
-//        if (isInject) ARouter.getInstance().inject(this)
         initTop()
         return mRootView
     }
@@ -67,7 +66,7 @@ abstract class AppBaseFragment : Fragment(), IBase {
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         this.mIsVisible = !hidden
-        if (activity != null && !activity!!.isFinishing && !activity!!.isDestroyed) {
+        if (activity != null && !activity!!.isFinishing && !activity!!.isFinishing) {
             if (mIsVisible) onVisibleToUser() else onInVisibleToUser()
         }
     }
@@ -106,7 +105,7 @@ abstract class AppBaseFragment : Fragment(), IBase {
      * @param isCanCancel 是否能被取消
      */
     fun showLoadingDialog(isCanCancel: Boolean = true) {
-        val activityIsRun = activity != null && !activity!!.isFinishing && !activity!!.isDestroyed;
+        val activityIsRun = activity != null && !activity!!.isFinishing && !activity!!.isFinishing;
         if (activityIsRun && !mLoadingDialog.isShowing()) {
             mLoadingDialog.isCancelable = isCanCancel
             mLoadingDialog.showDialog(activity!!.supportFragmentManager, "loading", isResumed)

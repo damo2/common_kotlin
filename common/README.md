@@ -1,5 +1,5 @@
 *****************************************   注意  ******************************************
-添加
+App 模块AndroidManifest 添加
 <meta-data
             android:name="APPLICATION_ID"
             android:value="${applicationId}"/>

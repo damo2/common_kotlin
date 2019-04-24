@@ -1,5 +1,6 @@
-package com.app.common.api.util
+package com.app.common.api.transformer
 
+import com.app.common.api.util.LifeCycleEvent
 import com.orhanobut.hawk.Hawk
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe

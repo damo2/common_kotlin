@@ -14,7 +14,7 @@ projectFilesBackup/
 
 # IntelliJ
 *.iml
-#所有
+所有
 #.idea/
 #部分
 .idea/workspace.xml

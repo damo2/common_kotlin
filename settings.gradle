@@ -1,1 +1,1 @@
-include ':app', ':common', ':libdb', ':libimgcompre'
+include ':app', ':libdb', ':libimgcompre', ':common'

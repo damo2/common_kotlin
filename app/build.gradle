@@ -43,6 +43,8 @@ dependencies {
     //Rxjava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //权限
+    implementation 'pub.devrel:easypermissions:1.0.0'
 
     implementation project(':libdb')
     implementation project(':common')

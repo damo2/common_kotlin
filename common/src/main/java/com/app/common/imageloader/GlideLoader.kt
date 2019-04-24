@@ -47,7 +47,7 @@ object GlideLoader : ILoader {
 
         val requestManage: RequestManager? = when (context) {
             is Activity -> {
-                if (context.isDestroyed.not()) {
+                if (context.isFinishing.not()) {
                     Glide.with(context)
                 } else {
                     Logger.e("You cannot start a load for a destroyed activity")
@@ -55,7 +55,7 @@ object GlideLoader : ILoader {
                 }
             }
             is Context -> Glide.with(context)
-            is Fragment -> Glide.with(context)
+//            is Fragment -> Glide.with(context)
             is android.app.Fragment -> Glide.with(context)
             else -> throw TypeCastException("only support ")
         }

@@ -26,17 +26,18 @@ open class AppBaseApplication : Application() {
     private val TAG = "AppBaseApplication"
 
     companion object {
-        var instance: AppBaseApplication by Delegates.notNull()
-        val toast: ToastX by lazy { ToastX(instance) }
+        var instanceBase: AppBaseApplication by Delegates.notNull()
+        val toast: ToastX by lazy { ToastX(instanceBase) }
     }
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
 //        MultiDex.install(this)
+        addActivityListener()
     }
 
     override fun onCreate() {
-        instance = this
+        instanceBase = this
         super.onCreate()
     }
 
@@ -63,7 +64,7 @@ open class AppBaseApplication : Application() {
         }
     }
 
-    fun addActivityListener() {
+    private fun addActivityListener() {
         registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {
                 Log.d(TAG, "onActivityCreated: " + activity.localClassName)

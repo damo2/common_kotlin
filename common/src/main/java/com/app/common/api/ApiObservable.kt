@@ -6,6 +6,8 @@ import com.app.common.base.AppBaseActivity
 import com.app.common.base.AppBaseApplication
 import com.app.common.base.AppBaseFragment
 import com.app.common.logger.Logger
+import com.app.common.view.toastErrorNet
+import com.app.common.view.toastInfo
 import com.google.gson.JsonSyntaxException
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -39,7 +41,7 @@ fun <T> Observable<T>.subscribeExtApi(onNext: (result: T) -> Unit,
                 dismissLoad(context, isShowLoad)
                 errorToast(e, {
                     onError?.invoke(e) ?: run {
-                        if (isToast) AppBaseApplication.toast.errorNet(e)
+                        if (isToast) toastErrorNet(e)
                     }
                 })
             },
@@ -59,21 +61,19 @@ fun <T> Observable<T>.subscribeExtApi(onNext: (result: T) -> Unit,
 
 private fun errorToast(e: Throwable, block: () -> Unit) {
     if (e is ApiException) {
-        if (e.code != 20022) {//令牌过期不toast
-            block()
-        }
+        block()
     } else if (e is ConnectException || e is UnknownHostException) {
-        AppBaseApplication.toast.error("网络未连接")
+        toastInfo("网络未连接")
     } else if (e is TimeoutException || e is SocketTimeoutException) {
-        AppBaseApplication.toast.error("网络超时")
+        toastInfo("网络超时")
     } else if (e is JsonSyntaxException) {
-        AppBaseApplication.toast.error("数据解析异常")
+        toastInfo("数据解析异常")
     } else {
         Logger.d("onError#${e.message}")
         if (BuildConfig.DEBUG) {
-            AppBaseApplication.toast.error("未知异常${e.message}")
+            toastInfo("未知异常${e.message}")
         } else {
-            AppBaseApplication.toast.error("请求异常")
+            toastInfo("请求异常")
         }
     }
     e.printStackTrace()

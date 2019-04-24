@@ -12,46 +12,34 @@ import android.widget.Toast
 import com.app.common.BuildConfig
 import com.app.common.R
 import com.app.common.api.ApiException
+import com.app.common.base.AppBaseApplication
 import com.google.gson.JsonSyntaxException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 
-
+///app模块application继承AppBaseApplication
+fun toastInfo(msg: String?) {
+    AppBaseApplication.toast.info(msg)
+}
+fun toastErrorNet(e: Throwable) {
+    AppBaseApplication.toast.netError(e)
+}
 class ToastX constructor(val mContext: Context) : Toast(mContext) {
     private var mToastX: ToastX? = null
 
     fun info(messageId: Int, duration: Int = Toast.LENGTH_SHORT) {
-        info(mContext.getString(messageId))
+        val msg = try {
+            mContext.getString(messageId)
+        } catch (e: Exception) {
+            messageId.toString()
+        }
+        info(msg)
     }
 
     fun info(message: String?, duration: Int = Toast.LENGTH_SHORT) {
         custom(message)
-    }
-
-    fun success(messageId: Int, duration: Int = Toast.LENGTH_SHORT) {
-        error(mContext.getString(messageId))
-    }
-
-    fun success(message: String?, duration: Int = Toast.LENGTH_SHORT) {
-        custom(message)
-    }
-
-    fun error(messageId: Int, duration: Int = Toast.LENGTH_SHORT) {
-        error(mContext.getString(messageId))
-    }
-
-    fun error(message: String?, duration: Int = Toast.LENGTH_SHORT) {
-        custom(message)
-    }
-
-    fun errorNet(e: Throwable) {
-        var msg = e.message
-//        if (!BuildConfig.DEBUG) {
-//        msg = "网络请求出错"
-//        }
-        custom(msg)
     }
 
     fun netError(e: Throwable, icon: Int? = null, duration: Int = Toast.LENGTH_SHORT) {
@@ -67,14 +55,12 @@ class ToastX constructor(val mContext: Context) : Toast(mContext) {
     }
 
     private fun custom(message: String?, duration: Int = Toast.LENGTH_SHORT) {
-//        custom2(message)
         Handler(Looper.getMainLooper()).post {
             cancelToastX()
             val mLayout = View.inflate(mContext, R.layout.view_toast, null)
-            val mToastLayout = mLayout.findViewById<View>(R.id.toast_root)
-            mLayout.findViewById<TextView>(R.id.toast_text).setText(message)
+            mLayout.findViewById<TextView>(R.id.toast_text).text = message
             mToastX = ToastX(mContext).apply {
-                setView(mLayout)
+                view = mLayout
                 setGravity(Gravity.CENTER_HORIZONTAL, 0, 1)
                 setDuration(duration)
             }

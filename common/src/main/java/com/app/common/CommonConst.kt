@@ -11,5 +11,9 @@ object CommonConst {
     const val DOWNLOAD_OUTTIME = 16_000L
     const val UPLOAD_OUTTIME = 16_000L
     //retrofit baseurl 必须以“/”结尾
-    const val BASE_URL = "http://www.baidu.com/"
+    var BASE_URL = "http://www.baidu.com/"
+
+    fun setBaseUrl(url: String) {
+        BASE_URL = url;
+    }
 }

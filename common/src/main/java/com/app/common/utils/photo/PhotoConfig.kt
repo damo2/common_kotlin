@@ -1,7 +1,7 @@
 package com.app.common.utils.photo
 
 import android.app.Activity
-import android.app.Fragment
+import androidx.fragment.app.Fragment
 
 /**
  * Created by wr
