@@ -6,8 +6,7 @@ App 模块AndroidManifest 添加<br>
 通过 getApplicationIdExt()获取applicationId
 ********************************************************************************************<br>
 
-##打印日志
----
+###打印日志
    Logger.d(userName)
 
    Logger.init("MainActivity")         // 修改打印的tag值
