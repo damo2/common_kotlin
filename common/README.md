@@ -6,7 +6,8 @@ App 模块AndroidManifest 添加
 通过 getApplicationIdExt()获取applicationId
 ********************************************************************************************
 
-1、打印日志
+##打印日志
+---
    Logger.d(userName)
 
    Logger.init("MainActivity")         // 修改打印的tag值
@@ -19,7 +20,8 @@ App 模块AndroidManifest 添加
         .methodOffset(0)        //  设置调用堆栈的函数偏移值，0的话则从打印该Log的函数开始输出堆栈信息，默认是0
         .hideThreadInfo()      //  隐藏线程信息
         .logAdapter(new AndroidLogAdapter());// 自定义一个打印适配器，这里适配了Android的Log打印
-2、toast
+2、吐司
+    toastInfo("信息")
 
 
 3、打印日志到本地
@@ -115,21 +117,34 @@ App 模块AndroidManifest 添加
 
 7、网络请求
 
-LoginService里面：
-//地址带有 https: 后 不会用 baseurl 了
-@POST("https://www.dudulifo.com/user/phonelogin")
-@FormUrlEncoded
-fun login(@FieldMap map: HashMap<String, String>): Observable<BaseBean<UserInfo>>
+    LoginService里面：
+    //地址带有 https: 后 不会用 baseurl 了
+    @POST("https://www.dudulifo.com/user/phonelogin")
+    @FormUrlEncoded
+    fun login(@FieldMap map: HashMap<String, String>): Observable<BaseBean<UserInfo>>
 
-RequestManager.instanceApi
-                    .getLanguageType()
-                    .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))
-                    .compose(composeCache(true,"testa",true))
-                    .subscribeExtApi({
-                        Logger.d("test data" + GsonUtil().toJson(it))
-                    })
+    object ApiManager {
+        var apiService by NotNUllSingleVar<ApiService>()
+        //application 初始化
+        fun initApiService() {
+            apiService = RequestApiManager.instance.apply {
+                initRetrofit({ clientBuilder ->
+                    //添加拦截器
+                }, { retrofitBuilder ->
+                }, ConstApi.BaseUrl)
+            }.createService(ApiService::class.java)
+        }
+    }
 
-RxBus使用
+    ApiManager.apiService
+              .getLanguageType()
+              .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))
+              .compose(composeCommonBean())//.compose(composeCache(true,"testa",true))
+              .subscribeExtApi({
+                Logger.d("test data" + GsonUtil().toJson(it))
+              })
+
+8. RxBus使用
     接收方：
         RxBus.toFlowable().subscribe(t ->
             if(t is User){
@@ -142,3 +157,10 @@ RxBus使用
 
      发送方：
      RxBus.post(new User("张三"))
+
+
+弱引用
+        private var activity: Activity? by Weak()
+
+只能赋值一次，且不能为空
+        var context by NotNUllSingleVar<Context>()
