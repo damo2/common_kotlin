@@ -1,10 +1,10 @@
-*****************************************   注意  ******************************************<br>
-App 模块AndroidManifest 添加
-        <meta-data
-                android:name="APPLICATION_ID"
-                android:value="${applicationId}"/>
+###注意
+App 模块AndroidManifest 添加<br>
+
+   <meta-data
+          android:name="APPLICATION_ID"
+          android:value="${applicationId}"/>
 通过 getApplicationIdExt()获取applicationId
-********************************************************************************************<br>
 
 ###打印日志
    Logger.d(userName)
