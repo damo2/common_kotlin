@@ -33,10 +33,11 @@
                     centerCrop = true,placeholder = R.drawable.ic_launcher)
 
 ### SharedPreferences 保存信息
-    eg:
+ eg:
+
     var isShowGuide: Boolean by Preference(this, ConstantsKey.KEY_IS_SHOW_GUIDE, false)
-    取值 isShowGuide
-    设置值 isShowGuide=true
+    //取值 isShowGuide
+    //设置值 isShowGuide=true
 
     //注意 对象UserInfo 及里面的对象都要实现Serializable
      var mUserInfoBean: UserInfo by Preference<UserInfo>(this, "userinfo", UserInfo())
