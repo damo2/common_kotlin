@@ -1,9 +1,9 @@
 ### 注意 
 App 模块AndroidManifest 添加<br>
-
       <meta-data
-                android:name="APPLICATION_ID"
-                android:value="${applicationId}"/>
+               android:name="APPLICATION_ID"
+               android:value="${applicationId}"/>
+      
 通过 getApplicationIdExt()获取applicationId
 
 ### [打印日志](https://github.com/orhanobut/logger)
@@ -55,30 +55,30 @@ App 模块AndroidManifest 添加<br>
 
 
 ### CommonAdapter使用
-   private EmptyWrapper mAdapterWrapper;
-              CommonAdapter<String> mAdapter = new CommonAdapter<String>(getApplicationContext(), R.layout.item, mRedPacketThemeList) {
-                  @Override
-                  protected void convert(ViewHolder holder, String str, int position) {
-                      holder.getView(R.id.tv_name).setText(str);
-                  }
-              };
-              FullyGridLayoutManager mLayoutManager = new FullyGridLayoutManager(mContext, 2);
-              //设置是否能滚动
-              // mLayoutManager.setScrollEnabled(false);
-              mRecyclerView.setLayoutManager(mLayoutManager);
-              mRecyclerView.addItemDecoration(new GridBaseItemDecoration(mContext, 2, 16, 16, false));
-              //添加加载更多
-              LoadMoreWrapper mFootWrapper = new LoadMoreWrapper(mAdapter);
-              View view = new View(this);
-              RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, DensityUtils.dp2pxFI(mContext, 10));
-              view.setLayoutParams(params);
-              mFootWrapper.setLoadMoreView(view);
-              //添加空白页
-              mAdapterWrapper = new EmptyWrapper(mFootWrapper);
-              TextView tv = new TextView(mActivity);
-              tv.setText("请下拉刷新重试");
-              mAdapterWrapper.setEmptyView(tv);
-              mRecyclerView.setAdapter(mAdapterWrapper);
+         private EmptyWrapper mAdapterWrapper;
+                    CommonAdapter<String> mAdapter = new CommonAdapter<String>(getApplicationContext(), R.layout.item, mRedPacketThemeList) {
+                        @Override
+                        protected void convert(ViewHolder holder, String str, int position) {
+                            holder.getView(R.id.tv_name).setText(str);
+                        }
+                    };
+                    FullyGridLayoutManager mLayoutManager = new FullyGridLayoutManager(mContext, 2);
+                    //设置是否能滚动
+                    // mLayoutManager.setScrollEnabled(false);
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+                    mRecyclerView.addItemDecoration(new GridBaseItemDecoration(mContext, 2, 16, 16, false));
+                    //添加加载更多
+                    LoadMoreWrapper mFootWrapper = new LoadMoreWrapper(mAdapter);
+                    View view = new View(this);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, DensityUtils.dp2pxFI(mContext, 10));
+                    view.setLayoutParams(params);
+                    mFootWrapper.setLoadMoreView(view);
+                    //添加空白页
+                    mAdapterWrapper = new EmptyWrapper(mFootWrapper);
+                    TextView tv = new TextView(mActivity);
+                    tv.setText("请下拉刷新重试");
+                    mAdapterWrapper.setEmptyView(tv);
+                    mRecyclerView.setAdapter(mAdapterWrapper);
 
 
 ### 网络请求
@@ -112,17 +112,18 @@ App 模块AndroidManifest 添加<br>
 
 ### RxBus使用
 接收方：<br>
-   RxBus.toFlowable().subscribe(t ->
-               if(t is User){
+         RxBus.toFlowable().subscribe(t ->
+                     if(t is User){
 
-               }
-           }).apply{
-           //销毁时取消监听
-             addSubscription(this)
-           }
+                     }
+                 }).apply{
+                 //销毁时取消监听
+                   addSubscription(this)
+                 }
 
 发送方：<br>
-   RxBus.post(new User("张三"))
+
+            RxBus.post(new User("张三"))
 
 
 ### 弱引用
