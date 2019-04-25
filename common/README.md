@@ -1,15 +1,17 @@
 ### 注意 
-App 模块AndroidManifest 添加<br>
-      <meta-data
-               android:name="APPLICATION_ID"
-               android:value="${applicationId}"/>
+> App 模块AndroidManifest 添加
+
+    <meta-data
+             android:name="APPLICATION_ID"
+             android:value="${applicationId}"/>
       
 通过 getApplicationIdExt()获取applicationId
 
-### [打印日志](https://github.com/orhanobut/logger)
-      Logger.d(userName)
-
-      Logger.init("MainActivity")
+### 打印日志
+  [官网](https://github.com/orhanobut/logger)
+  
+    Logger.d(userName)
+    Logger.init("MainActivity")
            .logLevel(LogLevel.FULL) //  显示全部日志，LogLevel.NONE不显示日志，默认是Full
            .methodCount(5)         //  方法栈打印的个数，默认是2
            .methodOffset(0)        //  设置调用堆栈的函数偏移值，0的话则从打印该Log的函数开始输出堆栈信息，默认是0
@@ -55,30 +57,30 @@ App 模块AndroidManifest 添加<br>
 
 
 ### CommonAdapter使用
-         private EmptyWrapper mAdapterWrapper;
-                    CommonAdapter<String> mAdapter = new CommonAdapter<String>(getApplicationContext(), R.layout.item, mRedPacketThemeList) {
+    private EmptyWrapper mAdapterWrapper;
+    CommonAdapter<String> mAdapter = new CommonAdapter<String>(getApplicationContext(), R.layout.item, mRedPacketThemeList) {
                         @Override
                         protected void convert(ViewHolder holder, String str, int position) {
                             holder.getView(R.id.tv_name).setText(str);
                         }
                     };
-                    FullyGridLayoutManager mLayoutManager = new FullyGridLayoutManager(mContext, 2);
-                    //设置是否能滚动
-                    // mLayoutManager.setScrollEnabled(false);
-                    mRecyclerView.setLayoutManager(mLayoutManager);
-                    mRecyclerView.addItemDecoration(new GridBaseItemDecoration(mContext, 2, 16, 16, false));
-                    //添加加载更多
-                    LoadMoreWrapper mFootWrapper = new LoadMoreWrapper(mAdapter);
-                    View view = new View(this);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, DensityUtils.dp2pxFI(mContext, 10));
-                    view.setLayoutParams(params);
-                    mFootWrapper.setLoadMoreView(view);
-                    //添加空白页
-                    mAdapterWrapper = new EmptyWrapper(mFootWrapper);
-                    TextView tv = new TextView(mActivity);
-                    tv.setText("请下拉刷新重试");
-                    mAdapterWrapper.setEmptyView(tv);
-                    mRecyclerView.setAdapter(mAdapterWrapper);
+             FullyGridLayoutManager mLayoutManager = new FullyGridLayoutManager(mContext, 2);
+             //设置是否能滚动
+             // mLayoutManager.setScrollEnabled(false);
+             mRecyclerView.setLayoutManager(mLayoutManager);
+             mRecyclerView.addItemDecoration(new GridBaseItemDecoration(mContext, 2, 16, 16, false));
+             //添加加载更多
+             LoadMoreWrapper mFootWrapper = new LoadMoreWrapper(mAdapter);
+             View view = new View(this);
+             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, DensityUtils.dp2pxFI(mContext, 10));
+             view.setLayoutParams(params);
+             mFootWrapper.setLoadMoreView(view);
+             //添加空白页
+             mAdapterWrapper = new EmptyWrapper(mFootWrapper);
+             TextView tv = new TextView(mActivity);
+             tv.setText("请下拉刷新重试");
+             mAdapterWrapper.setEmptyView(tv);
+             mRecyclerView.setAdapter(mAdapterWrapper);
 
 
 ### 网络请求
@@ -111,8 +113,9 @@ App 模块AndroidManifest 添加<br>
               })
 
 ### RxBus使用
-接收方：<br>
-         RxBus.toFlowable().subscribe(t ->
+接收方：
+
+    RxBus.toFlowable().subscribe(t ->
                      if(t is User){
 
                      }
@@ -121,13 +124,13 @@ App 模块AndroidManifest 添加<br>
                    addSubscription(this)
                  }
 
-发送方：<br>
+发送方：
 
-            RxBus.post(new User("张三"))
+    RxBus.post(new User("张三"))
 
 
 ### 弱引用
-        private var activity: Activity? by Weak()
+    private var activity: Activity? by Weak()
 
 ### 只能赋值一次，且不能为空
-        var context by NotNUllSingleVar<Context>()
+    var context by NotNUllSingleVar<Context>()
