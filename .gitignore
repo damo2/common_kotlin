@@ -15,7 +15,7 @@ projectFilesBackup/
 # IntelliJ
 *.iml
 所有
-#.idea/
+.idea/
 #部分
 .idea/workspace.xml
 .idea/tasks.xml
