@@ -1,7 +1,7 @@
 package com.app.common
 
-import com.app.common.json.GsonConvert
-import com.app.common.json.GsonUtil
+import com.app.common.json.gsonFromJsonExt
+import com.app.common.json.toJsonExt
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import org.junit.Assert.assertEquals
@@ -51,7 +51,7 @@ class ExampleUnitTest {
                 "    \"type\": 1,\n" +
                 "    \"isGirl\": true\n" +
                 "}"
-        val user = GsonUtil().fromJson(json, User::class.java)
+        val user = json.gsonFromJsonExt<User>()
         println(Gson().toJson(user))
 
         val json2 = "{\n" +
@@ -59,18 +59,18 @@ class ExampleUnitTest {
                 "}"
 
         try {
-            val user2 = Gson().fromJson(json2, User::class.java)
+            val user2 = json.gsonFromJsonExt<User>()
             println(Gson().toJson(user2))
-            println("isGirl=${user2.isGirl}")
+            println("isGirl=${user2?.isGirl}")
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
 
         try {
-            val user3 = GsonUtil().fromJson(json2, User::class.java)
+            val user3 = json.gsonFromJsonExt<User>()
             println(Gson().toJson(user3))
-            println("isGirl=${user3.isGirl}")
+            println("isGirl=${user3?.isGirl}")
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -95,8 +95,13 @@ class ExampleUnitTest {
         msg.image!!.path = "http"
         msg.msg = "msg"
 
-        val message: MessageBean<ImageBean> = GsonConvert.jsonToBean(Gson().toJson(msg), MessageBean<ImageBean>().javaClass, ImageBean().javaClass)
-        print(Gson().toJson(message))
+        val list = listOf(msg, msg, msg, msg)
+        val jsonList = list.toJsonExt()
+        val json = msg.toJsonExt()
+        val message =json.gsonFromJsonExt<MessageBean<ImageBean>>()
+        val messageList =jsonList.gsonFromJsonExt<List<MessageBean<ImageBean>>>()
+        print("message#" +message)
+        print("messageList#" +messageList)
     }
 
 }

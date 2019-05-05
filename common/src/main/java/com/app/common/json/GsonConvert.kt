@@ -1,6 +1,7 @@
 package com.app.common.json
 
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
@@ -13,10 +14,14 @@ import java.lang.reflect.Type
  * 主要用于转换有泛型的对象
  */
 
+
+inline fun <reified T> gsonTypeExt() = object : TypeToken<T>() {}.type
+//eg: json.gsonFromJsonExt<User>()
+inline fun <reified T : Any> String?.gsonFromJsonExt(): T? = Gson().fromJson(this, gsonTypeExt<T>())
+//eg: list.toJsonExt()
+fun Any?.toJsonExt(): String? = Gson().toJson(this)
+
 object GsonConvert {
-    inline fun <reified T : Any> fromJson(json: String): T {
-        return GsonUtil().fromJson(json, T::class.java)
-    }
 
     fun <T> jsonToObj(jsonStr: String?, type: Type): T {
         return Gson().fromJson(jsonStr, type)
@@ -31,7 +36,7 @@ object GsonConvert {
      * @param <T>       要转换成的对象里面的泛型类名 eg: ResumeTxtBean
      * @return 要转换成的对象类  eg:BaseBean<ResumeTxtBean>()
      * eg: MessageBean<ImageBean> message = GsonConvert.jsonToBean(jsonString, MessageBean.class, ImageBean.class);
-    </ImageBean></ResumeTxtBean></T></ResumeTxtBean> */
+     */
     fun <T> jsonToBean(reader: String?, clazz: Class<T>, classType: Class<*>): T? {
         val typeT = ParameterizedTypeImpl(clazz, arrayOf(classType))
         return Gson().fromJson<T>(reader, typeT)
@@ -44,7 +49,7 @@ object GsonConvert {
      * @param classType List对象的泛型类
      * @param <T>       List对象的泛型类名
      * @return List对象
-     * eg: List<I> info=GsonConvert.jsonToBeanList(jsonString,iclass);
+     * eg:  GsonConvert.jsonToBeanList(jsonString,iclass);
     </I></T> */
     fun <T> jsonToBeanList(json: String?, classType: Class<T>): List<T>? {
         val listType = ParameterizedTypeImpl(List::class.java, arrayOf(classType))

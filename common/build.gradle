@@ -31,9 +31,9 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha04'
     implementation 'com.google.android.material:material:1.1.0-alpha05'
 
-//    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'androidx.test:runner:1.2.0-alpha04'
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha04'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0-alpha04'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha04'
 
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 

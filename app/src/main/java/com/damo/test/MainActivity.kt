@@ -2,7 +2,6 @@ package com.damo.test
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.app.common.api.RequestFileManager
 import com.app.common.api.download.FileDownLoadObserver
 import com.app.common.api.subscribeExtApi
