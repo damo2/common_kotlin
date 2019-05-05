@@ -7,6 +7,7 @@ import com.app.common.api.download.FileDownLoadObserver
 import com.app.common.api.subscribeExtApi
 import com.app.common.api.transformer.composeLife
 import com.app.common.api.util.LifeCycleEvent
+import com.app.common.json.GsonConvert
 import com.app.common.utils.StorageUtils
 import com.app.common.view.toastInfo
 import com.damo.libdb.Dao
@@ -30,14 +31,14 @@ class MainActivity : BaseActivity() {
             name = "张三${Random().nextInt(100)}"
         }
         tvGetCache.setOnClickListener {
-            Toast.makeText(applicationContext, name, Toast.LENGTH_SHORT).show();
+            Toast.makeText(applicationContext, name, Toast.LENGTH_SHORT).show()
         }
 
         //需要读写权限
         tvDownload.setOnClickListener {
             RequestFileManager.downloadFile("http://wangru.oss-cn-qingdao.aliyuncs.com/test/erp-v1.0.0-20190404.apk", StorageUtils.getPublicStorageFile("test/wanban.apk")!!, object : FileDownLoadObserver<File>() {
                 override fun onDownLoadSuccess(t: File) {
-                    Toast.makeText(applicationContext, "下载成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(applicationContext, "下载成功", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onDownLoadFail(throwable: Throwable) {

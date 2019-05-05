@@ -21,8 +21,13 @@
     toastInfo("信息")
 
 ### json解析
+    //写法1
     val user = jsonStr.gsonFromJsonExt<User>()
     val jsonStr = user.toJsonExt()
+    //写法2
+    MessageBean<ImageBean> message = GsonConvert.jsonToBean(jsonString, MessageBean.class, ImageBean.class);
+    var  bean :List<Bean>?  = GsonConvert.jsonToBeanList(jsonStr, Bean::class.java)
+    var  bean:BaseBean<SelectTypeBeam>?  = GsonConvert.fromJsonToBeanDataList(jsonStr, BaseBean::class.java, SelectTypeBeam::class.java)
 
 
 ### 打印日志到本地

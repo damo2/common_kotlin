@@ -50,7 +50,7 @@ object GsonConvert {
      * @param classType List对象的泛型类
      * @param <T>       List对象的泛型类名
      * @return List对象
-     * eg:  GsonConvert.jsonToBeanList(jsonString,iclass);
+     * eg: var  bean:List<Bean>?  = GsonConvert.jsonToBeanList(jsonStr, Bean::class.java)
     </I></T> */
     fun <T> jsonToBeanList(json: String?, classType: Class<T>): List<T>? {
         val listType = ParameterizedTypeImpl(List::class.java, arrayOf(classType))
@@ -60,11 +60,11 @@ object GsonConvert {
     /***
      *
      * @param json json 数据
-     * @param clazz eg: SelectTypeBeam::class.java
      * @param classType eg:BaseBean::class.java
-     * @return BaseBean<List></List><SelectTypeBeam>>
-    </SelectTypeBeam> */
-    @Deprecated("  val resultData = GsonConvert.fromJsonToBeanDataList(result,BaseBean::class.java,SelectTypeTwoBean::class.java) as BaseBean<List<SelectTypeTwoBean>>")
+     * @param clazz eg: SelectTypeBeam::class.java
+     * @return BaseBean<SelectTypeBeam>
+     *     eg: var  bean:BaseBean<SelectTypeBeam>? = GsonConvert.fromJsonToBeanDataList(jsonStr, BaseBean::class.java, SelectTypeBeam::class.java)
+     */
     fun <T> fromJsonToBeanDataList(json: String?, classType: Class<*>, clazz: Class<T>): Any? {
         // 生成List<T> 中的 List<T>
         val listType = ParameterizedTypeImpl(List::class.java, arrayOf(clazz))
