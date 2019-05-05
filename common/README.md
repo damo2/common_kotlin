@@ -20,6 +20,10 @@
 ### 吐司
     toastInfo("信息")
 
+### json解析
+    val user = jsonStr.gsonFromJsonExt<User>()
+    val jsonStr = user.toJsonExt()
+
 
 ### 打印日志到本地
     //初始化 isDebug 为true才会执行

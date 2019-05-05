@@ -12,13 +12,14 @@ import java.lang.reflect.Type
  * mail: 1902065822@qq.com
  * describe:
  * 主要用于转换有泛型的对象
+ * 泛型用GsonConvert，已知类型用扩展属性
  */
 
 
 inline fun <reified T> gsonTypeExt() = object : TypeToken<T>() {}.type
 //eg: json.gsonFromJsonExt<User>()
 inline fun <reified T : Any> String?.gsonFromJsonExt(): T? = Gson().fromJson(this, gsonTypeExt<T>())
-//eg: list.toJsonExt()
+//eg: bean.toJsonExt()
 fun Any?.toJsonExt(): String? = Gson().toJson(this)
 
 object GsonConvert {
