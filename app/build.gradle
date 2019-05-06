@@ -73,4 +73,6 @@ dependencies {
 
     implementation project(':libdb')
     implementation project(':common')
+
+    implementation "com.facebook.react:react-native:+"
 }

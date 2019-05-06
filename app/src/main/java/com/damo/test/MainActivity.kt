@@ -16,6 +16,7 @@ import com.damo.test.api.ApiManager
 import com.damo.test.api.composeDefault
 import com.damo.test.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 import java.io.File
 import java.util.*
 
@@ -57,6 +58,10 @@ class MainActivity : BaseActivity() {
                     .subscribeExtApi({
                         toastInfo(it.toString())
                     }, context = activity, isShowLoad = true, isToast = true)
+        }
+
+        tvRN.setOnClickListener {
+            startActivity<MainActivityRN>()
         }
 
     }

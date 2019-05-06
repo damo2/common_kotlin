@@ -1,0 +1,25 @@
+{
+  "name": "damoRn",
+  "version": "1.0.0",
+  "description": "damoReactNative",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "bundle-android": "react-native bundle --platform android --entry-file index.android.js --bundle-output app/src/main/assets/index.android.bundle --dev false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damo2/common.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/damo2/common/issues"
+  },
+  "homepage": "https://github.com/damo2/common#readme",
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-native": "^0.59.5"
+  }
+}
