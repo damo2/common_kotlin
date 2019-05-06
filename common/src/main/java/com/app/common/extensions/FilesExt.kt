@@ -83,7 +83,7 @@ val File.metadata: FileMetaData
             return FileMetaData.UNKNOWN
         }
         val metas = FileMetaData.values().filter { it.headers.contains(header) }
-        return if (metas.isNotEmpty()) metas.asSequence().first() else FileMetaData.UNKNOWN
+        return FileMetaData.values().asSequence().firstOrNull { it.headers.contains(header) } ?: FileMetaData.UNKNOWN
     }
 
 /**
