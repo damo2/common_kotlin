@@ -1,3 +1,7 @@
+import com.android.build.gradle.api.ApplicationVariant
+import com.android.builder.core.DefaultProductFlavor
+import org.gradle.api.internal.DefaultDomainObjectSet
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -8,6 +12,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.damo.test"
+        customAppName(applicationVariants, defaultConfig)
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -15,9 +20,26 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-DEBUG'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+def customAppName(DefaultDomainObjectSet<ApplicationVariant> applicationVariants, DefaultProductFlavor defaultConfig) {
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "damo-${variant.buildType.name}-${defaultConfig.versionName}-${new Date().format("yyyyMMdd")}"
+            variant.productFlavors.forEach() { it ->
+                outputFileName += "-" + it.name
+            }
+            outputFileName += ".apk"
+            outputFileName.toLowerCase()
         }
     }
 }
