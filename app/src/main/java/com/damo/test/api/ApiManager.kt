@@ -1,7 +1,7 @@
 package com.damo.test.api
 
 import com.app.common.api.RequestApiManager
-import com.app.common.by.NotNUllSingleVar
+import com.app.common.by.NotNullSingle
 
 /**
  * Created by wr
@@ -10,7 +10,7 @@ import com.app.common.by.NotNUllSingleVar
  * describe:
  */
 object ApiManager {
-    var apiService by NotNUllSingleVar<ApiService>()
+    var apiService by NotNullSingle<ApiService>()
     //application 初始化
     fun initApiService() {
         apiService = RequestApiManager.instance.apply {

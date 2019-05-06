@@ -10,7 +10,7 @@ import kotlin.reflect.KProperty
  * describe:
  * 只能赋值一次，且不能为空
  */
-class NotNUllSingleVar<T> : ReadWriteProperty<Any?, T> {
+class NotNullSingle<T> : ReadWriteProperty<Any?, T> {
     private var value: T? = null
     override fun getValue(thisRef: Any?, property: KProperty<*>): T {
         return value ?: throw IllegalStateException("还没有被赋值")

@@ -102,7 +102,7 @@
     fun login(@FieldMap map: HashMap<String, String>): Observable<BaseBean<UserInfo>>
 
     object ApiManager {
-        var apiService by NotNUllSingleVar<ApiService>()
+        var apiService by NotNullSingle<ApiService>()
         //application 初始化
         fun initApiService() {
             apiService = RequestApiManager.instance.apply {
@@ -143,4 +143,4 @@
     private var activity: Activity? by Weak()
 
 ### 只能赋值一次，且不能为空
-    var context by NotNUllSingleVar<Context>()
+    var context by NotNullSingle<Context>()
