@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit
 object RequestFileManager {
 
     //下载
-    fun downloadFile(url: String, file: File, downSuccessCallback: ((file: File) -> Unit)? = null, downFailCallback: ((e: Throwable) -> Unit)? = null,
+    fun downloadFile(url: String, filePath: String, downSuccessCallback: ((file: File) -> Unit)? = null, downFailCallback: ((e: Throwable) -> Unit)? = null,
                      progressCallback: (totalLength: Long, contentLength: Long, done: Boolean) -> Unit) {
         val fileDownLoadObserver = FileDownLoadObserver(downSuccessCallback, downFailCallback)
         getDownRetrofit(progressCallback)
@@ -37,7 +37,7 @@ object RequestFileManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
-                .map { responseBody -> fileDownLoadObserver.saveFile(responseBody, file) }
+                .map { responseBody -> fileDownLoadObserver.saveFile(responseBody, filePath) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fileDownLoadObserver)
     }

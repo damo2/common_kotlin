@@ -18,7 +18,7 @@ import java.util.concurrent.TimeoutException
  * mail: 1902065822@qq.com
  * describe:
  */
-class FileDownLoadObserver<T>(private val downSuccessCallback: ((T) -> Unit)?=null, private val downFailCallback: ((e: Throwable) -> Unit)?=null) : Observer<T> {
+class FileDownLoadObserver<T>(private val downSuccessCallback: ((T) -> Unit)? = null, private val downFailCallback: ((e: Throwable) -> Unit)? = null) : Observer<T> {
 
     override fun onNext(t: T) {
         downSuccessCallback?.invoke(t)
@@ -45,7 +45,8 @@ class FileDownLoadObserver<T>(private val downSuccessCallback: ((T) -> Unit)?=nu
      * @param responseBody 请求结果全体
      * @return 写入完成的文件
      */
-    fun saveFile(responseBody: ResponseBody, file: File): File {
+    fun saveFile(responseBody: ResponseBody, filePath: String): File {
+        val file = File(filePath)
         if (file.exists()) file.delete()
         val fileBuf = File("${file.path}_down")
         if (fileBuf.exists()) fileBuf.delete()

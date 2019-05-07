@@ -38,9 +38,9 @@ class MainActivity : BaseActivity() {
         tvDownload.setOnClickListener {
             RequestFileManager.downloadFile(
                     "http://wangru.oss-cn-qingdao.aliyuncs.com/test/erp-v1.0.0-20190404.apk",
-                    StorageUtils.getPublicStorageFile("test/wanban.apk")!!,
+                    StorageUtils.getPublicStoragePath("test/wanban.apk"),
                     { file -> Toast.makeText(applicationContext, "下载成功${file.name}", Toast.LENGTH_SHORT).show() },
-                    { e -> Toast.makeText(applicationContext, "下载失败", Toast.LENGTH_SHORT).show() },
+                    { e -> Toast.makeText(applicationContext, "下载失败${e.message}", Toast.LENGTH_SHORT).show() },
                     { totalLength, contentLength, done ->
                         Logger.d("totalLength=$totalLength contentLength=$contentLength")
                     });
