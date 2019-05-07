@@ -3,11 +3,10 @@ package com.damo.test
 import android.os.Bundle
 import android.widget.Toast
 import com.app.common.api.RequestFileManager
-import com.app.common.api.download.FileDownLoadObserver
 import com.app.common.api.subscribeExtApi
 import com.app.common.api.transformer.composeLife
 import com.app.common.api.util.LifeCycleEvent
-import com.app.common.json.GsonConvert
+import com.app.common.logger.Logger
 import com.app.common.utils.StorageUtils
 import com.app.common.view.toastInfo
 import com.damo.libdb.Dao
@@ -18,7 +17,6 @@ import com.damo.test.api.composeDefault
 import com.damo.test.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
-import java.io.File
 import java.util.*
 
 class MainActivity : BaseActivity() {
@@ -36,19 +34,16 @@ class MainActivity : BaseActivity() {
             Toast.makeText(applicationContext, name, Toast.LENGTH_SHORT).show()
         }
 
-        //需要读写权限
+        //todo 需要读写权限
         tvDownload.setOnClickListener {
-            RequestFileManager.downloadFile("http://wangru.oss-cn-qingdao.aliyuncs.com/test/erp-v1.0.0-20190404.apk", StorageUtils.getPublicStorageFile("test/wanban.apk")!!, object : FileDownLoadObserver<File>() {
-                override fun onDownLoadSuccess(t: File) {
-                    Toast.makeText(applicationContext, "下载成功", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onDownLoadFail(throwable: Throwable) {
-
-                }
-            }, { totalLength, contentLength, done ->
-
-            });
+            RequestFileManager.downloadFile(
+                    "http://wangru.oss-cn-qingdao.aliyuncs.com/test/erp-v1.0.0-20190404.apk",
+                    StorageUtils.getPublicStorageFile("test/wanban.apk")!!,
+                    { file -> Toast.makeText(applicationContext, "下载成功${file.name}", Toast.LENGTH_SHORT).show() },
+                    { e -> Toast.makeText(applicationContext, "下载失败", Toast.LENGTH_SHORT).show() },
+                    { totalLength, contentLength, done ->
+                        Logger.d("totalLength=$totalLength contentLength=$contentLength")
+                    });
         }
 
         tvRequest.setOnClickListener {
@@ -74,6 +69,7 @@ class MainActivity : BaseActivity() {
     override fun onStop() {
         super.onStop()
     }
+
     override fun onStart() {
         super.onStart()
     }

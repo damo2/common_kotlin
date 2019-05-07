@@ -18,15 +18,14 @@ import java.util.concurrent.TimeoutException
  * mail: 1902065822@qq.com
  * describe:
  */
-
-abstract class FileDownLoadObserver<T> : Observer<T> {
+class FileDownLoadObserver<T>(private val downSuccessCallback: ((T) -> Unit)?=null, private val downFailCallback: ((e: Throwable) -> Unit)?=null) : Observer<T> {
 
     override fun onNext(t: T) {
-        onDownLoadSuccess(t)
+        downSuccessCallback?.invoke(t)
     }
 
     override fun onError(e: Throwable) {
-        onDownLoadFail(e)
+        downFailCallback?.invoke(e)
     }
 
     override fun onComplete() {
@@ -35,11 +34,11 @@ abstract class FileDownLoadObserver<T> : Observer<T> {
     override fun onSubscribe(d: Disposable) {
     }
 
-    //下载成功的回调
-    abstract fun onDownLoadSuccess(t: T)
-
-    //下载失败回调
-    abstract fun onDownLoadFail(throwable: Throwable)
+//    //下载成功的回调
+//    abstract fun onDownLoadSuccess(t: T)
+//
+//    //下载失败回调
+//    abstract fun onDownLoadFail(throwable: Throwable)
 
     /**
      * 将文件写入本地

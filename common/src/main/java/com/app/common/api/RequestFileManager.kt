@@ -28,8 +28,9 @@ import java.util.concurrent.TimeUnit
 object RequestFileManager {
 
     //下载
-    fun downloadFile(url: String, file: File,
-                     fileDownLoadObserver: FileDownLoadObserver<File>, progressCallback: (totalLength: Long, contentLength: Long, done: Boolean) -> Unit) {
+    fun downloadFile(url: String, file: File, downSuccessCallback: ((file: File) -> Unit)? = null, downFailCallback: ((e: Throwable) -> Unit)? = null,
+                     progressCallback: (totalLength: Long, contentLength: Long, done: Boolean) -> Unit) {
+        val fileDownLoadObserver = FileDownLoadObserver(downSuccessCallback, downFailCallback)
         getDownRetrofit(progressCallback)
                 .create(CommonApiService::class.java)
                 .downLoadFile(url)
