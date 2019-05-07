@@ -18,7 +18,7 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <application
         android:name=".base.App"
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -28,6 +28,15 @@
         <meta-data
             android:name="APPLICATION_ID"
             android:value="${applicationId}"/>
+
+        <!-- ******************  极光推送 start ************************ -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:process=":multiprocess"
+            tools:node="replace">
+        </service>
+
+        <!-- ******************  极光推送 end ************************ -->
 
         <activity android:name=".MainActivity">
             <intent-filter>
