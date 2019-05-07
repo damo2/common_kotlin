@@ -59,7 +59,8 @@ dependencies {
 
     //
     //kotlin工具
-    implementation "org.jetbrains.anko:anko-commons:0.10.0"
+    implementation "org.jetbrains.anko:anko:0.10.5"
+//    implementation "org.jetbrains.anko:anko-commons:0.10.0"
     //网络请求
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
