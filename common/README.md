@@ -67,6 +67,12 @@
 
 
 ### CommonAdapter使用
+    //kotlin
+    val adapter = CommonAdapter(this, R.layout.$itemLayoutId$, $data$, holderConvert = { holder, data, position, payloads ->
+
+    })
+
+    //java
     private EmptyWrapper mAdapterWrapper;
     CommonAdapter<String> mAdapter = new CommonAdapter<String>(getApplicationContext(), R.layout.item, mRedPacketThemeList) {
                         @Override
