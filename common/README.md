@@ -128,6 +128,16 @@
                 Logger.d("test data" + GsonUtil().toJson(it))
               })
 
+     //文件下载
+     RequestFileManager.downloadFile(
+                         "http://wangru.oss-cn-qingdao.aliyuncs.com/test/erp-v1.0.0-20190404.apk",
+                         StorageUtils.getPublicStoragePath("test/erp.apk"),
+                         { file -> Toast.makeText(applicationContext, "下载成功${file.name}", Toast.LENGTH_SHORT).show() },
+                         { e -> Toast.makeText(applicationContext, "下载失败${e.message}", Toast.LENGTH_SHORT).show() },
+                         { totalLength, contentLength, done ->
+                             Logger.d("totalLength=$totalLength contentLength=$contentLength")
+                         });
+
 ### RxBus使用
 接收方：
 
