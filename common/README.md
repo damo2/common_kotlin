@@ -137,6 +137,15 @@
                          { totalLength, contentLength, done ->
                              Logger.d("totalLength=$totalLength contentLength=$contentLength")
                          });
+      //文件上传
+      RequestFileManager.uploadFileByKey(
+                          "http://www.wxjishu.com:9999/file/upload",
+                          "file",
+                          File(StorageUtils.getPublicStoragePath("test/wanban.apk")),
+                          { str -> Logger.d("上传结果=$str") },
+                          { e -> Logger.d("异常=$e") },
+                          { progress,total -> Logger.d("up=$progress total=$total") }
+                  )
 
 ### RxBus使用
 接收方：
