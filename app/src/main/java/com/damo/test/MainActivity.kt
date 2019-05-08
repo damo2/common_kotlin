@@ -7,6 +7,7 @@ import com.app.common.api.subscribeExtApi
 import com.app.common.api.transformer.composeLife
 import com.app.common.api.upload.FileUpLoadObserver
 import com.app.common.api.util.LifeCycleEvent
+import com.app.common.json.toJsonExt
 import com.app.common.logger.logd
 import com.app.common.utils.StorageUtils
 import com.app.common.view.toastInfo
@@ -25,16 +26,18 @@ import java.util.*
 class MainActivity : BaseActivity() {
     override fun bindLayout(): Int = R.layout.activity_main
 
-    var name by Dao<String>(String::class.java, "name")
+    data class UserBean(var name: String, var age: Int)
+
+    var userBean by Dao<UserBean>(UserBean::class.java,"user")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         ObjectBoxInit.build(applicationContext);
         tvPutCache.setOnClickListener {
-            name = "张三${Random().nextInt(100)}"
+            userBean = UserBean("张三",Random().nextInt(100))
         }
         tvGetCache.setOnClickListener {
-            Toast.makeText(applicationContext, name, Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, userBean.toJsonExt(), Toast.LENGTH_SHORT).show()
         }
 
         //todo 需要读写权限

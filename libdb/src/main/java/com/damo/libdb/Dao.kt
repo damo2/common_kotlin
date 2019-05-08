@@ -7,7 +7,7 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 /**
- * @see T
+ * @see T String、对象。 不存int、boolean、long之类的
  */
 class Dao<T>(var type: Type, var key: String, private var default: T? = null) : ReadWriteProperty<Any?, T?> {
     override fun getValue(thisRef: Any?, property: KProperty<*>): T? = Gson().fromJson(DaoCache.getStringSync(key), type)
