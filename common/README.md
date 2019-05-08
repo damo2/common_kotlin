@@ -26,8 +26,9 @@
 
 ### json解析
     //写法1
-    val user = jsonStr.gsonFromJsonExt<User>()
-    val jsonStr = user.toJsonExt()
+    val userBean = userJsonStr.gsonFromJsonExt<UserBean>()
+    val jsonStr = userBean.toJsonExt()
+    
     //写法2
     MessageBean<ImageBean> message = GsonConvert.jsonToBean(jsonString, MessageBean.class, ImageBean.class);
     var  bean :List<Bean>?  = GsonConvert.jsonToBeanList(jsonStr, Bean::class.java)
