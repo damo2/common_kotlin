@@ -9,14 +9,18 @@
 
 ### 打印日志
   [官网](https://github.com/orhanobut/logger)
-  
-    Logger.d(userName)
+    
+    //初始化
     Logger.init("MainActivity")
            .logLevel(LogLevel.FULL) //  显示全部日志，LogLevel.NONE不显示日志，默认是Full
            .methodCount(5)         //  方法栈打印的个数，默认是2
            .methodOffset(0)        //  设置调用堆栈的函数偏移值，0的话则从打印该Log的函数开始输出堆栈信息，默认是0
            .hideThreadInfo()      //  隐藏线程信息
            .logAdapter(new AndroidLogAdapter());// 自定义一个打印适配器，这里适配了Android的Log打印
+     //使用
+     logd("开始")
+     loge("异常")
+           
 ### 吐司
     toastInfo("信息")
 
@@ -28,14 +32,6 @@
     MessageBean<ImageBean> message = GsonConvert.jsonToBean(jsonString, MessageBean.class, ImageBean.class);
     var  bean :List<Bean>?  = GsonConvert.jsonToBeanList(jsonStr, Bean::class.java)
     var  bean:BaseBean<SelectTypeBeam>?  = GsonConvert.fromJsonToBeanDataList(jsonStr, BaseBean::class.java, SelectTypeBeam::class.java)
-
-
-### 打印日志到本地
-    //初始化 isDebug 为true才会执行
-    LogSD.setIsDebug(isDebug)
-    LogSD.setRootDirDefault(SDPathUtils.getSDCardPublicDir("xiaoyingying/log"))
-    //
-    LogSD.w("打印的信息"，"filename")
 
 ### 图片加载
     ImageLoader.loader().load(this, "http://chuantu.biz/t6/345/1532056593x-1404817629.jpg", ivIcon,
@@ -62,8 +58,6 @@
     val dataEncrypt = EncryptUtils.instance.encrypt("啦啦啦123")
     //解密
     val dataDecrypt = EncryptUtils.instance.decrypt(dataEncrypt)
-
-
 
 
 ### CommonAdapter使用
@@ -101,11 +95,15 @@
 
 ### 网络请求
 
+>接口
+
     LoginService里面：
     //地址带有 https: 后 不会用 baseurl 了
     @POST("https://www.dudulifo.com/user/phonelogin")
     @FormUrlEncoded
     fun login(@FieldMap map: HashMap<String, String>): Observable<BaseBean<UserInfo>>
+    
+>初始化
 
     object ApiManager {
         var apiService by NotNullSingle<ApiService>()
@@ -119,14 +117,17 @@
             }.createService(ApiService::class.java)
         }
     }
+    
+>请求
 
+    //请求
     ApiManager.apiService
-              .getLanguageType()
-              .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))
-              .compose(composeCommonBean())//.compose(composeCache(true,"testa",true))
-              .subscribeExtApi({
-                Logger.d("test data" + GsonUtil().toJson(it))
-              })
+                      .getLanguageType()
+                      .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))
+                      .compose(composeCommonBean())//.compose(composeCache(true,"testa",true))
+                      .subscribeExtApi({
+                        Logger.d("test data" + GsonUtil().toJson(it))
+                      })        
 
      //文件下载
      RequestFileManager.downloadFile(

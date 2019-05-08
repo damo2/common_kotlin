@@ -7,7 +7,7 @@ import com.app.common.api.subscribeExtApi
 import com.app.common.api.transformer.composeLife
 import com.app.common.api.upload.FileUpLoadObserver
 import com.app.common.api.util.LifeCycleEvent
-import com.app.common.logger.Logger
+import com.app.common.logger.logd
 import com.app.common.utils.StorageUtils
 import com.app.common.view.toastInfo
 import com.damo.libdb.Dao
@@ -42,10 +42,10 @@ class MainActivity : BaseActivity() {
             RequestFileManager.downloadFile(
                     "http://wangru.oss-cn-qingdao.aliyuncs.com/test/erp-v1.0.0-20190404.apk",
                     StorageUtils.getPublicStoragePath("test/wanban.apk"),
-                    { file -> Toast.makeText(applicationContext, "下载成功${file.name}", Toast.LENGTH_SHORT).show() },
-                    { e -> Toast.makeText(applicationContext, "下载失败${e.message}", Toast.LENGTH_SHORT).show() },
+                    { file -> toastInfo("下载成功") },
+                    { e -> toastInfo("下载失败${e.message}") },
                     { totalLength, contentLength, done ->
-                        Logger.d("totalLength=$totalLength contentLength=$contentLength")
+                        logd("totalLength=$totalLength contentLength=$contentLength")
                     });
         }
         tvUp.setOnClickListener {
@@ -53,9 +53,9 @@ class MainActivity : BaseActivity() {
                     "http://www.wxjishu.com:9999/file/upload",
                     "file",
                     File(StorageUtils.getPublicStoragePath("test/wanban.apk")),
-                    { str -> Logger.d("上传结果=$str") },
-                    { e -> Logger.d("异常=$e") },
-                    { progress,total -> Logger.d("up=$progress total=$total") }
+                    { str -> toastInfo("上传成功$str") },
+                    { e -> toastInfo("上传失败$e") },
+                    { progress, total -> logd("up=$progress total=$total") }
             )
         }
         tvRequest.setOnClickListener {

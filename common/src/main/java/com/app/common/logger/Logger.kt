@@ -4,6 +4,21 @@ import LoggerPrinter
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 
+fun logw(message: String) {
+    Logger.w(message)
+}
+
+fun logd(message: String) {
+    Logger.d(message)
+}
+
+fun logi(message: String) {
+    Logger.i(message)
+}
+
+fun loge(message: String) {
+    Logger.e(message)
+}
 
 object Logger {
 
