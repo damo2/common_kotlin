@@ -3,7 +3,6 @@ package com.app.common.api
 import android.content.Context
 import com.app.common.BuildConfig
 import com.app.common.base.AppBaseActivity
-import com.app.common.base.AppBaseApplication
 import com.app.common.base.AppBaseFragment
 import com.app.common.logger.Logger
 import com.app.common.view.toastErrorNet
