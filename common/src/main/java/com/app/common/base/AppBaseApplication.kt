@@ -51,7 +51,7 @@ open class AppBaseApplication : Application() {
         super.onLowMemory()
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
+    override fun onConfigurationChanged(newConfig: Configuration?) {
         Log.d(TAG, "配置改变")
         super.onConfigurationChanged(newConfig)
     }
@@ -66,7 +66,7 @@ open class AppBaseApplication : Application() {
 
     private fun addActivityListener() {
         registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                 Log.d(TAG, "onActivityCreated: " + activity.localClassName)
                 ActivityStack.add(activity)
             }
@@ -79,7 +79,7 @@ open class AppBaseApplication : Application() {
 
             override fun onActivityStopped(activity: Activity) {}
 
-            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
 
             override fun onActivityDestroyed(activity: Activity) {
                 Log.d(TAG, "onActivityDestroyed: " + activity.localClassName)
