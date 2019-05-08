@@ -2,10 +2,10 @@ package com.app.common.api
 
 import com.app.common.BuildConfig
 import com.app.common.CommonConst
-import com.app.common.api.interceptor.LogInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,7 +33,7 @@ class RequestApiManager() {
                 connectTimeout(CommonConst.REQUEST_OUTTIME, TimeUnit.MILLISECONDS)
                 addInterceptor(CommonInterceptor())
                 if (BuildConfig.DEBUG) {
-                    addInterceptor(LogInterceptor())
+                    addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
                 }
                 clientBuilder(this);
             }.build()

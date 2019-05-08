@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.app.common.api.RequestFileManager
 import com.app.common.api.subscribeExtApi
 import com.app.common.api.transformer.composeLife
+import com.app.common.api.upload.FileUpLoadObserver
 import com.app.common.api.util.LifeCycleEvent
 import com.app.common.logger.Logger
 import com.app.common.utils.StorageUtils
@@ -15,8 +16,10 @@ import com.damo.test.activity.AnkoActivity
 import com.damo.test.api.ApiManager
 import com.damo.test.api.composeDefault
 import com.damo.test.base.BaseActivity
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
+import java.io.File
 import java.util.*
 
 class MainActivity : BaseActivity() {
@@ -45,7 +48,16 @@ class MainActivity : BaseActivity() {
                         Logger.d("totalLength=$totalLength contentLength=$contentLength")
                     });
         }
-
+        tvUp.setOnClickListener {
+            RequestFileManager.uploadFileByKey(
+                    "http://www.wxjishu.com:9999/file/upload",
+                    "file",
+                    File(StorageUtils.getPublicStoragePath("test/wanban.apk")),
+                    { str -> Logger.d("上传结果=$str") },
+                    { e -> Logger.d("异常=$e") },
+                    { progress,total -> Logger.d("up=$progress total=$total") }
+            )
+        }
         tvRequest.setOnClickListener {
             ApiManager.apiService
                     .update("1.0")
