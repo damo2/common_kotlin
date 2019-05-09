@@ -174,6 +174,7 @@
     val num1: Int? = null
     val num2: Int? = 2
     ifNotNull(num1, num2) { num1a, num2a ->
+        //都不为空才执行
         print(num1a + num2a)
     }
     
@@ -186,7 +187,7 @@
     edtInput.limitLengthExt(5,{ toastInfo("最多输入字数为5")})
     
 #### 单例
-    //没有参数
+    //没有参数 （或者使用 lazy 委托）
     class Manager {
         companion object : SingleHolder<Manager>(::Manager)
     }

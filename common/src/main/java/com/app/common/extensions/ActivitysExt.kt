@@ -1,14 +1,20 @@
 package com.app.common.extensions
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
+import android.graphics.Color
 import android.graphics.Point
 import android.graphics.Rect
 import android.os.Build
 import android.util.DisplayMetrics
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.FrameLayout
 
 
 private val STATUS_BAR_HEIGHT_RES_NAME = "status_bar_height"
@@ -61,8 +67,7 @@ private fun getBarHeight(context: Context, barName: String): Int {
     return context.resources.getDimensionPixelSize(resourceId)
 }
 
-private fun hasNavBar(activity: Activity): Boolean {
-    val windowManager = activity.windowManager
+fun Activity.hasNavBar(): Boolean {
     val d = windowManager.defaultDisplay
 
     val realDisplayMetrics = DisplayMetrics()
@@ -90,8 +95,17 @@ fun Activity.statusHind() {
 //沉浸式状态栏
 fun Activity.statusTranslucent() {
     //透明状态栏
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+        return
+    }
+    //透明状态栏
+    window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        //5.0及以上版本
+        createNavBarExt()
+    } else {
+        //4.4版本
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     }
 }
 
@@ -129,5 +143,67 @@ fun Activity.hindSoftInputExt() {
             val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
         }
+    }
+}
+
+
+/**
+ * 创建Navigation Bar
+ *
+ * @param activity 上下文
+ */
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+private fun Activity.createNavBarExt() {
+    val navBarHeight = getNavigationBarHeight()
+    val navBarWidth = getNavigationBarWidth()
+    if (navBarHeight > 0 && navBarWidth > 0) {
+        //创建NavigationBar
+        val navBar = View(this)
+        val pl: FrameLayout.LayoutParams
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            pl = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, navBarHeight)
+            pl.gravity = Gravity.BOTTOM
+        } else {
+            pl = FrameLayout.LayoutParams(navBarWidth, ViewGroup.LayoutParams.MATCH_PARENT)
+            pl.gravity = Gravity.END
+        }
+        navBar.layoutParams = pl
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            navBar.setBackgroundColor(Color.parseColor("#fffafafa"))
+        } else {
+            navBar.setBackgroundColor(Color.parseColor("#40000000"))
+        }
+        //添加到布局当中
+        val decorView = window.decorView as ViewGroup
+        decorView.addView(navBar)
+        //设置主布局PaddingBottom
+        val contentView = decorView.findViewById<ViewGroup>(android.R.id.content)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            contentView.setPaddingRelative(0, 0, 0, navBarHeight)
+        } else {
+            contentView.setPaddingRelative(0, 0, navBarWidth, 0)
+        }
+
+    }
+}
+
+/**
+ * 设置BarPaddingTop
+ *
+ * @param context Activity
+ * @param view    View[ToolBar、TitleBar、navigationView.getHeaderView(0)]
+ */
+fun Activity.setBarPaddingTop(view: View) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        val paddingStart = view.paddingStart
+        val paddingEnd = view.paddingEnd
+        val paddingBottom = view.paddingBottom
+        val statusBarHeight = getStatusBarHeight()
+        //改变titleBar的高度
+        val lp = view.layoutParams
+        lp.height += statusBarHeight
+        view.layoutParams = lp
+        //设置paddingTop
+        view.setPaddingRelative(paddingStart, statusBarHeight, paddingEnd, paddingBottom)
     }
 }

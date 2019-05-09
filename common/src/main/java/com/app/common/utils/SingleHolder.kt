@@ -5,17 +5,8 @@ package com.app.common.utils
  * Date: 2019/2/14  16:56
  * mail: 1902065822@qq.com
  * describe: 带参数的单例封装，双重检查锁定,不需要参数时，只需使用lazy的属性委托
- *
-带一个参数例子：
-class Manager constructor(context: Context) {
-init {
-// Init using context argument
-}
-companion object : SingleHolder<Manager, Context>(::Manager)
-}
-调用
-Manager.getInstance(context)
  */
+
 /**
  * 不带参数
  * @param T 单例对象
