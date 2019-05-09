@@ -9,12 +9,12 @@ import android.graphics.Point
 import android.graphics.Rect
 import android.os.Build
 import android.util.DisplayMetrics
-import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
+import android.view.Window.ID_ANDROID_CONTENT
+
+
 
 
 private val STATUS_BAR_HEIGHT_RES_NAME = "status_bar_height"
@@ -65,6 +65,13 @@ private fun getBarHeight(context: Context, barName: String): Int {
     // 获得状态栏高度
     val resourceId = context.resources.getIdentifier(barName, "dimen", "android")
     return context.resources.getDimensionPixelSize(resourceId)
+}
+
+/**
+ * 获取activity的根view
+ */
+fun Activity.getActivityRootExt(): View {
+    return (findViewById<ViewGroup>(Window.ID_ANDROID_CONTENT)).getChildAt(0)
 }
 
 fun Activity.hasNavBar(): Boolean {
