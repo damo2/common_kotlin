@@ -76,28 +76,19 @@ object KeyboardUtils {
     }
 
     /**
-     * Set keyboard visibility change event listener.
+     * 软键盘显示状态改变监听
      *
      * @param activity Activity
      */
-    fun setVisibilityEventListener(activity: Activity?,
-                                   listener: ((isOpen: Boolean, heightDiff: Int)-> Boolean)?) {
+    fun Activity.setKeyboardVisibleListenerExt(listener: ((isOpen: Boolean, heightDiff: Int) -> Boolean)?) {
 
-        if (activity == null) {
-            throw NullPointerException("Parameter:activity must not be null")
-        }
-
-        if (listener == null) {
-            throw NullPointerException("Parameter:listener must not be null")
-        }
-
-        val activityRoot = activity.getActivityRootExt()
+        val activityRoot = getActivityRootExt()
 
         val layoutListener = object : ViewTreeObserver.OnGlobalLayoutListener {
 
             private val r = Rect()
 
-            private val visibleThreshold = Math.round(activity.dp2px(KEYBOARD_VISIBLE_THRESHOLD_DP).toFloat())
+            private val visibleThreshold = Math.round(dp2px(KEYBOARD_VISIBLE_THRESHOLD_DP).toFloat())
 
             private var wasOpened = false
 
@@ -115,8 +106,8 @@ object KeyboardUtils {
 
                 wasOpened = isOpen
 
-                val removeListener = listener(isOpen, heightDiff)
-                if (removeListener) {
+                val removeListener = listener?.invoke(isOpen, heightDiff)
+                if (removeListener == true) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                         activityRoot.viewTreeObserver
                                 .removeOnGlobalLayoutListener(this)
@@ -128,8 +119,8 @@ object KeyboardUtils {
             }
         }
         activityRoot.viewTreeObserver.addOnGlobalLayoutListener(layoutListener)
-        activity.application
-                .registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks(activity) {
+        application
+                .registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks(this) {
                     override fun onTargetActivityDestroyed() {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                             activityRoot.viewTreeObserver
