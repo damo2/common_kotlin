@@ -1,5 +1,6 @@
 package com.damo.test
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import com.app.common.api.RequestFileManager
@@ -11,6 +12,8 @@ import com.app.common.extensions.limitLengthExt
 import com.app.common.extensions.setOnClickExtNoFast
 import com.app.common.json.toJsonExt
 import com.app.common.logger.logd
+import com.app.common.utils.SingleHolder
+import com.app.common.utils.SingleHolder1
 import com.app.common.utils.StorageUtils
 import com.app.common.view.toastInfo
 import com.damo.libdb.Dao
@@ -82,7 +85,7 @@ class MainActivity : BaseActivity() {
         }
         edtInput.limitLengthExt(5,{ toastInfo("最多输入字数为5")})
 
-
+        Manager.getInstance(applicationContext)
     }
 
     override fun onStop() {
@@ -92,4 +95,12 @@ class MainActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
     }
+
+    class Manager(context: Context) {
+        companion object : SingleHolder1<Manager, Context>(::Manager)
+        init {
+            //使用context 初始化
+        }
+    }
+
 }

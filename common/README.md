@@ -169,15 +169,36 @@
 <br><br><br>
 
 ## **常用**
+
 #### 多个判空
     val num1: Int? = null
     val num2: Int? = 2
     ifNotNull(num1, num2) { num1a, num2a ->
         print(num1a + num2a)
     }
+    
 #### 防止快速点击
     tvAnko.setOnClickExtNoFast {
         startActivity<AnkoActivity>()
     }
+    
 #### 限制最多输入字数
     edtInput.limitLengthExt(5,{ toastInfo("最多输入字数为5")})
+    
+#### 单例
+    //没有参数
+    class Manager {
+        companion object : SingleHolder<Manager>(::Manager)
+    }
+    //使用
+    Manager.getInstance()
+    
+    //一个参数
+    class Manager(context: Context) {
+        companion object : SingleHolder1<Manager, Context>(::Manager)
+        init {
+            //使用context 初始化
+        }
+    }
+    //使用
+    Manager.getInstance(context)
