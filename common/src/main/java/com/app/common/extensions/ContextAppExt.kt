@@ -18,29 +18,27 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 
-fun Context.getVersionCode(): Int? {
-    val pm = this.packageManager
-    return try {
-        val packageInfo = pm.getPackageInfo(this.packageName, 0)
-        packageInfo.versionCode
-    } catch (e: PackageManager.NameNotFoundException) {
-        null
-    }
-}
+fun Context.getVersionCode(): Int? =
+        try {
+            val packageInfo = packageManager.getPackageInfo(this.packageName, 0)
+            packageInfo.versionCode
+        } catch (e: Exception) {
+            null
+        }
 
-fun Context.getVersionName(): String? {
-    val pm = this.packageManager
-    return try {
-        val packageInfo = pm.getPackageInfo(this.packageName, 0)
-        packageInfo.versionName
-    } catch (e: PackageManager.NameNotFoundException) {
-        null
-    }
-}
 
-fun Context.getApplicationIdExt(): String {
-    return MetaDataUtil.getMetaDataString(this, ConstCommon.APPLICATION_ID)
-}
+fun Context.getVersionName(): String? =
+        try {
+            val packageInfo = packageManager.getPackageInfo(this.packageName, 0)
+            packageInfo.versionName
+        } catch (e: PackageManager.NameNotFoundException) {
+            null
+        }
+
+
+fun Context.getApplicationIdExt(): String =
+        MetaDataUtil.getMetaDataString(this, ConstCommon.APPLICATION_ID)
+
 
 fun Context.isNamedProcess(processName: String): Boolean {
     val pid = android.os.Process.myPid()

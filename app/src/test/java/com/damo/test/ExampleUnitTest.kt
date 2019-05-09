@@ -87,5 +87,7 @@ class ExampleUnitTest {
         ifNotNull(num1, num2, num3) { num1a, num2a, num3a ->
             print(num1a + num2a + num3a)
         }
+        val listStr= listOf("a","b","c")
+        println(listStr.joinToString (", ", "[", "]"))
     }
 }

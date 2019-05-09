@@ -166,10 +166,18 @@
 
 ### 只能赋值一次，且不能为空
     var context by NotNullSingle<Context>()
+<br><br><br>
 
-### 多个判空
+## **常用**
+#### 多个判空
     val num1: Int? = null
     val num2: Int? = 2
     ifNotNull(num1, num2) { num1a, num2a ->
         print(num1a + num2a)
     }
+#### 防止快速点击
+    tvAnko.setOnClickExtNoFast {
+        startActivity<AnkoActivity>()
+    }
+#### 限制最多输入字数
+    edtInput.limitLengthExt(5,{ toastInfo("最多输入字数为5")})

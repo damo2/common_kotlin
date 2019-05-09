@@ -90,5 +90,17 @@
         android:text="AnkoLayout"
         android:textColor="@color/colorAccent"
         />
+    <EditText
+        android:id="@+id/edtInput"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_margin="4dp"
+        android:background="@color/defaultBg"
+        android:gravity="center"
+        android:padding="8dp"
+        android:maxLines="1"
+        android:hint="最多输入10个字"
+        android:textColor="@color/colorAccent"
+        />
 </com.google.android.flexbox.FlexboxLayout>
 

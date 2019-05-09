@@ -7,6 +7,8 @@ import com.app.common.api.subscribeExtApi
 import com.app.common.api.transformer.composeLife
 import com.app.common.api.upload.FileUpLoadObserver
 import com.app.common.api.util.LifeCycleEvent
+import com.app.common.extensions.limitLengthExt
+import com.app.common.extensions.setOnClickExtNoFast
 import com.app.common.json.toJsonExt
 import com.app.common.logger.logd
 import com.app.common.utils.StorageUtils
@@ -71,13 +73,15 @@ class MainActivity : BaseActivity() {
                     }, context = activity, isShowLoad = true, isToast = true)
         }
 
-        tvRN.setOnClickListener {
+        tvRN.setOnClickExtNoFast {
             startActivity<MainActivityRN>()
         }
 
-        tvAnko.setOnClickListener {
+        tvAnko.setOnClickExtNoFast {
             startActivity<AnkoActivity>()
         }
+        edtInput.limitLengthExt(5,{ toastInfo("最多输入字数为5")})
+
 
     }
 

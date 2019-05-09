@@ -15,18 +15,23 @@ import com.app.common.view.ToastX
  * describe:
  */
 
-//禁止输入空格
+/**
+ * 禁止输入空格
+ */
 fun EditText.inhibitInputSpaceExt() {
-    val filter = object : InputFilter {
+    val filter = InputFilter { source, start, end, dest, dstart, dend ->
         //返回null表示接收输入的字符,返回空字符串表示不接受输入的字符
-        override fun filter(source: CharSequence?, start: Int, end: Int, dest: Spanned?, dstart: Int, dend: Int): CharSequence? =
-                if (" ".equals(source)) "" else null
+        if (" " == source) "" else null
     }
     filters = arrayOf(filter)
 }
 
-//限制长度
-fun EditText.limitLengthExt(context: Context, maxLength: Int, tig: String? = null) {
+/**
+ * 限制长度
+ * @param maxLength 最多输入字数
+ * @param outCallback 超出回调
+ */
+fun EditText.limitLengthExt(maxLength: Int, outCallback: (()->Unit)? = null) {
     addTextChangedListener(object : TextWatcher {
         private var temp: CharSequence? = null
         private var start: Int = 0
@@ -50,7 +55,7 @@ fun EditText.limitLengthExt(context: Context, maxLength: Int, tig: String? = nul
             // 先去掉监听器，否则会出现栈溢出
             removeTextChangedListener(this)
             if (s.length > maxLength) {
-                tig?.let { ToastX(context).info(it) }
+                outCallback?.invoke()
                 while (text.toString().length > maxLength) {
                     s.delete(start - 1, end)
                     start--
