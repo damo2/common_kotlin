@@ -96,16 +96,14 @@
 
 ### 网络请求
 
->接口
-
+##### 接口
     LoginService里面：
     //地址带有 https: 后 不会用 baseurl 了
     @POST("https://www.dudulifo.com/user/phonelogin")
     @FormUrlEncoded
     fun login(@FieldMap map: HashMap<String, String>): Observable<BaseBean<UserInfo>>
     
->初始化
-
+##### 初始化
     object ApiManager {
         var apiService by NotNullSingle<ApiService>()
         //application 初始化
@@ -119,8 +117,7 @@
         }
     }
     
->请求
-
+##### 请求
     //请求
     ApiManager.apiService
                       .getLanguageType()
@@ -150,8 +147,7 @@
                   )
 
 ### RxBus使用
-接收方：
-
+###### 接收方：
     RxBus.toFlowable().subscribe(t ->
                      if(t is User){
 
@@ -161,8 +157,7 @@
                    addSubscription(this)
                  }
 
-发送方：
-
+###### 发送方：
     RxBus.post(new User("张三"))
 
 
@@ -171,3 +166,10 @@
 
 ### 只能赋值一次，且不能为空
     var context by NotNullSingle<Context>()
+
+### 多个判空
+    val num1: Int? = null
+    val num2: Int? = 2
+    ifNotNull(num1, num2) { num1a, num2a ->
+        print(num1a + num2a)
+    }

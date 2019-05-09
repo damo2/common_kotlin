@@ -1,5 +1,6 @@
 package com.damo.test
 
+import com.app.common.utils.ifNotNull
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -76,12 +77,15 @@ class ExampleUnitTest {
             return stringBuilder.toString()
         }
 
-       val str= buildString{
+        val str = buildString {
             append("a")
             append("b")
         }
-        println(str)
-
-
+        val num1: Int? = null
+        val num2: Int? = 2
+        val num3: Int? = 3
+        ifNotNull(num1, num2, num3) { num1a, num2a, num3a ->
+            print(num1a + num2a + num3a)
+        }
     }
 }
