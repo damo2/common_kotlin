@@ -27,18 +27,17 @@ object LangUtils {
     }
 
 
-    fun formatNumberToLimitedDigits(number: Int, maxDigits: Int): String {
-        if (getNumberDigits(number) > maxDigits) {
-            val result = StringBuilder()
-            for (digit in 1..maxDigits) {
-                result.append("9")
+    fun formatNumberToLimitedDigits(number: Int, maxDigits: Int): String =
+            if (getNumberDigits(number) > maxDigits) {
+                buildString {
+                    for (digit in 1..maxDigits) {
+                        append("9")
+                    }
+                    append("+")
+                }
+            } else {
+                number.toString()
             }
-            result.append("+")
-            return result.toString()
-        } else {
-            return number.toString()
-        }
-    }
 
     /**
      * 规范化价格字符串显示的工具类

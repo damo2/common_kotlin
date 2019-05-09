@@ -15,27 +15,30 @@ import java.net.URLDecoder
 class LogInterceptor : BaseInterceptor(requestCallback = {
     try {
         val method = it.method();
-        val sb = StringBuilder();
-        if ("POST" == method) {
-            if (it.body() is FormBody) {
-                val body = it.body() as FormBody
-                for (i in 0..(body.size() - 1)) {
-                    sb.append(body.encodedName(i) + "=" + body.encodedValue(i) + ",")
+
+        val urlStr = buildString {
+            if ("POST" == method) {
+                if (it.body() is FormBody) {
+                    val body = it.body() as FormBody
+                    for (i in 0..(body.size() - 1)) {
+                        append(body.encodedName(i) + "=" + body.encodedValue(i) + ",")
+                    }
+                    delete(length - 1, length);
                 }
-                sb.delete(sb.length - 1, sb.length);
             }
         }
+
         //URLDecoder.decode URLDecode解码
         val info = "Request{" +
                 "method=[${it.method()}]" +
                 ", url=[${URLDecoder.decode(it.url().toString())}]\n" +
                 ", headers=[" + it.headers().toString() + "]" +
                 ", isHttps=" + it.isHttps +
-                ", Params=[${URLDecoder.decode(sb.toString(), "utf-8")}]" +
+                ", Params=[${URLDecoder.decode(urlStr, "utf-8")}]" +
                 '}'
         Log.i("LogInterceptor", "intercept#request:\n$info")
     } catch (e: Exception) {
     }
-}, resultCallback = {result, request ->
+}, resultCallback = { result, request ->
     Log.i("LogInterceptor", "intercept#result:\n${result}")
 })

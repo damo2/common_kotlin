@@ -39,7 +39,7 @@ fun Context.getVersionName(): String? {
 }
 
 fun Context.getApplicationIdExt(): String {
-    return MetaDataUtil.getMetaDataString(this,ConstCommon.APPLICATION_ID)
+    return MetaDataUtil.getMetaDataString(this, ConstCommon.APPLICATION_ID)
 }
 
 fun Context.isNamedProcess(processName: String): Boolean {
@@ -112,21 +112,21 @@ private fun toMD5(text: String): String {
     val messageDigest = MessageDigest.getInstance("MD5")
     //通过摘要器对字符串的二进制字节数组进行hash计算
     val digest = messageDigest.digest(text.toByteArray())
-    val sb = StringBuilder()
-    for (i in digest.indices) {
-        //循环每个字符 将计算结果转化为正整数;
-        val digestInt = digest[i].toInt() and 0xff
-        //将10进制转化为较短的16进制
-        val hexString = Integer.toHexString(digestInt)
-        //转化结果如果是个位数会省略0,因此判断并补0
-        if (hexString.length < 2) {
-            sb.append(0)
+
+    return buildString {
+        for (i in digest.indices) {
+            //循环每个字符 将计算结果转化为正整数;
+            val digestInt = digest[i].toInt() and 0xff
+            //将10进制转化为较短的16进制
+            val hexString = Integer.toHexString(digestInt)
+            //转化结果如果是个位数会省略0,因此判断并补0
+            if (hexString.length < 2) {
+                append(0)
+            }
+            //将循环结果添加到缓冲区
+            append(hexString)
         }
-        //将循环结果添加到缓冲区
-        sb.append(hexString)
     }
-    //返回整个结果
-    return sb.toString()
 }
 
 //屏幕宽
@@ -136,6 +136,7 @@ fun Context.screenWidthExt(): Int {
     wm.defaultDisplay.getMetrics(outMetrics)
     return outMetrics.widthPixels
 }
+
 //屏幕高
 fun Context.screenHeightExt(): Int {
     val wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager

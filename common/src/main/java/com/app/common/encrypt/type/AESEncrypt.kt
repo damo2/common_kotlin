@@ -117,19 +117,19 @@ class AESEncrypt : IEncrypt {
     }
 
     private fun bytesToHexString(src: ByteArray?): String? {
-        val stringBuilder = StringBuilder("")
-        if (src == null || src.size <= 0) {
-            return null
-        }
-        for (i in 0..src.size - 1) {
-            val v = src[i].toInt() and 0xFF
-            val hv = Integer.toHexString(v)
-            if (hv.length < 2) {
-                stringBuilder.append(0)
+        return buildString {
+            if (src == null || src.size <= 0) {
+                return null
             }
-            stringBuilder.append(hv)
+            for (i in 0..src.size - 1) {
+                val v = src[i].toInt() and 0xFF
+                val hv = Integer.toHexString(v)
+                if (hv.length < 2) {
+                    append(0)
+                }
+                append(hv)
+            }
         }
-        return stringBuilder.toString()
     }
 
     class CryptoProvider : Provider("Crypto", 1.0, "HARMONY (SHA1 digest; SecureRandom; SHA1withDSA signature)") {
