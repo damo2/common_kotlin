@@ -13,9 +13,9 @@ fun RecyclerView.addScrollPauseLoadExt(){
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             when (newState) {
-                RecyclerView.SCROLL_STATE_IDLE -> Glide.with(getContext()).resumeRequests()
-                RecyclerView.SCROLL_STATE_DRAGGING -> Glide.with(getContext()).pauseRequests()
-                RecyclerView.SCROLL_STATE_SETTLING -> Glide.with(getContext()).resumeRequests()
+                RecyclerView.SCROLL_STATE_IDLE -> Glide.with(context).resumeRequests()
+                RecyclerView.SCROLL_STATE_DRAGGING -> Glide.with(context).pauseRequests()
+                RecyclerView.SCROLL_STATE_SETTLING -> Glide.with(context).resumeRequests()
             }
         }
     })

@@ -6,14 +6,13 @@ package com.app.common.extensions
  * describe:
  */
 
-fun <E> List<E>.getExt(index: Int): E? {
-    try {
-        return this.get(index)
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-    return null
-}
+fun <E> List<E>.getExt(index: Int): E? =
+        try {
+            this[index]
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
 
 
 fun <E> List<E>?.isEmptyExt(): Boolean = this == null || this.isEmpty()

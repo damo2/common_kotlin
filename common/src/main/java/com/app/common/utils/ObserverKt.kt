@@ -4,15 +4,15 @@ import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import io.reactivex.exceptions.CompositeException
 import io.reactivex.exceptions.Exceptions
-import io.reactivex.functions.Action
-import io.reactivex.functions.Consumer
 import io.reactivex.internal.disposables.DisposableHelper
 import io.reactivex.plugins.RxJavaPlugins
 import java.util.concurrent.atomic.AtomicReference
 
-class ObserverKt<T>(val onNextKt: (data: T) -> Unit, val onErrorKt: ((e: Throwable) -> Unit)? = null,
-                    val onCompleteKt: (() -> Unit)? = null,
-                    val onSubscribeKt: ((disposable: Disposable) -> Unit)? = null) : AtomicReference<Disposable>(), Observer<T>, Disposable {
+class ObserverKt<T>(private val onNextKt: (data: T) -> Unit,
+                    private val onErrorKt: ((e: Throwable) -> Unit)? = null,
+                    private val onCompleteKt: (() -> Unit)? = null,
+                    private val onSubscribeKt: ((disposable: Disposable) -> Unit)? = null
+) : AtomicReference<Disposable>(), Observer<T>, Disposable {
 
     override fun onSubscribe(s: Disposable) {
         if (DisposableHelper.setOnce(this, s)) {
@@ -75,6 +75,6 @@ class ObserverKt<T>(val onNextKt: (data: T) -> Unit, val onErrorKt: ((e: Throwab
     }
 
     companion object {
-        private val serialVersionUID = -2118322957072273456L
+        private const val serialVersionUID = -2118322957072273456L
     }
 }
