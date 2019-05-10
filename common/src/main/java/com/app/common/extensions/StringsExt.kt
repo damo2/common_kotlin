@@ -1,9 +1,11 @@
 package com.app.common.extensions
 
+import android.graphics.BitmapFactory
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import com.app.common.logger.Logger
+import com.app.common.utils.BitmapUtil
 import java.io.File
 import java.nio.charset.Charset
 import java.util.regex.Pattern
@@ -40,4 +42,7 @@ fun String.toIntExt(): Int {
     }
 }
 
+fun String.imgGetWidthExt()=BitmapUtil.imgGetWidth(this)
+
+fun String.imgGetHeightExt()=BitmapUtil.imgGetHeight(this)
 
