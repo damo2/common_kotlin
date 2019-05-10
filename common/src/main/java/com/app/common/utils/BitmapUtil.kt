@@ -259,34 +259,18 @@ object BitmapUtil {
         return ratio
     }
 
-    //保存图片
-    fun saveBitmap(path: String, bitmap: Bitmap) {
-        var bos: FileOutputStream? = null
+    //保存文件（需要判断权限）
+    fun saveFile(bitmap: Bitmap,path: String,sucCallback:(()->Unit)?=null) {
         val file = File(path)
-        try {
-            bos = FileOutputStream(file)
-            if (path.contains(".png") || path.contains(".PNG")) {
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos)
-            } else {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
-            }
-            bos.close()
+        if (file.parentFile != null && file.parentFile.exists()) {
+            file.parentFile.mkdirs()
+        }
+        BufferedOutputStream(FileOutputStream(file)).use { bos ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
             //TODO 保存图片后记得发送广播通知更新数据库
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            if (bos != null) {
-                try {
-                    bos.close()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-
-            }
+            sucCallback?.invoke()
         }
     }
-
-
     /**
      * uri 获取图片路径
      *
@@ -332,36 +316,24 @@ object BitmapUtil {
 
     /** */
     // 1. Bitmap to InputStream
-    fun bitmap2Input(bitmap: Bitmap, quality: Int): InputStream {
+    fun bitmap2Input(bitmap: Bitmap, quality: Int=100): InputStream {
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, quality, baos)
-        return ByteArrayInputStream(baos.toByteArray())
-    }
-
-    fun bitmap2Input(bitmap: Bitmap): InputStream {
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
         return ByteArrayInputStream(baos.toByteArray())
     }
 
     // 2. Bitmap to byte[]
-    fun bitmap2ByteArray(bitmap: Bitmap, quality: Int): ByteArray {
+    fun bitmap2ByteArray(bitmap: Bitmap, quality: Int=100): ByteArray {
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, quality, baos)
         return baos.toByteArray()
     }
 
-    fun bitmap2ByteArray(bitmap: Bitmap): ByteArray {
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
-        return baos.toByteArray()
-    }
-
     // 3. Drawable to byte[]
-    fun drawable2ByteArray(drawable: Drawable): ByteArray {
+    fun drawable2ByteArray(drawable: Drawable, quality: Int=100): ByteArray {
         val bitmap = (drawable as BitmapDrawable).bitmap
         val out = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+        bitmap.compress(Bitmap.CompressFormat.PNG, quality, out)
         return out.toByteArray()
     }
 
