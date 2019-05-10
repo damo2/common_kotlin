@@ -12,6 +12,7 @@ import android.util.Log
 import com.app.common.extensions.getApplicationIdExt
 import java.io.File
 import java.io.FileNotFoundException
+import androidx.core.content.FileProvider
 
 /**
  * 下载文件后通知系统更新
