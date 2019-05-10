@@ -7,12 +7,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import androidx.core.content.FileProvider
 import android.text.TextUtils
 import android.util.Log
+import com.app.common.extensions.getApplicationIdExt
 import java.io.File
 import java.io.FileNotFoundException
-
 
 
 /**
@@ -26,6 +25,22 @@ import java.io.FileNotFoundException
 object UpdateFile {
 
     private val TAG = "UpdateFile"
+
+    /**
+    App 模块AndroidManifest 添加
+    <meta-data
+    android:name="APPLICATION_ID"
+    android:value="${applicationId}"/>
+     */
+    fun getUriFromFile(context: Context?, file: File): Uri {
+        val imageUri: Uri
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            imageUri = FileProvider.getUriForFile(this, "${context.getApplicationIdExt()}.fileprovider", file)
+        } else {
+            imageUri = Uri.fromFile(file)
+        }
+        return imageUri
+    }
 
     /**
      * 保存文件通知系统更新，在图库显示图片
@@ -49,7 +64,7 @@ object UpdateFile {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-                updateFileStatu(context, file, applicationId)
+                updateFileStatu(context, file)
             }
 
         } else {
@@ -59,20 +74,14 @@ object UpdateFile {
 
     /**
      * 保存文件通知系统更新，在图库显示图片
-     *
-     * @param packageName 包名 eg: com.app.test
+     * @param
      */
-    fun updateFileStatu(context: Context?, file: File?, applicationId: String) {
+    fun updateFileStatu(context: Context?, file: File?) {
         if (context != null && file != null && file.exists()) {
             //通知图库更新
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
-                val uri: Uri
-                if (Build.VERSION.SDK_INT >= 24) {
-                    uri = FileProvider.getUriForFile(context, "${applicationId}.fileprovider", file)
-                } else {
-                    uri = Uri.fromFile(file)
-                }
+                val uri: Uri = getUriFromFile(context, file)
                 intent.data = uri
                 context.sendBroadcast(intent)
             } else {
