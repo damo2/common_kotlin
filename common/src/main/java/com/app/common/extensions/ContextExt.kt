@@ -2,8 +2,6 @@ package com.app.common.extensions
 
 import android.content.Context
 import android.content.res.Resources
-import android.net.Uri
-import android.os.Build
 import android.util.TypedValue
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -37,7 +35,7 @@ fun Context.screenWidthExt() = AppInfoUtils.screenWidth(this)
 fun Context.screenHeightExt() = AppInfoUtils.screenHeight(this)
 
 
-fun Context.getUriFromFileExt(file: File)= UpdateFile.getUriFromFile(this,file)
+fun Context.getUriFromFileExt(file: File, applicationId: String = getApplicationIdExt()) = UpdateFile.getUriFromFile(this, file, applicationId)
 
 //---------------------------     单位转换start        --------------------------------
 

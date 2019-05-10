@@ -13,7 +13,6 @@ import com.app.common.extensions.getApplicationIdExt
 import java.io.File
 import java.io.FileNotFoundException
 
-
 /**
  * 下载文件后通知系统更新
  * Created by wangru
@@ -32,10 +31,10 @@ object UpdateFile {
     android:name="APPLICATION_ID"
     android:value="${applicationId}"/>
      */
-    fun getUriFromFile(context: Context?, file: File): Uri {
+    fun getUriFromFile(context: Context, file: File, applicationId: String = context.getApplicationIdExt()): Uri {
         val imageUri: Uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            imageUri = FileProvider.getUriForFile(this, "${context.getApplicationIdExt()}.fileprovider", file)
+            imageUri = FileProvider.getUriForFile(context, "$applicationId.fileprovider", file)
         } else {
             imageUri = Uri.fromFile(file)
         }
