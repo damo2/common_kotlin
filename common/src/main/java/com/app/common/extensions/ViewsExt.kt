@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.view.View
 import com.app.common.utils.ViewUtils
 import com.google.android.material.tabs.TabLayout
+import androidx.recyclerview.widget.RecyclerView
 
 fun View.setMarginExt(left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) = ViewUtils.setMargin(this, left, top, right, bottom)
 
@@ -23,3 +24,6 @@ fun View.getHeightExt() = ViewUtils.getHeight(this)
 
 //TabLayout
 fun TabLayout.setIndicatorExt(leftDp: Int, rightDp: Int) =ViewUtils.setIndicator(this,leftDp,rightDp)
+
+
+fun RecyclerView.addScrollPauseLoadExt()= RecyclerViewUtils.addScrollPauseLoadExt(this)
