@@ -1,13 +1,10 @@
 package com.app.common.extensions
 
-import android.graphics.BitmapFactory
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import com.app.common.logger.Logger
 import com.app.common.utils.BitmapUtil
-import java.io.File
-import java.nio.charset.Charset
 import java.util.regex.Pattern
 
 fun String?.equalsExt(str: String?, isIgnoerNull: Boolean = true) = this == str || (isIgnoerNull && (this == null && str == "") || (this == "" && str == null))

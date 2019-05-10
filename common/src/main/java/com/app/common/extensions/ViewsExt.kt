@@ -1,101 +1,25 @@
 package com.app.common.extensions
 
 import android.graphics.Bitmap
-import android.graphics.Canvas
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
+import com.app.common.utils.ViewUtils
+import com.google.android.material.tabs.TabLayout
+
+fun View.setMarginExt(left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) = ViewUtils.setMargin(this, left, top, right, bottom)
+
+//view转成图片
+fun View.toBitmapExt(): Bitmap = ViewUtils.toBitmap(this)
+
+fun View.setPaddingExt(left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) = ViewUtils.setPadding(this, left, top, right, bottom)
+
+fun View.setWidthHeightExt(width: Int? = null, height: Int? = null) = ViewUtils.setWidthHeight(this, width)
+
+fun View.setWidthScaleExt(width: Int? = null) = ViewUtils.setWidthScale(this, width)
+
+fun View.getWidthExt(): Int = ViewUtils.getWidth(this)
+
+fun View.getHeightExt() = ViewUtils.getHeight(this)
 
 
-fun View.setMarginExt(left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) {
-    val layout = when (layoutParams) {
-        is RelativeLayout.LayoutParams -> layoutParams as RelativeLayout.LayoutParams
-        is LinearLayout.LayoutParams -> layoutParams as LinearLayout.LayoutParams
-        is FrameLayout.LayoutParams -> layoutParams as FrameLayout.LayoutParams
-        is RecyclerView.LayoutParams -> layoutParams as RecyclerView.LayoutParams
-        is ViewGroup.MarginLayoutParams -> layoutParams as ViewGroup.MarginLayoutParams
-        else -> null
-    }
-    if (layout == null) return
-    val leftResult = left ?: layout.leftMargin
-    val rightResult = right ?: layout.rightMargin
-    val topResult = top ?: layout.topMargin
-    val bottomResult = bottom ?: layout.bottomMargin
-
-    layout.let {
-        it.setMargins(leftResult, topResult, rightResult, bottomResult)
-        layoutParams = it
-    }
-
-}
-
-/**
- * view转成图片
- */
-fun View.toBitmapExt(): Bitmap {
-    val b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-    val c = Canvas(b)
-    draw(c)
-    return b
-}
-
-fun View.setPaddingExt(left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) {
-    setPadding(left ?: paddingLeft, top ?: paddingTop, right ?: paddingRight, bottom
-            ?: paddingBottom)
-}
-
-
-fun View.setWidthHeightExt(width: Int? = null, height: Int? = null) {
-    val layout = when (layoutParams) {
-        is RelativeLayout.LayoutParams -> layoutParams as RelativeLayout.LayoutParams
-        is LinearLayout.LayoutParams -> layoutParams as LinearLayout.LayoutParams
-        is FrameLayout.LayoutParams -> layoutParams as FrameLayout.LayoutParams
-        is RecyclerView.LayoutParams -> layoutParams as RecyclerView.LayoutParams
-        is ViewGroup.MarginLayoutParams -> layoutParams as ViewGroup.MarginLayoutParams
-        else -> null
-    }
-    if (layout == null) return
-    val widthResult = width ?: layout.width
-    val heightResult = height ?: layout.height
-    layout.let {
-        it.width = widthResult
-        it.height = heightResult
-        layoutParams = it
-    }
-}
-
-fun View.setWidthScaleExt(width: Int? = null) {
-    val layout = when (layoutParams) {
-        is RelativeLayout.LayoutParams -> layoutParams as RelativeLayout.LayoutParams
-        is LinearLayout.LayoutParams -> layoutParams as LinearLayout.LayoutParams
-        is FrameLayout.LayoutParams -> layoutParams as FrameLayout.LayoutParams
-        is RecyclerView.LayoutParams -> layoutParams as RecyclerView.LayoutParams
-        is ViewGroup.MarginLayoutParams -> layoutParams as ViewGroup.MarginLayoutParams
-        else -> null
-    }
-    if (layout == null) return
-    val widthResult = width ?: layout.width
-    val heightResult = height ?: layout.height
-    layout.let {
-        it.width = widthResult
-        it.height = heightResult
-        layoutParams = it
-    }
-}
-
-fun View.getWidthExt(): Int {
-    val width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-    val height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-    measure(width, height);
-    return measuredWidth
-}
-
-fun View.getHeightExt(): Int {
-    val width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-    val height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-    measure(width, height);
-    return measuredHeight
-}
+//TabLayout
+fun TabLayout.setIndicatorExt(leftDp: Int, rightDp: Int) =ViewUtils.setIndicator(this,leftDp,rightDp)

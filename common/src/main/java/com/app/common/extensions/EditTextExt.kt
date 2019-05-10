@@ -1,14 +1,7 @@
 package com.app.common.extensions
 
-import android.content.Context
-import android.text.Editable
-import android.text.InputFilter
-import android.text.Spanned
-import android.text.TextWatcher
 import android.widget.EditText
-import com.app.common.logger.Logger
 import com.app.common.utils.EditTextUtils
-import com.app.common.view.ToastX
 
 /**
  * Created by wr
