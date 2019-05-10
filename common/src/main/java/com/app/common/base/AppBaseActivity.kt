@@ -118,7 +118,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
     }
 
     //防止手机改字体布局乱掉
-    protected fun attachBaseContext(newBase: Context) {
+    override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(MyContextWrapper.wrap(newBase))
     }
 
