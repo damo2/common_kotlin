@@ -13,13 +13,33 @@ import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.content.res.ResourcesCompat
+import com.app.common.utils.AppInfoUtils
 import com.app.common.utils.StorageUtils
 import java.io.File
 
+//-------------------   appinfo -----------------
+fun Context.getVersionCodeExt()= AppInfoUtils.getVersionCode(this)
 
-/**
- *  getUri
- */
+fun Context.getVersionNameExt()= AppInfoUtils.getVersionName(this)
+
+//获取ApplicationId
+fun Context.getApplicationIdExt() = AppInfoUtils.getApplicationIdExt(this)
+
+//是否运行在前台
+fun Context.isAppRunningForegroundExt()= AppInfoUtils.isAppRunningForeground(this)
+
+//设备唯一id
+fun Context.getAndroidIDExt()= AppInfoUtils.getAndroidID(this)
+
+//屏幕宽
+fun Context.screenWidthExt()= AppInfoUtils.screenWidth(this)
+
+//屏幕高
+fun Context.screenHeightExt()= AppInfoUtils.screenHeight(this)
+
+
+
+
 fun Context.getUriFromFile(file: File): Uri {
     val imageUri: Uri
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
