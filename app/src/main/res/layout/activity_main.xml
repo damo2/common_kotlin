@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#EEEEEE"
     app:flexWrap="wrap"
     >
 
@@ -90,6 +91,7 @@
         android:text="AnkoLayout"
         android:textColor="@color/colorAccent"
         />
+
     <EditText
         android:id="@+id/edtInput"
         android:layout_width="120dp"
@@ -97,10 +99,22 @@
         android:layout_margin="4dp"
         android:background="@color/defaultBg"
         android:gravity="center"
-        android:padding="8dp"
-        android:maxLines="1"
         android:hint="最多输入10个字"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:padding="8dp"
         android:textColor="@color/colorAccent"
         />
+
+    <TextView
+        android:id="@+id/tvSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/tvSpan2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"/>
 </com.google.android.flexbox.FlexboxLayout>
 

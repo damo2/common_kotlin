@@ -1,10 +1,7 @@
 package com.app.common.utils
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.PixelFormat
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -13,14 +10,9 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
-
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.InputStream
+import android.view.View
+import android.widget.ImageView
+import java.io.*
 
 /**
  * 图片工具
@@ -57,6 +49,87 @@ object BitmapUtil {
             bitmap = BitmapFactory.decodeResource(context.resources, vectorDrawableId)
         }
         return bitmap
+    }
+
+    //节省每次创建时产生的开销，但要注意多线程操作synchronized
+    private val sCanvas = Canvas()
+
+    /**
+     * 从一个view创建Bitmap。
+     * 注意点：绘制之前要清掉 View 的焦点，因为焦点可能会改变一个 View 的 UI 状态。
+     * 来源：https://github.com/tyrantgit/ExplosionField
+     *
+     * @param view  传入一个 View，会获取这个 View 的内容创建 Bitmap。
+     * @param scale 缩放比例，对创建的 Bitmap 进行缩放，数值支持从 0 到 1。
+     */
+    fun createBitmapFromView(view: View, scale: Float): Bitmap? {
+        if (view is ImageView) {
+            val drawable = view.drawable
+            if (drawable != null && drawable is BitmapDrawable) {
+                return drawable.bitmap
+            }
+        }
+        view.clearFocus()
+        val bitmap = createBitmapSafely((view.width * scale).toInt(),
+                (view.height * scale).toInt(), Bitmap.Config.ARGB_8888, 1)
+        if (bitmap != null) {
+            synchronized(sCanvas) {
+                val canvas = sCanvas
+                canvas.setBitmap(bitmap)
+                canvas.save()
+                canvas.drawColor(Color.WHITE) // 防止 View 上面有些区域空白导致最终 Bitmap 上有些区域变黑
+                canvas.scale(scale, scale)
+                view.draw(canvas)
+                canvas.restore()
+                canvas.setBitmap(null)
+            }
+        }
+        return bitmap
+    }
+
+    fun createBitmapFromView(view: View): Bitmap? {
+        return createBitmapFromView(view, 1f)
+    }
+
+    /**
+     * 从一个view创建Bitmap。把view的区域截掉leftCrop/topCrop/rightCrop/bottomCrop
+     */
+    fun createBitmapFromView(view: View, leftCrop: Int, topCrop: Int, rightCrop: Int, bottomCrop: Int): Bitmap? {
+        val originBitmap = createBitmapFromView(view) ?: return null
+        val cutBitmap = createBitmapSafely(view.width - rightCrop - leftCrop, view.height - topCrop - bottomCrop, Bitmap.Config.ARGB_8888, 1)
+                ?: return null
+        val canvas = Canvas(cutBitmap)
+        val src = Rect(leftCrop, topCrop, view.width - rightCrop, view.height - bottomCrop)
+        val dest = Rect(0, 0, view.width - rightCrop - leftCrop, view.height - topCrop - bottomCrop)
+        canvas.drawColor(Color.WHITE) // 防止 View 上面有些区域空白导致最终 Bitmap 上有些区域变黑
+        canvas.drawBitmap(originBitmap, src, dest, null)
+        originBitmap.recycle()
+        return cutBitmap
+    }
+
+
+    /**
+     * 安全的创建bitmap。
+     * 如果新建 Bitmap 时产生了 OOM，可以主动进行一次 GC - System.gc()，然后再次尝试创建。
+     *
+     * @param width      Bitmap 宽度。
+     * @param height     Bitmap 高度。
+     * @param config     传入一个 Bitmap.Config。
+     * @param retryCount 创建 Bitmap 时产生 OOM 后，主动重试的次数。
+     * @return 返回创建的 Bitmap。
+     */
+    fun createBitmapSafely(width: Int, height: Int, config: Bitmap.Config, retryCount: Int): Bitmap? {
+        try {
+            return Bitmap.createBitmap(width, height, config)
+        } catch (e: OutOfMemoryError) {
+            e.printStackTrace()
+            if (retryCount > 0) {
+                System.gc()
+                return createBitmapSafely(width, height, config, retryCount - 1)
+            }
+            return null
+        }
+
     }
 
     /**

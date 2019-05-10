@@ -6,6 +6,8 @@ package com.app.common
  * describe:
  */
 object CommonConst {
+    const val APPLICATION_ID = "APPLICATION_ID"
+
     const val REQUEST_OUTTIME = 10_000L
     //超时时间 ms
     const val DOWNLOAD_OUTTIME = 16_000L

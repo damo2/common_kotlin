@@ -8,7 +8,7 @@ import android.provider.Settings
 import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.view.WindowManager
-import com.app.common.consts.ConstCommon
+import com.app.common.CommonConst
 import com.app.common.logger.Logger
 import com.app.common.utils.MetaDataUtil
 import java.io.BufferedReader
@@ -37,7 +37,7 @@ fun Context.getVersionName(): String? =
 
 
 fun Context.getApplicationIdExt(): String =
-        MetaDataUtil.getMetaDataString(this, ConstCommon.APPLICATION_ID)
+        MetaDataUtil.getMetaDataString(this, CommonConst.APPLICATION_ID)
 
 
 fun Context.isNamedProcess(processName: String): Boolean {

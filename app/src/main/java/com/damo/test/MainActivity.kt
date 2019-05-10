@@ -1,19 +1,17 @@
 package com.damo.test
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.app.common.api.RequestFileManager
 import com.app.common.api.subscribeExtApi
 import com.app.common.api.transformer.composeLife
-import com.app.common.api.upload.FileUpLoadObserver
 import com.app.common.api.util.LifeCycleEvent
 import com.app.common.extensions.limitLengthExt
 import com.app.common.extensions.setOnClickExtNoFast
 import com.app.common.json.toJsonExt
 import com.app.common.logger.logd
-import com.app.common.utils.SingleHolder
-import com.app.common.utils.SingleHolder1
+import com.app.common.utils.SpanUtils
 import com.app.common.utils.StorageUtils
 import com.app.common.view.toastInfo
 import com.damo.libdb.Dao
@@ -22,7 +20,6 @@ import com.damo.test.activity.AnkoActivity
 import com.damo.test.api.ApiManager
 import com.damo.test.api.composeDefault
 import com.damo.test.base.BaseActivity
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import java.io.File
@@ -85,7 +82,9 @@ class MainActivity : BaseActivity() {
         }
         edtInput.limitLengthExt(5,{ toastInfo("最多输入字数为5")})
 
-        Manager.getInstance(applicationContext)
+        tvSpan.text = SpanUtils.generateSideIconText(true, 10, "左边一个图 10px", ContextCompat.getDrawable(mContext, R.drawable.common_loading_icon))
+
+        tvSpan2.text = SpanUtils.generateHorIconText("左右2个图 20px",20,ContextCompat.getDrawable(mContext, R.drawable.common_toast_info),20,ContextCompat.getDrawable(mContext, R.drawable.common_toast_error))
     }
 
     override fun onStop() {
@@ -95,12 +94,4 @@ class MainActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
     }
-
-    class Manager(context: Context) {
-        companion object : SingleHolder1<Manager, Context>(::Manager)
-        init {
-            //使用context 初始化
-        }
-    }
-
 }
