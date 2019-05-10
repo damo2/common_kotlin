@@ -8,7 +8,7 @@ package com.app.common.utils
  */
 
 /**
- * 不带参数
+ * 不带参数  (或者使用lazy)
  * @param T 单例对象
  */
 open class SingleHolder<out T>(private var creator: () -> T) {

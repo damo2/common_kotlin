@@ -25,6 +25,7 @@ object CompressConst {
     const val IMAGE_HEIGHT_MAX = 1280 //默认图片最大高
     const val IMAGE_WIDTH_MAX = 1280 //默认图片最大宽
 }
+
 object BitmapUtil {
     private val TAG = "BitmapUtil"
 
@@ -136,11 +137,11 @@ object BitmapUtil {
     /**
      * 质量压缩
      */
-    fun compressImage(image: Bitmap): Bitmap {
+    fun compressImage(image: Bitmap, sizeMax: Int = CompressConst.IMAGE_MAXSIZE_SYS): Bitmap {
         val baos = ByteArrayOutputStream()
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos)// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         var options = 100
-        while (baos.toByteArray().size / 1024 > CompressConst.IMAGE_MAXSIZE_SYS && options > 8) { // 循环判断如果压缩后图片是否大于200kb,大于继续压缩
+        while (baos.toByteArray().size / 1024 > sizeMax && options > 8) { // 循环判断如果压缩后图片是否大于200kb,大于继续压缩
             baos.reset()// 重置baos即清空baos
             image.compress(Bitmap.CompressFormat.JPEG, options, baos)// 这里压缩options%，把压缩后的数据存放到baos中
             options -= 8// 每次都减少10
@@ -179,12 +180,12 @@ object BitmapUtil {
     /**
      * 按大小等比例压缩（根据Bitmap图片压缩）
      */
-    fun compressBySize(image: Bitmap): Bitmap {
+    fun compressBySize(image: Bitmap, sizeMax: Int = CompressConst.IMAGE_MAXSIZE_SYS): Bitmap {
         val baos = ByteArrayOutputStream()
         var option = 100
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val length = baos.toByteArray().size / 1024//原图大小
-        while (length > CompressConst.IMAGE_MAXSIZE_SYS && option > 8) {// 判断如果图片大于IMG_MAX_SIZE,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
+        while (length > sizeMax && option > 8) {// 判断如果图片大于IMG_MAX_SIZE,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
             baos.reset()// 重置baos即清空baos
             option -= 8
             image.compress(Bitmap.CompressFormat.JPEG, option, baos)// 压缩后的数据存放到baos中
@@ -261,7 +262,7 @@ object BitmapUtil {
     }
 
     //保存文件（需要判断权限）
-    fun saveFile(bitmap: Bitmap,path: String,sucCallback:(()->Unit)?=null) {
+    fun saveFile(bitmap: Bitmap, path: String, sucCallback: (() -> Unit)? = null) {
         val file = File(path)
         if (file.parentFile != null && file.parentFile.exists()) {
             file.parentFile.mkdirs()
@@ -272,6 +273,7 @@ object BitmapUtil {
             sucCallback?.invoke()
         }
     }
+
     /**
      * uri 获取图片路径
      *
@@ -378,26 +380,25 @@ object BitmapUtil {
     }
 
 
-
     // Bitmap、Drawable、InputStream、byte[] 之间转换
 
     /** */
     // 1. Bitmap to InputStream
-    fun bitmap2Input(bitmap: Bitmap, quality: Int=100): InputStream {
+    fun bitmap2Input(bitmap: Bitmap, quality: Int = 100): InputStream {
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, quality, baos)
         return ByteArrayInputStream(baos.toByteArray())
     }
 
     // 2. Bitmap to byte[]
-    fun bitmap2ByteArray(bitmap: Bitmap, quality: Int=100): ByteArray {
+    fun bitmap2ByteArray(bitmap: Bitmap, quality: Int = 100): ByteArray {
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, quality, baos)
         return baos.toByteArray()
     }
 
     // 3. Drawable to byte[]
-    fun drawable2ByteArray(drawable: Drawable, quality: Int=100): ByteArray {
+    fun drawable2ByteArray(drawable: Drawable, quality: Int = 100): ByteArray {
         val bitmap = (drawable as BitmapDrawable).bitmap
         val out = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, quality, out)

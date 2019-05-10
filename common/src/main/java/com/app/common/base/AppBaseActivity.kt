@@ -6,15 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.app.common.api.util.LifeCycleEvent
 import com.app.common.utils.FixMemLeak
+import com.app.common.utils.MyContextWrapper
 import com.app.common.view.LoadingDialogFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 
 
-/**
- *
- */
 abstract class AppBaseActivity : AppCompatActivity(), IBase {
     protected var activity = this
     private val mCompositeDisposable by lazy { CompositeDisposable() }
@@ -118,4 +116,10 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
         lifecycleSubject.onNext(LifeCycleEvent.DESTROY)
         super.onDestroy()
     }
+
+    //防止手机改字体布局乱掉
+    protected fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(MyContextWrapper.wrap(newBase))
+    }
+
 }

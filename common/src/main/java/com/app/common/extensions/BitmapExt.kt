@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
 import com.app.common.utils.BitmapUtil
+import com.app.common.utils.CompressConst
 
 /**
  * Created by wr
@@ -24,11 +25,11 @@ fun View.createBitmapFromViewExt(): Bitmap? = createBitmapFromViewExt(1f)
 fun View.createBitmapFromViewExt(leftCrop: Int, topCrop: Int, rightCrop: Int, bottomCrop: Int) = BitmapUtil.createBitmapFromView(this, leftCrop, topCrop, rightCrop, bottomCrop)
 
 //图片压缩
-fun Bitmap.compressImageExt() = BitmapUtil.compressImage(this)
+fun Bitmap.compressImageExt(sizeMax: Int = CompressConst.IMAGE_MAXSIZE_SYS) = BitmapUtil.compressImage(this,sizeMax)
 
 fun String.compressByPxExt() = BitmapUtil.compressByPx(this)
 
-fun Bitmap.compressBySizeExt() = BitmapUtil.compressBySize(this)
+fun Bitmap.compressBySizeExt(sizeMax: Int = CompressConst.IMAGE_MAXSIZE_SYS) = BitmapUtil.compressBySize(this,sizeMax)
 
 fun Drawable.drawableToBitmapExt() = BitmapUtil.drawableToBitmap(this)
 
