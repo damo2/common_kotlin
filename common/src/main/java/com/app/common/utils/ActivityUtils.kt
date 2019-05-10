@@ -101,8 +101,8 @@ object ActivityUtils {
 
 
     //隐藏状态栏
-    fun Activity.statusHind() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+    fun statusHind(activity: Activity) {
+        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
     //沉浸式状态栏

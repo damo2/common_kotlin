@@ -4,7 +4,6 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.os.Build
 import android.view.View
-import android.view.WindowManager
 import com.app.common.utils.ActivityUtils
 
 
@@ -41,9 +40,7 @@ fun Activity.getActivityRootExt() = ActivityUtils.getActivityRoot(this)
 fun Activity.hasNavBar(): Boolean = ActivityUtils.hasNavBar(this)
 
 //隐藏状态栏
-fun Activity.statusHind() {
-    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-}
+fun Activity.statusHind() = ActivityUtils.statusHind(this)
 
 //沉浸式状态栏
 fun Activity.statusTranslucent() = ActivityUtils.statusTranslucent(this)
