@@ -14,7 +14,7 @@ import android.os.Build
 class MyContextWrapper(base: Context) : ContextWrapper(base) {
     companion object {
         fun wrap(context: Context): ContextWrapper {
-            var context = context
+            var cxt = context
             val resources = context.resources
             val newConfig = Configuration()
             val metrics = resources.displayMetrics
@@ -22,11 +22,11 @@ class MyContextWrapper(base: Context) : ContextWrapper(base) {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 //如果没有设置densityDpi, createConfigurationContext对字体大小设置限制无效
                 newConfig.densityDpi = metrics.densityDpi
-                context = context.createConfigurationContext(newConfig)
+                cxt = context.createConfigurationContext(newConfig)
             } else {
                 resources.updateConfiguration(newConfig, resources.displayMetrics)
             }
-            return MyContextWrapper(context)
+            return MyContextWrapper(cxt)
         }
     }
 }
