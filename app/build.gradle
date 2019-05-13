@@ -109,6 +109,8 @@ dependencies {
         exclude group: 'androidx.legacy', module: 'legacy-support-core-utils'
     }
     releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:1.1.6'
+
+    implementation  'com.alibaba.android:alpha:1.0.0.1@aar'
 }
 
 allprojects {

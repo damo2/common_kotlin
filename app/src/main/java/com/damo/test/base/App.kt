@@ -1,7 +1,11 @@
 package com.damo.test.base
 
 import cn.jpush.android.api.JPushInterface
+import com.alibaba.android.alpha.AlphaManager
+import com.alibaba.android.alpha.Project
+import com.alibaba.android.alpha.Task
 import com.app.common.base.AppBaseApplication
+import com.app.common.logger.logd
 import com.damo.test.BuildConfig
 import com.damo.test.api.ApiManager
 import com.didichuxing.doraemonkit.DoraemonKit
@@ -16,9 +20,7 @@ class App : AppBaseApplication() {
 
     override fun onCreate() {
         instance = this
-        ApiManager.initApiService()
-        initJPush()
-        initDoraemonKit()
+        createProject()
         super.onCreate()
     }
 
@@ -34,5 +36,50 @@ class App : AppBaseApplication() {
         JPushInterface.setDebugMode(true)
         JPushInterface.init(this)
         JPushInterface.setAlias(applicationContext, 1, "s")
+    }
+
+    inner class ApiServiceTask : Task("SampleTask") {
+        override fun run() {
+            logd("ApiServiceTask")
+            ApiManager.initApiService()
+        }
+    }
+
+    inner class JPushTask : Task("SampleTask") {
+        override fun run() {
+            logd("JPushTask")
+            initJPush()
+        }
+    }
+
+    inner class DoraemonKitTask : Task("SampleTask") {
+        override fun run() {
+            logd("DoraemonKitTask")
+            initDoraemonKit()
+        }
+    }
+
+    private fun createCommonTaskGroup(): Task {
+        val apiServiceTask = ApiServiceTask()
+
+        val doraemonKitTask = DoraemonKitTask()
+
+        val builder = Project.Builder()
+        builder.add(apiServiceTask)
+        builder.add(doraemonKitTask)
+
+        return builder.create()
+    }
+
+    private fun createProject() {
+        val group = createCommonTaskGroup()
+        val jPushTask = JPushTask()
+        val builder = Project.Builder()
+        builder.add(group)
+        builder.add(jPushTask)
+        val project = builder.create()
+
+        AlphaManager.getInstance(applicationContext).addProject(project);
+        AlphaManager.getInstance(applicationContext).start();
     }
 }
