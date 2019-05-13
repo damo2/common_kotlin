@@ -41,6 +41,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dexOptions {
+        preDexLibraries true
+        maxProcessCount 8
+    }
 }
 
 def customAppName(DefaultDomainObjectSet<ApplicationVariant> applicationVariants, DefaultProductFlavor defaultConfig) {
@@ -110,5 +115,13 @@ allprojects {
     //版本冲突：强制使用某版本依赖
     configurations.all {
         resolutionStrategy.force 'androidx.print:print:1.0.0-alpha3'
+    }
+}
+
+//如果有用到kapt添加如下配置
+kapt {
+    useBuildCache = true
+    javacOptions {
+        option("-Xmaxerrs", 500)
     }
 }
