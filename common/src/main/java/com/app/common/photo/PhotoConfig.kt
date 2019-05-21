@@ -1,4 +1,4 @@
-package com.app.common.utils.photo
+package com.app.common.photo
 
 import android.app.Activity
 import androidx.fragment.app.Fragment
