@@ -3,6 +3,7 @@ package com.app.common.utils
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import com.app.common.logger.Logger
 
@@ -29,7 +30,7 @@ object EditTextUtils {
      * @param maxLength 最多输入字数
      * @param outCallback 超出回调
      */
-    fun limitLength(editText: EditText,maxLength: Int, outCallback: (()->Unit)? = null) {
+    fun limitLength(editText: EditText, maxLength: Int, outCallback: (() -> Unit)? = null) {
         editText.addTextChangedListener(object : TextWatcher {
             private var temp: CharSequence? = null
             private var start: Int = 0
@@ -65,5 +66,46 @@ object EditTextUtils {
                 editText.addTextChangedListener(this)
             }
         })
+    }
+
+    /**
+     * EditText设置只能输入数字和小数点，小数点只能1个且小数点后最多只能2位
+     */
+    fun setOnlyDecimal(editText: EditText) {
+        editText.inputType = EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_FLAG_DECIMAL
+        editText.addTextChangedListener(object : TextWatcher {
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                //这部分是处理如果输入框内小数点后有俩位，那么舍弃最后一位赋值，光标移动到最后
+                if (s.toString().contains(".")) {
+                    if (s.length - 1 - s.toString().indexOf(".") > 2) {
+                        editText.setText(s.toString().subSequence(0, s.toString().indexOf(".") + 3))
+                        editText.setSelection(s.toString().subSequence(0, s.toString().indexOf(".") + 3).length)
+                    }
+                }
+
+                if (s.toString().trim().substring(0) == ".") {
+                    editText.setText("0$s")
+                    editText.setSelection(2)
+                }
+
+                if (s.toString().startsWith("0") && s.toString().trim().length > 1) {
+                    if (s.toString().substring(1, 2) != ".") {
+                        editText.setText(s.subSequence(0, 1))
+                        editText.setSelection(1)
+                        return
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,
+                                           after: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+            }
+
+        })
+
     }
 }
