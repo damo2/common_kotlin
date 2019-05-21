@@ -34,7 +34,10 @@ fun Context.screenWidthExt() = AppInfoUtils.screenWidth(this)
 //屏幕高
 fun Context.screenHeightExt() = AppInfoUtils.screenHeight(this)
 
+//检查设备是否有虚拟键盘
+fun Context.checkDeviceHasNavigationBarExt() = AppInfoUtils.checkDeviceHasNavigationBar(this)
 
+//文件生成Uri
 fun Context.getUriFromFileExt(file: File, applicationId: String = getApplicationIdExt()) = UpdateFile.getUriFromFile(this, file, applicationId)
 
 //---------------------------     单位转换start        --------------------------------

@@ -9,10 +9,10 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
+import androidx.core.content.FileProvider
 import com.app.common.extensions.getApplicationIdExt
 import java.io.File
 import java.io.FileNotFoundException
-import androidx.core.content.FileProvider
 
 /**
  * 下载文件后通知系统更新
@@ -32,15 +32,13 @@ object UpdateFile {
     android:name="APPLICATION_ID"
     android:value="${applicationId}"/>
      */
-    fun getUriFromFile(context: Context, file: File, applicationId: String = context.getApplicationIdExt()): Uri {
-        val imageUri: Uri
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            imageUri = FileProvider.getUriForFile(context, "$applicationId.fileprovider", file)
-        } else {
-            imageUri = Uri.fromFile(file)
-        }
-        return imageUri
-    }
+    fun getUriFromFile(context: Context, file: File, applicationId: String = context.getApplicationIdExt()): Uri =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                FileProvider.getUriForFile(context, "$applicationId.fileprovider", file)
+            } else {
+                Uri.fromFile(file)
+            }
+
 
     /**
      * 保存文件通知系统更新，在图库显示图片
