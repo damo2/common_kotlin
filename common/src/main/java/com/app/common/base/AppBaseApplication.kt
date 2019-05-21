@@ -89,8 +89,12 @@ open class AppBaseApplication : Application() {
     }
 
     fun exitApp() {
-        ActivityStack.showAll()
-        ActivityStack.finishAll()
-        System.exit(0)
+        try {
+            ActivityStack.showAll()
+            ActivityStack.finishAll()
+            android.os.Process.killProcess(android.os.Process.myPid())
+            System.exit(0)
+        } catch (e: Exception) {
+        }
     }
 }
