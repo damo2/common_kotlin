@@ -22,7 +22,7 @@ import kotlin.properties.Delegates
  * describe:
  */
 
-open class AppBaseApplication : Application() {
+open class AppBaseApplication(private val isAddActivityListener: Boolean = true) : Application() {
     private val TAG = "AppBaseApplication"
 
     companion object {
@@ -33,7 +33,7 @@ open class AppBaseApplication : Application() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
 //        MultiDex.install(this)
-        addActivityListener()
+        if (isAddActivityListener) addActivityListener()
     }
 
     override fun onCreate() {
@@ -89,12 +89,8 @@ open class AppBaseApplication : Application() {
     }
 
     fun exitApp() {
-        try {
-            ActivityStack.showAll()
-            ActivityStack.finishAll()
-            android.os.Process.killProcess(android.os.Process.myPid())
-            System.exit(0)
-        } catch (e: Exception) {
-        }
+        ActivityStack.showAll()
+        ActivityStack.finishAll()
+        System.exit(0)
     }
 }
