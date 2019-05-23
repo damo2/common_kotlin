@@ -15,6 +15,9 @@ import com.app.common.extensions.createNavBarExt
 import com.app.common.extensions.getNavigationBarHeightExt
 import com.app.common.extensions.getNavigationBarWidthExt
 import com.app.common.extensions.getStatusBarHeightExt
+import android.content.ContextWrapper
+import androidx.annotation.NonNull
+
 
 /**
  * Created by wr
@@ -208,5 +211,32 @@ object ActivityUtils {
             //设置paddingTop
             view.setPaddingRelative(paddingStart, statusBarHeight, paddingEnd, paddingBottom)
         }
+    }
+
+    /**
+     * Return the activity by view.
+     *
+     * @param view The view.
+     * @return the activity by view.
+     */
+    fun getActivityByView(@NonNull view: View): Activity? {
+        return getActivityByContext(view.context)
+    }
+
+    /**
+     * Return the activity by context.
+     *
+     * @param context The context.
+     * @return the activity by context.
+     */
+    fun getActivityByContext(@NonNull context: Context): Activity? {
+        var context = context
+        while (context is ContextWrapper) {
+            if (context is Activity) {
+                return context
+            }
+            context = context.baseContext
+        }
+        return null
     }
 }

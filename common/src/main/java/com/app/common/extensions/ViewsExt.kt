@@ -6,6 +6,7 @@ import android.view.View
 import com.app.common.utils.ViewUtils
 import com.google.android.material.tabs.TabLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.app.common.utils.ActivityUtils
 import com.app.common.utils.DialogUtil
 import com.app.common.utils.RecyclerViewUtils
 
@@ -24,6 +25,8 @@ fun View.getWidthExt(): Int = ViewUtils.getWidth(this)
 
 fun View.getHeightExt() = ViewUtils.getHeight(this)
 
+
+fun View.getActivityExt() = ActivityUtils.getActivityByView(this)
 
 //TabLayout
 fun TabLayout.setIndicatorExt(leftDp: Int, rightDp: Int) = ViewUtils.setIndicator(this, leftDp, rightDp)

@@ -1,5 +1,7 @@
 package com.app.common.extensions
 
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.EditText
 import com.app.common.utils.EditTextUtils
 
@@ -25,3 +27,8 @@ fun EditText.limitLengthExt(maxLength: Int, outCallback: (() -> Unit)? = null) =
  * EditText设置只能输入数字和小数点，小数点只能1个且小数点后最多只能2位
  */
 fun EditText.setOnlyDecimalExt() = EditTextUtils.setOnlyDecimal(this)
+
+/**
+ * EditText设置密码显示或隐藏
+ */
+fun EditText.setPwdShowOrHindExt(isShow: Boolean) = EditTextUtils.setPwdShowOrHind(this, isShow)

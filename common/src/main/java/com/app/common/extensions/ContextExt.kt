@@ -3,6 +3,7 @@ package com.app.common.extensions
 import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
+import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.Nullable
@@ -10,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.content.res.ResourcesCompat
 import com.app.common.file.UpdateFile
+import com.app.common.utils.ActivityUtils
 import com.app.common.utils.AppInfoUtils
 import com.app.common.utils.NetUtils
 import java.io.File
@@ -39,6 +41,8 @@ fun Context.checkDeviceHasNavigationBarExt() = AppInfoUtils.checkDeviceHasNaviga
 
 //文件生成Uri
 fun Context.getUriFromFileExt(file: File, applicationId: String = getApplicationIdExt()) = UpdateFile.getUriFromFile(this, file, applicationId)
+
+fun Context.getActivityExt() = ActivityUtils.getActivityByContext(this)
 
 //---------------------------     单位转换start        --------------------------------
 
@@ -115,3 +119,7 @@ fun Context.getNetworkTypeExt() = NetUtils.getNetworkType(this)
  *  NETWORK_WIFI、 NETWORK_4G、NETWORK_3G、NETWORK_2G、NETWORK_UNKNOWN、NETWORK_NO
  */
 fun Context.getNetWorkTypeNameExt() = NetUtils.getNetWorkTypeName(this)
+
+
+//---------------------------       其他       --------------------------------
+
