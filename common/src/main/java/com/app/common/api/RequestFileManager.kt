@@ -43,7 +43,7 @@ object RequestFileManager {
     }
 
     //上传文件
-    fun uploadFile(url: String, file: File,  upSuccessCallback: ((t: String) -> Unit)? = null, upFailCallback: ((e: Throwable) -> Unit)? = null, upProgressCallback: ((up: Long?, total: Long?) -> Unit)? = null) {
+    fun uploadFile(url: String, file: File, upSuccessCallback: ((t: String) -> Unit)? = null, upFailCallback: ((e: Throwable) -> Unit)? = null, upProgressCallback: ((up: Long?, total: Long?) -> Unit)? = null) {
         val fileUpLoadObserver = FileUpLoadObserver(upSuccessCallback, upFailCallback, upProgressCallback)
         val requestFile = RequestBody.create(MultipartBody.FORM, file)
         val fileRequestBody = FileRequestBody(requestFile, fileUpLoadObserver)
@@ -63,7 +63,7 @@ object RequestFileManager {
         val fileUpLoadObserver = FileUpLoadObserver(upSuccessCallback, upFailCallback, upProgressCallback)
         val requestFile = RequestBody.create(MultipartBody.FORM, file)
         val fileRequestBody = FileRequestBody(requestFile, fileUpLoadObserver)
-        val multipartBody = MultipartBody.Part.createFormData(key, file.name,  fileRequestBody)
+        val multipartBody = MultipartBody.Part.createFormData(key, file.name, fileRequestBody)
 
         getUpRetrofit()
                 .create(CommonApiService::class.java)

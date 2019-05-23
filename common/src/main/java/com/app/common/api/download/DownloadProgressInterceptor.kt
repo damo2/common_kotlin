@@ -11,7 +11,7 @@ import java.io.IOException
  * describe:
  */
 
-class DownloadProgressInterceptor(private var progressCallback: (totalLength: Long, contentLength: Long, done: Boolean)->Unit) : Interceptor {
+class DownloadProgressInterceptor(private var progressCallback: (totalLength: Long, contentLength: Long, done: Boolean) -> Unit) : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response? {

@@ -51,8 +51,9 @@ object ViewUtils {
         return b
     }
 
-    fun setPadding(view: View,left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) {
-        setPadding(view,left ?: view.paddingLeft, top ?: view.paddingTop, right ?: view.paddingRight, bottom
+    fun setPadding(view: View, left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) {
+        setPadding(view, left ?: view.paddingLeft, top ?: view.paddingTop, right
+                ?: view.paddingRight, bottom
                 ?: view.paddingBottom)
     }
 
@@ -112,7 +113,7 @@ object ViewUtils {
     }
 
 
-    fun setIndicator(tabLayout:TabLayout,left: Int, right: Int) {
+    fun setIndicator(tabLayout: TabLayout, left: Int, right: Int) {
         val tabLayoutClass = javaClass
         var tabStrip: Field? = null
         try {

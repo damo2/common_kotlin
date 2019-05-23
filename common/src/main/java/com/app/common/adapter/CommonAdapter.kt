@@ -16,7 +16,7 @@ class CommonAdapter<T>(protected var context: Context, protected var mLayoutId: 
                        onItemClick: ((view: View, holder: RecyclerView.ViewHolder, position: Int) -> Unit)? = null,
                        onItemLongClick: ((view: View, holder: RecyclerView.ViewHolder, position: Int) -> Boolean?)? = null
 
-) : MultiItemTypeAdapter<T>(context, data,onItemClick,onItemLongClick) {
+) : MultiItemTypeAdapter<T>(context, data, onItemClick, onItemLongClick) {
     protected var mInflater: LayoutInflater
 
     init {

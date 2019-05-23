@@ -21,7 +21,7 @@ class LinearLayoutRound : LinearLayout {
     }
 
     private fun initValue(attrs: AttributeSet?) {
-        mRoundViewDelegate = RoundViewDelegate(this, context,attrs)
+        mRoundViewDelegate = RoundViewDelegate(this, context, attrs)
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int,

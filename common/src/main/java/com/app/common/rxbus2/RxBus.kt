@@ -7,7 +7,7 @@ import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 
 /**
- * 
+ *
  */
 object RxBus {
     // 支持背压且线程安全的，保证线程安全需要调用 toSerialized() 方法

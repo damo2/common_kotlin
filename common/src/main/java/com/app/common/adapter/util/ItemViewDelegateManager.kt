@@ -81,7 +81,7 @@ class ItemViewDelegateManager<T> {
     }
 
 
-    fun getItemViewDelegate(viewType: Int): ItemViewDelegate<T>{
+    fun getItemViewDelegate(viewType: Int): ItemViewDelegate<T> {
         //todo
         return delegates.get(viewType)!!
     }

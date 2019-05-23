@@ -11,7 +11,7 @@ import java.io.FileOutputStream
  */
 object ImageUtils {
     //webp 格式转png
-    fun webpToPng(webpPath: String,pngPath:String){
+    fun webpToPng(webpPath: String, pngPath: String) {
         FileOutputStream(pngPath).use { fos ->
             val bitmap = BitmapFactory.decodeFile(webpPath, null)
             bitmap?.compress(Bitmap.CompressFormat.PNG, 90, fos)

@@ -39,7 +39,7 @@ fun String.toIntExt(): Int {
     }
 }
 
-fun String.imgGetWidthExt()=BitmapUtil.imgGetWidth(this)
+fun String.imgGetWidthExt() = BitmapUtil.imgGetWidth(this)
 
-fun String.imgGetHeightExt()=BitmapUtil.imgGetHeight(this)
+fun String.imgGetHeightExt() = BitmapUtil.imgGetHeight(this)
 

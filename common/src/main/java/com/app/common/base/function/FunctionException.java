@@ -6,8 +6,8 @@ package com.app.common.base.function;
  * describe:
  */
 
-public class FunctionException extends Exception{
-    public FunctionException(String msg){
+public class FunctionException extends Exception {
+    public FunctionException(String msg) {
         super();
     }
 }

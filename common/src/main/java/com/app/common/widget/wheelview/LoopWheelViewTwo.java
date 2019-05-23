@@ -305,51 +305,51 @@ public class LoopWheelViewTwo extends View {
      * 调整Item移动和循环显示
      */
     private void adjust() {
-//        if (isLoop) {
-            //如果向下滑动超出半个Item的高度，则调整容器
-            if (wheelItems.get(0).getStartY() >= -itemHeight / 2) {
-                //移除最后一个Item重用
-                WheelItem item = wheelItems.remove(wheelItems.size() - 1);
-                //设置起点Y坐标
-                item.setStartY(wheelItems.get(0).getStartY() - itemHeight);
-                //得到文本在容器中的索引
-                int index = lists.indexOf(wheelItems.get(0).getText());
-                if (index == -1) {
-                    return;
-                }
-                index -= 1;
-                if (index < 0) {
-                    index = lists.size() + index;
-                }
-                //设置文本
-                item.setText(lists.get(index));
-                //添加到最开始
-                wheelItems.add(0, item);
-                invalidate();
+        //        if (isLoop) {
+        //如果向下滑动超出半个Item的高度，则调整容器
+        if (wheelItems.get(0).getStartY() >= -itemHeight / 2) {
+            //移除最后一个Item重用
+            WheelItem item = wheelItems.remove(wheelItems.size() - 1);
+            //设置起点Y坐标
+            item.setStartY(wheelItems.get(0).getStartY() - itemHeight);
+            //得到文本在容器中的索引
+            int index = lists.indexOf(wheelItems.get(0).getText());
+            if (index == -1) {
                 return;
             }
-            //如果向上滑超出半个Item的高度，则调整容器
-            if (wheelItems.get(0).getStartY() <= (-itemHeight / 2 - itemHeight)) {
-                //移除第一个Item重用
-                WheelItem item = wheelItems.remove(0);
-                //设置起点Y坐标
-                item.setStartY(wheelItems.get(wheelItems.size() - 1).getStartY() + itemHeight);
-                //得到文本在容器中的索引
-                int index = lists.indexOf(wheelItems.get(wheelItems.size() - 1).getText());
-                if (index == -1) {
-                    return;
-                }
-                index += 1;
-                if (index >= lists.size()) {
-                    index = 0;
-                }
-                //设置文本
-                item.setText(lists.get(index));
-                //添加到最后面
-                wheelItems.add(item);
-                invalidate();
+            index -= 1;
+            if (index < 0) {
+                index = lists.size() + index;
             }
-//        }
+            //设置文本
+            item.setText(lists.get(index));
+            //添加到最开始
+            wheelItems.add(0, item);
+            invalidate();
+            return;
+        }
+        //如果向上滑超出半个Item的高度，则调整容器
+        if (wheelItems.get(0).getStartY() <= (-itemHeight / 2 - itemHeight)) {
+            //移除第一个Item重用
+            WheelItem item = wheelItems.remove(0);
+            //设置起点Y坐标
+            item.setStartY(wheelItems.get(wheelItems.size() - 1).getStartY() + itemHeight);
+            //得到文本在容器中的索引
+            int index = lists.indexOf(wheelItems.get(wheelItems.size() - 1).getText());
+            if (index == -1) {
+                return;
+            }
+            index += 1;
+            if (index >= lists.size()) {
+                index = 0;
+            }
+            //设置文本
+            item.setText(lists.get(index));
+            //添加到最后面
+            wheelItems.add(item);
+            invalidate();
+        }
+        //        }
     }
 
     /**

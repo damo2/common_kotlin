@@ -7,7 +7,7 @@ import android.os.Bundle;
 /**
  * @author cginechen
  * @date 2016-11-07
- *
+ * <p>
  * https://github.com/yshrsmz/KeyboardVisibilityEvent/blob/master/keyboardvisibilityevent/src/main/java/net/yslibrary/android/keyboardvisibilityevent/AutoActivityLifecycleCallback.java
  */
 

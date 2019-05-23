@@ -24,6 +24,7 @@ object StorageUtils {
         }
         return sdCardSize
     }
+
     /**
      * 获取SD卡剩余空间大小 （单位 byte）
      */
@@ -57,6 +58,7 @@ object StorageUtils {
         file.mkdirs()
         return filePath
     }
+
     /**
      * 获取SD卡公有目录的文件路径,SD卡卸载就取系统目录
      */

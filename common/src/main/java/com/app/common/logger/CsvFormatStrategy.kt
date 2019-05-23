@@ -62,7 +62,8 @@ class CsvFormatStrategy(builder: Builder) : FormatStrategy {
         logStrategy.log(priority, tag, builder.toString())
     }
 
-    @Nullable private fun formatTag(@Nullable tag: String?): String {
+    @Nullable
+    private fun formatTag(@Nullable tag: String?): String {
         return if (this.tag != tag) {
             this.tag + "-" + tag
         } else this.tag

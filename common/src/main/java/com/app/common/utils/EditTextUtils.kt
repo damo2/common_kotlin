@@ -8,8 +8,6 @@ import android.text.method.PasswordTransformationMethod
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import com.app.common.logger.Logger
-import android.text.Selection.getSelectionStart
-
 
 
 /**
@@ -117,7 +115,7 @@ object EditTextUtils {
     /**
      * EditText设置密码显示或隐藏
      */
-    fun setPwdShowOrHind(edt:EditText,isShow:Boolean){
+    fun setPwdShowOrHind(edt: EditText, isShow: Boolean) {
         val pos = edt.selectionStart
         edt.transformationMethod = if (isShow) HideReturnsTransformationMethod.getInstance() else PasswordTransformationMethod.getInstance()
         edt.setSelection(pos)

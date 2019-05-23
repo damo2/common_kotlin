@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit
 class RequestApiManager() {
     private var retrofit: Retrofit? = null
     private var client: OkHttpClient? = null
+
     private object SingletonHolder {
         val INSTANCE = RequestApiManager()
     }

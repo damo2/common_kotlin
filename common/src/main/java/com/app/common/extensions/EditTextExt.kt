@@ -1,7 +1,5 @@
 package com.app.common.extensions
 
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.widget.EditText
 import com.app.common.utils.EditTextUtils
 

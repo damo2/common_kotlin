@@ -23,7 +23,7 @@ object CacheImgUtil {
     private val TAG = "CacheImgUtil"
     val NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors()
     internal var mFixedThreadPool: ExecutorService = ThreadPoolExecutor(NUMBER_OF_CORES, NUMBER_OF_CORES, 0L, TimeUnit.MILLISECONDS, LinkedBlockingQueue())
-    val hanler= Handler(Looper.getMainLooper())
+    val hanler = Handler(Looper.getMainLooper())
     fun downImage(context: Context, url: String, pathSave: String, packageName: String, downCallback: (isSuc: Boolean) -> Unit) {
         mFixedThreadPool.execute {
             try {

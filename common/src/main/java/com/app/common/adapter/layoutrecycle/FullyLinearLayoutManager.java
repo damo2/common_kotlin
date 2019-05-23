@@ -1,11 +1,14 @@
 package com.app.common.adapter.layoutrecycle;
 
 import java.lang.reflect.Field;
+
 import android.content.Context;
 import android.graphics.Rect;
+
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 
@@ -54,8 +57,9 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
     }
 
     public void setOverScrollMode(int overScrollMode) {
-        if (overScrollMode < ViewCompat.OVER_SCROLL_ALWAYS || overScrollMode > ViewCompat.OVER_SCROLL_NEVER)
+        if (overScrollMode < ViewCompat.OVER_SCROLL_ALWAYS || overScrollMode > ViewCompat.OVER_SCROLL_NEVER) {
             throw new IllegalArgumentException("Unknown overscroll mode: " + overScrollMode);
+        }
         if (this.view == null) {
             throw new IllegalStateException("view == null");
         }

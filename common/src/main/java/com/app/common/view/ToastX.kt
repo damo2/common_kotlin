@@ -23,9 +23,11 @@ import java.util.concurrent.TimeoutException
 fun toastInfo(msg: String?) {
     AppBaseApplication.toast.info(msg)
 }
+
 fun toastErrorNet(e: Throwable) {
     AppBaseApplication.toast.netError(e)
 }
+
 class ToastX constructor(val mContext: Context) : Toast(mContext) {
     private var mToastX: ToastX? = null
 

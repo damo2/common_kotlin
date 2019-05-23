@@ -34,7 +34,8 @@ private class IntegerDefaultAdapter : JsonSerializer<Int>, JsonDeserializer<Int>
             if (json.asString == "") 0 else json.asInt
 
 
-    override fun serialize(src: Int?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement = JsonPrimitive(src ?: 0)
+    override fun serialize(src: Int?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement = JsonPrimitive(src
+            ?: 0)
 }
 
 //"" 转Double 为0.0
@@ -44,7 +45,8 @@ private class DoubleDefaultAdapter : JsonSerializer<Double>, JsonDeserializer<Do
             if (json.asString == "") 0.0 else json.asDouble
 
 
-    override fun serialize(src: Double?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement = JsonPrimitive(src ?: 0.0)
+    override fun serialize(src: Double?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement = JsonPrimitive(src
+            ?: 0.0)
 
 }
 
@@ -55,7 +57,8 @@ private class LongDefaultAdapter : JsonSerializer<Long>, JsonDeserializer<Long> 
             if (json.asString == "") 0L else json.asLong
 
 
-    override fun serialize(src: Long?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement = JsonPrimitive(src ?: 0L)
+    override fun serialize(src: Long?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement = JsonPrimitive(src
+            ?: 0L)
 }
 
 //null 转String 为""
@@ -67,5 +70,6 @@ private class StringNullConverter : JsonSerializer<String>, JsonDeserializer<Str
 
 
     override fun serialize(src: String?, typeOfSrc: Type,
-                           context: JsonSerializationContext): JsonElement = JsonPrimitive(src ?: "")
+                           context: JsonSerializationContext): JsonElement = JsonPrimitive(src
+            ?: "")
 }

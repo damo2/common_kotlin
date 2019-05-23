@@ -32,7 +32,7 @@ class SideBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
             if (i == choose) {
                 paint.color = Color.parseColor("#FFFFFF")
                 paint.isFakeBoldText = true
-            }else{
+            } else {
                 paint.color = Color.parseColor("#5cc2d0")
             }
             val x = width / 2 - paint.measureText(letters[i]) / 2

@@ -42,6 +42,7 @@ object ActivityUtils {
         activity.windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
         return localDisplayMetrics.heightPixels
     }
+
     /**
      * 状态栏高度
      */
@@ -57,7 +58,7 @@ object ActivityUtils {
      */
     fun getNavigationBarWidth(activity: Activity): Int = getBarHeight(activity, NAV_BAR_WIDTH_RES_NAME)
 
-     fun getBarHeight(context: Context, barName: String): Int {
+    fun getBarHeight(context: Context, barName: String): Int {
         // 获得状态栏高度
         val resourceId = context.resources.getIdentifier(barName, "dimen", "android")
         return context.resources.getDimensionPixelSize(resourceId)
@@ -82,6 +83,7 @@ object ActivityUtils {
     fun getActivityRoot(activity: Activity): View {
         return (activity.findViewById<ViewGroup>(Window.ID_ANDROID_CONTENT)).getChildAt(0)
     }
+
     fun hasNavBar(activity: Activity): Boolean {
         val d = activity.windowManager.defaultDisplay
 
@@ -126,7 +128,7 @@ object ActivityUtils {
     }
 
     //改变背景亮度
-    fun backgroundAlpha(activity: Activity,bgAlpha: Float) {
+    fun backgroundAlpha(activity: Activity, bgAlpha: Float) {
         val lp = activity.window?.attributes
         //0.0-1.0
         lp?.alpha = bgAlpha
@@ -141,7 +143,7 @@ object ActivityUtils {
     }
 
     //view是否在屏幕中可见
-    fun viewIsVisible(activity: Activity,view: View): Boolean {
+    fun viewIsVisible(activity: Activity, view: View): Boolean {
         val p = Point()
         activity.windowManager.defaultDisplay.getSize(p)
         val screenWidth = p.x
@@ -198,7 +200,7 @@ object ActivityUtils {
      * @param context Activity
      * @param view    View[ToolBar、TitleBar、navigationView.getHeaderView(0)]
      */
-    fun setBarPaddingTop(activity: Activity,view: View) {
+    fun setBarPaddingTop(activity: Activity, view: View) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val paddingStart = view.paddingStart
             val paddingEnd = view.paddingEnd

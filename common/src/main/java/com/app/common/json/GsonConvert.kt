@@ -17,8 +17,10 @@ import java.lang.reflect.Type
 
 
 inline fun <reified T> gsonTypeExt() = object : TypeToken<T>() {}.type
+
 //eg: json.gsonFromJsonExt<User>()
 inline fun <reified T : Any> String?.gsonFromJsonExt(): T? = Gson().fromJson(this, gsonTypeExt<T>())
+
 //eg: bean.toJsonExt()
 fun Any?.toJsonExt(): String? = Gson().toJson(this)
 

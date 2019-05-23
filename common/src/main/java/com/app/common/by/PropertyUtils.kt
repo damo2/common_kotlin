@@ -15,7 +15,8 @@ class NotNullSingle<T> : ReadWriteProperty<Any?, T> {
     override fun getValue(thisRef: Any?, property: KProperty<*>): T {
         return value ?: throw IllegalStateException("还没有被赋值")
     }
+
     override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-        this.value = if (this.value == null&&value!=null) value else throw IllegalStateException("不能设置为null，或已经有值了")
+        this.value = if (this.value == null && value != null) value else throw IllegalStateException("不能设置为null，或已经有值了")
     }
 }

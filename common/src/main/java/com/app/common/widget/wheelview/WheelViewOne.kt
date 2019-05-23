@@ -284,6 +284,7 @@ class WheelViewOne : ScrollView {
 //            mOnSelectCallBack?.let { it(selectedIndex - offset, items[selectedIndex]) }
 //        }
     }
+
     fun setSeletion(position: Int) {
         selectedIndex = position + offset
         this.post { this@WheelViewOne.smoothScrollTo(0, position * itemHeight) }

@@ -7,7 +7,7 @@ package com.app.common.base
  * describe:
  */
 
-interface IBase{
+interface IBase {
     fun initTop()
     fun initData()
     fun initView()

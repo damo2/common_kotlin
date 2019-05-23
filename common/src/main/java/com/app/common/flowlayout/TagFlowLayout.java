@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
 import com.app.common.R;
 
 import java.util.HashSet;
@@ -22,7 +23,7 @@ import java.util.Set;
  * Created by zhy on 15/9/10.
  */
 public class TagFlowLayout extends FlowLayout
-        implements TagAdapter.OnDataChangedListener {
+implements TagAdapter.OnDataChangedListener {
 
     private TagAdapter mTagAdapter;
     private int mSelectedMax = -1;//-1为不限制数量
@@ -106,12 +107,12 @@ public class TagFlowLayout extends FlowLayout
 
             } else {
                 MarginLayoutParams lp = new MarginLayoutParams(
-                        LayoutParams.WRAP_CONTENT,
-                        LayoutParams.WRAP_CONTENT);
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT);
                 lp.setMargins(dip2px(getContext(), 5),
-                        dip2px(getContext(), 5),
-                        dip2px(getContext(), 5),
-                        dip2px(getContext(), 5));
+                dip2px(getContext(), 5),
+                dip2px(getContext(), 5),
+                dip2px(getContext(), 5));
                 tagViewContainer.setLayoutParams(lp);
             }
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -135,7 +136,7 @@ public class TagFlowLayout extends FlowLayout
                     doSelect(finalTagViewContainer, position);
                     if (mOnTagClickListener != null) {
                         mOnTagClickListener.onTagClick(finalTagViewContainer, position,
-                                TagFlowLayout.this);
+                        TagFlowLayout.this);
                     }
                 }
             });

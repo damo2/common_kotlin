@@ -1,4 +1,3 @@
-
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import com.app.common.logger.LogAdapter
@@ -99,10 +98,11 @@ class LoggerPrinter : Printer {
     /**
      * This method is synchronized in order to avoid messy of logs' order.
      */
-    @Synchronized private fun log(priority: Logger.Level,
-                                  @Nullable throwable: Throwable?,
-                                  @NonNull msg: String?,
-                                  @Nullable vararg args: Any) {
+    @Synchronized
+    private fun log(priority: Logger.Level,
+                    @Nullable throwable: Throwable?,
+                    @NonNull msg: String?,
+                    @Nullable vararg args: Any) {
         checkNotNull(msg)
 
         val tag = tag
@@ -110,7 +110,8 @@ class LoggerPrinter : Printer {
         log(priority, tag, message, throwable)
     }
 
-    @NonNull private fun createMessage(message: String?, @Nullable vararg args: Any): String {
+    @NonNull
+    private fun createMessage(message: String?, @Nullable vararg args: Any): String {
         return message?.let {
             return if (args.isEmpty()) message else {
                 try {
