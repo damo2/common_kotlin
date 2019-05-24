@@ -17,7 +17,7 @@ import javax.crypto.spec.DESKeySpec
  */
 
 class ECBEncrypt : IEncrypt {
-    override val key: String get() = "qwertyuiopasdfgh"
+    private val key: String get() = "qwertyuiopasdfgh"
 
     /**
      * @param key 秘钥

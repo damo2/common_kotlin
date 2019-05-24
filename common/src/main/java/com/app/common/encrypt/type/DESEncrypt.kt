@@ -13,7 +13,7 @@ import javax.crypto.spec.SecretKeySpec
  */
 
 class DESEncrypt : IEncrypt {
-    override val key: String get() = "qwerasdf"
+    private val key: String get() = "qwerasdf"
 
     private val iv = byteArrayOf(0x12, 0x34, 0x56, 0x78, 0x90.toByte(), 0xAB.toByte(), 0xCD.toByte(), 0xEF.toByte())
 

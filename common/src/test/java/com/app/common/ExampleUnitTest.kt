@@ -1,11 +1,22 @@
 package com.app.common
 
+import com.app.common.encrypt.type.Base64
+import com.app.common.encrypt.type.RSAEncrypt
+import com.app.common.encrypt.type.RSAUtils
 import com.app.common.json.gsonFromJsonExt
 import com.app.common.json.toJsonExt
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.security.KeyFactory
+import java.security.NoSuchAlgorithmException
+import java.security.interfaces.RSAPrivateKey
+import java.security.interfaces.RSAPublicKey
+import java.security.spec.InvalidKeySpecException
+import java.security.spec.PKCS8EncodedKeySpec
+import java.security.spec.X509EncodedKeySpec
+
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -98,10 +109,33 @@ class ExampleUnitTest {
         val list = listOf(msg, msg, msg, msg)
         val jsonList = list.toJsonExt()
         val json = msg.toJsonExt()
-        val message =json.gsonFromJsonExt<MessageBean<ImageBean>>()
-        val messageList =jsonList.gsonFromJsonExt<List<MessageBean<ImageBean>>>()
-        print("message#" +message)
-        print("messageList#" +messageList)
+        val message = json.gsonFromJsonExt<MessageBean<ImageBean>>()
+        val messageList = jsonList.gsonFromJsonExt<List<MessageBean<ImageBean>>>()
+        print("message#" + message)
+        print("messageList#" + messageList)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun testEncrypt() {
+
+        val data=" 我的内心毫无波动,据说是后台生成的密文是一堆乱码 ,我也没功夫研究后台日至输出,猜测是编码问题,我的内心毫无波动,据说是后台生成的密文是一堆乱码,我也没功夫研究后台日至输出,猜测是编码问题,"
+
+
+        //生成密钥对
+        val keyPair = RSAUtils.generateRSAKeyPair(RSAUtils.DEFAULT_KEY_SIZE)!!
+        //获取公钥
+        val publicKey = RSAUtils.getPublicKey(keyPair)
+        //获取私钥
+        val privateKey = RSAUtils.getPrivateKey(keyPair)
+
+        //用公钥加密
+        val encrypt1 = RSAEncrypt.encrypt(data, publicKey)
+        println("加密后：$encrypt1");
+        //用私钥解密
+        val decrypt1 = RSAEncrypt.decrypt(encrypt1, privateKey)
+        println("解密后：$decrypt1" );
+    }
+
 
 }

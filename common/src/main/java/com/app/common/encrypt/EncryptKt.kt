@@ -21,14 +21,14 @@ class EncryptKt private constructor() {
     /**
      * 加密
      */
-    fun encrypt(data: String, key: String = mEncrypt.key): String {
+    fun encrypt(data: String, key: String): String {
         return mEncrypt.encrypt(data, key)
     }
 
     /**
      * 解密
      */
-    fun decrypt(data: String, key: String = mEncrypt.key): String {
+    fun decrypt(data: String, key: String): String {
         return mEncrypt.decrypt(data, key)
     }
 

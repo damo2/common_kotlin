@@ -18,7 +18,7 @@ import javax.crypto.spec.SecretKeySpec
  * describe:
  */
 class AESEncrypt : IEncrypt {
-    override val key: String get() = "qwertyuiopasdfgh"
+    private val key: String get() = "qwertyuiopasdfgh"
 
     companion object {
         val CBC_PKCS5_PADDING = "AES/CBC/PKCS5Padding" //AES是加密方式 CBC是工作模式 PKCS5Padding是填充模式

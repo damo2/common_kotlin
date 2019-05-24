@@ -13,6 +13,5 @@ interface IEncrypt {
 
     fun decrypt(data: String, key: String): String
 
-    val key: String
 
 }
