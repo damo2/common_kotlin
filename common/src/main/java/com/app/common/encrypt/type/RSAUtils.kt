@@ -1,18 +1,14 @@
 package com.app.common.encrypt.type
 
-import java.security.KeyFactory
-import java.security.KeyPair
-import java.security.KeyPairGenerator
-import java.security.NoSuchAlgorithmException
-import java.security.PrivateKey
-import java.security.PublicKey
+import android.os.Build
+import java.security.*
 import java.security.interfaces.RSAPrivateKey
 import java.security.interfaces.RSAPublicKey
 import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
-import java.util.ArrayList
-
+import java.util.*
 import javax.crypto.Cipher
+
 
 /**
  * Created by wr
@@ -21,7 +17,7 @@ import javax.crypto.Cipher
  * describe:
  */
 object RSAUtils {
-    private  val RSA = "RSA"// 非对称加密密钥算法
+    private val RSA = "RSA"// 非对称加密密钥算法
     private val ECB_PKCS1_PADDING = "RSA/ECB/PKCS1Padding"//加密填充方式
     val DEFAULT_KEY_SIZE = 1024//秘钥默认长度
     private val DEFAULT_SPLIT = "#PART#".toByteArray()    // 当要加密的内容超过bufferSize，则采用partSplit进行分块加密
@@ -59,75 +55,64 @@ object RSAUtils {
     }
 
     /**
-     * 用公钥对字符串进行加密
+     * 获取数字签名
      *
-     * @param data 原文
+     * @param data       二进制位
+     * @param privateKey 私钥(BASE64编码)
+     * @return 数字签名结果字符串
+     * @throws Exception 异常
      */
     @Throws(Exception::class)
-    fun encryptByPublicKey(data: ByteArray, publicKey: ByteArray): ByteArray {
-        // 得到公钥
-        val keySpec = X509EncodedKeySpec(publicKey)
-        val kf = KeyFactory.getInstance(RSA)
-        val keyPublic = kf.generatePublic(keySpec)
-        // 加密数据
-        val cp = Cipher.getInstance(ECB_PKCS1_PADDING)
-        cp.init(Cipher.ENCRYPT_MODE, keyPublic)
-        return cp.doFinal(data)
+    fun sign(data: ByteArray, privateKey: String): String {
+        val keyBytes = Base64.decode(privateKey)
+        val pkcs8KeySpec = PKCS8EncodedKeySpec(keyBytes)
+        val keyFactory = getKeyFactory()
+        val privateK = keyFactory.generatePrivate(pkcs8KeySpec)
+
+        val signature = Signature.getInstance("MD5withRSA")
+        signature.initSign(privateK)
+        signature.update(data)
+        return Base64.encode(signature.sign())
     }
 
     /**
-     * 私钥加密
+     * 数字签名校验
      *
-     * @param data       待加密数据
-     * @param privateKey 密钥
-     * @return byte[] 加密数据
+     * @param data      二进位组
+     * @param publicKey 公钥(BASE64编码)
+     * @param sign      数字签名字符串
+     * @return true：校验成功，false：校验失败
+     * @throws Exception 异常
      */
     @Throws(Exception::class)
-    fun encryptByPrivateKey(data: ByteArray, privateKey: ByteArray): ByteArray {
-        // 得到私钥
-        val keySpec = PKCS8EncodedKeySpec(privateKey)
-        val kf = KeyFactory.getInstance(RSA)
-        val keyPrivate = kf.generatePrivate(keySpec)
-        // 数据加密
-        val cipher = Cipher.getInstance(ECB_PKCS1_PADDING)
-        cipher.init(Cipher.ENCRYPT_MODE, keyPrivate)
-        return cipher.doFinal(data)
+    fun verify(data: ByteArray, publicKey: String, sign: String): Boolean {
+        val keyBytes = Base64.decode(publicKey)
+        val keySpec = X509EncodedKeySpec(keyBytes)
+        val keyFactory = getKeyFactory()
+        val publicK = keyFactory.generatePublic(keySpec)
+
+        val signature = Signature.getInstance("MD5withRSA")
+        signature.initVerify(publicK)
+        signature.update(data)
+        return signature.verify(Base64.decode(sign))
     }
 
     /**
-     * 公钥解密
+     * 获取 KeyFactory
      *
-     * @param data      待解密数据
-     * @param publicKey 密钥
-     * @return byte[] 解密数据
+     * @throws NoSuchAlgorithmException 异常
      */
-    @Throws(Exception::class)
-    fun decryptByPublicKey(data: ByteArray, publicKey: ByteArray): ByteArray {
-        // 得到公钥
-        val keySpec = X509EncodedKeySpec(publicKey)
-        val kf = KeyFactory.getInstance(RSA)
-        val keyPublic = kf.generatePublic(keySpec)
-        // 数据解密
-        val cipher = Cipher.getInstance(ECB_PKCS1_PADDING)
-        cipher.init(Cipher.DECRYPT_MODE, keyPublic)
-        return cipher.doFinal(data)
+    @Throws(NoSuchAlgorithmException::class, NoSuchProviderException::class)
+    private fun getKeyFactory(): KeyFactory {
+        val keyFactory: KeyFactory
+        if (Build.VERSION.SDK_INT >= 16) {
+            keyFactory = KeyFactory.getInstance("RSA", "BC")
+        } else {
+            keyFactory = KeyFactory.getInstance("RSA")
+        }
+        return keyFactory
     }
 
-    /**
-     * 使用私钥进行解密
-     */
-    @Throws(Exception::class)
-    fun decryptByPrivateKey(encrypted: ByteArray, privateKey: ByteArray): ByteArray {
-        // 得到私钥
-        val keySpec = PKCS8EncodedKeySpec(privateKey)
-        val kf = KeyFactory.getInstance(RSA)
-        val keyPrivate = kf.generatePrivate(keySpec)
-
-        // 解密数据
-        val cp = Cipher.getInstance(ECB_PKCS1_PADDING)
-        cp.init(Cipher.DECRYPT_MODE, keyPrivate)
-        return cp.doFinal(encrypted)
-    }
 
     /**
      * 用公钥对字符串进行分段加密
@@ -362,4 +347,77 @@ object RSAUtils {
         }
         return bytes
     }
+
+
+    /**
+     * 用公钥对字符串进行加密
+     *
+     * @param data 原文
+     */
+    @Throws(Exception::class)
+    private fun encryptByPublicKey(data: ByteArray, publicKey: ByteArray): ByteArray {
+        // 得到公钥
+        val keySpec = X509EncodedKeySpec(publicKey)
+        val kf = KeyFactory.getInstance(RSA)
+        val keyPublic = kf.generatePublic(keySpec)
+        // 加密数据
+        val cp = Cipher.getInstance(ECB_PKCS1_PADDING)
+        cp.init(Cipher.ENCRYPT_MODE, keyPublic)
+        return cp.doFinal(data)
+    }
+
+    /**
+     * 私钥加密
+     *
+     * @param data       待加密数据
+     * @param privateKey 密钥
+     * @return byte[] 加密数据
+     */
+    @Throws(Exception::class)
+    private fun encryptByPrivateKey(data: ByteArray, privateKey: ByteArray): ByteArray {
+        // 得到私钥
+        val keySpec = PKCS8EncodedKeySpec(privateKey)
+        val kf = KeyFactory.getInstance(RSA)
+        val keyPrivate = kf.generatePrivate(keySpec)
+        // 数据加密
+        val cipher = Cipher.getInstance(ECB_PKCS1_PADDING)
+        cipher.init(Cipher.ENCRYPT_MODE, keyPrivate)
+        return cipher.doFinal(data)
+    }
+
+    /**
+     * 公钥解密
+     *
+     * @param data      待解密数据
+     * @param publicKey 密钥
+     * @return byte[] 解密数据
+     */
+    @Throws(Exception::class)
+    private fun decryptByPublicKey(data: ByteArray, publicKey: ByteArray): ByteArray {
+        // 得到公钥
+        val keySpec = X509EncodedKeySpec(publicKey)
+        val kf = KeyFactory.getInstance(RSA)
+        val keyPublic = kf.generatePublic(keySpec)
+        // 数据解密
+        val cipher = Cipher.getInstance(ECB_PKCS1_PADDING)
+        cipher.init(Cipher.DECRYPT_MODE, keyPublic)
+        return cipher.doFinal(data)
+    }
+
+    /**
+     * 使用私钥进行解密
+     */
+    @Throws(Exception::class)
+    private fun decryptByPrivateKey(encrypted: ByteArray, privateKey: ByteArray): ByteArray {
+        // 得到私钥
+        val keySpec = PKCS8EncodedKeySpec(privateKey)
+        val kf = KeyFactory.getInstance(RSA)
+        val keyPrivate = kf.generatePrivate(keySpec)
+
+        // 解密数据
+        val cp = Cipher.getInstance(ECB_PKCS1_PADDING)
+        cp.init(Cipher.DECRYPT_MODE, keyPrivate)
+        return cp.doFinal(encrypted)
+    }
+
 }
