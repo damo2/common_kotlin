@@ -19,7 +19,7 @@ import javax.crypto.Cipher
 object RSAUtils {
     private val RSA = "RSA"// 非对称加密密钥算法
     private val ECB_PKCS1_PADDING = "RSA/ECB/PKCS1Padding"//加密填充方式
-    val DEFAULT_KEY_SIZE = 1024//秘钥默认长度
+    private val DEFAULT_KEY_SIZE = 1024//秘钥默认长度
     private val DEFAULT_SPLIT = "#PART#".toByteArray()    // 当要加密的内容超过bufferSize，则采用partSplit进行分块加密
     private val DEFAULT_BUFFERSIZE = DEFAULT_KEY_SIZE / 8 - 11// 当前秘钥支持加密的最大字节数
 
@@ -104,13 +104,11 @@ object RSAUtils {
      */
     @Throws(NoSuchAlgorithmException::class, NoSuchProviderException::class)
     private fun getKeyFactory(): KeyFactory {
-        val keyFactory: KeyFactory
-        if (Build.VERSION.SDK_INT >= 16) {
-            keyFactory = KeyFactory.getInstance("RSA", "BC")
+        return if (Build.VERSION.SDK_INT >= 16) {
+            KeyFactory.getInstance("RSA", "BC")
         } else {
-            keyFactory = KeyFactory.getInstance("RSA")
+            KeyFactory.getInstance("RSA")
         }
-        return keyFactory
     }
 
 
