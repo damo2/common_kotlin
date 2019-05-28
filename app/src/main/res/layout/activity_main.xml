@@ -122,5 +122,10 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="service"/>
+    <TextView
+        android:id="@+id/tvTest"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="test"/>
 </com.google.android.flexbox.FlexboxLayout>
 

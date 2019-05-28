@@ -17,6 +17,7 @@ import com.app.common.view.toastInfo
 import com.damo.libdb.Dao
 import com.damo.libdb.objectbox.ObjectBoxInit
 import com.damo.test.activity.AnkoActivity
+import com.damo.test.activity.test.TestActivity
 import com.damo.test.api.ApiManager
 import com.damo.test.api.composeDefault
 import com.damo.test.base.BaseActivity
@@ -90,6 +91,11 @@ class MainActivity : BaseActivity() {
         tvService.setOnClickListener {
             TestJobSchedulerService.startJobScheduler(applicationContext)
         }
+
+        tvTest.setOnClickListener {
+            startActivity<TestActivity>()
+        }
+
     }
 
     override fun onStop() {

@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.app.common.base.AppBaseActivity
-import com.damo.test.base.App
+import com.evernote.android.state.StateSaver
 import pub.devrel.easypermissions.EasyPermissions
 
 abstract class BaseActivity(private var isInject: Boolean = false) : AppBaseActivity(), EasyPermissions.PermissionCallbacks {
@@ -14,6 +14,7 @@ abstract class BaseActivity(private var isInject: Boolean = false) : AppBaseActi
     override fun onCreate(savedInstanceState: Bundle?) {
         mContext = App.instance
         super.onCreate(savedInstanceState)
+        StateSaver.restoreInstanceState(this, savedInstanceState)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -27,5 +28,10 @@ abstract class BaseActivity(private var isInject: Boolean = false) : AppBaseActi
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    public override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        StateSaver.saveInstanceState(this, outState)
     }
 }
