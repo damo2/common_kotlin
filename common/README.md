@@ -8,13 +8,26 @@
 通过 getApplicationIdExt()获取applicationId
 
 ### 打印日志
-  [官网](https://github.com/orhanobut/logger)
+  [logger](https://github.com/orhanobut/logger)
     
     //初始化
     Logger.addLogAdapter(DiskLogAdapter())
      //使用
      logd("开始")
      loge("异常")
+     
+### 保存恢复数据
+  [android-state](https://github.com/evernote/android-state)
+  
+  app gradle添加
+  
+    //保存恢复数据
+    kapt 'com.evernote:android-state-processor:1.4.1'
+ 使用
+ 
+    //赋值后，横竖屏或折叠屏切换，onCreate数据会恢复
+    @State
+    var username: String? = null
            
 ### 吐司
     toastInfo("信息")

@@ -8,6 +8,7 @@ import com.app.common.api.util.LifeCycleEvent
 import com.app.common.utils.FixMemLeak
 import com.app.common.utils.MyContextWrapper
 import com.app.common.view.LoadingDialogFragment
+import com.evernote.android.state.StateSaver
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
@@ -26,6 +27,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
             savedInstanceState.putParcelable("android:support:fragments", null)
         }
         super.onCreate(savedInstanceState ?: Bundle())
+        StateSaver.restoreInstanceState(this, savedInstanceState)
         lifecycleSubject.onNext(LifeCycleEvent.CREATE)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         initTop()
@@ -81,21 +83,9 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
         mLoadingDialog.dismiss()
     }
 
-    //InputMethodManager.mLastSrvView memory leak(华为)
-    private fun fixLeakCanary696(context: Context) {
-//        if (!OsUtil.isEmui) return
-//        try {
-//            val clazz = Class.forName("android.gestureboost.GestureBoostManager")
-//            val gestureBoostManager = clazz.getDeclaredField("sGestureBoostManager");
-//            gestureBoostManager.isAccessible = true
-//            val contextField = clazz.getDeclaredField("mContext")
-//            contextField.isAccessible = true
-//            gestureBoostManager.get(null)?.let {
-//                contextField.set(it, context)
-//            }
-//        } catch (e: Exception) {
-//            e.printStackTrace();
-//        }
+    public override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        StateSaver.saveInstanceState(this, outState)
     }
 
     override fun onPause() {
@@ -111,7 +101,6 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
 
     override fun onDestroy() {
         mCompositeDisposable.clear()
-        fixLeakCanary696(applicationContext)
         FixMemLeak.fixLeak(applicationContext)
         lifecycleSubject.onNext(LifeCycleEvent.DESTROY)
         super.onDestroy()
