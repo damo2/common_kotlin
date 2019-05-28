@@ -153,7 +153,7 @@ class PrettyFormatStrategy(builder: Builder) : FormatStrategy {
         while (i < trace.size) {
             val e = trace[i]
             val name = e.className
-            if (name != LoggerPrinter::class.java.name && name != Logger::class.java.name) {
+            if (name != LoggerPrinter::class.java.name && name != Logger::class.java.name && name != "com.app.common.logger.LoggerKt") {
                 return --i
             }
             i++
