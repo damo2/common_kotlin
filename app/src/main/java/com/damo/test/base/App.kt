@@ -10,6 +10,9 @@ import com.damo.test.BuildConfig
 import com.damo.test.api.ApiManager
 import com.didichuxing.doraemonkit.DoraemonKit
 import kotlin.properties.Delegates
+import com.app.common.logger.AndroidLogAdapter
+import com.app.common.logger.DiskLogAdapter
+import com.app.common.logger.Logger
 
 
 class App : AppBaseApplication() {
@@ -37,7 +40,13 @@ class App : AppBaseApplication() {
         JPushInterface.init(this)
         JPushInterface.setAlias(applicationContext, 1, "s")
     }
-
+    inner class LoggerTask : Task("LoggerTask") {
+        override fun run() {
+            logd("ApiServiceTask")
+            //初始化
+            Logger.addLogAdapter(DiskLogAdapter())
+        }
+    }
     inner class ApiServiceTask : Task("SampleTask") {
         override fun run() {
             logd("ApiServiceTask")
@@ -60,14 +69,10 @@ class App : AppBaseApplication() {
     }
 
     private fun createCommonTaskGroup(): Task {
-        val apiServiceTask = ApiServiceTask()
-
-        val doraemonKitTask = DoraemonKitTask()
-
         val builder = Project.Builder()
-        builder.add(apiServiceTask)
-        builder.add(doraemonKitTask)
-
+        builder.add(ApiServiceTask())
+        builder.add(DoraemonKitTask())
+        builder.add(LoggerTask())
         return builder.create()
     }
 

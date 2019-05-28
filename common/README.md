@@ -11,12 +11,7 @@
   [官网](https://github.com/orhanobut/logger)
     
     //初始化
-    Logger.init("MainActivity")
-           .logLevel(LogLevel.FULL) //  显示全部日志，LogLevel.NONE不显示日志，默认是Full
-           .methodCount(5)         //  方法栈打印的个数，默认是2
-           .methodOffset(0)        //  设置调用堆栈的函数偏移值，0的话则从打印该Log的函数开始输出堆栈信息，默认是0
-           .hideThreadInfo()      //  隐藏线程信息
-           .logAdapter(new AndroidLogAdapter());// 自定义一个打印适配器，这里适配了Android的Log打印
+    Logger.addLogAdapter(DiskLogAdapter())
      //使用
      logd("开始")
      loge("异常")

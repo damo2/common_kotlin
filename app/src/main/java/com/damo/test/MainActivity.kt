@@ -20,6 +20,7 @@ import com.damo.test.activity.AnkoActivity
 import com.damo.test.api.ApiManager
 import com.damo.test.api.composeDefault
 import com.damo.test.base.BaseActivity
+import com.damo.test.service.TestJobSchedulerService
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import java.io.File
@@ -85,6 +86,10 @@ class MainActivity : BaseActivity() {
         tvSpan.text = SpanUtils.generateSideIconText(true, 10, "左边一个图 10px", ContextCompat.getDrawable(mContext, R.drawable.common_loading_icon))
 
         tvSpan2.text = SpanUtils.generateHorIconText("左右2个图 20px",20,ContextCompat.getDrawable(mContext, R.drawable.common_toast_info),20,ContextCompat.getDrawable(mContext, R.drawable.common_toast_error))
+
+        tvService.setOnClickListener {
+            TestJobSchedulerService.startJobScheduler(applicationContext)
+        }
     }
 
     override fun onStop() {

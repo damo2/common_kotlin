@@ -23,7 +23,7 @@ object RSAEncrypt : IEncrypt {
     fun testEncrypt() {
         val data="其算法原理基于很简单的数学知识：既对两个大素数相乘得到其乘积很简单，但对乘积进行因数分解很难，两个大素数组合即为公钥，乘积未秘钥。只要保证两个不想等的素数足够大就可以保证加密足够安全。"
         //生成密钥对
-        val keyPair = RSAUtils.generateRSAKeyPair(RSAUtils.DEFAULT_KEY_SIZE)!!
+        val keyPair = RSAUtils.generateRSAKeyPair()!!
         //获取公钥
         val publicKey = RSAUtils.getPublicKey(keyPair)
         //获取私钥
