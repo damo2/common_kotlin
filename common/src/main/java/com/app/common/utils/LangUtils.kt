@@ -2,7 +2,7 @@ package com.app.common.utils
 
 import java.io.Closeable
 import java.io.IOException
-import java.util.Locale
+import java.util.*
 
 /**
  * Created by wr

@@ -2,7 +2,6 @@ package com.app.common.widget.text
 
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Paint
 import android.os.Build
 import android.text.TextUtils
@@ -11,9 +10,8 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.app.common.R
-
 import java.lang.reflect.Method
-import java.util.ArrayList
+import java.util.*
 
 
 /**

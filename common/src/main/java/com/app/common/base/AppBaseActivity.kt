@@ -8,7 +8,6 @@ import com.app.common.api.util.LifeCycleEvent
 import com.app.common.utils.FixMemLeak
 import com.app.common.utils.MyContextWrapper
 import com.app.common.view.LoadingDialogFragment
-import com.evernote.android.state.StateSaver
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject

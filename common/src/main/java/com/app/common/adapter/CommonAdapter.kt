@@ -1,9 +1,9 @@
 package com.app.common.adapter
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.app.common.adapter.util.ItemViewDelegate
 import com.app.common.adapter.util.ViewHolder
 

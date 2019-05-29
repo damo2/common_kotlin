@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.Checkable
 import android.widget.RelativeLayout
-import android.widget.TextView
 
 /**
  * 可设置选中状态的TextView

@@ -2,11 +2,8 @@ package com.app.common.encrypt.type
 
 import androidx.annotation.NonNull
 import com.app.common.encrypt.IEncrypt
-import java.io.UnsupportedEncodingException
-import java.security.InvalidKeyException
-import java.security.NoSuchAlgorithmException
-import java.security.spec.InvalidKeySpecException
-import javax.crypto.*
+import javax.crypto.Cipher
+import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.DESKeySpec
 
 /**

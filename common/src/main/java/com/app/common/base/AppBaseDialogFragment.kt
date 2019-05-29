@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 import android.view.*
 import androidx.annotation.Nullable
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.app.common.R
 import com.app.common.logger.Logger

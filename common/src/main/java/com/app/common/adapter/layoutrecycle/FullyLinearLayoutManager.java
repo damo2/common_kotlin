@@ -1,16 +1,15 @@
 package com.app.common.adapter.layoutrecycle;
 
-import java.lang.reflect.Field;
-
 import android.content.Context;
 import android.graphics.Rect;
+import android.util.Log;
+import android.view.View;
+
+import java.lang.reflect.Field;
 
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.View;
 
 /**
  * 重写 LinearLayoutManager 为了ScrollView可以显示RecyclerView 垂直布局

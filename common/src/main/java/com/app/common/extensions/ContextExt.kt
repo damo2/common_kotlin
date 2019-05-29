@@ -3,12 +3,10 @@ package com.app.common.extensions
 import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
-import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.core.content.res.ResourcesCompat
 import com.app.common.file.UpdateFile
 import com.app.common.utils.ActivityUtils

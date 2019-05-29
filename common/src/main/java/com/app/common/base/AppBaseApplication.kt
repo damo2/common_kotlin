@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import com.app.common.BuildConfig
 import com.app.common.imageloader.ImageLoader
 import com.app.common.utils.ActivityStack
 import com.app.common.view.ToastX

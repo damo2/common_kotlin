@@ -1,10 +1,10 @@
 package com.app.common.adapter
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.app.common.adapter.util.ItemViewDelegate
 import com.app.common.adapter.util.ItemViewDelegateManager
 import com.app.common.adapter.util.ViewHolder

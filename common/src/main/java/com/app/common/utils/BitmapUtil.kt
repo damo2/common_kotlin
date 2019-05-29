@@ -1,5 +1,6 @@
 package com.app.common.utils
 
+import android.Manifest
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
@@ -12,7 +13,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import com.app.common.extensions.imgGetWidthExt
+import androidx.annotation.RequiresPermission
 import java.io.*
 
 /**
@@ -262,6 +263,7 @@ object BitmapUtil {
     }
 
     //保存文件（需要判断权限）
+    @RequiresPermission(allOf = [(Manifest.permission.READ_EXTERNAL_STORAGE), (Manifest.permission.WRITE_EXTERNAL_STORAGE)])
     fun saveFile(bitmap: Bitmap, path: String, sucCallback: (() -> Unit)? = null) {
         val file = File(path)
         if (file.parentFile != null && file.parentFile.exists()) {

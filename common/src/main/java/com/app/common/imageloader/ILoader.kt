@@ -1,8 +1,6 @@
 package com.app.common.imageloader
 
-import android.content.Context
 import android.widget.ImageView
-import com.app.common.extensions.dp2px
 
 interface ILoader {
     /**

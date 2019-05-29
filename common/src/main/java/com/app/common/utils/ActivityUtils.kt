@@ -3,6 +3,7 @@ package com.app.common.utils
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Point
@@ -11,12 +12,11 @@ import android.os.Build
 import android.util.DisplayMetrics
 import android.view.*
 import android.widget.FrameLayout
+import androidx.annotation.NonNull
 import com.app.common.extensions.createNavBarExt
 import com.app.common.extensions.getNavigationBarHeightExt
 import com.app.common.extensions.getNavigationBarWidthExt
 import com.app.common.extensions.getStatusBarHeightExt
-import android.content.ContextWrapper
-import androidx.annotation.NonNull
 
 
 /**

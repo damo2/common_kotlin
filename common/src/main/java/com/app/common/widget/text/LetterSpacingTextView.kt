@@ -2,7 +2,6 @@ package com.app.common.widget.text
 
 
 import android.content.Context
-import android.graphics.Canvas
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ScaleXSpan

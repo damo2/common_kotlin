@@ -2,8 +2,8 @@ package com.app.common.adapter.decoration
 
 import android.content.Context
 import android.graphics.Rect
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 
 /**

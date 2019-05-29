@@ -7,7 +7,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.view.View
-import android.webkit.DownloadListener
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient

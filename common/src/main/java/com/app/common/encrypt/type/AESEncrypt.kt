@@ -1,6 +1,5 @@
 package com.app.common.encrypt.type
 
-import android.text.TextUtils
 import android.util.Base64
 import com.app.common.encrypt.IEncrypt
 import java.security.Provider

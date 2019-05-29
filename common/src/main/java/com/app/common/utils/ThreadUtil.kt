@@ -2,9 +2,6 @@ package com.app.common.utils
 
 import android.os.Looper
 import com.app.common.logger.Logger
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit

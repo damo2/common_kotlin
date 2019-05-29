@@ -7,7 +7,6 @@ import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
-import androidx.recyclerview.widget.RecyclerView
 import android.text.util.Linkify
 import android.util.SparseArray
 import android.view.LayoutInflater
@@ -15,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import com.app.common.extensions.setOnClickExtNoFast
 import com.bumptech.glide.Glide
 
