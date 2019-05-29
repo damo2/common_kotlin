@@ -27,7 +27,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
             savedInstanceState.putParcelable("android:support:fragments", null)
         }
         super.onCreate(savedInstanceState ?: Bundle())
-        StateSaver.restoreInstanceState(this, savedInstanceState)
+//        StateSaver.restoreInstanceState(this, savedInstanceState)
         lifecycleSubject.onNext(LifeCycleEvent.CREATE)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         initTop()
@@ -85,7 +85,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
 
     public override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        StateSaver.saveInstanceState(this, outState)
+//        StateSaver.saveInstanceState(this, outState)
     }
 
     override fun onPause() {

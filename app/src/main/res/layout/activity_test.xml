@@ -7,7 +7,17 @@
     android:background="#EEEEEE"
     app:flexWrap="wrap"
     >
-
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="4dp"
+        android:background="@color/defaultBg"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="GetValue"
+        android:textColor="@color/colorAccent"
+        />
     <TextView
         android:id="@+id/tvSetValue"
         android:layout_width="wrap_content"
@@ -31,6 +41,11 @@
         android:text="GetValue"
         android:textColor="@color/colorAccent"
         />
+
+    <FrameLayout
+        android:id="@+id/fragmentView"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"/>
 
 </com.google.android.flexbox.FlexboxLayout>
 

@@ -11,6 +11,7 @@ import com.app.common.BuildConfig
 import com.app.common.imageloader.ImageLoader
 import com.app.common.utils.ActivityStack
 import com.app.common.view.ToastX
+import com.evernote.android.state.StateSaver
 import kotlin.properties.Delegates
 
 
@@ -38,6 +39,8 @@ open class AppBaseApplication(private val isAddActivityListener: Boolean = true)
 
     override fun onCreate() {
         instanceBase = this
+        //保存和恢复数据
+        StateSaver.setEnabledForAllActivitiesAndSupportFragments(this, true)
         super.onCreate()
     }
 

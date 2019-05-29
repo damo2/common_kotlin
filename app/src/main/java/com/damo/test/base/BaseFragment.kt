@@ -8,9 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.common.base.AppBaseFragment
 import com.damo.test.base.App
+import com.evernote.android.state.StateSaver
 import pub.devrel.easypermissions.EasyPermissions
 
-abstract class BaseFragment(private var isInject: Boolean = false) : AppBaseFragment(), EasyPermissions.PermissionCallbacks {
+abstract class BaseFragment() : AppBaseFragment(), EasyPermissions.PermissionCallbacks {
 
     protected lateinit var mContext: Context
 
