@@ -1,6 +1,5 @@
 package com.damo.test
 
-import com.app.common.utils.ifNotNull
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

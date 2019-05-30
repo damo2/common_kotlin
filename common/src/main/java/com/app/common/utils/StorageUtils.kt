@@ -7,7 +7,7 @@ import java.io.File
 
 object StorageUtils {
 
-    /* Checks if external storage is available for read and write */
+    /* 判断 SD Card 是否 read and write */
     fun isExternalStorageWritable(): Boolean {
         return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
     }
@@ -90,30 +90,27 @@ object StorageUtils {
      */
     private fun getPublicStoragePathSub(filename: String, type: String? = null): String {
         val baseDir = getSDCardBaseDir(type) ?: getDataBaseDir()
-        val filePath = """$baseDir${File.separator}$filename"""
-        return filePath
+        return "$baseDir${File.separator}$filename"
     }
 
     /**
      * 获取私有缓存目录,SD卡卸载就取系统目录
      */
     private fun getPrivateCachePathSub(context: Context, childPath: String? = null): String {
-        val baseDir: String
-        if (isExternalStorageWritable()) {
+        val baseDir: String = if (isExternalStorageWritable()) {
             if (context.externalCacheDir != null) {
-                baseDir = context.externalCacheDir.absolutePath//  /mnt/sdcard/Android/data/com.my.app/cache
+                context.externalCacheDir.absolutePath//  /mnt/sdcard/Android/data/com.my.app/cache
             } else {
-                baseDir = Environment.getExternalStorageDirectory().path//  /mnt/sdcard
+                Environment.getExternalStorageDirectory().path//  /mnt/sdcard
             }
         } else {
             if (context.cacheDir != null) {
-                baseDir = context.cacheDir.absolutePath//  /data/data/com.my.app/cache
+                context.cacheDir.absolutePath//  /data/data/com.my.app/cache
             } else {
-                baseDir = Environment.getDataDirectory().absolutePath//  /data
+                Environment.getDataDirectory().absolutePath//  /data
             }
         }
-        val filePath = """$baseDir${File.separator}$childPath"""
-        return filePath
+        return "$baseDir${File.separator}$childPath"
     }
 
     /**
