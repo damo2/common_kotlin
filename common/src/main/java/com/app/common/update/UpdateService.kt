@@ -9,8 +9,10 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import com.app.common.api.RequestFileManager
+import com.app.common.bean.DownApkEvent
 import com.app.common.logger.Logger
 import com.app.common.logger.logd
+import com.app.common.rxbus2.RxBus
 import com.app.common.utils.ActivityStack
 
 /**
@@ -18,12 +20,13 @@ import com.app.common.utils.ActivityStack
  * Created by wr
  * Date: 2018/10/31  20:10
  * describe:
- * 启动的Activity 需要使用了ActivityStack管理，ActivityStack.top()取到Activity去安装apk
+ * InstallApp(file).installProcess(activity)
  */
 
 class UpdateService : Service() {
     private val mNotificationUtils by lazy { NotificationUtils(applicationContext) }
     private val notificationManager by lazy { applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
+    private var isDowning = false
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
@@ -49,27 +52,31 @@ class UpdateService : Service() {
     }
 
     private fun downApk(downUrl: String, installPath: String) {
-        var progress = -1
-        RequestFileManager.downloadFile(downUrl, installPath, { file ->
-            mNotificationUtils.cancelDownLoad()
-            //下载完成，安装apk
-            ActivityStack.top()?.let {
-                InstallApp(file).installProcess(it)
-            }
-            stopSelf()
-        }, { e ->
-            stopSelf()
-            logd(e.message ?: "下载apk异常")
-        }, { totalLength, contentLength, done ->
-            val curProgress = (totalLength * 100 / contentLength).toInt()
-            if (curProgress != progress) {
-                progress = curProgress
-                mNotificationUtils.updateDownLoad(progress)
-            }
-            if (done) {
-                notificationManager.cancel(NotificationId.SERVICE_UPDATE)
-            }
-        })
+        if (!isDowning) {
+            isDowning = true
+            var progress = -1
+            RequestFileManager.downloadFile(downUrl, installPath, { file ->
+                mNotificationUtils.cancelDownLoad()
+                //下载完成，安装apk  InstallApp(file).installProcess(activity)
+                RxBus.post(DownApkEvent(true, file))
+                stopSelf()
+                isDowning = false
+            }, { e ->
+                RxBus.post(DownApkEvent(false, null))
+                stopSelf()
+                isDowning = false
+                logd(e.message ?: "下载apk异常")
+            }, { totalLength, contentLength, done ->
+                val curProgress = (totalLength * 100 / contentLength).toInt()
+                if (curProgress != progress) {
+                    progress = curProgress
+                    mNotificationUtils.updateDownLoad(progress)
+                }
+                if (done) {
+                    notificationManager.cancel(NotificationId.SERVICE_UPDATE)
+                }
+            })
+        }
     }
 
     override fun onDestroy() {

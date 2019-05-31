@@ -105,7 +105,7 @@ dependencies {
     //权限
     implementation 'pub.devrel:easypermissions:1.0.0'
 
-    implementation project(':libdb')
+    implementation project(':libcache')
     implementation project(':common')
 
     implementation "com.facebook.react:react-native:+"

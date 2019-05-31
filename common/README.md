@@ -156,14 +156,14 @@
 
 ### RxBus使用
 ###### 接收方：
-    RxBus.toFlowable().subscribe(t ->
-                     if(t is User){
-
-                     }
-                 }).apply{
-                 //销毁时取消监听
-                   addSubscription(this)
-                 }
+    RxBus.toFlowable().subscribe { event ->
+            if (event is DownApkEvent) {
+            //todo same thing
+            }
+        }.apply {
+            //结束时取消监听
+            addSubscription(this)
+        }
 
 ###### 发送方：
     RxBus.post(new User("张三"))

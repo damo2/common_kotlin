@@ -14,8 +14,7 @@
     <!-- RN调试权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
-    <!-- 安装apk -->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
     <application
         android:name=".base.App"
         android:networkSecurityConfig="@xml/network_security_config"
