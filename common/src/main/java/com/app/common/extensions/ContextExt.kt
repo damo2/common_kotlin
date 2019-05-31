@@ -21,6 +21,8 @@ fun Context.getVersionCodeExt() = AppInfoUtils.getVersionCode(this)
 
 fun Context.getVersionNameExt() = AppInfoUtils.getVersionName(this)
 
+fun Context.getAppNameExt() = AppInfoUtils.getAppName(this)
+
 /** 获取ApplicationId */
 fun Context.getApplicationIdExt() = AppInfoUtils.getApplicationIdExt(this)
 

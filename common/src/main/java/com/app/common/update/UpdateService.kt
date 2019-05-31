@@ -10,25 +10,20 @@ import android.os.Build
 import android.os.IBinder
 import com.app.common.api.RequestFileManager
 import com.app.common.logger.Logger
+import com.app.common.logger.logd
 import com.app.common.utils.ActivityStack
-import com.app.common.utils.StorageUtils
-import java.io.File
 
 /**
  * 更新app
  * Created by wr
  * Date: 2018/10/31  20:10
  * describe:
+ * 启动的Activity 需要使用了ActivityStack管理，ActivityStack.top()取到Activity去安装apk
  */
 
 class UpdateService : Service() {
     private val mNotificationUtils by lazy { NotificationUtils(applicationContext) }
     private val notificationManager by lazy { applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
-
-    val DIR_APK_STR = "apk"
-
-    private fun getApkPath(url: String) = StorageUtils.getPublicStorageDir(DIR_APK_STR) + File.separator + url.substring(url.lastIndexOf("/"), url.length)
-
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
@@ -46,23 +41,25 @@ class UpdateService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
-            val url = it.getStringExtra(ConstUpdate.KEY_DOWN_APK_URL)
-            downApk(url)
+            val apkDownUrl = it.getStringExtra(ConstUpdate.KEY_DOWN_APK_URL)
+            val apkInstallPath = it.getStringExtra(ConstUpdate.KEY_INSTALL_APK_PATH)
+            downApk(apkDownUrl, apkInstallPath)
         }
         return super.onStartCommand(intent, flags, startId)
     }
 
-    private fun downApk(url: String) {
+    private fun downApk(downUrl: String, installPath: String) {
         var progress = -1
-        val urlPath = getApkPath(url)
-        RequestFileManager.downloadFile(url, urlPath, { file ->
+        RequestFileManager.downloadFile(downUrl, installPath, { file ->
             mNotificationUtils.cancelDownLoad()
+            //下载完成，安装apk
             ActivityStack.top()?.let {
                 InstallApp(file).installProcess(it)
             }
             stopSelf()
         }, { e ->
             stopSelf()
+            logd(e.message ?: "下载apk异常")
         }, { totalLength, contentLength, done ->
             val curProgress = (totalLength * 100 / contentLength).toInt()
             if (curProgress != progress) {

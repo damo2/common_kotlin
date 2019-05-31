@@ -27,8 +27,7 @@ import java.security.NoSuchAlgorithmException
 object AppInfoUtils {
     fun getVersionCode(context: Context): Int? =
             try {
-                val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-                packageInfo.versionCode
+                context.packageManager.getPackageInfo(context.packageName, 0).versionCode
             } catch (e: Exception) {
                 null
             }
@@ -36,8 +35,7 @@ object AppInfoUtils {
 
     fun getVersionName(context: Context): String? =
             try {
-                val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-                packageInfo.versionName
+                context.packageManager.getPackageInfo(context.packageName, 0).versionName
             } catch (e: PackageManager.NameNotFoundException) {
                 null
             }
@@ -54,6 +52,15 @@ object AppInfoUtils {
     fun getApplicationIdExt(context: Context): String =
             MetaDataUtil.getMetaDataString(context, CommonConst.APPLICATION_ID)
 
+    fun getAppName(context: Context): String? {
+        return try {
+            val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0);
+            val labelRes = packageInfo.applicationInfo.labelRes
+            context.resources.getString(labelRes);
+        } catch (e: Exception) {
+            null
+        }
+    }
 
     fun isNamedProcess(processName: String): Boolean {
         val pid = android.os.Process.myPid()

@@ -19,7 +19,7 @@ import com.app.common.R
  * describe:
  */
 class NotificationUtils(val context: Context) {
-    val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+    private val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -39,13 +39,13 @@ class NotificationUtils(val context: Context) {
      *初始化或更新下载进度
      */
     fun updateDownLoad(progress: Int = 0) {
-        val notificDownLoad: Notification =
+        val notificationDownLoad: Notification =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                     buildDown26.setContentTitle("下载进度:$progress%").setProgress(100, progress, false).build()
                 else
                     buildDown25.setContentTitle("下载进度:$progress%").setProgress(100, progress, false).build()
 
-        notificationManager.notify(NotificationId.DOWNLOAD, notificDownLoad)
+        notificationManager.notify(NotificationId.DOWNLOAD, notificationDownLoad)
     }
 
     fun cancelDownLoad() {
@@ -69,7 +69,7 @@ class NotificationUtils(val context: Context) {
             createNotificationChannel(notificationManager, ChannelId.DOWNLOAD, ChannelName.DOWNLOAD, NotificationManager.IMPORTANCE_DEFAULT, isVibrate = false, isSound = false)
         }
 
-        fun createNotificationChannel(notificationManager: NotificationManager, channelId: String, channelName: String, importance: Int, isVibrate: Boolean = true, isSound: Boolean = true) {
+        private fun createNotificationChannel(notificationManager: NotificationManager, channelId: String, channelName: String, importance: Int, isVibrate: Boolean = true, isSound: Boolean = true) {
             if (notificationManager.getNotificationChannel(channelId) != null) return
             val channel = NotificationChannel(channelId, channelName, importance).apply {
                 enableLights(true)

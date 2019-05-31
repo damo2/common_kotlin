@@ -7,8 +7,9 @@ package com.app.common.update
  * mail: 1902065822@qq.com
  * describe:
  */
-object  ConstUpdate{
-    const val KEY_DOWN_APK_URL = "DOWN_APK_URL"//下载apk路径
+object ConstUpdate {
+    const val KEY_DOWN_APK_URL = "DOWN_APK_URL"//下载apk地址
+    const val KEY_INSTALL_APK_PATH = "INSTALL_APK_PATH"//安装apk路径
 }
 
 object ChannelId {

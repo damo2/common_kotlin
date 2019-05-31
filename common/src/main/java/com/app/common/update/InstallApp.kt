@@ -53,7 +53,7 @@ class InstallApp(var apkFile: File) {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private fun toInstallPermissionSettingIntent(activity: Activity) {
-        val packageURI = Uri.parse("package:" + activity.getPackageName())
+        val packageURI = Uri.parse("package:" + activity.packageName)
         val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI)
         activity.startActivityForResult(intent, InstallAppCode.INSTALL_PERMISSION_CODE)
     }
