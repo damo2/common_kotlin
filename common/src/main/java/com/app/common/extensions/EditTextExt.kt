@@ -9,9 +9,7 @@ import com.app.common.utils.EditTextUtils
  * describe:
  */
 
-/**
- * 禁止输入空格
- */
+/** 禁止输入空格 */
 fun EditText.inhibitInputSpaceExt() = EditTextUtils.inhibitInputSpace(this)
 
 /**
@@ -21,12 +19,8 @@ fun EditText.inhibitInputSpaceExt() = EditTextUtils.inhibitInputSpace(this)
  */
 fun EditText.limitLengthExt(maxLength: Int, outCallback: (() -> Unit)? = null) = EditTextUtils.limitLength(this, maxLength, outCallback)
 
-/**
- * EditText设置只能输入数字和小数点，小数点只能1个且小数点后最多只能2位
- */
+/**  EditText设置只能输入数字和小数点，小数点只能1个且小数点后最多只能2位 */
 fun EditText.setOnlyDecimalExt() = EditTextUtils.setOnlyDecimal(this)
 
-/**
- * EditText设置密码显示或隐藏
- */
+/** EditText设置密码显示或隐藏  */
 fun EditText.setPwdShowOrHindExt(isShow: Boolean) = EditTextUtils.setPwdShowOrHind(this, isShow)

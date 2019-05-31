@@ -3,6 +3,7 @@ package com.app.common.utils
 import android.app.ActivityManager
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.provider.Settings
 import android.text.TextUtils
@@ -15,6 +16,7 @@ import java.io.FileReader
 import java.io.IOException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+
 
 /**
  * Created by wr
@@ -40,7 +42,15 @@ object AppInfoUtils {
                 null
             }
 
-
+    /**
+     * 获取applicationId
+     *
+     * 注意:需要在app模块 AndroidManifest.xml 里面添加
+     *
+     * <meta-data
+     *  android:name="APPLICATION_ID"
+     *  android:value="${applicationId}"/>
+     */
     fun getApplicationIdExt(context: Context): String =
             MetaDataUtil.getMetaDataString(context, CommonConst.APPLICATION_ID)
 
@@ -49,12 +59,6 @@ object AppInfoUtils {
         val pid = android.os.Process.myPid()
         return getProcessName(pid) == processName
     }
-
-//fun Context.getProcessName(pid: Int = android.os.Process.myPid()): String? {
-//    return BufferedReader(FileReader("/proc/$pid/cmdline")).use {
-//        it.readLine().trim()
-//    }
-//}
 
     fun getProcessName(pid: Int = android.os.Process.myPid()): String? {
         var reader: BufferedReader? = null
@@ -82,21 +86,20 @@ object AppInfoUtils {
     //是否运行在前台
     fun isAppRunningForeground(context: Context): Boolean {
         val var1 = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        try {
+        return try {
             val taskInfoList = var1.getRunningTasks(1)
             if (taskInfoList != null && taskInfoList.size >= 1) {
-                return context.packageName.equals((taskInfoList[0] as ActivityManager.RunningTaskInfo).baseActivity.packageName, ignoreCase = true)
+                context.packageName.equals((taskInfoList[0] as ActivityManager.RunningTaskInfo).baseActivity.packageName, ignoreCase = true)
             } else {
-                return false
+                false
             }
         } catch (e: SecurityException) {
             Logger.d("isAppRunningForeground#Apk doesn't hold GET_TASKS permission")
             e.printStackTrace()
-            return false
+            false
         }
 
     }
-
 
     //设备唯一id
     fun getAndroidID(context: Context): String {
@@ -108,28 +111,6 @@ object AppInfoUtils {
             e.printStackTrace()
         }
         return id
-    }
-
-    private fun toMD5(text: String): String {
-        //获取摘要器 MessageDigest
-        val messageDigest = MessageDigest.getInstance("MD5")
-        //通过摘要器对字符串的二进制字节数组进行hash计算
-        val digest = messageDigest.digest(text.toByteArray())
-
-        return buildString {
-            for (i in digest.indices) {
-                //循环每个字符 将计算结果转化为正整数;
-                val digestInt = digest[i].toInt() and 0xff
-                //将10进制转化为较短的16进制
-                val hexString = Integer.toHexString(digestInt)
-                //转化结果如果是个位数会省略0,因此判断并补0
-                if (hexString.length < 2) {
-                    append(0)
-                }
-                //将循环结果添加到缓冲区
-                append(hexString)
-            }
-        }
     }
 
     //屏幕宽
@@ -146,6 +127,20 @@ object AppInfoUtils {
         val outMetrics = DisplayMetrics()
         wm.defaultDisplay.getMetrics(outMetrics)
         return outMetrics.heightPixels
+    }
+
+
+    /** 通过[context]和[packageName]获取App图标 */
+    fun getAppIcon(context: Context, packageName: String = context.packageName): Drawable? {
+        if (packageName.isBlank()) return null
+        return try {
+            val pm = context.packageManager
+            val pi = pm.getPackageInfo(packageName, 0)
+            pi?.applicationInfo?.loadIcon(pm)
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+            null
+        }
     }
 
 
@@ -175,4 +170,26 @@ object AppInfoUtils {
         return hasNavigationBar
     }
 
+
+    private fun toMD5(text: String): String {
+        //获取摘要器 MessageDigest
+        val messageDigest = MessageDigest.getInstance("MD5")
+        //通过摘要器对字符串的二进制字节数组进行hash计算
+        val digest = messageDigest.digest(text.toByteArray())
+
+        return buildString {
+            for (i in digest.indices) {
+                //循环每个字符 将计算结果转化为正整数;
+                val digestInt = digest[i].toInt() and 0xff
+                //将10进制转化为较短的16进制
+                val hexString = Integer.toHexString(digestInt)
+                //转化结果如果是个位数会省略0,因此判断并补0
+                if (hexString.length < 2) {
+                    append(0)
+                }
+                //将循环结果添加到缓冲区
+                append(hexString)
+            }
+        }
+    }
 }

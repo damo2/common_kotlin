@@ -17,6 +17,7 @@ import com.app.common.view.toastInfo
 import com.damo.libdb.Dao
 import com.damo.libdb.objectbox.ObjectBoxInit
 import com.damo.test.activity.AnkoActivity
+import com.damo.test.activity.test.Test2Activity
 import com.damo.test.activity.test.TestActivity
 import com.damo.test.api.ApiManager
 import com.damo.test.api.composeDefault
@@ -32,13 +33,18 @@ class MainActivity : BaseActivity() {
 
     data class UserBean(var name: String, var age: Int)
 
-    var userBean by Dao<UserBean>(UserBean::class.java,"user")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    var userBean by Dao<UserBean>(UserBean::class.java, "user")
 
-        ObjectBoxInit.build(applicationContext);
+
+    override fun initData() {
+        super.initData()
+        ObjectBoxInit.build(applicationContext)
+    }
+
+    override fun initListener() {
+        super.initListener()
         tvPutCache.setOnClickListener {
-            userBean = UserBean("张三",Random().nextInt(100))
+            userBean = UserBean("张三", Random().nextInt(100))
         }
         tvGetCache.setOnClickListener {
             Toast.makeText(applicationContext, userBean.toJsonExt(), Toast.LENGTH_SHORT).show()
@@ -82,11 +88,11 @@ class MainActivity : BaseActivity() {
         tvAnko.setOnClickExtNoFast {
             startActivity<AnkoActivity>()
         }
-        edtInput.limitLengthExt(5,{ toastInfo("最多输入字数为5")})
+        edtInput.limitLengthExt(5, { toastInfo("最多输入字数为5") })
 
         tvSpan.text = SpanUtils.generateSideIconText(true, 10, "左边一个图 10px", ContextCompat.getDrawable(mContext, R.drawable.common_loading_icon))
 
-        tvSpan2.text = SpanUtils.generateHorIconText("左右2个图 20px",20,ContextCompat.getDrawable(mContext, R.drawable.common_toast_info),20,ContextCompat.getDrawable(mContext, R.drawable.common_toast_error))
+        tvSpan2.text = SpanUtils.generateHorIconText("左右2个图 20px", 20, ContextCompat.getDrawable(mContext, R.drawable.common_toast_info), 20, ContextCompat.getDrawable(mContext, R.drawable.common_toast_error))
 
         tvService.setOnClickListener {
             TestJobSchedulerService.startJobScheduler(applicationContext)
@@ -96,6 +102,9 @@ class MainActivity : BaseActivity() {
             startActivity<TestActivity>()
         }
 
+        tvTest2.setOnClickListener {
+            startActivity<Test2Activity>()
+        }
     }
 
     override fun onStop() {

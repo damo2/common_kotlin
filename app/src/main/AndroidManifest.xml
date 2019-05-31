@@ -30,6 +30,7 @@
             android:name="APPLICATION_ID"
             android:value="${applicationId}"/>
 
+
         <!-- ******************  极光推送 start ************************ -->
         <service
             android:name="cn.jpush.android.service.PushService"
@@ -61,6 +62,7 @@
         <activity android:name=".MainActivityRN"/>
         <activity android:name=".activity.AnkoActivity"/>
         <activity android:name=".activity.test.TestActivity"/>
+        <activity android:name=".activity.test.Test2Activity"/>
 
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
 
