@@ -42,7 +42,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    flavorDimensions("ip")
+    productFlavors {
+        //IP地址
+        Online {
+            dimension "ip"
+            resValue "string", "AppName", "达摩"
+        }
+        Moni {
+            dimension "ip"
+            resValue "string", "AppName", "达摩-模拟"
+        }
+        Offline {
+            dimension "ip"
+            resValue "string", "AppName", "达摩-测试"
+        }
+    }
     dexOptions {
         preDexLibraries true
         maxProcessCount 8
