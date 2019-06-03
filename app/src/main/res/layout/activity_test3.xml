@@ -22,31 +22,5 @@
         app:cb_bg="@drawable/getcode_button"
         app:cb_isExitTiming="true"
         />
-    <com.app.common.widget.CountdownButton
-        android:layout_width="110dp"
-        android:layout_height="30dp"
-        android:padding="0dp"
-        android:textSize="12sp"
-        android:textColor="#FFFFFF"
-        android:text="获取验证码"
-        app:cb_downFormat="%s 秒"
-        app:cb_endTxt="重新获取"
-        app:cb_totalTime="30000"
-        app:cb_bg="@drawable/getcode_button"
-        app:cb_isExitTiming="true"
-        />
-    <com.app.common.widget.CountdownButton
-        android:layout_width="110dp"
-        android:layout_height="30dp"
-        android:padding="0dp"
-        android:textSize="12sp"
-        android:textColor="#FFFFFF"
-        android:text="获取验证码"
-        app:cb_downFormat="%s 秒"
-        app:cb_endTxt="重新获取"
-        app:cb_totalTime="30000"
-        app:cb_bg="@drawable/getcode_button"
-        app:cb_isExitTiming="true"
-        />
 </com.google.android.flexbox.FlexboxLayout>
 

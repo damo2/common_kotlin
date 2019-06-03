@@ -8,7 +8,6 @@ import com.app.common.CommonConst
 import com.app.common.R
 import com.app.common.save.Preference
 
-
 /**
  * 点击倒计时。
  * 退出依然倒计时（isExitTiming 为true） 时 CountdownButton必须设置id，
@@ -23,19 +22,25 @@ class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, a
     //背景
     private val bgResource: Int
     //倒计时格式
-    private var downFormat = "%s 秒"
+    private val downFormat: String
     //是否退出依然倒计时，默认false
     private val isExitTiming: Boolean
     //倒计时开始时间
     private var countdownTime: Long by Preference(context, "countdown_time_$id", 0, CommonConst.PREFERENCE_FILENAME)
 
+    companion object {
+        const val DOWNFORMAT_DEFAULT = "%s 秒"
+        const val TOTAL_DEFAULT = 60000
+        const val INTERVAL_DEFAULT = 1000
+    }
+
     init {
         // 获取自定义属性，并赋值
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CountdownButton)
-        total = typedArray.getInteger(R.styleable.CountdownButton_cb_totalTime, 60000)
-        interval = typedArray.getInteger(R.styleable.CountdownButton_cb_timeInterval, 1000)
+        total = typedArray.getInteger(R.styleable.CountdownButton_cb_totalTime, TOTAL_DEFAULT)
+        interval = typedArray.getInteger(R.styleable.CountdownButton_cb_timeInterval, INTERVAL_DEFAULT)
         endTxt = typedArray.getString(R.styleable.CountdownButton_cb_endTxt)
-        downFormat = typedArray.getString(R.styleable.CountdownButton_cb_downFormat)
+        downFormat = typedArray.getString(R.styleable.CountdownButton_cb_downFormat) ?: DOWNFORMAT_DEFAULT
         bgResource = typedArray.getResourceId(R.styleable.CountdownButton_cb_bg, R.drawable.countdown_button)
         isExitTiming = typedArray.getBoolean(R.styleable.CountdownButton_cb_isExitTiming, false)
 
