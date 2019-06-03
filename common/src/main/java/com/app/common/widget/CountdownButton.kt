@@ -4,7 +4,9 @@ import android.content.Context
 import android.os.CountDownTimer
 import android.util.AttributeSet
 import android.widget.Button
+import com.app.common.CommonConst
 import com.app.common.R
+import com.app.common.save.Preference
 
 
 /**
@@ -14,12 +16,19 @@ import com.app.common.R
  * describe:
  */
 class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, attrs) {
+    //总时长,默认60s
     private val total: Int
+    //间隔，默认1s
     private val interval: Int
     private val endTxt: String?
-    private var bgResource: Int = R.drawable.countdown_button
+    //背景
+    private val bgResource: Int
+    //倒计时格式
     private var downFormat = "%s 秒"
-
+    //是否退出依然倒计时，默认false
+    private val isExitTiming: Boolean
+    //倒计时开始时间
+    private var countdownTime: Long by Preference(context, "countdown_time", 0, CommonConst.PREFERENCE_FILENAME)
     init {
         // 获取自定义属性，并赋值
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CountdownButton)
@@ -28,6 +37,8 @@ class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, a
         endTxt = typedArray.getString(R.styleable.CountdownButton_cb_endTxt)
         downFormat = typedArray.getString(R.styleable.CountdownButton_cb_downFormat)
         bgResource = typedArray.getResourceId(R.styleable.CountdownButton_cb_bg, R.drawable.countdown_button)
+        isExitTiming = typedArray.getBoolean(R.styleable.CountdownButton_cb_isExitTiming, false)
+
         typedArray.recycle()
         initView()
     }
@@ -37,12 +48,22 @@ class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, a
         setOnClickListener {
             startCountdown()
         }
+        if (isExitTiming) {
+            val time = total - (System.currentTimeMillis() - countdownTime)
+            if (time > 0) {
+                val timeCount = TimeCount(time, interval.toLong())
+                timeCount.start()
+            }
+        }
     }
 
     //执行
     fun startCountdown() {
         val time = TimeCount(total.toLong(), interval.toLong())
         time.start()
+        if (isExitTiming) {
+            countdownTime = System.currentTimeMillis()
+        }
     }
 
     //millisInFuture 总时长, countDownInterval 时间间隔
@@ -51,11 +72,17 @@ class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, a
         override fun onFinish() {
             text = endTxt
             isEnabled = true
+            if (isExitTiming) {
+                countdownTime = 0
+            }
         }
 
         override fun onTick(millisUntilFinished: Long) {
             isEnabled = false
-            text = String.format(downFormat, (millisUntilFinished / countDownInterval).toString())
+            val count = millisUntilFinished / countDownInterval
+            if (count > 0) {
+                text = String.format(downFormat, count.toString())
+            }
         }
     }
 }

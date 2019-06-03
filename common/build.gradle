@@ -61,6 +61,8 @@ dependencies {
     //onSaveInstance
     api 'com.evernote:android-state:1.4.1'
     kapt 'com.evernote:android-state-processor:1.4.1'
+    //权限
+    implementation 'pub.devrel:easypermissions:1.0.0'
 
 }
 

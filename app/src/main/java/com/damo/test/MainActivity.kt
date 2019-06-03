@@ -18,6 +18,7 @@ import com.damo.libdb.Dao
 import com.damo.libdb.objectbox.ObjectBoxInit
 import com.damo.test.activity.AnkoActivity
 import com.damo.test.activity.test.Test2Activity
+import com.damo.test.activity.test.Test3Activity
 import com.damo.test.activity.test.TestActivity
 import com.damo.test.api.ApiManager
 import com.damo.test.api.composeDefault
@@ -104,6 +105,10 @@ class MainActivity : BaseActivity() {
 
         tvTest2.setOnClickListener {
             startActivity<Test2Activity>()
+        }
+
+        tvTest3.setOnClickListener {
+            startActivity<Test3Activity>()
         }
     }
 

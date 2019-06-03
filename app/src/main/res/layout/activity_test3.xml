@@ -20,6 +20,7 @@
         app:cb_endTxt="重新获取"
         app:cb_totalTime="30000"
         app:cb_bg="@drawable/getcode_button"
+        app:cb_isExitTiming="true"
         />
 </com.google.android.flexbox.FlexboxLayout>
 

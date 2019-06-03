@@ -15,7 +15,5 @@ object CommonConst {
     //retrofit baseurl 必须以“/”结尾
     var BASE_URL = "http://www.baidu.com/"
 
-    fun setBaseUrl(url: String) {
-        BASE_URL = url;
-    }
+    const val PREFERENCE_FILENAME = "common"
 }

@@ -216,3 +216,40 @@
     }
     //使用
     Manager.getInstance(context)
+    
+    
+    
+<br><br><br>
+## **自定义view**
+##### 点击倒计时
+    <com.app.common.widget.CountdownButton
+        android:id="@+id/btnGetCode"
+        android:layout_width="110dp"
+        android:layout_height="30dp"
+        android:padding="0dp"
+        android:textSize="12sp"
+        android:textColor="#FFFFFF"
+        android:text="获取验证码"
+        app:cb_downFormat="%s 秒"
+        app:cb_endTxt="重新获取"
+        app:cb_totalTime="30000"
+        app:cb_bg="@drawable/getcode_button"
+        app:cb_isExitTiming="true"
+        />
+            
+    <!--getcode_button-->
+    <?xml version="1.0" encoding="utf-8"?>
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:state_enabled="true">
+            <shape android:shape="rectangle">
+                <solid android:color="#ff80cbc4" />
+                <corners android:radius="50dp" />
+            </shape>
+        </item>
+        <item android:state_enabled="false">
+            <shape android:shape="rectangle">
+                <solid android:color="@color/common_textgray" />
+                <corners android:radius="50dp" />
+            </shape>
+        </item>
+    </selector>

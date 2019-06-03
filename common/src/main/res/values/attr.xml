@@ -83,9 +83,10 @@
         <attr name="cb_totalTime" format="integer" />
         <!--计时时间间隔，毫秒-->
         <attr name="cb_timeInterval" format="integer" />
-
-        <!--圆角-->
+        <!--背景-->
         <attr name="cb_bg" format="reference" />
+        <!--是否退出依然计时,默认false-->
+        <attr name="cb_isExitTiming" format="boolean" />
     </declare-styleable>
 
 </resources>
