@@ -10,10 +10,9 @@ import com.app.common.save.Preference
 
 
 /**
- * Created by wr
- * Date: 2019/6/3  13:23
- * mail: 1902065822@qq.com
- * describe:
+ * 点击倒计时。
+ * 退出依然倒计时（isExitTiming 为true） 时 CountdownButton必须设置id，
+ * id为倒计时唯一标识，如果id名字一样倒计时时间也一样。
  */
 class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, attrs) {
     //总时长,默认60s
@@ -28,7 +27,8 @@ class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, a
     //是否退出依然倒计时，默认false
     private val isExitTiming: Boolean
     //倒计时开始时间
-    private var countdownTime: Long by Preference(context, "countdown_time", 0, CommonConst.PREFERENCE_FILENAME)
+    private var countdownTime: Long by Preference(context, "countdown_time_$id", 0, CommonConst.PREFERENCE_FILENAME)
+
     init {
         // 获取自定义属性，并赋值
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CountdownButton)

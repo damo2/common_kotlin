@@ -10,9 +10,9 @@ import com.damo.test.BuildConfig
 import com.damo.test.api.ApiManager
 import com.didichuxing.doraemonkit.DoraemonKit
 import kotlin.properties.Delegates
-import com.app.common.logger.AndroidLogAdapter
 import com.app.common.logger.DiskLogAdapter
 import com.app.common.logger.Logger
+import com.damo.libdb.objectbox.ObjectBoxInit
 
 
 class App : AppBaseApplication() {
@@ -42,7 +42,7 @@ class App : AppBaseApplication() {
     }
     inner class LoggerTask : Task("LoggerTask") {
         override fun run() {
-            logd("ApiServiceTask")
+            logd("LoggerTask")
             //初始化
             Logger.addLogAdapter(DiskLogAdapter())
         }
@@ -68,11 +68,19 @@ class App : AppBaseApplication() {
         }
     }
 
+    inner class ObjectBoxTask : Task("SampleTask") {
+        override fun run() {
+            logd("ObjectBoxTask")
+            ObjectBoxInit.build(applicationContext)
+        }
+    }
+
     private fun createCommonTaskGroup(): Task {
         val builder = Project.Builder()
         builder.add(ApiServiceTask())
         builder.add(DoraemonKitTask())
         builder.add(LoggerTask())
+        builder.add(ObjectBoxTask())
         return builder.create()
     }
 

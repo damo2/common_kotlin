@@ -39,7 +39,6 @@ class MainActivity : BaseActivity() {
 
     override fun initData() {
         super.initData()
-        ObjectBoxInit.build(applicationContext)
     }
 
     override fun initListener() {
