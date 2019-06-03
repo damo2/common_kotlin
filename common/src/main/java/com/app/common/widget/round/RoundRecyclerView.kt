@@ -3,13 +3,13 @@ package com.app.common.widget.round
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.app.common.widget.round.util.RoundViewDelegate
 
 /**
  * 自定义控件：圆角RelativeLayout
  */
-class LinearLayoutRound : LinearLayout {
+class RoundRecyclerView : RecyclerView {
     private var mRoundViewDelegate: RoundViewDelegate? = null
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {

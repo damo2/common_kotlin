@@ -6,7 +6,7 @@
         <!--文字间距 1个中文4个间距-->
         <attr name="letterSpace" format="float"/>
         <attr name="letterAlignLength" format="float"/>
-        <attr name = "text" format = "string" />
+        <attr name="text" format="string"/>
     </declare-styleable>
 
     <!-- 圆角view -->
@@ -28,7 +28,7 @@
         <attr name="leftSwipe" format="boolean"/>
     </declare-styleable>
 
-    <!-- 流动布局-->
+    <!-- TagFlowLayout流动布局-->
     <declare-styleable name="TagFlowLayout">
         <attr name="max_select" format="integer"></attr>
         <attr name="tag_gravity">
@@ -38,39 +38,54 @@
         </attr>
     </declare-styleable>
 
-
+    <!--RoundImageView-->
     <declare-styleable name="round_imageview">
         <attr name="border_color" format="color"/>
         <attr name="border_width" format="dimension"/>
         <attr name="circle" format="boolean"/>
     </declare-styleable>
-
+    <!-- WheelView -->
     <declare-styleable name="WheelView">
-        <attr name="unitHeight" format="dimension" />
+        <attr name="unitHeight" format="dimension"/>
         <attr name="itemNumber" format="integer"/>
 
-        <attr name="normalTextColor" format="color" />
-        <attr name="normalTextSize" format="dimension" />
-        <attr name="selectedTextColor" format="color" />
-        <attr name="selectedTextSize" format="dimension" />
-        <attr name="isCyclic" format="boolean" />
+        <attr name="normalTextColor" format="color"/>
+        <attr name="normalTextSize" format="dimension"/>
+        <attr name="selectedTextColor" format="color"/>
+        <attr name="selectedTextSize" format="dimension"/>
+        <attr name="isCyclic" format="boolean"/>
 
-        <attr name="lineColor" format="color" />
-        <attr name="lineHeight" format="dimension" />
+        <attr name="lineColor" format="color"/>
+        <attr name="lineHeight" format="dimension"/>
 
         <attr name="noEmpty" format="boolean"/>
         <attr name="isEnable" format="boolean"/>
 
-        <attr name="maskDarkColor" format="color" />
-        <attr name="maskLightColor" format="color" />
+        <attr name="maskDarkColor" format="color"/>
+        <attr name="maskLightColor" format="color"/>
     </declare-styleable>
-
+    <!-- RoundAngleImageView -->
     <declare-styleable name="Custom_Round_Image_View">
         <attr name="round_radius" format="dimension"/>
         <attr name="left_top_radius" format="dimension"/>
         <attr name="right_top_radius" format="dimension"/>
         <attr name="right_bottom_radius" format="dimension"/>
         <attr name="left_bottom_radius" format="dimension"/>
+    </declare-styleable>
+
+    <!-- CountdownButton 点击倒计时 -->
+    <declare-styleable name="CountdownButton">
+        <!--倒计时格式 默认 %s秒-->
+        <attr name="cb_downFormat" format="string" />
+        <!--结束后的文字-->
+        <attr name="cb_endTxt" format="string" />
+        <!--计时总时长，毫秒-->
+        <attr name="cb_totalTime" format="integer" />
+        <!--计时时间间隔，毫秒-->
+        <attr name="cb_timeInterval" format="integer" />
+
+        <!--圆角-->
+        <attr name="cb_bg" format="reference" />
     </declare-styleable>
 
 </resources>

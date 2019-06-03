@@ -19,5 +19,15 @@
         android:textColor="@color/colorAccent"
         />
 
+    <Button
+        android:id="@+id/btnSelect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择图片"/>
+    <Button
+        android:id="@+id/btnSelectKt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择图片kt"/>
 </com.google.android.flexbox.FlexboxLayout>
 

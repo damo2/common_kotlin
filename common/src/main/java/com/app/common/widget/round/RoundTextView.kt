@@ -3,13 +3,13 @@ package com.app.common.widget.round
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.widget.RelativeLayout
+import android.widget.TextView
 import com.app.common.widget.round.util.RoundViewDelegate
 
 /**
- * 自定义控件：圆角RelativeLayout
+ * 自定义控件：圆角TextView
  */
-class RelativeLayoutRound : RelativeLayout {
+class RoundTextView : TextView {
     private var mRoundViewDelegate: RoundViewDelegate? = null
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -18,6 +18,10 @@ class RelativeLayoutRound : RelativeLayout {
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
         initValue(attrs)
+    }
+
+    constructor(context: Context) : super(context) {
+        initValue(null)
     }
 
     private fun initValue(attrs: AttributeSet?) {
@@ -37,5 +41,4 @@ class RelativeLayoutRound : RelativeLayout {
         super.draw(canvas)
         canvas.restore()
     }
-
 }

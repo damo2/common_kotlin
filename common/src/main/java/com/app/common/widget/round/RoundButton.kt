@@ -3,13 +3,14 @@ package com.app.common.widget.round
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
+import android.widget.Button
 import android.widget.TextView
 import com.app.common.widget.round.util.RoundViewDelegate
 
 /**
- * 自定义控件：圆角RelativeLayout
+ * 自定义控件：圆角ButtonRound
  */
-class TextViewRound : TextView {
+class RoundButton : Button {
     private var mRoundViewDelegate: RoundViewDelegate? = null
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {

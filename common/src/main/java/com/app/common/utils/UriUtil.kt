@@ -23,16 +23,14 @@ import java.io.File
  */
 @TargetApi(19)
 object UriUtil {
-    fun getUri(context: Context, cameraFile: File): Uri {
-        val cameraUri: Uri
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //7.0
-            cameraUri = FileProvider.getUriForFile(context, context.getApplicationIdExt() + ".fileprovider", cameraFile)
-            //            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        } else {
-            cameraUri = Uri.fromFile(cameraFile)
-        }
-        return cameraUri
-    }
+    fun getUri(context: Context, cameraFile: File): Uri =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //7.0
+                FileProvider.getUriForFile(context, "${context.getApplicationIdExt()}.fileprovider", cameraFile)
+                //            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            } else {
+                Uri.fromFile(cameraFile)
+            }
+
 
     fun getPath(context: Context, uri: Uri): String? {
         val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
