@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-beta01'
+        classpath 'com.android.tools.build:gradle:3.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.objectbox:objectbox-gradle-plugin:2.3.1"
         //方法数
@@ -23,14 +23,12 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            // All of React Native (JS, Android binaries) is installed from npm
-            url "$rootDir/node_modules/react-native/android"
-        }
-
-        maven {
-            url "https://dl.bintray.com/zhangsl/maven"
-        }
+        // All of React Native (JS, Android binaries) is installed from npm
+        maven { url "$rootDir/node_modules/react-native/android" }
+        //异步初始化
+        maven { url "https://dl.bintray.com/zhangsl/maven" }
+        //新浪微博
+        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
     }
 }
 
