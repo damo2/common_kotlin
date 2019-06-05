@@ -1,8 +1,8 @@
 package com.damo.loginshared.api
 
-import com.youke.yingba.base.loginshare.bean.SinaUserBean
-import com.youke.yingba.base.loginshare.bean.WxInfoBean
-import com.youke.yingba.base.loginshare.bean.WxTokenBean
+import com.damo.loginshared.bean.SinaUserBean
+import com.damo.loginshared.bean.WxInfoBean
+import com.damo.loginshared.bean.WxTokenBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

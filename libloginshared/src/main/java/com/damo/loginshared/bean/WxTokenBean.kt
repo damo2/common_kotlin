@@ -1,4 +1,4 @@
-package com.youke.yingba.base.loginshare.bean
+package com.damo.loginshared.bean
 
 /**
  * Created by zq on 2018/9/18

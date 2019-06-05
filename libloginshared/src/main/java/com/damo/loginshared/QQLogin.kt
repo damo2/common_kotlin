@@ -11,8 +11,8 @@ import com.tencent.connect.common.Constants
 import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
 import com.tencent.tauth.UiError
-import com.youke.yingba.base.loginshare.bean.QQDataBean
-import com.youke.yingba.base.loginshare.bean.QQUserInfoBean
+import com.damo.loginshared.bean.QQDataBean
+import com.damo.loginshared.bean.QQUserInfoBean
 
 
 /**

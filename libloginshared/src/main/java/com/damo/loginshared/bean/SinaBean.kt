@@ -1,4 +1,4 @@
-package com.youke.yingba.base.loginshare.bean
+package com.damo.loginshared.bean
 
 import com.google.gson.annotations.SerializedName
 

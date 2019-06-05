@@ -10,7 +10,7 @@ import com.sina.weibo.sdk.auth.AccessTokenKeeper
 import com.sina.weibo.sdk.auth.Oauth2AccessToken
 import com.sina.weibo.sdk.auth.WbConnectErrorMessage
 import com.sina.weibo.sdk.auth.sso.SsoHandler
-import com.youke.yingba.base.loginshare.bean.SinaUserBean
+import com.damo.loginshared.bean.SinaUserBean
 
 
 /**
