@@ -37,16 +37,16 @@ class ToastX constructor(val mContext: Context) : Toast(mContext) {
         } catch (e: Exception) {
             messageId.toString()
         }
-        info(msg)
+        info(msg, duration)
     }
 
     fun info(message: String?, duration: Int = Toast.LENGTH_SHORT) {
-        custom(message)
+        custom(message, duration)
     }
 
     fun netError(e: Throwable, icon: Int? = null, duration: Int = Toast.LENGTH_SHORT) {
         val message = when (e) {
-        //处理服务器返回的错误
+            //处理服务器返回的错误
             is ApiException -> e.message
             is ConnectException, is UnknownHostException -> "网络异常"
             is TimeoutException, is SocketTimeoutException -> "网络超时"

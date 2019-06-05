@@ -1,12 +1,8 @@
 package com.damo.test.activity.test
 
-import com.app.common.logger.logd
 import com.damo.test.R
 import com.damo.test.base.BaseActivity
-import com.damo.test.base.BaseFragment
-import com.evernote.android.state.State
-import kotlinx.android.synthetic.main.activity_test.*
-import kotlinx.android.synthetic.main.fragment_test.*
+import kotlinx.android.synthetic.main.activity_test3.*
 
 
 /**
@@ -28,6 +24,6 @@ class Test3Activity : BaseActivity() {
     override fun initListener() {
         super.initListener()
 
-    }
+        }
 
 }
