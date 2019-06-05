@@ -8,16 +8,12 @@ package com.damo.loginshared
  */
 object Const {
     //微信登录分享
-    const val WX_APPID = "wx900abb90f6be147a"
-    const val WX_SECRET = "4857b5074e9883c4e19dedfaca87b135"
+    const val WX_APPID = "wx4c1885c6644ef05a"
+    const val WX_SECRET = "cbc4e7494417e3d274011cfd8c52f1a7"
     //QQ登录分享
-    const val QQ_APP_ID = "1107978730"
-    const val QQ_APP_KEY = "X2zQJODmoBAZeHjT"
-
+    const val QQ_APP_ID = "1105570540"
     //新浪微博登录分享
-    const val SINA_APP_ID = "1439791251"
-    const val SINA_APP_KEY = "856474246"
-    const val SINA_APP_SECRET = "17a934ca23dd28ced1bd704c3a8d6870"
+    const val SINA_APP_KEY = "2790564456"
     /**
      * WeiboSDKDemo 应用对应的权限，第三方开发者一般不需要这么多，可直接设置成空即可。
      * 详情请查看 Demo 中对应的注释。
