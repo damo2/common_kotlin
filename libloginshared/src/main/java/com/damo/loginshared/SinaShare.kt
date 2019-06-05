@@ -1,7 +1,6 @@
 package com.damo.loginshared
 
 import android.app.Activity
-import android.content.Context
 import android.graphics.Bitmap
 import com.sina.weibo.sdk.WbSdk
 import com.sina.weibo.sdk.api.ImageObject
@@ -18,7 +17,7 @@ import com.sina.weibo.sdk.share.WbShareHandler
  * describe: 微博分享工具类
  */
 
-object ShareWeiboManager : WbShareCallback {
+object SinaShare : WbShareCallback {
     private lateinit var mWbShareHandler: WbShareHandler    //微博分享管理类
     private lateinit var mAuthInfo: AuthInfo
 

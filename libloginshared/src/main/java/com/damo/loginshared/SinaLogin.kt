@@ -18,7 +18,7 @@ import com.youke.yingba.base.loginshare.bean.SinaUserBean
  * Date: 2018/12/10  15:09
  * describe:
  */
-class SinaLoginShare(var activity: Activity) {
+class SinaLogin(var activity: Activity) {
     private var mSsoHandler: SsoHandler? = null
 
     private var mCallback: ((isSuc: Boolean, errorInfo: String?, accessToken: Oauth2AccessToken?) -> Unit)? = null

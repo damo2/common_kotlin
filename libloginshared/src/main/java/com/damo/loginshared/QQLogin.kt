@@ -20,7 +20,7 @@ import com.youke.yingba.base.loginshare.bean.QQUserInfoBean
  * Date: 2018/12/6  17:19
  * describe:
  */
-class QQLoginShare(var context: Context) {
+class QQLogin(var context: Context) {
     private var mCallbackToken: ((isSuc: Boolean, qqDataBean: QQDataBean?) -> Unit)? = null
     private var mCallback: ((isSuc: Boolean, qqDataBean: QQDataBean?, qqUserInfoBean: QQUserInfoBean?) -> Unit)? = null
 

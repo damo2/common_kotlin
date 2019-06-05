@@ -14,7 +14,7 @@ import com.tencent.tauth.UiError
  * describe: qq分享工具类
  */
 
-object ShareQQManager : IUiListener {
+object QQShare : IUiListener {
     private val mQQApiId = Const.QQ_APP_ID
     private lateinit var mTencent: Tencent
 

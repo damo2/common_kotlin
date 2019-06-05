@@ -16,14 +16,15 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory
  * @see {@link https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419317340&token=&lang=zh_CN}
  */
 
-class ShareWechatManager private constructor(var context: Context) {
+class WechatShare private constructor(var context: Context) {
     val api: IWXAPI by lazy { WXAPIFactory.createWXAPI(context, Const.WX_APPID, true) }
 
-    fun getInstance(context: Context): ShareWechatManager = SingletonHolder(context).holder
+    fun getInstance(context: Context): WechatShare = SingletonHolder(context).holder
 
     private class SingletonHolder(context: Context) {
-        val holder = ShareWechatManager(context)
+        val holder = WechatShare(context)
     }
+
     companion object {
         const val WX_FRIEND = 0
         const val WX_CIRCLE = 1
