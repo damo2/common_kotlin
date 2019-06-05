@@ -14,7 +14,7 @@ apply plugin: 'android-aspectjx'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.damo.test"
+        applicationId "com.weiyao.zuzuapp"
         customAppName(applicationVariants, defaultConfig)
         minSdkVersion 21
         targetSdkVersion 28
