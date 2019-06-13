@@ -59,13 +59,14 @@ class PhotoUtil {
 	 */
     fun gallery() {
         // 激活系统图库，选择一张图片
-        val intent = Intent()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//ACTION_OPEN_DOCUMENT
-            intent.action = Intent.ACTION_PICK
+        val intent = if (Build.VERSION.SDK_INT < 19) {
+            Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "image/*"
+            }
         } else {
-            intent.action = Intent.ACTION_GET_CONTENT
+            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         }
-        intent.type = "image/*"
+        // 判断系统中是否有处理该 Intent 的 Activity
         startIntent(intent, PHOTO_REQUEST_GALLERY)
     }
 
@@ -166,10 +167,15 @@ class PhotoUtil {
     }
 
     private fun startIntent(intent: Intent, requestCode: Int) {
-        if (simplePhoto?.fragment?.isAdded ?: false) {
-            simplePhoto?.fragment?.startActivityForResult(intent, requestCode)
-        } else if (simplePhoto?.activity?.isFinishing?.not() ?: false) {
-            simplePhoto?.activity?.startActivityForResult(intent, requestCode)
+        // 判断系统中是否有处理该 Intent 的 Activity
+        if (intent.resolveActivity(context?.packageManager) != null) {
+            if (simplePhoto?.fragment?.isAdded == true) {
+                simplePhoto?.fragment?.startActivityForResult(intent, requestCode)
+            } else if (simplePhoto?.activity?.isFinishing?.not() == true) {
+                simplePhoto?.activity?.startActivityForResult(intent, requestCode)
+            }
+        } else {
+            Toast.makeText(simplePhoto?.fragment?.context, "未找到图片查看器", Toast.LENGTH_SHORT).show();
         }
     }
 
