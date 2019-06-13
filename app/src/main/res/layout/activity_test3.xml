@@ -22,5 +22,25 @@
         app:cb_isExitTiming="true"
         app:cb_totalTime="30000"
         />
+
+
+    <Button
+        android:id="@+id/btnQQLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QQ登录"
+        />
+    <Button
+        android:id="@+id/btnWeixinLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="微信登录"
+        />
+    <Button
+        android:id="@+id/btnWeiboLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="微博登录"
+        />
 </com.google.android.flexbox.FlexboxLayout>
 

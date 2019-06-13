@@ -24,7 +24,6 @@ class WechatShare private constructor(var context: Context) {
     private class SingletonHolder(context: Context) {
         val holder = WechatShare(context)
     }
-
     companion object {
         const val WX_FRIEND = 0
         const val WX_CIRCLE = 1

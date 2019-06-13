@@ -1,2 +1,31 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.damo.loginshared"/>
+          package="com.damo.loginshared">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application>
+
+        <!-- **************       QQ start   ************** -->
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="tencent1105570540"/>
+            </intent-filter>
+        </activity>
+        <!-- **************       QQ end   ************** -->
+    </application>
+
+</manifest>

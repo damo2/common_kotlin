@@ -4,15 +4,16 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
+import com.app.common.utils.SingleHolder
+import com.app.common.utils.SingleHolder1
+import com.damo.loginshared.bean.QQDataBean
+import com.damo.loginshared.bean.QQUserInfoBean
 import com.google.gson.Gson
 import com.tencent.connect.UserInfo
 import com.tencent.connect.common.Constants
 import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
 import com.tencent.tauth.UiError
-import com.damo.loginshared.bean.QQDataBean
-import com.damo.loginshared.bean.QQUserInfoBean
 
 
 /**
@@ -20,27 +21,28 @@ import com.damo.loginshared.bean.QQUserInfoBean
  * Date: 2018/12/6  17:19
  * describe:
  */
-class QQLogin(var context: Context) {
+class QQLogin (var activity: Activity) {
     private var mCallbackToken: ((isSuc: Boolean, qqDataBean: QQDataBean?) -> Unit)? = null
-    private var mCallback: ((isSuc: Boolean, qqDataBean: QQDataBean?, qqUserInfoBean: QQUserInfoBean?) -> Unit)? = null
+    private var mInfoCallback: ((isSuc: Boolean, qqUserInfoBean: QQUserInfoBean?, errorInfo: String?) -> Unit)? = null
 
-    private val mTencent by lazy { Tencent.createInstance(Const.QQ_APP_ID, context) }
-    private val mLoginQQListener = BaseUiListener()
-    private var mIsServerSideLogin = false
-    private var mInfo: UserInfo? = null
+    private lateinit var mTencent: Tencent
+    private lateinit var mLoginQQListener: BaseUiListener
 
-    fun login(activity: Activity, callback: (isSuc: Boolean, qqDataBean: QQDataBean?, qqUserInfoBean: QQUserInfoBean?) -> Unit) {
-        this.mCallback = callback
-        login(activity)
-    }
+    fun login(callback: (isSuc: Boolean, qqDataBean: QQDataBean?) -> Unit,
+              infoCallback: ((isSuc: Boolean, qqUserInfoBean: QQUserInfoBean?, errorInfo: String?) -> Unit)? = null) {
 
-    fun login(activity: Activity, callback: (isSuc: Boolean, qqDataBean: QQDataBean?) -> Unit) {
         this.mCallbackToken = callback
-        login(activity)
+        this.mInfoCallback = infoCallback
+        login()
     }
 
-    private fun login(activity: Activity) {
-        mTencent.login(activity, "all", mLoginQQListener)
+    private fun login() {
+        mLoginQQListener = BaseUiListener()
+        mTencent = Tencent.createInstance(Const.QQ_APP_ID, activity)
+        if (!mTencent.isSessionValid) {
+            mTencent.login(activity, "all", mLoginQQListener)
+        }
+
         //        if (!mTencent.isSessionValid()) {
 //            mTencent.login(mActivity, "all", mLoginQQListener)
 //            mIsServerSideLogin = false
@@ -60,46 +62,41 @@ class QQLogin(var context: Context) {
         mTencent.setAccessToken(qqDataBean.accessToken, qqDataBean.expiresIn.toString())
         mTencent.openId = qqDataBean.openid
 
-        mInfo = UserInfo(context, mTencent.qqToken)
-        mInfo?.getUserInfo(object : IUiListener {
+        UserInfo(activity, mTencent.qqToken).getUserInfo(object : IUiListener {
             override fun onComplete(data: Any?) {
                 val qqUserBean = Gson().fromJson(data?.toString(), QQUserInfoBean::class.java)
-                Log.d("QQLoginShare", "onComplete#获取信息")
-                mCallback?.invoke(true, qqDataBean, qqUserBean)
+                Log.d("QQLogin", "onComplete#获取信息")
+                mInfoCallback?.invoke(true, qqUserBean, "")
             }
 
             override fun onCancel() {
-                mCallback?.invoke(false, qqDataBean, null)
+                mInfoCallback?.invoke(false, null, "取消")
             }
 
             override fun onError(e: UiError?) {
-                mCallback?.invoke(false, qqDataBean, null)
+                mInfoCallback?.invoke(false, null, e?.errorMessage ?: "异常")
             }
 
         })
     }
 
 
-    private inner class BaseUiListener : IUiListener {
+    private inner class BaseUiListener() : IUiListener {
         override fun onComplete(data: Any?) {
             val qqDataBean = Gson().fromJson(data?.toString(), QQDataBean::class.java)
-            mCallback?.let {
+            mInfoCallback?.let {
                 getQQUserInfo(qqDataBean)
             }
             mCallbackToken?.invoke(true, qqDataBean)
         }
 
         override fun onError(e: UiError?) {
-            mCallback?.invoke(false, null, null)
             mCallbackToken?.invoke(false, null)
             Log.e("QQLoginShare", "onError#${e?.errorMessage}")
-            Toast.makeText(context, "QQ登录异常", Toast.LENGTH_SHORT).show()
         }
 
         override fun onCancel() {
-            mCallback?.invoke(false, null, null)
             mCallbackToken?.invoke(false, null)
-            Toast.makeText(context, "取消", Toast.LENGTH_SHORT).show()
         }
     }
 
