@@ -2,13 +2,13 @@ package com.app.common.widget.round
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.LinearLayout
+import android.widget.Button
 import com.app.common.widget.round.delegate.RoundViewDelegate
 
 /**
- * 自定义控件：圆角LinearLayout
+ * 自定义控件：圆角TextView
  */
-class RoundLinearLayout : LinearLayout {
+class RoundButtonView : Button {
     private lateinit var mRoundViewDelegate: RoundViewDelegate
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -17,6 +17,10 @@ class RoundLinearLayout : LinearLayout {
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
         initValue(attrs)
+    }
+
+    constructor(context: Context) : super(context) {
+        initValue(null)
     }
 
     private fun initValue(attrs: AttributeSet?) {

@@ -10,7 +10,7 @@
 ### 打印日志
   [logger](https://github.com/orhanobut/logger)
     
-    //初始化
+    //初始化 DiskLogAdapter 需要存储权限
     Logger.addLogAdapter(DiskLogAdapter())
      //使用
      logd("开始")
@@ -132,6 +132,7 @@
                       .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))
                       .compose(composeCommonBean())//.compose(composeCache(true,"testa",true))
                       .subscribeExtApi({
+                        //成功
                         Logger.d("test data" + GsonUtil().toJson(it))
                       })        
 
@@ -181,7 +182,6 @@
     
 
 <br><br><br>
-## **常用**
 
 #### 多个判空
     val num1: Int? = null
@@ -220,7 +220,7 @@
     
     
 <br><br><br>
-## **自定义view**
+### **自定义view**
 ##### 点击倒计时
     <com.app.common.widget.CountdownButton
         android:id="@+id/btnGetCode"
@@ -253,3 +253,42 @@
             </shape>
         </item>
     </selector>
+    
+##### 圆角view
+RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、RoundTextView 相同设置
+
+    //圆角button
+    <com.app.common.widget.round.RoundButtonView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:padding="8dp"
+            android:text="圆角"
+            android:textColor="#888888"
+            app:backgroundColor="#D1C4E9"
+            app:backgroundPressColor="#9575CD"
+            app:borderColor="#81D4FA"
+            app:borderPressColor="#0277BD"
+            app:borderSize="0.5dp"
+            app:isRippleEnable="false"
+            app:radius="4dp"
+            app:textPressColor="#FFFFFF"
+            />
+     //圆形图片
+    <com.app.common.widget.round.RoundImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_test1"
+            app:borderColor="#81D4FA"
+            app:borderSize="8dp"
+            />
+            
+            
+            
+            
+            
+## 参考及使用
+    圆角view https://github.com/H07000223/FlycoRoundView
+    通用adapter https://github.com/hongyangAndroid/baseAdapter
+    字体对齐的TextView  https://github.com/androiddevelop/AlignTextView
+    日志 https://github.com/orhanobut/logger

@@ -1,4 +1,4 @@
-package com.app.common.widget.image;
+package com.app.common.widget.round;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -16,6 +16,7 @@ import androidx.appcompat.widget.AppCompatImageView;
  * Created by wr
  * Date: 2018/10/12  14:58
  * describe:
+ * 圆角ImageView 4个圆角大小可不一样
  */
 
 public class RoundAngleImageView extends AppCompatImageView {
@@ -48,12 +49,12 @@ public class RoundAngleImageView extends AppCompatImageView {
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
         // 读取配置
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.Custom_Round_Image_View);
-        radius = array.getDimensionPixelOffset(R.styleable.Custom_Round_Image_View_round_radius, defaultRadius);
-        leftTopRadius = array.getDimensionPixelOffset(R.styleable.Custom_Round_Image_View_left_top_radius, defaultRadius);
-        rightTopRadius = array.getDimensionPixelOffset(R.styleable.Custom_Round_Image_View_right_top_radius, defaultRadius);
-        rightBottomRadius = array.getDimensionPixelOffset(R.styleable.Custom_Round_Image_View_right_bottom_radius, defaultRadius);
-        leftBottomRadius = array.getDimensionPixelOffset(R.styleable.Custom_Round_Image_View_left_bottom_radius, defaultRadius);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RoundImageView2);
+        radius = array.getDimensionPixelOffset(R.styleable.RoundImageView2_radius, defaultRadius);
+        leftTopRadius = array.getDimensionPixelOffset(R.styleable.RoundImageView2_radiusTopLeft, defaultRadius);
+        rightTopRadius = array.getDimensionPixelOffset(R.styleable.RoundImageView2_radiusTopRight, defaultRadius);
+        rightBottomRadius = array.getDimensionPixelOffset(R.styleable.RoundImageView2_radiusBottomRight, defaultRadius);
+        leftBottomRadius = array.getDimensionPixelOffset(R.styleable.RoundImageView2_radiusBottomLeft, defaultRadius);
 
 
         //如果四个角的值没有设置，那么就使用通用的radius的值。

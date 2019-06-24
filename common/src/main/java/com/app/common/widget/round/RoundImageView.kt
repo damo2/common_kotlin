@@ -17,13 +17,12 @@
 package com.app.common.widget.round
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-
+import androidx.appcompat.widget.AppCompatImageView
 import com.app.common.R
 
 /**
@@ -31,41 +30,15 @@ import com.app.common.R
  *
  * @author venshine
  */
-class RoundImageView : androidx.appcompat.widget.AppCompatImageView {
+class RoundImageView : AppCompatImageView {
 
-    /**
-     * 边框颜色
-     */
-    private var mBorderColor: Int = 0
+    //边框颜色
+    var borderColor: Int = 0
 
-    /**
-     * 边框宽度
-     */
-    /**
-     * 获取边框宽度
-     *
-     * @return
-     */
-    /**
-     * 设置边框宽度
-     *
-     * @param borderWidth
-     */
+    //边框宽度
     var borderWidth: Int = 0
 
-    /**
-     * 是否圆形，默认如果图片宽高不相等即为椭圆
-     */
-    /**
-     * 是否设置圆形处理
-     *
-     * @return
-     */
-    /**
-     * 设置圆形处理方式，默认按椭圆处理
-     *
-     * @param isCircle
-     */
+    //是否圆形，默认如果图片宽高不相等即为椭圆
     var isCircle = true
 
     constructor(context: Context) : super(context) {}
@@ -78,19 +51,17 @@ class RoundImageView : androidx.appcompat.widget.AppCompatImageView {
         initAttrs(context, attrs)
     }
 
-    /**
-     * 初始化属性
-     */
+    //初始化属性
     private fun initAttrs(context: Context, attrs: AttributeSet) {
         try {
-            val ta = context.obtainStyledAttributes(attrs, R.styleable.round_imageview)
-            mBorderColor = ta.getColor(R.styleable.round_imageview_border_color, 0x00000000)
-            borderWidth = ta.getDimension(R.styleable.round_imageview_border_width, 0f).toInt()
-            isCircle = ta.getBoolean(R.styleable.round_imageview_circle, true)
+            val ta = context.obtainStyledAttributes(attrs, R.styleable.RoundImageView)
+            borderColor = ta.getColor(R.styleable.RoundImageView_borderColor, 0x00000000)
+            borderWidth = ta.getDimension(R.styleable.RoundImageView_borderSize, 0f).toInt()
+            isCircle = ta.getBoolean(R.styleable.RoundImageView_isCircle, true)
             ta.recycle()
             val resId = attrs.getAttributeResourceValue("http://schemas.android.com/apk/res/android", "src", -1)
             if (resId != -1) {
-                setImageResource(resId, mBorderColor, borderWidth, isCircle)
+                setImageResource(resId, borderColor, borderWidth, isCircle)
             }
         } catch (e: Error) {
             e.printStackTrace()
@@ -99,31 +70,14 @@ class RoundImageView : androidx.appcompat.widget.AppCompatImageView {
     }
 
     /**
-     * 获取边框颜色
-     *
-     * @return
-     */
-    fun getBorderColor(): Int {
-        return mBorderColor
-    }
-
-    /**
      * 设置边框颜色，形如'#aarrggbb'
      *
      * @param borderColor
      */
     fun setBorderColor(borderColor: String) {
-        this.mBorderColor = Color.parseColor(borderColor)
+        this.borderColor = Color.parseColor(borderColor)
     }
 
-    /**
-     * 设置边框颜色，形如[Color]
-     *
-     * @param borderColor
-     */
-    fun setBorderColor(borderColor: Int) {
-        this.mBorderColor = borderColor
-    }
 
     /**
      * 设置图片资源
@@ -131,7 +85,7 @@ class RoundImageView : androidx.appcompat.widget.AppCompatImageView {
      * @param resId
      */
     override fun setImageResource(resId: Int) {
-        setImageResource(resId, mBorderColor, borderWidth, isCircle)
+        setImageResource(resId, borderColor, borderWidth, isCircle)
     }
 
     /**
@@ -152,7 +106,7 @@ class RoundImageView : androidx.appcompat.widget.AppCompatImageView {
      * @param drawable
      */
     override fun setImageDrawable(drawable: Drawable?) {
-        setImageDrawable(drawable, mBorderColor, borderWidth, isCircle)
+        setImageDrawable(drawable, borderColor, borderWidth, isCircle)
     }
 
     /**
@@ -174,7 +128,7 @@ class RoundImageView : androidx.appcompat.widget.AppCompatImageView {
      * @param bm
      */
     override fun setImageBitmap(bm: Bitmap) {
-        setImageBitmap(bm, mBorderColor, borderWidth, isCircle)
+        setImageBitmap(bm, borderColor, borderWidth, isCircle)
     }
 
     /**

@@ -2,13 +2,13 @@ package com.app.common.widget.round
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.LinearLayout
+import android.widget.FrameLayout
 import com.app.common.widget.round.delegate.RoundViewDelegate
 
 /**
- * 自定义控件：圆角LinearLayout
+ * 自定义控件：圆角FrameLayout
  */
-class RoundLinearLayout : LinearLayout {
+class RoundFrameLayout : FrameLayout {
     private lateinit var mRoundViewDelegate: RoundViewDelegate
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {

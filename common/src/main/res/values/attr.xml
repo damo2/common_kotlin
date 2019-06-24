@@ -9,17 +9,62 @@
         <attr name="text" format="string"/>
     </declare-styleable>
 
-    <!-- 圆角view -->
+    <!-- ##################### 圆角view start ####################### -->
+    <attr name="radius" format="dimension"/>
+    <attr name="radiusTopLeft" format="dimension"/>
+    <attr name="radiusTopRight" format="dimension"/>
+    <attr name="radiusBottomLeft" format="dimension"/>
+    <attr name="radiusBottomRight" format="dimension"/>
+    <attr name="borderColor" format="color"/>
+    <attr name="borderPressColor" format="color"/>
+    <attr name="borderSize" format="dimension"/>
+    <attr name="backgroundColor" format="color"/>
+    <attr name="backgroundPressColor" format="color"/>
+    <attr name="isCircle" format="boolean"/>
+
     <declare-styleable name="RoundView">
         <!--圆角-->
-        <attr name="radius" format="dimension"/>
-        <attr name="radiuTopLeft" format="dimension"/>
-        <attr name="radiuTopRight" format="dimension"/>
-        <attr name="radiuBottomLeft" format="dimension"/>
-        <attr name="radiuBottomRight" format="dimension"/>
-        <attr name="borderColor" format="color"/>
-        <attr name="borderSize" format="dimension"/>
+        <attr name="radius"/>
+        <attr name="radiusTopLeft"/>
+        <attr name="radiusTopRight"/>
+        <attr name="radiusBottomLeft"/>
+        <attr name="radiusBottomRight"/>
+        <attr name="borderColor"/>
+        <attr name="borderPressColor"/>
+        <attr name="borderSize"/>
+        <attr name="backgroundColor"/>
+        <attr name="backgroundPressColor"/>
+        <attr name="textPressColor" format="color"/>
+        <attr name="isRippleEnable" format="boolean"/>
     </declare-styleable>
+
+    <!--RoundImageView-->
+    <declare-styleable name="RoundImageView">
+        <attr name="borderColor"/>
+        <attr name="borderSize"/>
+        <attr name="isCircle"/>
+    </declare-styleable>
+
+    <!-- RoundAngleImageView -->
+    <declare-styleable name="RoundImageView2">
+        <attr name="radius"/>
+        <attr name="radiusTopLeft"/>
+        <attr name="radiusTopRight"/>
+        <attr name="radiusBottomLeft"/>
+        <attr name="radiusBottomRight"/>
+    </declare-styleable>
+
+    <declare-styleable name="RoundViewLayout">
+        <attr name="radius"/>
+        <attr name="radiusTopLeft"/>
+        <attr name="radiusTopRight"/>
+        <attr name="radiusBottomLeft"/>
+        <attr name="radiusBottomRight"/>
+        <attr name="backgroundColor"/>
+        <attr name="backgroundPressColor"/>
+    </declare-styleable>
+    <!-- ##################### 圆角view end ####################### -->
+
 
     <!-- 左右滑动删除 -->
     <declare-styleable name="SwipeMenuLayout">
@@ -38,12 +83,7 @@
         </attr>
     </declare-styleable>
 
-    <!--RoundImageView-->
-    <declare-styleable name="round_imageview">
-        <attr name="border_color" format="color"/>
-        <attr name="border_width" format="dimension"/>
-        <attr name="circle" format="boolean"/>
-    </declare-styleable>
+
     <!-- WheelView -->
     <declare-styleable name="WheelView">
         <attr name="unitHeight" format="dimension"/>
@@ -63,14 +103,6 @@
 
         <attr name="maskDarkColor" format="color"/>
         <attr name="maskLightColor" format="color"/>
-    </declare-styleable>
-    <!-- RoundAngleImageView -->
-    <declare-styleable name="Custom_Round_Image_View">
-        <attr name="round_radius" format="dimension"/>
-        <attr name="left_top_radius" format="dimension"/>
-        <attr name="right_top_radius" format="dimension"/>
-        <attr name="right_bottom_radius" format="dimension"/>
-        <attr name="left_bottom_radius" format="dimension"/>
     </declare-styleable>
 
     <!-- CountdownButton 点击倒计时 -->

@@ -2,15 +2,19 @@ package com.app.common.widget.round
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.widget.RelativeLayout
-import com.app.common.widget.round.util.RoundViewDelegate
+import com.app.common.widget.round.delegate.RoundViewCutDelegate
+
 
 /**
- * 自定义控件：圆角RelativeLayout
+ * 圆角的RelativeLayout
+ *
  */
+
 class RoundRelativeLayout : RelativeLayout {
-    private var mRoundViewDelegate: RoundViewDelegate? = null
+    private lateinit var delegate: RoundViewCutDelegate
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         initValue(attrs)
@@ -20,22 +24,17 @@ class RoundRelativeLayout : RelativeLayout {
         initValue(attrs)
     }
 
-    private fun initValue(attrs: AttributeSet?) {
-        mRoundViewDelegate = RoundViewDelegate(this, context, attrs)
-    }
+    private fun initValue(attrs:AttributeSet) {
 
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int,
-                          bottom: Int) {
-        super.onLayout(changed, left, top, right, bottom)
-        val w = width
-        val h = height
-        mRoundViewDelegate?.roundRectSet(w, h)
+        delegate = RoundViewCutDelegate(this, context, attrs)
     }
 
     override fun draw(canvas: Canvas) {
-        mRoundViewDelegate?.canvasSetLayer(canvas)
+        val saveCount = canvas.save()
+        val path = delegate.setDrawChange()
+        canvas.clipPath(path)
         super.draw(canvas)
-        canvas.restore()
+        canvas.restoreToCount(saveCount)
     }
 
 }
