@@ -2,6 +2,7 @@ package com.weiyao.zuzuapp
 
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.app.common.api.ApiException
 import com.app.common.api.RequestFileManager
 import com.app.common.api.subscribeExtApi
 import com.app.common.api.transformer.composeLife
@@ -14,7 +15,6 @@ import com.app.common.utils.SpanUtils
 import com.app.common.utils.StorageUtils
 import com.app.common.view.toastInfo
 import com.damo.libdb.Dao
-import com.weiyao.zuzuapp.R
 import com.weiyao.zuzuapp.activity.AnkoActivity
 import com.weiyao.zuzuapp.activity.test.Test2Activity
 import com.weiyao.zuzuapp.activity.test.Test3Activity
@@ -73,11 +73,24 @@ class MainActivity : BaseActivity() {
         tvRequest.setOnClickListener {
             ApiManager.apiService
                     .update("1.0")
-                    .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))
-                    .compose(composeDefault())
+                    .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))//结束时取消订阅
+                    .compose(composeDefault())//统一处理异常，请求后台异常throw ApiException ，异常信息为后台给的异常内容
                     .subscribeExtApi({
+                        //成功返回
                         toastInfo(it.toString())
-                    }, context = activity, isShowLoad = true, isToast = true)
+                    }, { e ->
+                        //异常，不传默认toast ApiError的异常信息，添加此处理了 isToast 无效。
+                        if (e is ApiException) {
+                            //可根据后台错误码处理不同异常
+                            logd("${e.code}")
+                        }
+                        toastInfo("更新失败")
+                    }, {
+                        //请求完成
+                    }, isShowLoad = true,// 是否显示进度框
+                            context = activity,//isShowLoad 为true时必传
+                            isToast = true//是否toast异常，处理了异常时无效
+                    )
         }
 
         tvRN.setOnClickExtNoFast {

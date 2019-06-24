@@ -128,13 +128,25 @@
 ##### 请求
     //请求
     ApiManager.apiService
-                      .getLanguageType()
-                      .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))
-                      .compose(composeCommonBean())//.compose(composeCache(true,"testa",true))
-                      .subscribeExtApi({
-                        //成功
-                        Logger.d("test data" + GsonUtil().toJson(it))
-                      })        
+                    .update("1.0")
+                    .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))//结束时取消订阅
+                    .compose(composeDefault())//统一处理异常，请求后台异常throw ApiException ，异常信息为后台给的异常内容
+                    .subscribeExtApi({
+                        //成功返回
+                        toastInfo(it.toString())
+                    }, { e ->
+                        //异常，不传默认toast ApiError的异常信息，添加此处理了 isToast 无效。
+                        if (e is ApiException) {
+                            //可根据后台错误码处理不同异常
+                            logd("${e.code}")
+                        }
+                        toastInfo("更新失败")
+                    }, {
+                        //请求完成
+                    }, isShowLoad = true,// 是否显示进度框
+                            context = activity,//isShowLoad 为true时必传
+                            isToast = true//是否toast异常，处理了异常时无效
+                    )
 
      //文件下载
      RequestFileManager.downloadFile(

@@ -12,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
  * Date: 2019/4/23  20:39
  * mail: 1902065822@qq.com
  * describe:
+ * 统一处理，失败请求
  */
 fun <T> composeDefault(): ObservableTransformer<T, T> {
     return ObservableTransformer { observable ->

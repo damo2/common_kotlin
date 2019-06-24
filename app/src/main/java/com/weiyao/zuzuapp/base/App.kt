@@ -43,8 +43,8 @@ class App : AppBaseApplication() {
     inner class LoggerTask : Task("LoggerTask") {
         override fun run() {
             logd("LoggerTask")
-            //初始化
-            Logger.addLogAdapter(DiskLogAdapter())
+            //初始化 需要存储权限
+//            Logger.addLogAdapter(DiskLogAdapter())
         }
     }
     inner class ApiServiceTask : Task("SampleTask") {

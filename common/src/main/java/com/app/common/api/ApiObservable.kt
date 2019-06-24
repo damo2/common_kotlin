@@ -21,6 +21,13 @@ import java.util.concurrent.TimeoutException
  * Date: 2018/12/17  10:44
  * mail: 1902065822@qq.com
  * describe:
+ * @param onNext 成功
+ * @param onError 失败 不传默认toast ApiException的异常信息，可以传onError 能toast自己的信息 例如：{toastInfo("添加失败")}
+ * @param onComplete 完成
+ * @param context isShowLoad为true 必传
+ * @param isShowLoad 是否显示加载框
+ * @param isCanCancel 是否能被取消
+ * @param isToast 是否toast失败信息
  */
 fun <T> Observable<T>.subscribeExtApi(onNext: (result: T) -> Unit,
                                       onError: ((e: Throwable) -> Unit)? = null,
@@ -38,11 +45,11 @@ fun <T> Observable<T>.subscribeExtApi(onNext: (result: T) -> Unit,
             },
             { e ->
                 dismissLoad(context, isShowLoad)
-                errorToast(e, {
+                errorToast(e) {
                     onError?.invoke(e) ?: run {
                         if (isToast) toastErrorNet(e)
                     }
-                })
+                }
             },
             {
                 dismissLoad(context, isShowLoad)
@@ -99,8 +106,8 @@ private fun showDialog(context: Context?, isShowLoad: Boolean, isCanCancel: Bool
 }
 
 private fun dismissLoad(context: Context?, isShowLoad: Boolean) {
-    context?.let {
-        if (isShowLoad) {
+    if (isShowLoad) {
+        context?.let {
             when (it) {
                 is AppBaseActivity -> it.dismissLoadingDialog()
                 is AppBaseFragment -> it.dismissLoadingDialog()
