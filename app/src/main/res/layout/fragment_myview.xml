@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="输入限制："
+            />
+
+        <EditText
+            android:id="@+id/edtInput"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@color/defaultBg"
+            android:gravity="center"
+            android:hint="最多输入5个字"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="RoundImageView 圆角ImageView,边框颜色："
+            />
+        <!--圆角LinearLayout-->
+
+
+        <com.app.common.widget.round.RoundImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_test1"
+            app:borderColor="#81D4FA"
+            app:borderSize="8dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="RoundAngleImageView 圆角ImageView,角度不一样："/>
+
+        <com.app.common.widget.round.RoundAngleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_test1"
+            app:radiusBottomLeft="24dp"
+            app:radiusBottomRight="12dp"
+            app:radiusTopLeft="6dp"
+            app:radiusTopRight="0dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="RoundButtonView  圆角Button,带点击颜色，边框颜色，圆角："/>
+
+        <com.app.common.widget.round.RoundButtonView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:padding="8dp"
+            android:text="圆角"
+            android:textColor="#888888"
+            app:backgroundColor="#D1C4E9"
+            app:backgroundPressColor="#9575CD"
+            app:borderColor="#81D4FA"
+            app:borderPressColor="#0277BD"
+            app:borderSize="1dp"
+            app:isRippleEnable="false"
+            app:radius="4dp"
+            app:textPressColor="#FFFFFF"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="RoundLinearLayout 圆角Layout里面放2张普通图片,点击背景颜色："/>
+
+        <com.app.common.widget.round.RoundLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:background="#BBBBBB"
+            app:backgroundPressColor="#9575CD"
+            app:radiusBottomLeft="12dp"
+            app:radiusBottomRight="12dp"
+            app:radiusTopLeft="12dp"
+            app:radiusTopRight="12dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_test1"
+                />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_test1"
+                />
+        </com.app.common.widget.round.RoundLinearLayout>
+    </LinearLayout>
+</ScrollView>
+

@@ -1,10 +1,10 @@
 package com.weiyao.zuzuapp.activity.test
 
 import com.app.common.logger.logd
+import com.evernote.android.state.State
 import com.weiyao.zuzuapp.R
 import com.weiyao.zuzuapp.base.BaseActivity
 import com.weiyao.zuzuapp.base.BaseFragment
-import com.evernote.android.state.State
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlinx.android.synthetic.main.fragment_test.*
 

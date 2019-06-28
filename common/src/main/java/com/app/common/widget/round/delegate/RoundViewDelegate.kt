@@ -3,6 +3,7 @@ package com.app.common.widget.round.delegate
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
@@ -134,6 +135,11 @@ class RoundViewDelegate(private val mView: View, private val mContext: Context, 
 
     fun setBgSelector() {
         val bg = StateListDrawable()
+        if (backgroundColor == 0) {
+            (mView.background as? ColorDrawable)?.color?.let {
+                backgroundColor = it
+            }
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && isRippleEnable) {
             setDrawable(gdBackground, backgroundColor, borderColor)
             val rippleDrawable = RippleDrawable(

@@ -1,168 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.flexbox.FlexboxLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#EEEEEE"
-    app:flexWrap="wrap"
-    >
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvPutCache"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
-        android:background="@color/defaultBg"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="添加缓存"
-        android:textColor="@color/colorAccent"
-        />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpMain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/navMain"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/tvGetCache"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
-        android:background="@color/defaultBg"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="查找缓存"
-        android:textColor="@color/colorAccent"
-        />
-
-    <TextView
-        android:id="@+id/tvDownload"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
-        android:background="@color/defaultBg"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="下载"
-        android:textColor="@color/colorAccent"
-        />
-
-    <TextView
-        android:id="@+id/tvUp"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
-        android:background="@color/defaultBg"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="上传"
-        android:textColor="@color/colorAccent"
-        />
-
-    <TextView
-        android:id="@+id/tvRequest"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
-        android:background="@color/defaultBg"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="请求"
-        android:textColor="@color/colorAccent"
-        />
-
-    <TextView
-        android:id="@+id/tvRN"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
-        android:background="@color/defaultBg"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="ReactNative"
-        android:textColor="@color/colorAccent"
-        />
-
-    <TextView
-        android:id="@+id/tvAnko"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
-        android:background="@color/defaultBg"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="AnkoLayout"
-        android:textColor="@color/colorAccent"
-        />
-
-    <EditText
-        android:id="@+id/edtInput"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
-        android:background="@color/defaultBg"
-        android:gravity="center"
-        android:hint="最多输入5个字"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:singleLine="true"
-        android:textColor="@color/colorAccent"
-        />
-
-    <TextView
-        android:id="@+id/tvSpan"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"/>
-
-    <TextView
-        android:id="@+id/tvSpan2"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navMain"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        >
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu"/>
 
-        <com.app.common.widget.CountdownButton
-            android:id="@+id/btnGetCode"
-            android:layout_width="110dp"
-            android:layout_height="30dp"
-            android:minHeight="0dp"
-            android:padding="0dp"
-            android:text="获取验证码"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            app:cb_bg="@drawable/getcode_button"
-            app:cb_downFormat="%s 秒"
-            app:cb_endTxt="重新获取"
-            app:cb_isExitTiming="true"
-            app:cb_totalTime="30000"
-            />
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/tvService"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="service"/>
-
-    <Button
-        android:id="@+id/tvTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test"/>
-
-    <Button
-        android:id="@+id/tvTest2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test2"/>
-
-    <Button
-        android:id="@+id/tvTest3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test3"/>
-</com.google.android.flexbox.FlexboxLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>

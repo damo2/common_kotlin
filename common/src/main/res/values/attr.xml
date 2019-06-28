@@ -21,7 +21,8 @@
     <attr name="backgroundColor" format="color"/>
     <attr name="backgroundPressColor" format="color"/>
     <attr name="isCircle" format="boolean"/>
-
+    <attr name="isRippleEnable" format="boolean"/>
+    <attr name="textPressColor" format="color"/>
     <declare-styleable name="RoundView">
         <!--圆角-->
         <attr name="radius"/>
@@ -34,8 +35,8 @@
         <attr name="borderSize"/>
         <attr name="backgroundColor"/>
         <attr name="backgroundPressColor"/>
-        <attr name="textPressColor" format="color"/>
-        <attr name="isRippleEnable" format="boolean"/>
+        <attr name="textPressColor"/>
+        <attr name="isRippleEnable"/>
     </declare-styleable>
 
     <!--RoundImageView-->
@@ -62,6 +63,7 @@
         <attr name="radiusBottomRight"/>
         <attr name="backgroundColor"/>
         <attr name="backgroundPressColor"/>
+        <attr name="isRippleEnable"/>
     </declare-styleable>
     <!-- ##################### 圆角view end ####################### -->
 

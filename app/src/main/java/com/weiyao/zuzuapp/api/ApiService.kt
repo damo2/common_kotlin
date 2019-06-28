@@ -2,7 +2,8 @@ package com.weiyao.zuzuapp.api
 
 import com.google.gson.JsonObject
 import io.reactivex.Observable
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 
 /**

@@ -3,21 +3,18 @@ package com.app.common.widget.round.delegate
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Canvas
 import android.graphics.Path
 import android.graphics.RectF
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import com.app.common.R
 import com.app.common.extensions.dp2px
-
-
+import com.app.common.logger.logd
 
 
 /**
@@ -62,7 +59,7 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
             setBackgroundSelector()
         }
     //是否水波纹
-    var isRippleEnable: Boolean = false
+    var isRippleEnable: Boolean = true
         set(value) {
             field = value
             setBackgroundSelector()
@@ -83,48 +80,40 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
             radiusTopRight = mContext.dp2px(a.getDimension(R.styleable.RoundViewLayout_radiusTopRight, 0f))
             radiusBottomLeft = mContext.dp2px(a.getDimension(R.styleable.RoundViewLayout_radiusBottomLeft, 0f))
             radiusBottomRight = mContext.dp2px(a.getDimension(R.styleable.RoundViewLayout_radiusBottomRight, 0f))
-            backgroundColor = a.getColor(R.styleable.RoundView_backgroundColor, 0)
-            backgroundPressColor = a.getColor(R.styleable.RoundView_backgroundPressColor, 0)
+            backgroundColor = a.getColor(R.styleable.RoundViewLayout_backgroundColor, 0)
+            backgroundPressColor = a.getColor(R.styleable.RoundViewLayout_backgroundPressColor, 0)
             isRippleEnable = a.getBoolean(R.styleable.RoundView_isRippleEnable, true)
             a.recycle()
         }
     }
 
 
-    fun setDrawChange():Path {
+    fun setDrawChange(): Path {
         checkPathChanged()
         return mPath
+    }
+
+    fun setBackgroundSelector() {
+        logd("setBackgroundSelector")
+        val bg = StateListDrawable()
+        if (backgroundColor == 0) {
+            (mView.background as? ColorDrawable)?.color?.let {
+                backgroundColor = it
+            }
+        }
+        mView.backgroundTintList = getPressedColorSelector(backgroundColor, backgroundPressColor)
     }
 
     private fun checkPathChanged() {
         val mWidth = mView.width
         val mHeight = mView.height
         mPath.reset()
-        if(radius>0){
+        if (radius > 0) {
             mPath.addRoundRect(RectF(0f, 0f, mWidth.toFloat(), mHeight.toFloat()), radius, radius, Path.Direction.CW)
-        }else {
+        } else {
             mPath.addRoundRect(RectF(0f, 0f, mWidth.toFloat(), mHeight.toFloat()),
                     floatArrayOf(radiusTopLeft, radiusTopLeft, radiusTopRight, radiusTopRight, radiusBottomRight, radiusBottomRight, radiusBottomLeft, radiusBottomLeft),
                     Path.Direction.CW)
-        }
-    }
-
-   private fun setBackgroundSelector() {
-        val bg = StateListDrawable()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && isRippleEnable) {
-            val rippleDrawable = RippleDrawable(
-                    getPressedColorSelector(backgroundColor, backgroundPressColor), gdBackground, null)
-            mView.background = rippleDrawable
-        } else {
-            bg.addState(intArrayOf(-android.R.attr.state_pressed), gdBackground)
-            if (backgroundPressColor != Integer.MAX_VALUE) {
-                bg.addState(intArrayOf(android.R.attr.state_pressed), gdBackgroundPress)
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {//16
-                mView.background = bg
-            } else {
-                mView.setBackgroundDrawable(bg)
-            }
         }
     }
 

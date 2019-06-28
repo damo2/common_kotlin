@@ -2,20 +2,20 @@ package com.weiyao.zuzuapp.api
 
 import android.app.Activity
 import androidx.fragment.app.Fragment
+import com.app.common.api.ApiException
 import com.app.common.by.Weak
 import com.app.common.logger.Logger
-import com.app.common.api.ApiException
 import com.app.common.view.toastInfo
+import com.google.gson.JsonSyntaxException
 import com.weiyao.zuzuapp.base.App
 import com.weiyao.zuzuapp.base.BaseActivity
 import com.weiyao.zuzuapp.base.BaseFragment
-import com.google.gson.JsonSyntaxException
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
 
 /**
  * Created by wr

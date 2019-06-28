@@ -6,13 +6,11 @@ import com.alibaba.android.alpha.Project
 import com.alibaba.android.alpha.Task
 import com.app.common.base.AppBaseApplication
 import com.app.common.logger.logd
+import com.damo.libdb.objectbox.ObjectBoxInit
+import com.didichuxing.doraemonkit.DoraemonKit
 import com.weiyao.zuzuapp.BuildConfig
 import com.weiyao.zuzuapp.api.ApiManager
-import com.didichuxing.doraemonkit.DoraemonKit
 import kotlin.properties.Delegates
-import com.app.common.logger.DiskLogAdapter
-import com.app.common.logger.Logger
-import com.damo.libdb.objectbox.ObjectBoxInit
 
 
 class App : AppBaseApplication() {

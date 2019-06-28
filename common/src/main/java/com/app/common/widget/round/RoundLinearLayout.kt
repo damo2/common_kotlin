@@ -1,15 +1,17 @@
 package com.app.common.widget.round
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import com.app.common.widget.round.delegate.RoundViewCutDelegate
 import com.app.common.widget.round.delegate.RoundViewDelegate
 
 /**
  * 自定义控件：圆角LinearLayout
  */
 class RoundLinearLayout : LinearLayout {
-    private lateinit var mRoundViewDelegate: RoundViewDelegate
+    private lateinit var delegate: RoundViewCutDelegate
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         initValue(attrs)
@@ -19,33 +21,22 @@ class RoundLinearLayout : LinearLayout {
         initValue(attrs)
     }
 
-    private fun initValue(attrs: AttributeSet?) {
-        mRoundViewDelegate = RoundViewDelegate(this, context, attrs)
+    private fun initValue(attrs:AttributeSet) {
+
+        delegate = RoundViewCutDelegate(this, context, attrs)
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        if (mRoundViewDelegate.isWidthHeightEqual && width > 0 && height > 0) {
-            val max = Math.max(width, height)
-            val measureSpec = MeasureSpec.makeMeasureSpec(max, MeasureSpec.EXACTLY)
-            super.onMeasure(measureSpec, measureSpec)
-            return
-        }
-
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    override fun draw(canvas: Canvas) {
+        val saveCount = canvas.save()
+        val path = delegate.setDrawChange()
+        canvas.clipPath(path)
+        super.draw(canvas)
+        canvas.restoreToCount(saveCount)
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
-        if (mRoundViewDelegate.isRadiusHalfHeight) {
-            mRoundViewDelegate.radius = height / 2f
-        } else {
-            mRoundViewDelegate.setBgSelector();
-        }
-    }
-
-    /** use delegate to set attr  */
-    fun getDelegate(): RoundViewDelegate {
-        return mRoundViewDelegate
+        delegate.setBackgroundSelector();
     }
 
 }
