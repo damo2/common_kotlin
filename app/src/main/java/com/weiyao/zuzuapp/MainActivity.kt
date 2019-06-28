@@ -74,7 +74,7 @@ class MainActivity : BaseActivity() {
         tvRequest.setOnClickListener {
             ApiManager.apiService
                     .update("1.0")
-                    .composeLife(lifecycleSubject)//结束时取消订阅
+                    .composeLife(getLifecycleSubject())//结束时取消订阅
                     .composeDefault()//统一处理异常，请求后台异常throw ApiException ，异常信息为后台给的异常内容
                     .subscribeExtApi({
                         //成功返回
