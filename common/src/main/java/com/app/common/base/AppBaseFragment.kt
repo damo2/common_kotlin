@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.app.common.api.util.LifeCycleEvent
 import com.app.common.base.function.Functions
 import com.app.common.logger.Logger
 import com.app.common.view.LoadingDialogFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.subjects.PublishSubject
 
 abstract class AppBaseFragment : Fragment(), IBase {
     protected lateinit var mRootView: View
@@ -27,6 +29,8 @@ abstract class AppBaseFragment : Fragment(), IBase {
     private var mBaseActivity: AppBaseActivity? = null
     //函数的集合
     protected var mFunctions: Functions? = null
+
+    private val mLifecycleSubject = PublishSubject.create<LifeCycleEvent>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -48,6 +52,7 @@ abstract class AppBaseFragment : Fragment(), IBase {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mLifecycleSubject.onNext(LifeCycleEvent.CREATE)
         initData()
         initView()
         mIsPrepare = true
@@ -56,12 +61,20 @@ abstract class AppBaseFragment : Fragment(), IBase {
         onVisibleToUser()
     }
 
+    override fun onStart() {
+        super.onStart()
+        mLifecycleSubject.onNext(LifeCycleEvent.START)
+    }
+
     protected abstract fun bindLayout(): Int
     override fun initTop() {}
     override fun initData() {}
     override fun initView() {}
     override fun initValue() {}
     override fun initListener() {}
+    override fun getLifecycleSubject(): PublishSubject<LifeCycleEvent> = mLifecycleSubject
+    override fun getMyContext(): Context = context ?: mActivity?.application
+    ?: AppBaseApplication.instanceBase
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
@@ -94,6 +107,7 @@ abstract class AppBaseFragment : Fragment(), IBase {
     // 懒加载，仅当用户可见切view初始化结束后才会执行
     protected open fun onLazyLoad() {
         Logger.i("${this.javaClass.simpleName}#onLazyLoad")
+        mLifecycleSubject.onNext(LifeCycleEvent.RESUME)
     }
 
     //不可见时清理
@@ -125,7 +139,18 @@ abstract class AppBaseFragment : Fragment(), IBase {
         this.mFunctions = functions
     }
 
+    override fun onPause() {
+        mLifecycleSubject.onNext(LifeCycleEvent.PAUSE)
+        super.onPause()
+    }
+
+    override fun onStop() {
+        mLifecycleSubject.onNext(LifeCycleEvent.STOP)
+        super.onStop()
+    }
+
     override fun onDestroy() {
+        mLifecycleSubject.onNext(LifeCycleEvent.DESTROY)
         mIsPrepare = false
         mCompositeDisposable.clear()
         super.onDestroy()

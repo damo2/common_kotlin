@@ -18,7 +18,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
     private val mCompositeDisposable by lazy { CompositeDisposable() }
     private val mLoadingDialog by lazy { LoadingDialogFragment() }
     private var mIsShowLoading = false
-    protected val lifecycleSubject = PublishSubject.create<LifeCycleEvent>()
+    private val mLifecycleSubject = PublishSubject.create<LifeCycleEvent>()
     var isResume = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
         }
         super.onCreate(savedInstanceState ?: Bundle())
 //        StateSaver.restoreInstanceState(this, savedInstanceState)
-        lifecycleSubject.onNext(LifeCycleEvent.CREATE)
+        mLifecycleSubject.onNext(LifeCycleEvent.CREATE)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         initTop()
         bindLayout()?.let {
@@ -45,16 +45,18 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
     override fun initValue() {}
     override fun initData() {}
     override fun initListener() {}
+    override fun getLifecycleSubject(): PublishSubject<LifeCycleEvent> = mLifecycleSubject
+    override fun getMyContext(): Context = application ?: AppBaseApplication.instanceBase
 
     override fun onStart() {
         super.onStart()
-        lifecycleSubject.onNext(LifeCycleEvent.START)
+        mLifecycleSubject.onNext(LifeCycleEvent.START)
     }
 
     override fun onResume() {
         isResume = true
         super.onResume()
-        lifecycleSubject.onNext(LifeCycleEvent.RESUME)
+        mLifecycleSubject.onNext(LifeCycleEvent.RESUME)
     }
 
     fun addSubscription(disposable: Disposable) {
@@ -89,19 +91,19 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
 
     override fun onPause() {
         isResume = false
-        lifecycleSubject.onNext(LifeCycleEvent.PAUSE)
+        mLifecycleSubject.onNext(LifeCycleEvent.PAUSE)
         super.onPause()
     }
 
     override fun onStop() {
-        lifecycleSubject.onNext(LifeCycleEvent.STOP)
+        mLifecycleSubject.onNext(LifeCycleEvent.STOP)
         super.onStop()
     }
 
     override fun onDestroy() {
         mCompositeDisposable.clear()
         FixMemLeak.fixLeak(applicationContext)
-        lifecycleSubject.onNext(LifeCycleEvent.DESTROY)
+        mLifecycleSubject.onNext(LifeCycleEvent.DESTROY)
         super.onDestroy()
     }
 

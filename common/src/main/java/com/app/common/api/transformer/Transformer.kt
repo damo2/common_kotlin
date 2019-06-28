@@ -16,18 +16,33 @@ import io.reactivex.subjects.PublishSubject
  * describe:
  *
  */
-fun <T> composeCommon(): ObservableTransformer<T, T> {
-    return ObservableTransformer { observable ->
-        observable.subscribeOn(Schedulers.io())
+
+fun <T> Observable<T>.composeDefault(): Observable<T> =
+        subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+
+//根据生命周期取消订阅，默认结束时取消
+fun <T> Observable<T>.composeLife(lifecycleSubject: PublishSubject<LifeCycleEvent>, event: LifeCycleEvent = LifeCycleEvent.DESTROY): Observable<T> =
+        takeUntil(
+                lifecycleSubject.filter { activityLifeCycleEvent ->
+                    activityLifeCycleEvent == event
+                })
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread()
+                )
+
+fun <T> composeCommon(): ObservableTransformer<T, T> {
+    return ObservableTransformer { observable ->
+        observable.composeDefault()
     }
 }
 
-fun <T> composeLife(event: LifeCycleEvent, lifecycleSubject: PublishSubject<LifeCycleEvent>): ObservableTransformer<T, T> {
+fun <T> composeLife(lifecycleSubject: PublishSubject<LifeCycleEvent>, event: LifeCycleEvent = LifeCycleEvent.DESTROY): ObservableTransformer<T, T> {
     return ObservableTransformer { observable ->
-        val lifecycleObservable = lifecycleSubject.filter { activityLifeCycleEvent -> activityLifeCycleEvent == event }
-        observable.takeUntil(lifecycleObservable).subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).observeOn(AndroidSchedulers.mainThread())
+        observable.composeLife(lifecycleSubject, event)
     }
 }
 

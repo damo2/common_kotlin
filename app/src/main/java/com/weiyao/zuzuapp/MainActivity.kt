@@ -9,14 +9,12 @@ import com.app.common.api.transformer.composeLife
 import com.app.common.api.util.LifeCycleEvent
 import com.app.common.extensions.limitLengthExt
 import com.app.common.extensions.setOnClickExtNoFast
-import com.app.common.json.GsonUtil
 import com.app.common.json.toJsonExt
 import com.app.common.logger.logd
 import com.app.common.utils.SpanUtils
 import com.app.common.utils.StorageUtils
 import com.app.common.view.toastInfo
 import com.damo.libdb.Dao
-import com.google.gson.JsonObject
 import com.weiyao.zuzuapp.activity.AnkoActivity
 import com.weiyao.zuzuapp.activity.test.Test2Activity
 import com.weiyao.zuzuapp.activity.test.Test3Activity
@@ -24,12 +22,7 @@ import com.weiyao.zuzuapp.activity.test.TestActivity
 import com.weiyao.zuzuapp.api.ApiManager
 import com.weiyao.zuzuapp.api.composeDefault
 import com.weiyao.zuzuapp.base.BaseActivity
-import com.weiyao.zuzuapp.base.BaseBean
 import com.weiyao.zuzuapp.service.TestJobSchedulerService
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import java.io.File
@@ -81,7 +74,7 @@ class MainActivity : BaseActivity() {
         tvRequest.setOnClickListener {
             ApiManager.apiService
                     .update("1.0")
-                    .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))//结束时取消订阅
+                    .composeLife(lifecycleSubject)//结束时取消订阅
                     .composeDefault()//统一处理异常，请求后台异常throw ApiException ，异常信息为后台给的异常内容
                     .subscribeExtApi({
                         //成功返回
