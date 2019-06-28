@@ -22,7 +22,6 @@ import com.weiyao.zuzuapp.activity.test.Test2Activity
 import com.weiyao.zuzuapp.activity.test.Test3Activity
 import com.weiyao.zuzuapp.activity.test.TestActivity
 import com.weiyao.zuzuapp.api.ApiManager
-import com.weiyao.zuzuapp.api.abc
 import com.weiyao.zuzuapp.api.composeDefault
 import com.weiyao.zuzuapp.base.BaseActivity
 import com.weiyao.zuzuapp.base.BaseBean
@@ -100,10 +99,6 @@ class MainActivity : BaseActivity() {
                             context = activity,//isShowLoad 为true时必传
                             isToast = true//是否toast异常，处理了异常时无效
                     )
-        }
-
-        tvRN.setOnClickExtNoFast {
-            startActivity<MainActivityRN>()
         }
 
         tvAnko.setOnClickExtNoFast {
