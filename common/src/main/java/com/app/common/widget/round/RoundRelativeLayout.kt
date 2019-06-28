@@ -2,7 +2,6 @@ package com.app.common.widget.round
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.widget.RelativeLayout
 import com.app.common.widget.round.delegate.RoundViewCutDelegate
@@ -24,7 +23,7 @@ class RoundRelativeLayout : RelativeLayout {
         initValue(attrs)
     }
 
-    private fun initValue(attrs:AttributeSet) {
+    private fun initValue(attrs: AttributeSet) {
 
         delegate = RoundViewCutDelegate(this, context, attrs)
     }
@@ -35,6 +34,11 @@ class RoundRelativeLayout : RelativeLayout {
         canvas.clipPath(path)
         super.draw(canvas)
         canvas.restoreToCount(saveCount)
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        delegate.setBackgroundSelector();
     }
 
 }
