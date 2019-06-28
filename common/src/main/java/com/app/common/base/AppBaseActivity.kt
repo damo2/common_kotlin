@@ -18,7 +18,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
     private val mCompositeDisposable by lazy { CompositeDisposable() }
     private val mLoadingDialog by lazy { LoadingDialogFragment() }
     private var mIsShowLoading = false
-    private val mLifecycleSubject = PublishSubject.create<LifeCycleEvent>()
+    protected val mLifecycleSubject = PublishSubject.create<LifeCycleEvent>()
     var isResume = false
 
     override fun onCreate(savedInstanceState: Bundle?) {

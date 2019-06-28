@@ -30,7 +30,7 @@ abstract class AppBaseFragment : Fragment(), IBase {
     //函数的集合
     protected var mFunctions: Functions? = null
 
-    private val mLifecycleSubject = PublishSubject.create<LifeCycleEvent>()
+    protected val mLifecycleSubject = PublishSubject.create<LifeCycleEvent>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
