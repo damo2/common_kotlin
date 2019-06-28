@@ -129,8 +129,8 @@
     //请求
     ApiManager.apiService
                     .update("1.0")
-                    .compose(composeLife(LifeCycleEvent.DESTROY, lifecycleSubject))//结束时取消订阅
-                    .compose(composeDefault())//统一处理异常，请求后台异常throw ApiException ，异常信息为后台给的异常内容
+                    .composeLife(getLifecycleSubject(), LifeCycleEvent.DESTROY)//结束时取消订阅
+                    .composeDefault()//统一处理异常，请求后台异常throw ApiException ，异常信息为后台给的异常内容
                     .subscribeExtApi({
                         //成功返回
                         toastInfo(it.toString())
