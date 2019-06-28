@@ -3,6 +3,7 @@ package com.weiyao.zuzuapp.api
 import com.app.common.api.ApiException
 import com.app.common.json.GsonUtil
 import com.weiyao.zuzuapp.base.BaseBean
+import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -35,3 +36,19 @@ fun <T> composeDefault(): ObservableTransformer<T, T> {
                 }
     }
 }
+
+fun <T> Observable<T>.composeDefault(): Observable<T> = subscribeOn(Schedulers.io())
+        .unsubscribeOn(Schedulers.io()).map { t ->
+            var msg = "请求异常"
+            val code = when (t) {
+                is BaseBean<*> -> {
+                    msg = t.msg
+                    t.code
+                }
+                else -> 12000
+            }
+            if (code != 12000) {
+                throw ApiException(code, msg, GsonUtil().toJson(t))
+            }
+            t
+        }

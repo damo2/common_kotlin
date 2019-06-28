@@ -23,8 +23,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        // All of React Native (JS, Android binaries) is installed from npm
-        maven { url "$rootDir/node_modules/react-native/android" }
         //异步初始化
         maven { url "https://dl.bintray.com/zhangsl/maven" }
         //新浪微博
