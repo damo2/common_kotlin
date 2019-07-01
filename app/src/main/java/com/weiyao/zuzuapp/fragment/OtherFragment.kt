@@ -6,11 +6,7 @@ import com.damo.libdb.Dao
 import com.weiyao.zuzuapp.R
 import com.weiyao.zuzuapp.base.BaseFragment
 import com.weiyao.zuzuapp.service.TestJobSchedulerService
-import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.fragment_other.*
-import kotlinx.android.synthetic.main.fragment_other.tvGetCache
-import kotlinx.android.synthetic.main.fragment_other.tvPutCache
-import kotlinx.android.synthetic.main.fragment_other.tvService
 import java.util.*
 
 /**
