@@ -12,7 +12,7 @@ import com.weiyao.zuzuapp.R
 import com.weiyao.zuzuapp.api.ApiManager
 import com.weiyao.zuzuapp.api.composeDefault
 import com.weiyao.zuzuapp.base.BaseFragment
-import kotlinx.android.synthetic.main.activity_main2.*
+import kotlinx.android.synthetic.main.fragment_apirequest.*
 import java.io.File
 
 /**
