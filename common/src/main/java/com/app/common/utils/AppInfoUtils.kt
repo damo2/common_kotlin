@@ -1,8 +1,12 @@
 package com.app.common.utils
 
 import android.app.ActivityManager
+import android.app.Service
+import android.content.ComponentName
 import android.content.Context
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.pm.ServiceInfo
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.provider.Settings
@@ -11,6 +15,7 @@ import android.util.DisplayMetrics
 import android.view.WindowManager
 import com.app.common.CommonConst
 import com.app.common.logger.Logger
+import com.app.common.logger.logd
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
@@ -198,5 +203,63 @@ object AppInfoUtils {
                 append(hexString)
             }
         }
+    }
+
+    /**
+     * 当前进程是否是运行serviceClass的进程
+     */
+    fun isInServiceProcess(context: Context, serviceClass: Class<out Service>): Boolean {
+        val packageManager = context.packageManager
+        val packageInfo: PackageInfo
+        try {
+            packageInfo = packageManager.getPackageInfo(context.packageName, PackageManager.GET_SERVICES)
+        } catch (e: Exception) {
+            logd("Could not get package info for ${context.packageName}")
+            return false
+        }
+
+        val mainProcess = packageInfo.applicationInfo.processName
+
+        val component = ComponentName(context, serviceClass)
+        val serviceInfo: ServiceInfo
+        try {
+            serviceInfo = packageManager.getServiceInfo(component, 0)
+        } catch (ignored: PackageManager.NameNotFoundException) {
+            // Service is disabled.
+            return false
+        }
+
+        if (serviceInfo.processName == mainProcess) {
+            logd("Did not expect service $serviceClass to run in main process $mainProcess")
+            // Technically we are in the service process, but we're not in the service dedicated process.
+            return false
+        }
+
+        val myPid = android.os.Process.myPid()
+        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        var myProcess: ActivityManager.RunningAppProcessInfo? = null
+        val runningProcesses: List<ActivityManager.RunningAppProcessInfo>?
+        try {
+            runningProcesses = activityManager.runningAppProcesses
+        } catch (exception: SecurityException) {
+            // https://github.com/square/leakcanary/issues/948
+            logd("Could not get running app processes $exception")
+            return false
+        }
+
+        if (runningProcesses != null) {
+            for (process in runningProcesses) {
+                if (process.pid == myPid) {
+                    myProcess = process
+                    break
+                }
+            }
+        }
+        if (myProcess == null) {
+            logd("Could not find running process for $myPid")
+            return false
+        }
+
+        return myProcess.processName == serviceInfo.processName
     }
 }
