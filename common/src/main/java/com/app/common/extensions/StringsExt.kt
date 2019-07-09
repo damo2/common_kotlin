@@ -1,45 +1,32 @@
 package com.app.common.extensions
 
-import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import com.app.common.logger.Logger
 import com.app.common.utils.BitmapUtil
-import java.util.regex.Pattern
+import com.app.common.utils.StringUtils
 
-fun String?.equalsExt(str: String?, isIgnoerNull: Boolean = true) = this == str || (isIgnoerNull && (this == null && str == "") || (this == "" && str == null))
+//是否相等
+fun String?.equalsExt(str: String?, isIgnoerNull: Boolean = true) = StringUtils.equals(this, str, isIgnoerNull)
 
 fun String?.equalsNotExt(str: String?, isIgnoerNull: Boolean = true) = !equalsExt(str, isIgnoerNull)
 
-
-fun String?.isEmailExt(): Boolean = !this.isNullOrBlank() && Pattern.compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*").matcher(this).matches()
+//是否是邮箱
+fun String?.isEmailExt(): Boolean = StringUtils.isEmail(this)
 
 //密码半角（所有英文字符英文符号）
-fun String.isPasswordExtHalfAngle(): Boolean = Pattern.compile("^[\u0000-\u00FF]+$").matcher(this).matches()
+fun String?.isPasswordHalfAngleExt(): Boolean = StringUtils.isPasswordHalfAngle(this)
 
-fun String.toSpannableStringExt(color: Int): SpannableString =
-        SpannableString(this).apply { setSpan(ForegroundColorSpan(color), 0, this.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE) }
+//String 设置颜色
+fun String?.setColorExt(color: Int): SpannableString = StringUtils.setColor(this, color)
 
-//获取String里面的数字转int
-fun String.getNumExt(): Int {
-    try {
-        return Pattern.compile("[^0-9]").matcher(this).replaceAll("").trim().toInt()
-    } catch (e: Exception) {
-        Logger.d("getNumExt#${this} to Int error")
-        return -1
-    }
-}
-
-//失败返回-1
-fun String.toIntExt(): Int {
-    try {
-        return this.toInt()
-    } catch (e: Exception) {
-        return -1
-    }
-}
-
+//图片路径获取宽
 fun String.imgGetWidthExt() = BitmapUtil.imgGetWidth(this)
 
+//图片路径获取高
 fun String.imgGetHeightExt() = BitmapUtil.imgGetHeight(this)
+
+//获取String里面的数字转int
+fun String?.getNumExt(default: Int = -1): Int = StringUtils.getNum(this, default)
+
+//失败返回-1
+fun String?.toIntExt(default: Int = -1): Int = StringUtils.toInt(this, default)
 

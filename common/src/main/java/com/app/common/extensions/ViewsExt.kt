@@ -25,15 +25,12 @@ fun View.getWidthExt(): Int = ViewUtils.getWidth(this)
 
 fun View.getHeightExt() = ViewUtils.getHeight(this)
 
-
 fun View.getActivityExt() = ActivityUtils.getActivityByView(this)
 
 //TabLayout
 fun TabLayout.setIndicatorExt(leftDp: Int, rightDp: Int) = ViewUtils.setIndicator(this, leftDp, rightDp)
 
-
 fun RecyclerView.addScrollPauseLoadExt() = RecyclerViewUtils.addScrollPauseLoad(this)
-
 
 fun Dialog.showExt() = DialogUtil.safeShowDialog(this)
 fun Dialog.dismissExt() = DialogUtil.safeDismissDialog(this)

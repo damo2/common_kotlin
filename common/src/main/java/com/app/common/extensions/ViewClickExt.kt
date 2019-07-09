@@ -8,16 +8,17 @@ import com.app.common.R
  * Date: 2019/1/21  21:01
  * mail: 1902065822@qq.com
  * describe:
+ * 防止快速点击
  */
 /***
  * 防止快速点击
  * @param time Long 间隔，默认500毫秒
  */
-fun <T : View> T.setOnClickExtNoFast(time: Long = 500L, block: (T) -> Unit) {
+fun <T : View> T.setOnClickExtNoFast(time: Long = 500L, block: (view: View) -> Unit) {
     triggerDelay = time
     setOnClickListener {
         if (clickEnable()) {
-            block(it as T)
+            block(it)
         }
     }
 }
