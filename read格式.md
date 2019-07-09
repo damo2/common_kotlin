@@ -41,6 +41,8 @@ protected void onDestroy() {
 5、其他引用
 图片  
 ![图片名称](https://www.baidu.com/img/bd_logo1.png)  
+修改图片大小  
+<img src="https://www.baidu.com/img/bd_logo1.png" width="150">  
 链接  
 [链接名称](https://www.baidu.com/)    
 6、列表 
@@ -60,3 +62,22 @@ protected void onDestroy() {
 8、引用
 > 第一行引用文字  
 > 第二行引用文字
+
+9、分割线
+***
+
+10、代办事项To-do List
+
+- [x] 已完成项目1
+  - [x] 已完成事项1
+  - [x] 已完成事项2
+- [ ]待办事项1
+- [ ]待办事项2
+
+11、流程图
+
+```
+graph TD
+    A[注册] --> B(登录)
+    B -->C{首页}
+```
