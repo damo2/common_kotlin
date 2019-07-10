@@ -1,9 +1,9 @@
 
  模块  | 描述  
  ---- | ----- 
- common | 通用工具类 [README](https://github.com/damo2/common/tree/master/common)
- libdb | objectbox数据库缓存 [README](https://github.com/damo2/common/blob/master/libcache)
-libimgcompre | 图片压缩 [README](https://github.com/damo2/common/tree/master/libimgcompre)，推荐[鲁班libjpeg-turbo版](https://github.com/Curzibn/Luban/tree/turbo)
+ common | 通用工具类 [README](/common/README.md)
+ libdb | objectbox数据库缓存 [README](/libcache/README.md)
+libimgcompre | 图片压缩 [README](/libimgcompre/README.md)，推荐[鲁班libjpeg-turbo版](https://github.com/Curzibn/Luban/tree/turbo)
 
 <br>
 
