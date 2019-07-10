@@ -13,17 +13,22 @@
 ##### 五级标题  
 ###### 六级标题 
 二、编辑基本语法  
-1、字体格式强调
- 我们可以使用下面的方式给我们的文本添加强调的效果
+1、字体格式
+* 强调  
 *强调*  (示例：斜体)  
  _强调_  (示例：斜体)  
 **加重强调**  (示例：粗体)  
  __加重强调__ (示例：粗体)  
 ***特别强调*** (示例：粗斜体)  
 ___特别强调___  (示例：粗斜体)  
+
+* 部分文字的高亮  
+Thank `You` . Please `Call` Me `Coder`  
+
 2、代码  
+* 代码  
 `<hello world>`  
-3、代码块高亮  
+* 代码块  
 ```
 @Override
 protected void onDestroy() {
@@ -31,6 +36,31 @@ protected void onDestroy() {
     super.onDestroy();
 }
 ```  
+
+* 使用2个Tab符实现单行文本。前面空一行。
+
+        helloword
+    
+* 多行再每行行首加2个Tab。前面空一行。
+
+        helloword
+        helloword
+        
+3、引用
+* 图片  
+![图片名称](https://www.baidu.com/img/bd_logo1.png)  
+修改图片大小  
+<img src="https://www.baidu.com/img/bd_logo1.png" width="150" alt="百度">  
+
+github 仓库图片引用路径  
+https://github.com/ 你的用户名 / 你的项目名 / raw / 分支名 / 存放图片的文件夹 / 该文件夹下的图片
+
+* 链接  
+[链接名称](https://www.baidu.com/)
+* 给图片加链接
+[![baidu]](http://baidu.com)  
+[baidu]:https://www.baidu.com/img/bd_logo1.png "百度Logo"      
+
 4、表格 （建议在表格前空一行，否则可能影响表格无法显示）
  
  表头  | 表头  | 表头
@@ -38,35 +68,39 @@ protected void onDestroy() {
  单元格内容  | 单元格内容 | 单元格内容 
  单元格内容  | 单元格内容 | 单元格内容  
  
-5、其他引用
-图片  
-![图片名称](https://www.baidu.com/img/bd_logo1.png)  
-修改图片大小  
-<img src="https://www.baidu.com/img/bd_logo1.png" width="150">  
-链接  
-[链接名称](https://www.baidu.com/)    
-6、列表 
+
+5、列表 
 1. 项目1  
 2. 项目2  
 3. 项目3  
    * 项目1 （一个*号会显示为一个黑点，注意⚠️有空格，否则直接显示为*项目1） 
    * 项目2   
  
-7、换行（建议直接在前一行后面补两个空格）
+6、排版  
+* 换行  
+建议直接在前一行后面补两个空格。  
 直接回车不能换行，  
 可以在上一行文本后面补两个空格，  
 这样下一行的文本就换行了。
 或者就是在两行文本直接加一个空行。
 也能实现换行效果，不过这个行间距有点大。  
+
+* 整体后移  
+选中要移动的，按Tab。
+
  
-8、引用
-> 第一行引用文字  
-> 第二行引用文字
+7、缩进
+>数据结构  
+>>树  
+>>>二叉树  
+>>>>平衡二叉树  
+>>>>>满二叉树 
 
-9、分割线
-***
+8、符号
+* 分割线
+    ***
 
-10、代办事项To-do List
+9、代办事项To-do List
 
 - [x] 已完成项目1
   - [x] 已完成事项1
@@ -74,10 +108,13 @@ protected void onDestroy() {
 - [ ]待办事项1
 - [ ]待办事项2
 
-11、流程图
+10、流程图
 
 ```
 graph TD
     A[注册] --> B(登录)
-    B -->C{首页}
+    B -->C(主页)
+    C -->D(首页)
+    C -->D(消息)
+    C -->D(我的)
 ```
