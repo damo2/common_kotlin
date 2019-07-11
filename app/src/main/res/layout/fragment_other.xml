@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
+        <Button
+            android:id="@+id/btnPutCache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="添加缓存"
+            android:textColor="@color/colorAccent"
+            />
 
-    <TextView
-        android:id="@+id/tvPutCache"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
-        android:background="@color/defaultBg"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="添加缓存"
-        android:textColor="@color/colorAccent"
-        />
+        <Button
+            android:id="@+id/btnGetCache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="查找缓存"
+            android:textColor="@color/colorAccent"
+            />
 
-    <TextView
-        android:id="@+id/tvGetCache"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
-        android:background="@color/defaultBg"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="查找缓存"
-        android:textColor="@color/colorAccent"
-        />
+        <Button
+            android:id="@+id/btnService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="service"/>
+    </LinearLayout>
 
     <Button
-        android:id="@+id/tvService"
+        android:id="@+id/btnLoginShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="service"/>
+
 </LinearLayout>

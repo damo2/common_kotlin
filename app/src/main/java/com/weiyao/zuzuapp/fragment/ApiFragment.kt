@@ -28,7 +28,7 @@ class ApiFragment : BaseFragment() {
         super.initListener()
 
         //todo 需要读写权限
-        tvDownload.setOnClickListener {
+        btnDownload.setOnClickListener {
             RequestFileManager.downloadFile(
                     "https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk",
                     StorageUtils.getPublicStoragePath("test/wanban.apk"),
@@ -39,7 +39,7 @@ class ApiFragment : BaseFragment() {
                     });
         }
 
-        tvUp.setOnClickListener {
+        btnUp.setOnClickListener {
             RequestFileManager.uploadFileByKey(
                     "http://www.wxjishu.com:9999/file/upload",
                     "file",
@@ -50,7 +50,7 @@ class ApiFragment : BaseFragment() {
             )
         }
 
-        tvRequest.setOnClickListener {
+        btnRequest.setOnClickListener {
             ApiManager.apiService
                     .update("1.0")
                     .composeLife(getLifecycleSubject(), LifeCycleEvent.DESTROY)//结束时取消订阅

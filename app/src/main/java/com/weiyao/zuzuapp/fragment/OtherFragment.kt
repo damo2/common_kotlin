@@ -4,11 +4,12 @@ import android.widget.Toast
 import com.app.common.json.toJsonExt
 import com.damo.libdb.Dao
 import com.weiyao.zuzuapp.R
+import com.weiyao.zuzuapp.activity.test.Test3Activity
 import com.weiyao.zuzuapp.base.BaseFragment
 import com.weiyao.zuzuapp.service.TestJobSchedulerService
 import kotlinx.android.synthetic.main.fragment_other.*
-import java.util.*
-
+import kotlin.random.Random
+import org.jetbrains.anko.startActivity
 /**
  * Created by wr
  * Date: 2019/6/28  14:27
@@ -25,14 +26,17 @@ class OtherFragment : BaseFragment() {
 
     override fun initListener() {
         super.initListener()
-        tvPutCache.setOnClickListener {
-            userBean = UserBean("张三", Random().nextInt(100))
+        btnPutCache.setOnClickListener {
+            userBean = UserBean("张三", Random.nextInt(100))
         }
-        tvGetCache.setOnClickListener {
+        btnGetCache.setOnClickListener {
             Toast.makeText(mContext, userBean.toJsonExt(), Toast.LENGTH_SHORT).show()
         }
-        tvService.setOnClickListener {
+        btnService.setOnClickListener {
             TestJobSchedulerService.startJobScheduler(mContext)
+        }
+        btnLoginShare.setOnClickListener {
+            mContext.startActivity<Test3Activity>()
         }
     }
 

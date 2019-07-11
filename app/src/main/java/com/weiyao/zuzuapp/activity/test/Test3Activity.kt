@@ -4,6 +4,7 @@ import android.content.Intent
 import com.app.common.json.GsonUtil
 import com.app.common.logger.logd
 import com.app.common.view.toastInfo
+import com.damo.loginshared.InitManager
 import com.damo.loginshared.QQLogin
 import com.damo.loginshared.SinaLogin
 import com.weiyao.zuzuapp.R
@@ -21,13 +22,12 @@ class Test3Activity : BaseActivity() {
 
     private val qqLogin = QQLogin(this)
     private val weiboLogin = SinaLogin()
-
     override fun bindLayout(): Int? = R.layout.activity_test3
 
 
     override fun initData() {
         super.initData()
-
+        InitManager.init(mContext)
     }
 
     override fun initListener() {

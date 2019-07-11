@@ -18,15 +18,13 @@ import com.sina.weibo.sdk.share.WbShareHandler
  */
 
 object SinaShare : WbShareCallback {
-    private lateinit var mWbShareHandler: WbShareHandler    //微博分享管理类
     private lateinit var mAuthInfo: AuthInfo
-
 
     fun shareToWeibo(mActivity: Activity, title: String, description: String, bitmap: Bitmap) {
         //注册微博sdk
         mAuthInfo = AuthInfo(mActivity.applicationContext, Const.SINA_APP_KEY, Const.SINA_REDIRECT_URL, Const.SINA_APP_SCOPE)
         WbSdk.install(mActivity, mAuthInfo)
-        mWbShareHandler = WbShareHandler(mActivity)
+        val mWbShareHandler = WbShareHandler(mActivity)
         mWbShareHandler.registerApp()
 
         //分享内容

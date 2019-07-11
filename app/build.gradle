@@ -32,12 +32,22 @@ android {
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
+    signingConfigs {
+        zuzu {
+            keyAlias 'zuzu'
+            keyPassword 'zuzu1234'
+            storeFile file('../app/damo.jks')
+            storePassword 'zuzu1234'
+        }
+    }
     buildTypes {
         debug {
 //            applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
+            signingConfig signingConfigs.zuzu
         }
         release {
+            signingConfig signingConfigs.zuzu
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
