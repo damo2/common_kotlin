@@ -8,7 +8,6 @@ import com.sina.weibo.sdk.api.ImageObject
 import com.sina.weibo.sdk.api.TextObject
 import com.sina.weibo.sdk.api.WeiboMultiMessage
 import com.sina.weibo.sdk.auth.AuthInfo
-import com.sina.weibo.sdk.share.WbShareCallback
 import com.sina.weibo.sdk.share.WbShareHandler
 
 
@@ -18,9 +17,9 @@ import com.sina.weibo.sdk.share.WbShareHandler
  * describe: 微博分享工具类
  */
 
-object SinaShare : WbShareCallback {
-    private lateinit var mAuthInfo: AuthInfo
+object SinaShare {
 
+    //activity 实现WbShareCallback接口回调
     fun shareToWeibo(activity: Activity, title: String, description: String, bitmap: Bitmap) {
         //注册新浪微博 只注册一次
         WbSdk.install(activity.applicationContext, AuthInfo(activity.applicationContext, Const.SINA_APP_KEY, Const.SINA_REDIRECT_URL, Const.SINA_APP_SCOPE))
@@ -39,20 +38,5 @@ object SinaShare : WbShareCallback {
         imageObject.setImageObject(bitmap)
         weiboMultiMessage.imageObject = imageObject
         mWbShareHandler.shareMessage(weiboMultiMessage, false)
-    }
-
-    //失败
-    override fun onWbShareFail() {
-
-    }
-
-    //取消
-    override fun onWbShareCancel() {
-
-    }
-
-    //成功
-    override fun onWbShareSuccess() {
-
     }
 }

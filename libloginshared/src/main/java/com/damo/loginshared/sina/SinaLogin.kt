@@ -26,7 +26,7 @@ class SinaLogin {
 
     fun login(activity: Activity, callback: (isSuc: Boolean, errorInfo: String?, accessToken: Oauth2AccessToken?) -> Unit, userCallBack: ((isSuc: Boolean, userBean: SinaUserBean?) -> Unit)? = null) {
         //注册新浪微博 只注册一次
-        WbSdk.install(activity.applicationContext, AuthInfo(activity.applicationContext, Const.SINA_APP_KEY, Const.SINA_REDIRECT_URL, Const.SINA_APP_SCOPE))
+        WbSdk.install(activity, AuthInfo(activity, Const.SINA_APP_KEY, Const.SINA_REDIRECT_URL, Const.SINA_APP_SCOPE))
         mCallback = callback
         mInfoCallback = userCallBack
         mSsoHandler = SsoHandler(activity)

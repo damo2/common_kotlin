@@ -2,12 +2,15 @@ package com.weiyao.zuzuapp.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import com.app.common.extensions.drawableToBitmapExt
 import com.app.common.json.GsonUtil
 import com.app.common.view.toastInfo
 import com.damo.loginshared.qq.QQLogin
 import com.damo.loginshared.qq.QQShare
 import com.damo.loginshared.sina.SinaLogin
+import com.damo.loginshared.sina.SinaShare
 import com.damo.loginshared.wechat.WechatLogin
+import com.damo.loginshared.wechat.WechatShare
 import com.weiyao.zuzuapp.R
 import com.weiyao.zuzuapp.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_logshare.*
@@ -21,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_logshare.*
  */
 class LogShareActivity : BaseActivity() {
 
-    private val qqLogin = QQLogin(this)
+    private val qqLogin = QQLogin()
     private val weiboLogin = SinaLogin()
     override fun bindLayout(): Int? = R.layout.activity_logshare
 
@@ -34,7 +37,7 @@ class LogShareActivity : BaseActivity() {
     override fun initListener() {
         super.initListener()
         btnQQLogin.setOnClickListener {
-            qqLogin.login({ isSuc, qqDataBean ->
+            qqLogin.login(this,{ isSuc, qqDataBean ->
                 if (isSuc) {
                     toastInfo("授权成功")
                     tvInfo.text = GsonUtil().toJson(qqDataBean)
@@ -53,7 +56,7 @@ class LogShareActivity : BaseActivity() {
         }
 
         btnWeiboLogin.setOnClickListener {
-            weiboLogin.login(this, { isSuc, errorInfo, accessToken ->
+            weiboLogin.login(this@LogShareActivity, { isSuc, errorInfo, accessToken ->
                 toastInfo("授权${if (isSuc) "成功" else "失败"}")
 
             }, { isSuc, userBean ->
@@ -82,13 +85,13 @@ class LogShareActivity : BaseActivity() {
                     })
         }
 
-//        btnWeixinShare.setOnClickListener {
-//            WechatShare.shareToWechat(mContext, WechatShare.WX_FRIEND, "http://www.baidu.com", "百度", "百度一下，你就知道", getDrawable(R.drawable.ic_app).drawableToBitmapExt())
-//        }
-//
-//        btnWeiboShare.setOnClickListener {
-//            SinaShare.shareToWeibo(this, "百度", "百度一下，你就知道", getDrawable(R.drawable.ic_app).drawableToBitmapExt())
-//        }
+        btnWeixinShare.setOnClickListener {
+            WechatShare.shareToWechat(mContext, WechatShare.WX_FRIEND, "http://www.baidu.com", "百度", "百度一下，你就知道", getDrawable(R.drawable.ic_app).drawableToBitmapExt())
+        }
+
+        btnWeiboShare.setOnClickListener {
+            SinaShare.shareToWeibo(this, "百度", "百度一下，你就知道", getDrawable(R.drawable.ic_app).drawableToBitmapExt())
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

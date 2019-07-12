@@ -17,43 +17,30 @@ import com.tencent.tauth.UiError
  * Date: 2018/12/6  17:19
  * describe:
  */
-class QQLogin (var activity: Activity) {
+class QQLogin() {
     private var mCallbackToken: ((isSuc: Boolean, qqDataBean: QQDataBean?) -> Unit)? = null
     private var mInfoCallback: ((isSuc: Boolean, qqUserInfoBean: QQUserInfoBean?, errorInfo: String?) -> Unit)? = null
 
-    private val mTencent: Tencent by lazy { Tencent.createInstance(Const.QQ_APP_ID, activity) }
-    private val mLoginQQListener: BaseUiListener = BaseUiListener()
+    private var mTencent: Tencent? = null
+    private var mLoginQQListener: BaseUiListener? = null
 
 
-    fun login(callback: (isSuc: Boolean, qqDataBean: QQDataBean?) -> Unit,
+    fun login(activity: Activity, callback: (isSuc: Boolean, qqDataBean: QQDataBean?) -> Unit,
               infoCallback: ((isSuc: Boolean, qqUserInfoBean: QQUserInfoBean?, errorInfo: String?) -> Unit)? = null) {
         this.mCallbackToken = callback
         this.mInfoCallback = infoCallback
-        login()
+
+        mTencent = Tencent.createInstance(Const.QQ_APP_ID, activity)
+        mLoginQQListener = BaseUiListener(activity)
+        mTencent?.login(activity, "all", mLoginQQListener)
     }
 
-    private fun login() {
-        mTencent.login(activity, "all", mLoginQQListener)
-        //        if (!mTencent.isSessionValid()) {
-//            mTencent.login(mActivity, "all", mLoginQQListener)
-//            mIsServerSideLogin = false
-//        } else {
-//            if (mIsServerSideLogin) { // Server-Side 模式的登陆, 先退出，再进行SSO登陆
-//                mTencent.logout(mActivity)
-//                mTencent.login(mActivity, "all", mLoginQQListener)
-//                mIsServerSideLogin = false
-//                Log.d("SDKQQAgentPref", "FirstLaunch_SDK:" + SystemClock.elapsedRealtime())
-//                return
-//            }
-//            mTencent.logout(mActivity)
-//        }
-    }
 
-    private fun getQQUserInfo(qqDataBean: QQDataBean) {
-        mTencent.setAccessToken(qqDataBean.accessToken, qqDataBean.expiresIn.toString())
-        mTencent.openId = qqDataBean.openid
+    private fun getQQUserInfo(activity: Activity, qqDataBean: QQDataBean) {
+        mTencent?.setAccessToken(qqDataBean.accessToken, qqDataBean.expiresIn.toString())
+        mTencent?.openId = qqDataBean.openid
 
-        UserInfo(activity, mTencent.qqToken).getUserInfo(object : IUiListener {
+        UserInfo(activity, mTencent?.qqToken).getUserInfo(object : IUiListener {
             override fun onComplete(data: Any?) {
                 val qqUserBean = Gson().fromJson(data?.toString(), QQUserInfoBean::class.java)
                 Log.d("QQLogin", "onComplete#获取信息")
@@ -72,11 +59,11 @@ class QQLogin (var activity: Activity) {
     }
 
 
-    private inner class BaseUiListener() : IUiListener {
+    private inner class BaseUiListener(var activity: Activity) : IUiListener {
         override fun onComplete(data: Any?) {
             val qqDataBean = Gson().fromJson(data?.toString(), QQDataBean::class.java)
             mInfoCallback?.let {
-                getQQUserInfo(qqDataBean)
+                getQQUserInfo(activity, qqDataBean)
             }
             mCallbackToken?.invoke(true, qqDataBean)
         }
