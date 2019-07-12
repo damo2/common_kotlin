@@ -1,15 +1,13 @@
-package com.damo.loginshared
+package com.damo.loginshared.sina
 
 import android.app.Activity
 import android.content.Intent
 import com.app.common.api.subscribeExtApi
 import com.app.common.api.transformer.composeCommonBean
+import com.damo.loginshared.Const
 import com.damo.loginshared.api.ApiManager
-import com.damo.loginshared.bean.SinaUserBean
-import com.sina.weibo.sdk.auth.AccessTokenKeeper
-import com.sina.weibo.sdk.auth.Oauth2AccessToken
-import com.sina.weibo.sdk.auth.WbAuthListener
-import com.sina.weibo.sdk.auth.WbConnectErrorMessage
+import com.sina.weibo.sdk.WbSdk
+import com.sina.weibo.sdk.auth.*
 import com.sina.weibo.sdk.auth.sso.SsoHandler
 
 
@@ -22,12 +20,15 @@ class SinaLogin {
     private var mSsoHandler: SsoHandler? = null
 
     private var mCallback: ((isSuc: Boolean, errorInfo: String?, accessToken: Oauth2AccessToken?) -> Unit)? = null
-    private var mInfoCallback: ((isSuc: Boolean, userBean: SinaUserBean?, errorInfo: String?) -> Unit)? = null
+    private var mInfoCallback: ((isSuc: Boolean, userBean: SinaUserBean?) -> Unit)? = null
 
     private var mAccessToken: Oauth2AccessToken? = null
 
     fun login(activity: Activity, callback: (isSuc: Boolean, errorInfo: String?, accessToken: Oauth2AccessToken?) -> Unit, userCallBack: ((isSuc: Boolean, userBean: SinaUserBean?) -> Unit)? = null) {
+        //注册新浪微博 只注册一次
+        WbSdk.install(activity.applicationContext, AuthInfo(activity.applicationContext, Const.SINA_APP_KEY, Const.SINA_REDIRECT_URL, Const.SINA_APP_SCOPE))
         mCallback = callback
+        mInfoCallback = userCallBack
         mSsoHandler = SsoHandler(activity)
         mSsoHandler?.authorize(SelfWbAuthListener(activity))
     }
@@ -68,9 +69,9 @@ class SinaLogin {
                     .getSinaInfo(accessToken.token, accessToken.uid)
                     .compose(composeCommonBean())
                     .subscribeExtApi({
-                        mInfoCallback?.invoke(true, it, "")
+                        mInfoCallback?.invoke(true, it)
                     }, { e ->
-                        mInfoCallback?.invoke(false, null, "获取用户信息失败")
+                        mInfoCallback?.invoke(false, null)
                     })
         }
 

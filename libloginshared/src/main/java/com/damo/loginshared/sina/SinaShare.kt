@@ -1,7 +1,8 @@
-package com.damo.loginshared
+package com.damo.loginshared.sina
 
 import android.app.Activity
 import android.graphics.Bitmap
+import com.damo.loginshared.Const
 import com.sina.weibo.sdk.WbSdk
 import com.sina.weibo.sdk.api.ImageObject
 import com.sina.weibo.sdk.api.TextObject
@@ -20,11 +21,11 @@ import com.sina.weibo.sdk.share.WbShareHandler
 object SinaShare : WbShareCallback {
     private lateinit var mAuthInfo: AuthInfo
 
-    fun shareToWeibo(mActivity: Activity, title: String, description: String, bitmap: Bitmap) {
-        //注册微博sdk
-        mAuthInfo = AuthInfo(mActivity.applicationContext, Const.SINA_APP_KEY, Const.SINA_REDIRECT_URL, Const.SINA_APP_SCOPE)
-        WbSdk.install(mActivity, mAuthInfo)
-        val mWbShareHandler = WbShareHandler(mActivity)
+    fun shareToWeibo(activity: Activity, title: String, description: String, bitmap: Bitmap) {
+        //注册新浪微博 只注册一次
+        WbSdk.install(activity.applicationContext, AuthInfo(activity.applicationContext, Const.SINA_APP_KEY, Const.SINA_REDIRECT_URL, Const.SINA_APP_SCOPE))
+
+        val mWbShareHandler = WbShareHandler(activity)
         mWbShareHandler.registerApp()
 
         //分享内容

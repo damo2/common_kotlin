@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EEEEEE"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnQQLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="QQ登录"
+                />
+
+            <Button
+                android:id="@+id/btnWeixinLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信登录"
+                />
+
+            <Button
+                android:id="@+id/btnWeiboLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微博登录"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnQQShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="QQ分享"
+                />
+
+            <Button
+                android:id="@+id/btnWeixinShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信分享"
+                />
+
+            <Button
+                android:id="@+id/btnWeiboShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微博分享"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+</ScrollView>
+

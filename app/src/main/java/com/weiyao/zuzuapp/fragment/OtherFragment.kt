@@ -4,7 +4,7 @@ import android.widget.Toast
 import com.app.common.json.toJsonExt
 import com.damo.libdb.Dao
 import com.weiyao.zuzuapp.R
-import com.weiyao.zuzuapp.activity.test.Test3Activity
+import com.weiyao.zuzuapp.activity.LogShareActivity
 import com.weiyao.zuzuapp.base.BaseFragment
 import com.weiyao.zuzuapp.service.TestJobSchedulerService
 import kotlinx.android.synthetic.main.fragment_other.*
@@ -36,7 +36,7 @@ class OtherFragment : BaseFragment() {
             TestJobSchedulerService.startJobScheduler(mContext)
         }
         btnLoginShare.setOnClickListener {
-            mContext.startActivity<Test3Activity>()
+            mActivity?.startActivity<LogShareActivity>()
         }
     }
 

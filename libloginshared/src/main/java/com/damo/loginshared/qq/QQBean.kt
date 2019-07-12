@@ -1,4 +1,4 @@
-package com.damo.loginshared.bean
+package com.damo.loginshared.qq
 
 import com.google.gson.annotations.SerializedName
 

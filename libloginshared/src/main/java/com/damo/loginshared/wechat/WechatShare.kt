@@ -1,8 +1,9 @@
-package com.damo.loginshared
+package com.damo.loginshared.wechat
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.widget.Toast
+import com.damo.loginshared.Const
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject
@@ -16,23 +17,12 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory
  * @see {@link https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419317340&token=&lang=zh_CN}
  */
 
-class WechatShare private constructor(var context: Context) {
-    val api: IWXAPI by lazy { WXAPIFactory.createWXAPI(context, Const.WX_APPID, true) }
-
-    fun getInstance(context: Context): WechatShare = SingletonHolder(context).holder
-
-    private class SingletonHolder(context: Context) {
-        val holder = WechatShare(context)
-    }
-    companion object {
-        const val WX_FRIEND = 0
-        const val WX_CIRCLE = 1
-    }
+object WechatShare {
 
 
-    fun regWechat() {
-        api.registerApp(Const.WX_APPID)
-    }
+    const val WX_FRIEND = 0
+    const val WX_CIRCLE = 1
+
 
     /**
      * @param flag        0 微信好友 1 微信朋友圈
@@ -41,7 +31,8 @@ class WechatShare private constructor(var context: Context) {
      * @param description 分享的具体内容
      * @param thumb       分享时显示的图片（R.drawable.icon_logo）  不能超过32k
      */
-    fun shareToWechat(flag: Int, url: String, title: String, description: String, thumb: Bitmap) {
+    fun shareToWechat(context: Context, flag: Int, url: String, title: String, description: String, thumb: Bitmap) {
+        val api: IWXAPI = WXAPIFactory.createWXAPI(context, Const.WX_APPID, true).apply { registerApp(Const.WX_APPID) }
         var content = description
         if (flag != 0 && flag != 1) {
             return

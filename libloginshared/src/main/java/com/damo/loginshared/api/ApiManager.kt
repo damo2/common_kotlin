@@ -1,7 +1,6 @@
 package com.damo.loginshared.api
 
 import com.app.common.api.RequestApiManager
-import com.app.common.by.NotNullSingle
 
 /**
  * Created by wr
@@ -10,10 +9,8 @@ import com.app.common.by.NotNullSingle
  * describe:
  */
 object ApiManager {
-    var apiService by NotNullSingle<ApiService>()
-    //application 初始化
-    fun initApiService() {
-        apiService = RequestApiManager.instance.apply {
+    val apiService: ApiService by lazy {
+        RequestApiManager.instance.apply {
             initRetrofit({ clientBuilder ->
                 //添加拦截器
             }, { retrofitBuilder ->

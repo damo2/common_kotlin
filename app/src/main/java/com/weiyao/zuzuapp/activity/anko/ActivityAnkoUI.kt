@@ -1,7 +1,6 @@
 package com.weiyao.zuzuapp.activity.anko
 
 import android.view.View
-import com.weiyao.zuzuapp.activity.AnkoActivity
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.button

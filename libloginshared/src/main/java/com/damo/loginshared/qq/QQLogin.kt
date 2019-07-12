@@ -1,13 +1,9 @@
-package com.damo.loginshared
+package com.damo.loginshared.qq
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.app.common.utils.SingleHolder
-import com.app.common.utils.SingleHolder1
-import com.damo.loginshared.bean.QQDataBean
-import com.damo.loginshared.bean.QQUserInfoBean
+import com.damo.loginshared.Const
 import com.google.gson.Gson
 import com.tencent.connect.UserInfo
 import com.tencent.connect.common.Constants
@@ -25,24 +21,19 @@ class QQLogin (var activity: Activity) {
     private var mCallbackToken: ((isSuc: Boolean, qqDataBean: QQDataBean?) -> Unit)? = null
     private var mInfoCallback: ((isSuc: Boolean, qqUserInfoBean: QQUserInfoBean?, errorInfo: String?) -> Unit)? = null
 
-    private lateinit var mTencent: Tencent
-    private lateinit var mLoginQQListener: BaseUiListener
+    private val mTencent: Tencent by lazy { Tencent.createInstance(Const.QQ_APP_ID, activity) }
+    private val mLoginQQListener: BaseUiListener = BaseUiListener()
+
 
     fun login(callback: (isSuc: Boolean, qqDataBean: QQDataBean?) -> Unit,
               infoCallback: ((isSuc: Boolean, qqUserInfoBean: QQUserInfoBean?, errorInfo: String?) -> Unit)? = null) {
-
         this.mCallbackToken = callback
         this.mInfoCallback = infoCallback
         login()
     }
 
     private fun login() {
-        mLoginQQListener = BaseUiListener()
-        mTencent = Tencent.createInstance(Const.QQ_APP_ID, activity)
-        if (!mTencent.isSessionValid) {
-            mTencent.login(activity, "all", mLoginQQListener)
-        }
-
+        mTencent.login(activity, "all", mLoginQQListener)
         //        if (!mTencent.isSessionValid()) {
 //            mTencent.login(mActivity, "all", mLoginQQListener)
 //            mIsServerSideLogin = false

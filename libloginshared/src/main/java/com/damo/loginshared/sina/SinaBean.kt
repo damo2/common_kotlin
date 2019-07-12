@@ -1,4 +1,4 @@
-package com.damo.loginshared.bean
+package com.damo.loginshared.sina
 
 import com.google.gson.annotations.SerializedName
 

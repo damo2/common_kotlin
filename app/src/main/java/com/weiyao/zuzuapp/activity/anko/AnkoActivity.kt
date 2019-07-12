@@ -1,4 +1,4 @@
-package com.weiyao.zuzuapp.activity
+package com.weiyao.zuzuapp.activity.anko
 
 import android.os.Bundle
 import com.weiyao.zuzuapp.activity.anko.ActivityAnkoUI

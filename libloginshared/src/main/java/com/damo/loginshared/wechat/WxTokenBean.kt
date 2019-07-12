@@ -1,4 +1,4 @@
-package com.damo.loginshared.bean
+package com.damo.loginshared.wechat
 
 /**
  * Created by zq on 2018/9/18

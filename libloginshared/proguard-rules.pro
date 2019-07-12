@@ -20,4 +20,11 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+
+#微博
 -keep class com.sina.weibo.sdk.** { *; }
+
+#微信
+-keep class com.tencent.mm.opensdk.** { *;}
+-keep class com.tencent.wxop.** { *;}
+-keep class com.tencent.mm.sdk.** { *;}
