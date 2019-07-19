@@ -15,6 +15,9 @@ class ListTest {
         assertEquals(listOf(Pair(1, 7), Pair(2, 8)), list.zip(listOf(7, 8)))
     }
 
-
-
+    fun strStr(haystack: String, needle: String): Int {
+        val index = haystack.indexOf(needle)
+        return  if (index > -1) index else 0
+    }
+    
 }

@@ -5,7 +5,7 @@
              android:name="APPLICATION_ID"
              android:value="${applicationId}"/>
       
-通过 getApplicationIdExt()获取applicationId
+通过 applicationIdExt获取applicationId
 
 ### 打印日志
   [logger](https://github.com/orhanobut/logger)

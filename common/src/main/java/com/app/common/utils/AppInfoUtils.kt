@@ -54,7 +54,7 @@ object AppInfoUtils {
      *  android:name="APPLICATION_ID"
      *  android:value="${applicationId}"/>
      */
-    fun getApplicationIdExt(context: Context): String =
+    fun applicationIdExt(context: Context): String =
             MetaDataUtil.getMetaDataString(context, CommonConst.APPLICATION_ID)
 
     fun getAppName(context: Context): String? {

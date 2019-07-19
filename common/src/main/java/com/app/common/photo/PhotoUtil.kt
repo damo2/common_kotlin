@@ -13,7 +13,7 @@ import android.provider.MediaStore
 import android.text.TextUtils
 import android.widget.Toast
 import com.app.common.by.Weak
-import com.app.common.extensions.getApplicationIdExt
+import com.app.common.extensions.applicationIdExt
 import com.app.common.file.UpdateFile
 import com.app.common.logger.Logger
 import com.app.common.utils.StorageUtils
@@ -216,7 +216,7 @@ class PhotoUtil {
                             it.onPathCallback?.let { it(cameraPath) }
                             //通知系统图库更新
                             if (context != null) {
-                                UpdateFile.updateImageSysStatu(context, cameraPath, context!!.getApplicationIdExt())
+                                UpdateFile.updateImageSysStatu(context, cameraPath, context!!.applicationIdExt)
                             }
                         }
                     }
@@ -233,7 +233,7 @@ class PhotoUtil {
                         it.onPathCallback?.let { it(cutPath) }
                         //通知系统图库更新
                         if (context != null) {
-                            UpdateFile.updateImageSysStatu(context, cameraPath, context!!.getApplicationIdExt())
+                            UpdateFile.updateImageSysStatu(context, cameraPath, context!!.applicationIdExt)
                         }
                     }
                 }

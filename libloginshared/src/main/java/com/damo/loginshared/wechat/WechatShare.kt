@@ -3,6 +3,7 @@ package com.damo.loginshared.wechat
 import android.content.Context
 import android.graphics.Bitmap
 import android.widget.Toast
+import androidx.annotation.IntDef
 import com.damo.loginshared.Const
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
@@ -23,6 +24,22 @@ object WechatShare {
     const val WX_FRIEND = 0
     const val WX_CIRCLE = 1
 
+    //注解
+//    @IntDef(WX_FRIEND, WX_CIRCLE)
+//    @Retention(AnnotationRetention.SOURCE)
+//    @Target(AnnotationTarget.CLASS, AnnotationTarget.VALUE_PARAMETER)
+//    annotation class WechatShareType
+
+    class WechatShareType {
+        @IntDef(WX_FRIEND, WX_CIRCLE)
+        @Retention(AnnotationRetention.SOURCE)
+        annotation class MyState
+
+        companion object {
+            const val WX_FRIEND = 0
+            const val WX_CIRCLE = 1
+        }
+    }
 
     /**
      * @param flag        0 微信好友 1 微信朋友圈
@@ -31,10 +48,10 @@ object WechatShare {
      * @param description 分享的具体内容
      * @param thumb       分享时显示的图片（R.drawable.icon_logo）  不能超过32k
      */
-    fun shareToWechat(context: Context, flag: Int, url: String, title: String, description: String, thumb: Bitmap) {
+    fun shareToWechat(context: Context,@WechatShareType.MyState flag: Int, url: String, title: String, description: String, thumb: Bitmap) {
         val api: IWXAPI = WXAPIFactory.createWXAPI(context, Const.WX_APPID, true).apply { registerApp(Const.WX_APPID) }
         var content = description
-        if (flag != 0 && flag != 1) {
+        if (flag != WechatShareType.WX_CIRCLE && flag != WechatShareType.WX_FRIEND) {
             return
         }
 

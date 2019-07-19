@@ -14,9 +14,9 @@ import android.view.*
 import android.widget.FrameLayout
 import androidx.annotation.NonNull
 import com.app.common.extensions.createNavBarExt
-import com.app.common.extensions.getNavigationBarHeightExt
-import com.app.common.extensions.getNavigationBarWidthExt
-import com.app.common.extensions.getStatusBarHeightExt
+import com.app.common.extensions.navigationBarHeightExt
+import com.app.common.extensions.navigationBarWidthExt
+import com.app.common.extensions.statusBarHeightExt
 
 
 /**
@@ -161,8 +161,8 @@ object ActivityUtils {
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     fun createNavBar(activity: Activity) {
-        val navBarHeight = activity.getNavigationBarHeightExt()
-        val navBarWidth = activity.getNavigationBarWidthExt()
+        val navBarHeight = activity.navigationBarHeightExt
+        val navBarWidth = activity.navigationBarWidthExt
         if (navBarHeight > 0 && navBarWidth > 0) {
             //创建NavigationBar
             val navBar = View(activity)
@@ -205,7 +205,7 @@ object ActivityUtils {
             val paddingStart = view.paddingStart
             val paddingEnd = view.paddingEnd
             val paddingBottom = view.paddingBottom
-            val statusBarHeight = activity.getStatusBarHeightExt()
+            val statusBarHeight = activity.statusBarHeightExt
             //改变titleBar的高度
             val lp = view.layoutParams
             lp.height += statusBarHeight

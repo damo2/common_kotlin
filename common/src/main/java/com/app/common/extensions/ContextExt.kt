@@ -17,32 +17,39 @@ import com.app.common.utils.NetUtils
 import java.io.File
 
 //-------------------   appinfo -----------------
-fun Context.getVersionCodeExt() = AppInfoUtils.getVersionCode(this)
+val Context.versionCodeExt: Int?
+    get() = AppInfoUtils.getVersionCode(this)
 
-fun Context.getVersionNameExt() = AppInfoUtils.getVersionName(this)
+val Context.versionNameExt: String?
+    get() = AppInfoUtils.getVersionName(this)
 
-fun Context.getAppNameExt() = AppInfoUtils.getAppName(this)
+val Context.appNameExt: String?
+    get() = AppInfoUtils.getAppName(this)
 
 /** 获取ApplicationId */
-fun Context.getApplicationIdExt() = AppInfoUtils.getApplicationIdExt(this)
+val Context.applicationIdExt: String
+    get() = AppInfoUtils.applicationIdExt(this)
+
+//设备唯一id
+val Context.androidIDExt: String
+    get() = AppInfoUtils.getAndroidID(this)
+
+//屏幕宽
+val Context.screenWidthExt: Int
+    get() = AppInfoUtils.screenWidth(this)
+
+/** 屏幕高 */
+val Context.screenHeightExt: Int
+    get() = AppInfoUtils.screenHeight(this)
 
 //是否运行在前台
 fun Context.isAppRunningForegroundExt() = AppInfoUtils.isAppRunningForeground(this)
-
-//设备唯一id
-fun Context.getAndroidIDExt() = AppInfoUtils.getAndroidID(this)
-
-//屏幕宽
-fun Context.screenWidthExt() = AppInfoUtils.screenWidth(this)
-
-/** 屏幕高 */
-fun Context.screenHeightExt() = AppInfoUtils.screenHeight(this)
 
 /** 检查设备是否有虚拟键盘 */
 fun Context.checkDeviceHasNavigationBarExt() = AppInfoUtils.checkDeviceHasNavigationBar(this)
 
 /** 文件生成Uri */
-fun Context.getUriFromFileExt(file: File, applicationId: String = getApplicationIdExt()) = UpdateFile.getUriFromFile(this, file, applicationId)
+fun Context.getUriFromFileExt(file: File, applicationId: String = applicationIdExt) = UpdateFile.getUriFromFile(this, file, applicationId)
 
 fun Context.getActivityExt() = ActivityUtils.getActivityByContext(this)
 

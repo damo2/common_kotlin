@@ -10,7 +10,7 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
-import com.app.common.extensions.getApplicationIdExt
+import com.app.common.extensions.applicationIdExt
 
 import java.io.File
 
@@ -25,7 +25,7 @@ import java.io.File
 object UriUtil {
     fun getUri(context: Context, cameraFile: File): Uri =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //7.0
-                FileProvider.getUriForFile(context, "${context.getApplicationIdExt()}.fileprovider", cameraFile)
+                FileProvider.getUriForFile(context, "${context.applicationIdExt}.fileprovider", cameraFile)
                 //            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             } else {
                 Uri.fromFile(cameraFile)

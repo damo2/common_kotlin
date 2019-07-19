@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresPermission
 import com.app.common.bean.DownApkEvent
-import com.app.common.extensions.getAppNameExt
+import com.app.common.extensions.appNameExt
 import com.app.common.rxbus2.RxBus
 import com.app.common.utils.SingleHolder
 import com.app.common.utils.StorageUtils
@@ -22,14 +22,16 @@ import java.io.File
  */
 class UpdateInstallApk {
     private var apkFile: File? = null
+
     companion object : SingleHolder<UpdateInstallApk>(::UpdateInstallApk)
+
     /**
      * 在Activity onActivityResult里面添加  UpdateApkUtil.onActivityResult(requestCode, resultCode, activity) 处理授权安装app
      */
     @RequiresPermission(allOf = [(Manifest.permission.READ_EXTERNAL_STORAGE), (Manifest.permission.WRITE_EXTERNAL_STORAGE)])
     fun updateInstallApk(activity: Activity, downApkUrl: String, installAppPath: String? = null, listener: ((disposable: Disposable) -> Unit)? = null): Disposable? {
         //默认下载路径
-        val defaultInstallPath = StorageUtils.getPublicStorageDir(activity.getAppNameExt()
+        val defaultInstallPath = StorageUtils.getPublicStorageDir(activity.appNameExt
                 ?: "apk") + File.separator + downApkUrl.substring(downApkUrl.lastIndexOf("/"), downApkUrl.length)
         val intent = Intent(activity, UpdateService::class.java).apply {
             putExtra(ConstUpdate.KEY_DOWN_APK_URL, downApkUrl)

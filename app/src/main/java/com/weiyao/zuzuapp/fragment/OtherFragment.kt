@@ -5,6 +5,7 @@ import com.app.common.json.toJsonExt
 import com.damo.libdb.Dao
 import com.weiyao.zuzuapp.R
 import com.weiyao.zuzuapp.activity.LogShareActivity
+import com.weiyao.zuzuapp.activity.test.TestActivity
 import com.weiyao.zuzuapp.base.BaseFragment
 import com.weiyao.zuzuapp.service.TestJobSchedulerService
 import kotlinx.android.synthetic.main.fragment_other.*
@@ -37,6 +38,9 @@ class OtherFragment : BaseFragment() {
         }
         btnLoginShare.setOnClickListener {
             mActivity?.startActivity<LogShareActivity>()
+        }
+        btnTest.setOnClickListener {
+            mActivity?.startActivity<TestActivity>()
         }
     }
 

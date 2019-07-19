@@ -8,36 +8,38 @@ import com.app.common.utils.ActivityUtils
 
 
 //屏幕宽
-fun Activity.getScreenWidth() = ActivityUtils.getScreenWidth(this)
+val Activity.screenWidth: Int
+    get() = ActivityUtils.getScreenWidth(this)
 
 //屏幕高
-fun Activity.getScreenHeight() = ActivityUtils.getScreenHeight(this)
+val Activity.screenHeight: Int
+    get() = ActivityUtils.getScreenHeight(this)
 
-/**
- * 状态栏高度
- */
-fun Activity.getStatusBarHeightExt(): Int = ActivityUtils.getStatusBarHeight(this)
+//状态栏高度
+val Activity.statusBarHeightExt: Int
+    get() = ActivityUtils.getStatusBarHeight(this)
 
-/**
- * 获取导航栏高度
- */
-fun Activity.getNavigationBarHeightExt(): Int = ActivityUtils.getNavigationBarHeight(this)
+//获取导航栏高度
+val Activity.navigationBarHeightExt: Int
+    get() = ActivityUtils.getNavigationBarHeight(this)
 
-/**
- * 获取横屏状态下导航栏的宽度
- */
-fun Activity.getNavigationBarWidthExt(): Int = ActivityUtils.getNavigationBarWidth(this)
-
+//获取横屏状态下导航栏的宽度
+val Activity.navigationBarWidthExt: Int
+    get() = ActivityUtils.getNavigationBarWidth(this)
 
 //屏幕密度
-fun Activity.getDensityExt() = ActivityUtils.getDensity(this)
+val Activity.densityExt: Int
+    get() = ActivityUtils.getDensity(this)
 
-fun Activity.getDensityDpiExt() = ActivityUtils.getDensityDpi(this)
+val Activity.densityDpiExt: Int
+    get() = ActivityUtils.getDensityDpi(this)
 
 //获取activity的根view
-fun Activity.getActivityRootExt() = ActivityUtils.getActivityRoot(this)
+val Activity.activityRootExt: View
+    get() = ActivityUtils.getActivityRoot(this)
 
-fun Activity.hasNavBar(): Boolean = ActivityUtils.hasNavBar(this)
+val Activity.hasNavBarExt: Boolean
+    get() = ActivityUtils.hasNavBar(this)
 
 //隐藏状态栏
 fun Activity.statusHind() = ActivityUtils.statusHind(this)

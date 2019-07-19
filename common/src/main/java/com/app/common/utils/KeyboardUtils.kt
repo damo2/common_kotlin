@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import com.app.common.extensions.activityRootExt
 import com.app.common.extensions.dp2px
-import com.app.common.extensions.getActivityRootExt
 
 
 /**
@@ -82,8 +82,6 @@ object KeyboardUtils {
      */
     fun Activity.setKeyboardVisibleListenerExt(listener: ((isOpen: Boolean, heightDiff: Int) -> Boolean)?) {
 
-        val activityRoot = getActivityRootExt()
-
         val layoutListener = object : ViewTreeObserver.OnGlobalLayoutListener {
 
             private val r = Rect()
@@ -93,9 +91,9 @@ object KeyboardUtils {
             private var wasOpened = false
 
             override fun onGlobalLayout() {
-                activityRoot.getWindowVisibleDisplayFrame(r)
+                activityRootExt.getWindowVisibleDisplayFrame(r)
 
-                val heightDiff = activityRoot.rootView.height - r.height()
+                val heightDiff = activityRootExt.rootView.height - r.height()
 
                 val isOpen = heightDiff > visibleThreshold
 
@@ -109,24 +107,24 @@ object KeyboardUtils {
                 val removeListener = listener?.invoke(isOpen, heightDiff)
                 if (removeListener == true) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        activityRoot.viewTreeObserver
+                        activityRootExt.viewTreeObserver
                                 .removeOnGlobalLayoutListener(this)
                     } else {
-                        activityRoot.viewTreeObserver
+                        activityRootExt.viewTreeObserver
                                 .removeGlobalOnLayoutListener(this)
                     }
                 }
             }
         }
-        activityRoot.viewTreeObserver.addOnGlobalLayoutListener(layoutListener)
+        activityRootExt.viewTreeObserver.addOnGlobalLayoutListener(layoutListener)
         application
                 .registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks(this) {
                     override fun onTargetActivityDestroyed() {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                            activityRoot.viewTreeObserver
+                            activityRootExt.viewTreeObserver
                                     .removeOnGlobalLayoutListener(layoutListener)
                         } else {
-                            activityRoot.viewTreeObserver
+                            activityRootExt.viewTreeObserver
                                     .removeGlobalOnLayoutListener(layoutListener)
                         }
                     }
@@ -141,12 +139,11 @@ object KeyboardUtils {
      */
     fun Activity.isKeyboardVisibleExt(): Boolean {
         val r = Rect()
-        val activityRoot = getActivityRootExt()
         val visibleThreshold = Math.round(dp2px(KEYBOARD_VISIBLE_THRESHOLD_DP).toFloat())
 
-        activityRoot.getWindowVisibleDisplayFrame(r)
+        activityRootExt.getWindowVisibleDisplayFrame(r)
 
-        val heightDiff = activityRoot.rootView.height - r.height()
+        val heightDiff = activityRootExt.rootView.height - r.height()
 
         return heightDiff > visibleThreshold
     }
