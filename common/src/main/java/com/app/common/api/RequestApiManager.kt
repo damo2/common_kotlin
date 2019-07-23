@@ -43,7 +43,7 @@ class RequestApiManager() {
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
                     .baseUrl(baseUrl)
-                    .client(client!!)
+                    .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
 //                .addConverterFactory(CustomGsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -67,6 +67,7 @@ class RequestApiManager() {
             get() = SingletonHolder.INSTANCE
     }
 
+    //添加通用参数
     private inner class CommonInterceptor(var isToken: Boolean = false, var isParams: Boolean = true) : Interceptor {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {

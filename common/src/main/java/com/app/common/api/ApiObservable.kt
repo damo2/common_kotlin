@@ -24,7 +24,7 @@ import java.util.concurrent.TimeoutException
  * @param onNext 成功
  * @param onError 失败 不传默认toast ApiException的异常信息，可以传onError 能toast自己的信息 例如：{toastInfo("添加失败")}
  * @param onComplete 完成
- * @param context isShowLoad为true 必传
+ * @param context 继承AppBaseActivity（或AppBaseFragment）的传this 用于统一取消监听， isShowLoad为true 必传
  * @param isShowLoad 是否显示加载框
  * @param isCanCancel 是否能被取消
  * @param isToast 是否toast失败信息

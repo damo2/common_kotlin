@@ -155,4 +155,9 @@ abstract class AppBaseFragment : Fragment(), IBase {
         mCompositeDisposable.clear()
         super.onDestroy()
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        mActivity = null
+    }
 }

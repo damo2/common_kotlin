@@ -20,18 +20,17 @@ fun <T> composeDefault(): ObservableTransformer<T, T> {
     }
 }
 
-fun <T> Observable<T>.composeDefault(): Observable<T> = subscribeOn(Schedulers.io())
-        .unsubscribeOn(Schedulers.io()).map { t ->
-            var msg = "请求异常"
-            val code = when (t) {
-                is BaseBean<*> -> {
-                    msg = t.msg
-                    t.code
+fun <T> Observable<T>.composeDefault(): Observable<T> =
+        subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io()).map { t ->
+                    var msg = "请求异常"
+                     when (t) {
+                        is BaseBean<*> -> {
+                            msg = t.msg
+                            if (t.code != 12000) {
+                                throw ApiException(t.code, msg, GsonUtil().toJson(t))
+                            }
+                        }
+                    }
+                    t
                 }
-                else -> 12000
-            }
-            if (code != 12000) {
-                throw ApiException(code, msg, GsonUtil().toJson(t))
-            }
-            t
-        }

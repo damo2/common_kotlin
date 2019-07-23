@@ -138,16 +138,27 @@ dependencies {
 }
 
 allprojects {
-    //版本冲突：强制使用某版本依赖
     configurations.all {
+        //版本冲突：强制使用某版本依赖
         resolutionStrategy.force 'androidx.print:print:1.0.0-alpha3'
+
+        resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                def requested = details.requested
+                if (requested.group == 'com.android.support') {
+                    if (!requested.name.startsWith("multidex")) {
+                        details.useVersion '27.1.1'//27.1.1为当前版本号
+                    }
+                }
+            }
+        }
     }
 }
 
 //如果有用到kapt添加如下配置
-kapt {
-    useBuildCache = true
-    javacOptions {
-        option("-Xmaxerrs", 500)
+    kapt {
+        useBuildCache = true
+        javacOptions {
+            option("-Xmaxerrs", 500)
+        }
     }
-}

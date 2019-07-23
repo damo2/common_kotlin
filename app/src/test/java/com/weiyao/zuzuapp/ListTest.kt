@@ -1,7 +1,9 @@
 package com.weiyao.zuzuapp
 
-import org.junit.Assert.assertEquals
+import android.content.Context
+import android.view.View
 import org.junit.Test
+import kotlin.coroutines.coroutineContext
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -10,14 +12,19 @@ import org.junit.Test
  */
 class ListTest {
     @Test
-    fun listTest() {
-        val list = listOf(1, 2, 3, 4, 5, 6)
-        assertEquals(listOf(Pair(1, 7), Pair(2, 8)), list.zip(listOf(7, 8)))
+    fun Test() {
+        print(twoSum(intArrayOf(3, 2, 4), 6).toList().toString())
     }
 
-    fun strStr(haystack: String, needle: String): Int {
-        val index = haystack.indexOf(needle)
-        return  if (index > -1) index else 0
+    fun twoSum(nums: IntArray, target: Int): IntArray {
+        nums.forEachIndexed { index, i ->
+            val temp = target - i;
+            val tempIndex = nums.indexOf(temp)
+            if (tempIndex > -1 && index != tempIndex) {
+                return intArrayOf(index, tempIndex);
+            }
+        }
+        return intArrayOf()
     }
-    
+
 }
