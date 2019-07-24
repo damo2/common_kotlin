@@ -217,6 +217,8 @@
     
 <br><br><br>
 ### **自定义view**
+<img src="https://github.com/damo2/common/blob/master/file/ic0.jpg?raw=true" width="150">  
+
 ##### 点击倒计时
     <com.app.common.widget.CountdownButton
         android:id="@+id/btnGetCode"
