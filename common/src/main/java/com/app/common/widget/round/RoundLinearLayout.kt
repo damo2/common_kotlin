@@ -5,7 +5,6 @@ import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import com.app.common.widget.round.delegate.RoundViewCutDelegate
-import com.app.common.widget.round.delegate.RoundViewDelegate
 
 /**
  * 自定义控件：圆角LinearLayout

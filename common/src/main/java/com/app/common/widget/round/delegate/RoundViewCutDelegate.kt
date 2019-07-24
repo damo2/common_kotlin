@@ -82,7 +82,7 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
             radiusBottomRight = mContext.dp2px(a.getDimension(R.styleable.RoundViewLayout_radiusBottomRight, 0f))
             backgroundColor = a.getColor(R.styleable.RoundViewLayout_backgroundColor, 0)
             backgroundPressColor = a.getColor(R.styleable.RoundViewLayout_backgroundPressColor, 0)
-            isRippleEnable = a.getBoolean(R.styleable.RoundView_isRippleEnable, true)
+            isRippleEnable = a.getBoolean(R.styleable.RoundViewLayout_isRippleEnable, true)
             a.recycle()
         }
     }
