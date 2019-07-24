@@ -8,11 +8,11 @@ import com.app.common.utils.ActivityUtils
 
 
 //屏幕宽
-val Activity.screenWidth: Int
+val Activity.screenWidthExt: Int
     get() = ActivityUtils.getScreenWidth(this)
 
 //屏幕高
-val Activity.screenHeight: Int
+val Activity.screenHeightExt: Int
     get() = ActivityUtils.getScreenHeight(this)
 
 //状态栏高度

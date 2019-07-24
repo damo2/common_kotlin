@@ -60,7 +60,6 @@ fun Context.getAppIconDrawableExt(packageName: String = this.packageName) = AppI
 
 fun Context.dp2px(dpVal: Int): Int = dp2px(dpVal.toFloat()).toInt()
 
-fun Context.dp2pxFI(dpVal: Float): Int = dp2px(dpVal).toInt()
 fun Context.dp2px(dpVal: Float): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, this.resources.displayMetrics)
 
 fun Context.sp2px(spVal: Float): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, this.resources.displayMetrics)
@@ -88,9 +87,6 @@ fun Context.getColorStateListExt(@ColorRes id: Int, theme: Resources.Theme?) = R
 //打开网络设置界面
 fun Context.openWirelessSettingsExt() = NetUtils.openWirelessSettings(this)
 
-/** 获取活动网络信息 */
-fun Context.getActiveNetworkInfoExt() = NetUtils.getActiveNetworkInfo(this)
-
 /**  判断网络是否可用 */
 @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
 fun Context.isAvailableExt() = NetUtils.isAvailable(this)
@@ -107,7 +103,7 @@ fun Context.is4GExt(): Boolean = NetUtils.is4G(this)
 
 /** 判断wifi是否连接状态 */
 @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-fun Context.isWifiConnectedExt() = NetUtils.isWifiConnected(this)
+fun Context.isWifiExt() = NetUtils.isWifiConnected(this)
 
 /** @return 移动网络运营商名称  如中国联通、中国移动、中国电信 */
 fun Context.getNetworkOperatorNameExt() = NetUtils.getNetworkOperatorName(this)

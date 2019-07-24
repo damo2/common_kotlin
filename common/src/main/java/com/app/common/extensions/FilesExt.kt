@@ -10,10 +10,9 @@ import java.io.File
  * @description 文件操作扩展
  */
 
-//向文件中追加文本
-fun File.appendExt(txt: String, create: Boolean = true) = FileUtils.append(this, txt, create)
-
-fun File.headerExt(): String? = FileUtils.header(this)
+//获取文件头
+val File.headerExt: String?
+    get() = FileUtils.header(this)
 
 //获取文件类型
 val File.metadataExt: FileMetaData
@@ -28,15 +27,21 @@ val File.sizeExt: Long
     get() = FileUtils.size(this)
 
 //文件名字带后缀
-fun String.filenameExt(): String = FileUtils.filename(this)
+val String.filenameExt: String
+    get() = FileUtils.filename(this)
 
 //文件名字不带后缀
-fun String.filenameNoExtensionExt(): String = FileUtils.filenameNoExtension(this)
+val String.filenameNoExtensionExt: String
+    get() = FileUtils.filenameNoExtension(this)
 
 //文件后缀
-fun String.fileExtensionExt(): String = FileUtils.fileExtension(this)
+val String.fileExtensionExt: String
+    get() = FileUtils.fileExtension(this)
 
 //获取视频信息
 fun File.getVideoInfoExt(videoInfo: (duration: Int, width: Int, height: Int) -> Unit) = FileUtils.getVideoInfo(this, videoInfo)
+
+//向文件中追加文本
+fun File.appendExt(txt: String, isCreate: Boolean = true) = FileUtils.append(this, txt, isCreate)
 
 fun File.bitmapExt(): Bitmap? = FileUtils.bitmap(this)

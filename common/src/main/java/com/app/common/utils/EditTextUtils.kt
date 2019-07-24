@@ -31,7 +31,7 @@ object EditTextUtils {
     /**
      * 限制长度
      * @param maxLength 最多输入字数
-     * @param outCallback 超出回调
+     * @param outCallback 字数超出限制回调
      */
     fun limitLength(editText: EditText, maxLength: Int, outCallback: (() -> Unit)? = null) {
         editText.addTextChangedListener(object : TextWatcher {

@@ -20,15 +20,7 @@ import java.lang.reflect.Field
 object ViewUtils {
     fun setMargin(view: View, left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) {
         val layoutParams = view.layoutParams
-        val layout = when (layoutParams) {
-            is RelativeLayout.LayoutParams -> layoutParams as RelativeLayout.LayoutParams
-            is LinearLayout.LayoutParams -> layoutParams as LinearLayout.LayoutParams
-            is FrameLayout.LayoutParams -> layoutParams as FrameLayout.LayoutParams
-            is RecyclerView.LayoutParams -> layoutParams as RecyclerView.LayoutParams
-            is ViewGroup.MarginLayoutParams -> layoutParams as ViewGroup.MarginLayoutParams
-            else -> null
-        }
-        if (layout == null) return
+        val layout = getMarginLayoutParams(layoutParams) ?: return
         val leftResult = left ?: layout.leftMargin
         val rightResult = right ?: layout.rightMargin
         val topResult = top ?: layout.topMargin
@@ -60,15 +52,7 @@ object ViewUtils {
 
     fun setWidthHeight(view: View, width: Int? = null, height: Int? = null) {
         val layoutParams = view.layoutParams
-        val layout = when (layoutParams) {
-            is RelativeLayout.LayoutParams -> layoutParams as RelativeLayout.LayoutParams
-            is LinearLayout.LayoutParams -> layoutParams as LinearLayout.LayoutParams
-            is FrameLayout.LayoutParams -> layoutParams as FrameLayout.LayoutParams
-            is RecyclerView.LayoutParams -> layoutParams as RecyclerView.LayoutParams
-            is ViewGroup.MarginLayoutParams -> layoutParams as ViewGroup.MarginLayoutParams
-            else -> null
-        }
-        if (layout == null) return
+        val layout = getMarginLayoutParams(layoutParams) ?: return
         val widthResult = width ?: layout.width
         val heightResult = height ?: layout.height
         layout.let {
@@ -78,23 +62,14 @@ object ViewUtils {
         }
     }
 
-    fun setWidthScale(view: View, width: Int? = null) {
-        val layoutParams = view.layoutParams
-        val layout = when (layoutParams) {
+    private fun getMarginLayoutParams(layoutParams: ViewGroup.LayoutParams?): ViewGroup.MarginLayoutParams? {
+        return when (layoutParams) {
             is RelativeLayout.LayoutParams -> layoutParams as RelativeLayout.LayoutParams
             is LinearLayout.LayoutParams -> layoutParams as LinearLayout.LayoutParams
             is FrameLayout.LayoutParams -> layoutParams as FrameLayout.LayoutParams
             is RecyclerView.LayoutParams -> layoutParams as RecyclerView.LayoutParams
             is ViewGroup.MarginLayoutParams -> layoutParams as ViewGroup.MarginLayoutParams
             else -> null
-        }
-        if (layout == null) return
-        val widthResult = width ?: layout.width
-        val heightResult = view.height ?: layout.height
-        layout.let {
-            it.width = widthResult
-            it.height = heightResult
-            view.layoutParams = it
         }
     }
 

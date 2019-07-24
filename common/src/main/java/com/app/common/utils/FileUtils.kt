@@ -34,7 +34,7 @@ object FileUtils {
      * 获取文件类型
      */
     fun metadata(file: File): FileMetaData {
-        val header = file.headerExt()
+        val header = header(file)
         if (header.isNullOrEmpty()) {
             return FileMetaData.UNKNOWN
         }
@@ -64,7 +64,7 @@ object FileUtils {
     //文件后缀
     fun fileExtension(filePath: String): String = filePath.substringAfterLast(".", "")
 
-
+    //file 转bitmap
     fun bitmap(file: File): Bitmap? {
         return if (!file.exists()) null
         else {

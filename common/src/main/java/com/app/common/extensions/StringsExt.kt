@@ -1,7 +1,6 @@
 package com.app.common.extensions
 
 import android.text.SpannableString
-import com.app.common.utils.BitmapUtil
 import com.app.common.utils.StringUtils
 
 //是否相等
@@ -18,15 +17,9 @@ fun String?.isPasswordHalfAngleExt(): Boolean = StringUtils.isPasswordHalfAngle(
 //String 设置颜色
 fun String?.setColorExt(color: Int): SpannableString = StringUtils.setColor(this, color)
 
-//图片路径获取宽
-fun String.imgGetWidthExt() = BitmapUtil.imgGetWidth(this)
-
-//图片路径获取高
-fun String.imgGetHeightExt() = BitmapUtil.imgGetHeight(this)
-
-//获取String里面的数字转int
+//获取String里面的数字，默认-1
 fun String?.getNumExt(default: Int = -1): Int = StringUtils.getNum(this, default)
 
-//失败返回-1
+//String转int失败，默认-1
 fun String?.toIntExt(default: Int = -1): Int = StringUtils.toInt(this, default)
 

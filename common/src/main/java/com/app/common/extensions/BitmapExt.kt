@@ -1,10 +1,12 @@
 package com.app.common.extensions
 
+import android.Manifest
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
+import androidx.annotation.RequiresPermission
 import com.app.common.utils.BitmapUtil
 import com.app.common.utils.CompressConst
 
@@ -15,6 +17,7 @@ import com.app.common.utils.CompressConst
  */
 
 //保存文件（需要判断权限）
+@RequiresPermission(allOf = [(Manifest.permission.READ_EXTERNAL_STORAGE), (Manifest.permission.WRITE_EXTERNAL_STORAGE)])
 fun Bitmap.saveFileExt(path: String, sucCallback: (() -> Unit)? = null) = BitmapUtil.saveFile(this, path, sucCallback)
 
 //从一个view创建Bitmap。
@@ -34,6 +37,12 @@ fun Bitmap.compressBySizeExt(sizeMax: Int = CompressConst.IMAGE_MAXSIZE_SYS) = B
 fun Drawable.drawableToBitmapExt() = BitmapUtil.drawableToBitmap(this)
 
 fun Uri.toBitmapExt(context: Context) = BitmapUtil.uriToBitmap(context, this)
+
+//图片路径获取宽
+fun String.imgGetWidthExt() = BitmapUtil.imgGetWidth(this)
+
+//图片路径获取高
+fun String.imgGetHeightExt() = BitmapUtil.imgGetHeight(this)
 
 
 

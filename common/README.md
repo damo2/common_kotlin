@@ -7,32 +7,20 @@
       
 通过 applicationIdExt获取applicationId
 
-### 打印日志
+###### 打印日志
   [logger](https://github.com/orhanobut/logger)
     
-    //初始化 DiskLogAdapter 需要存储权限
+    //添加日志保存本地 DiskLogAdapter 需要存储权限
     Logger.addLogAdapter(DiskLogAdapter())
-     //使用
-     logd("开始")
-     loge("异常")
+    //使用
+    logd("开始")
+    loge("异常")
      
-### 保存恢复数据
-  [android-state](https://github.com/evernote/android-state)
-  
-  app gradle添加
-  
-    //保存恢复数据
-    kapt 'com.evernote:android-state-processor:1.4.1'
- 使用
- 
-    //赋值后，横竖屏或折叠屏切换，onCreate数据会恢复
-    @State
-    var username: String? = null
            
-### 吐司
+###### 吐司
     toastInfo("信息")
 
-### json解析
+###### json解析
     //写法1
     val userBean = userJsonStr.gsonFromJsonExt<UserBean>()
     val jsonStr = userBean.toJsonExt()
@@ -40,13 +28,13 @@
     //写法2
     MessageBean<ImageBean> message = GsonConvert.jsonToBean(jsonString, MessageBean.class, ImageBean.class);
     var  bean :List<Bean>?  = GsonConvert.jsonToBeanList(jsonStr, Bean::class.java)
-    var  bean:BaseBean<SelectTypeBeam>?  = GsonConvert.fromJsonToBeanDataList(jsonStr, BaseBean::class.java, SelectTypeBeam::class.java)
+    var  bean :BaseBean<SelectTypeBeam>?  = GsonConvert.fromJsonToBeanDataList(jsonStr, BaseBean::class.java, SelectTypeBeam::class.java)
 
-### 图片加载
+###### 图片加载
     ImageLoader.loader().load(this, "http://chuantu.biz/t6/345/1532056593x-1404817629.jpg", ivIcon,
                     centerCrop = true,placeholder = R.drawable.ic_launcher)
 
-### SharedPreferences 保存信息
+###### SharedPreferences 保存信息
  eg:
 
     var isShowGuide: Boolean by Preference(this, ConstantsKey.KEY_IS_SHOW_GUIDE, false)
@@ -56,20 +44,20 @@
     //注意 对象UserInfo 及里面的对象都要实现Serializable
      var mUserInfoBean: UserInfo by Preference<UserInfo>(this, "userinfo", UserInfo())
 
-### SDPathUtils 获取目录
+###### SDPathUtils 获取目录
     //SD目录
     SDPathUtils.getSDCardPublicDir("xiaoyingying/log")
     //缓存目录
     SDPathUtils.getSDCardPrivateCacheDir(context,"cacheFile")
 
-### EncryptUtils 加密解密
+###### EncryptUtils 加密解密
     //加密
     val dataEncrypt = EncryptUtils.instance.encrypt("啦啦啦123")
     //解密
     val dataDecrypt = EncryptUtils.instance.decrypt(dataEncrypt)
 
 
-### CommonAdapter使用
+###### CommonAdapter使用
     //kotlin
     val adapter = CommonAdapter(this, R.layout.$itemLayoutId$, $data$, holderConvert = { holder, data, position, payloads ->
 
@@ -189,9 +177,6 @@
     var context by NotNullSingle<Context>()
     
     
-    
-    
-    
 
 <br><br><br>
 
@@ -297,7 +282,90 @@ RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、R
             
             
             
-            
+### 扩展属性和方法   
+[代码](/common/src/main/java/com/app/common/extensions)   
+[工具类](/common/src/main/java/com/app/common/utils)  
+###### Activity 扩展属性和方法
+ 属性和方法  | 描述  
+ ---- | ----- 
+ Activity.screenWidthExt  | 屏幕宽 
+ Activity.screenHeightExt  | 屏幕高 
+ Activity.statusBarHeightExt  | 状态栏高度 
+ Activity.navigationBarHeightExt  | 导航栏高度
+ Activity.navigationBarWidthExt  | 横屏状态下导航栏的宽度
+ Activity.activityRootExt  | 获取activity的根view
+ Activity.hasNavBarExt  | 是否有导航栏
+ Activity.statusHind()   | 隐藏状态栏
+ Activity.statusTranslucent() | 沉浸式状态栏
+ Activity.viewIsVisibleExt(view) | view是否在屏幕中可见
+ 
+ 
+###### Context 扩展属性和方法
+ 属性和方法  | 描述  
+ ---- | ----- 
+ Context.versionCodeExt  | 版本号 
+ Context.versionNameExt  | 版本名 
+ Context.appNameExt  | 项目名 
+ Context.applicationIdExt  | applicationId
+ Context.androidIDExt  | 设备唯一id
+ Context.screenWidthExt  | 屏幕宽
+ Context.screenHeightExt  | 屏幕高
+ Context.isAppRunningForegroundExt()   | 是否运行在前台
+ Context.checkDeviceHasNavigationBarExt() | 是否有虚拟键盘
+ Context.getUriFromFileExt(file,applicationId) | 文件生成Uri
+ Context.getActivityExt() | 获取Activity
+ Context.getAppIconDrawableExt(packageName) | 获取App图标
+ Context.dp2px(dp) | dp转px
+ Context.sp2px(sp) | sp转px
+ Context.getColorExt(id[,theme]) | 资源id获取颜色
+ Context.getColorStateListExt(id[,theme]) | 资源id获取颜色
+ Context.getNetWorkTypeNameExt() | 获取当前的网络类型(WIFI,2G,3G,4G)
+ Context.is4GExt() | 判断网络是否是4G
+ Context.isWifiExt() | 判断wifi是否连接
+ 
+ 
+###### String 扩展属性和方法
+ 属性和方法  | 描述  
+ ---- | ----- 
+ String.equalsExt(str,isIgnoerNull)  | 是否相等
+ String.isEmailExt()  | 是否是邮箱
+ String.isPasswordHalfAngleExt()  | 是否是密码半角（所有英文字符英文符号）
+ String.setColorExt(color)  | String 设置颜色
+ String.getNumExt(default)  | 获取String里面的数字
+ String.toIntExt(default)  | String转int失败
+ 
+###### View 扩展属性和方法
+ 属性和方法  | 描述  
+ ---- | ----- 
+ View.widthExt()  | view 宽
+ View.heightExt()  | view 高
+ View.setOnClickExtNoFast(time,block: (view: View) -> Unit)  | View.防止快速点击
+ View.setMarginExt(left,top,right,bottom)  | 设置 Margin
+ View.setPaddingExt(left,top,right,bottom)  | 设置 Padding
+ View.setWidthHeightExt(width,height)  | 设置宽高
+ View.getActivityExt() | 获取 activity
+ View.toBitmapExt() | view转成bitmap
+ 
+###### EditText 扩展属性和方法
+ 属性和方法  | 描述  
+ ---- | ----- 
+ EditText.inhibitInputSpaceExt()  | 禁止输入空格 
+ EditText.limitLengthExt(length,outCallback)  | 限制输入长度
+ EditText.setOnlyDecimalExt(isShow)  | 只能输入数字和小数点，小数点只能1个且小数点后最多只能2位 
+ EditText.setPwdShowOrHindExt()  | 设置密码显示或隐藏
+ 
+###### File 扩展属性和方法
+ 属性和方法  | 描述  
+ ---- | ----- 
+ File.headerExt  | 获取文件头
+ File.metadataExt  | 文件类型
+ File.isImageExt  | 是否是图片
+ File.sizeExt  | 获取文件的大小
+ String.filenameExt  | 文件名字带后缀
+ String.filenameNoExtensionExt  | 文件名字不带后缀
+ String.fileExtensionExt  | 文件后缀
+ File.appendExt(txt,isCreate)  | 向文件中追加文本 
+ File.getVideoInfoExt((duration: Int, width: Int, height: Int) -> Unit) | 获取视频信息           
             
 ## 参考及使用
     圆角view https://github.com/H07000223/FlycoRoundView
