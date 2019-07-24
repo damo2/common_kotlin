@@ -162,8 +162,7 @@
             //todo same thing
             }
         }.apply {
-            //结束时取消监听
-            addSubscription(this)
+            //todo 结束时取消监听
         }
 
 ###### 发送方：
