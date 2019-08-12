@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.flexbox.FlexboxLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EEEEEE"
+    app:flexWrap="wrap"
+    >
+    <Button
+        android:id="@+id/btnData"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="4dp"
+        android:background="@color/defaultBg"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="日期"
+        android:textColor="@color/colorAccent"
+        />
+
+</com.google.android.flexbox.FlexboxLayout>
+

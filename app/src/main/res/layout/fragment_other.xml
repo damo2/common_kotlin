@@ -48,4 +48,26 @@
         android:layout_height="wrap_content"
         android:text="第三方登录分享"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnStatic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="静态代理"/>
+
+        <Button
+            android:id="@+id/btnDynamic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="动态代理"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnTest2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test2"/>
 </LinearLayout>
