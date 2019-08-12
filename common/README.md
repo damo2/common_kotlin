@@ -213,7 +213,20 @@
     //使用
     Manager.getInstance(context)
     
-    
+##### 日期
+        val date = Date()       //现在时间
+
+        val beforeDay = date - 1    //前一天
+        val lastDay = date + 1      //后一天
+
+        val beforeHour = date - hour(1)     //前一个小时
+        val lastHour = date + month(1)       //后一个月
+        val beforeHour = date - minute(1)     //前一分钟
+        
+        val isBefore = beforeDay < date     //比较大小
+        
+        date++      //本月的最后一天
+        date--      //本月的第一天
     
 <br><br><br>
 ### **自定义view**
@@ -282,6 +295,8 @@ RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、R
             />
             
             
+            
+         
             
 ### 扩展属性和方法   
 [代码](/common/src/main/java/com/app/common/extensions)   
