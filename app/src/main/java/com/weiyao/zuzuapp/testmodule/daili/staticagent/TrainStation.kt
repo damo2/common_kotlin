@@ -1,4 +1,4 @@
-package com.weiyao.zuzuapp.testmodule.dynamicagent
+package com.weiyao.zuzuapp.testmodule.daili.staticagent
 
 import com.app.common.logger.logd
 

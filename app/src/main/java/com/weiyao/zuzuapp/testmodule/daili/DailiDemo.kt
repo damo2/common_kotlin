@@ -1,6 +1,9 @@
-package com.weiyao.zuzuapp.testmodule.dynamicagent
+package com.weiyao.zuzuapp.testmodule.daili
 
-import java.lang.reflect.InvocationHandler
+import com.weiyao.zuzuapp.testmodule.daili.dynamicagent.IBuy
+import com.weiyao.zuzuapp.testmodule.daili.dynamicagent.InvocationHandlerImpl
+import com.weiyao.zuzuapp.testmodule.daili.dynamicagent.TrainStation
+import com.weiyao.zuzuapp.testmodule.daili.staticagent.Huangniu
 import java.lang.reflect.Proxy
 
 /**
@@ -8,10 +11,18 @@ import java.lang.reflect.Proxy
  * Date: 2019/8/1  20:54
  * mail: 1902065822@qq.com
  * describe:
+ * 动态代理、静态代理demo
  */
-object DynamicProxyDemo {
-    fun test() {
-        val stationImpl = TrainStation()//将要被代理的真实对象
+object DailiDemo {
+    ///静态代理
+    fun staticagent() {
+        val iBuy = Huangniu("武汉")
+        iBuy.buyThing()
+    }
+
+    ///动态代理
+    fun dynamicagent() {
+        val stationImpl = TrainStation("汉口")//将要被代理的真实对象
         /**
          * 动态代理就好处在这里，不管这里是要代理什么对象，I
          * nvocationHandlerImpl与Proxy中代码都不必改变，

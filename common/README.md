@@ -227,6 +227,8 @@
         
         date++      //本月的最后一天
         date--      //本月的第一天
+        
+        if(date > beforeDay){}   //比较日期
     
 <br><br><br>
 ### **自定义view**
