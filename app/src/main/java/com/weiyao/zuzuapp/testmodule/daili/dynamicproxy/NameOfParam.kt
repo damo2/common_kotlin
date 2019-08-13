@@ -9,6 +9,10 @@ package com.weiyao.zuzuapp.testmodule.daili.dynamicproxy
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.VALUE_PARAMETER)
-annotation class Name(val value: String,
-                      val encoded: Boolean = false)
+annotation class NameOfParam(val value: String)
+
+@MustBeDocumented
+@Retention(AnnotationRetention.RUNTIME)
+@Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
+annotation class NameOfClass(val value: String)
 

@@ -1,7 +1,9 @@
 package com.weiyao.zuzuapp.testmodule.daili
 
-import com.weiyao.zuzuapp.testmodule.daili.dynamicproxy.*
+import com.weiyao.zuzuapp.testmodule.daili.dynamicproxy.ITrip
 import com.weiyao.zuzuapp.testmodule.daili.dynamicproxy.InvocationHandlerImpl
+import com.weiyao.zuzuapp.testmodule.daili.dynamicproxy.ToHankouTrip
+import com.weiyao.zuzuapp.testmodule.daili.dynamicproxy.ToShanghaiTrip
 import com.weiyao.zuzuapp.testmodule.daili.staticproxy.ToHankouTripStaticProxy
 import com.weiyao.zuzuapp.testmodule.daili.staticproxy.ToShanghaiTripStaticProxy
 import java.lang.reflect.Proxy
@@ -32,14 +34,14 @@ object ProxyDemo {
         val obj1 = ToHankouTrip("")//将要被代理的真实对象
         dynamicproxyFun(obj1).apply {
             buyTrain()
-            play("黄鹤楼", 200.00)
+            play("黄鹤楼", 200.00, "12:00", "15:00")
             hotel("武汉七天连锁酒店", 120.00)
         }
 
         val obj2 = ToShanghaiTrip("")
         dynamicproxyFun(obj2).apply {
             buyTrain()
-            play("外滩", 50.00)
+            play("外滩", 50.00, "19:00", "20:00")
             hotel("上海如家酒店", 150.00)
         }
     }

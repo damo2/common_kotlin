@@ -8,11 +8,12 @@ package com.weiyao.zuzuapp.testmodule.daili.dynamicproxy
  */
 interface ITrip {
     //买票
+    @NameOfClass("buyTrain")
     fun buyTrain()
 
     //游玩
-    fun play(@Name(value = "playName") name: String,@Name(value = "playPrice") price: Double)
+    fun play(@NameOfParam("playName") name: String, @NameOfParam("playPrice") price: Double, @NameOfParam("startTime") startTime: String, @NameOfParam("endTime") endTime: String)
 
     //住宿
-    fun hotel(@Name(value = "hotelName") name: String,@Name(value = "hotelPrice") price: Double)
+    fun hotel(@NameOfParam("hotelName") name: String, @NameOfParam("hotelPrice") price: Double)
 }

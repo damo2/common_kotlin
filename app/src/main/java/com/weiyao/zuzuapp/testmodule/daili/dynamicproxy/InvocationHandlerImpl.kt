@@ -31,7 +31,7 @@ internal class InvocationHandlerImpl(var proxyobj: ITrip) : InvocationHandler {
             //方法上参数对应的注解
             annotations?.forEach { annotation ->
                 //参数注解类型
-                if (annotation is Name) {
+                if (annotation is NameOfParam) {
                     val name = annotation.value
                     logd("name=$name value=${args?.get(argsIndex)}")
                 }
