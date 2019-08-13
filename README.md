@@ -60,3 +60,10 @@ HTTP客户端。
 
 ##### ReactNative集成
 [ReactNative集成](https://www.jianshu.com/p/a7fc884da42a)
+
+
+<br><br><br>
+#### 练习
+ 模块  |
+ ---- |
+ [静态代理动态代理](app/src/main/java/com/weiyao/zuzuapp/testmodule/daili)|
