@@ -1,9 +1,7 @@
 package com.weiyao.zuzuapp.testmodule.daili
 
-import com.weiyao.zuzuapp.testmodule.daili.dynamicproxy.ITrip
+import com.weiyao.zuzuapp.testmodule.daili.dynamicproxy.*
 import com.weiyao.zuzuapp.testmodule.daili.dynamicproxy.InvocationHandlerImpl
-import com.weiyao.zuzuapp.testmodule.daili.dynamicproxy.ToHankouTrip
-import com.weiyao.zuzuapp.testmodule.daili.dynamicproxy.ToShanghaiTrip
 import com.weiyao.zuzuapp.testmodule.daili.staticproxy.ToHankouTripStaticProxy
 import com.weiyao.zuzuapp.testmodule.daili.staticproxy.ToShanghaiTripStaticProxy
 import java.lang.reflect.Proxy

@@ -11,8 +11,8 @@ interface ITrip {
     fun buyTrain()
 
     //游玩
-    fun play(name: String, price: Double)
+    fun play(@Name(value = "playName") name: String,@Name(value = "playPrice") price: Double)
 
     //住宿
-    fun hotel(name: String, price: Double)
+    fun hotel(@Name(value = "hotelName") name: String,@Name(value = "hotelPrice") price: Double)
 }
