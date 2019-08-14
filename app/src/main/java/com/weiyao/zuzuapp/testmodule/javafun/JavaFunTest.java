@@ -49,6 +49,11 @@ public class JavaFunTest {
 
         System.out.println("输出大于 3 的所有数字:");
         eval(list, n -> n > 3);
+
+        ConsumerInterface<Integer, Boolean> test = n -> n < 8 && n > 4;
+
+        System.out.println("输出大于 4  小于 8 的所有数字:");
+        eval(list, test);
     }
 
     @FunctionalInterface
@@ -56,11 +61,25 @@ public class JavaFunTest {
         void sayMessage(String message);
     }
 
-    public static void eval(List<Integer> list, Function<Integer, Boolean> function) {
+    //    public static void eval(List<Integer> list, Function<Integer, Boolean> function) {
+    //        for (Integer n : list) {
+    //            if (function.apply(n)) {
+    //                System.out.println(n + " ");
+    //            }
+    //        }
+    //    }
+
+    public static void eval(List<Integer> list, ConsumerInterface<Integer, Boolean> function) {
         for (Integer n : list) {
-            if (function.apply(n)) {
+            if (function.accept(n)) {
                 System.out.println(n + " ");
             }
         }
+    }
+
+    //自定义函数接口
+    @FunctionalInterface
+    public interface ConsumerInterface<T, R> {
+        R accept(T t);
     }
 }
