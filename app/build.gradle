@@ -72,6 +72,11 @@ android {
         preDexLibraries true
         maxProcessCount 8
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 def customAppName(DefaultDomainObjectSet<ApplicationVariant> applicationVariants, DefaultProductFlavor defaultConfig) {

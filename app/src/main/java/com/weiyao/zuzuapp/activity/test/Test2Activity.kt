@@ -5,6 +5,7 @@ import com.app.common.logger.logd
 import com.app.common.utils.*
 import com.weiyao.zuzuapp.R
 import com.weiyao.zuzuapp.base.BaseActivity
+import com.weiyao.zuzuapp.testmodule.javafun.JavaFunTest
 import kotlinx.android.synthetic.main.activity_test2.*
 import java.math.BigDecimal
 import java.util.*
@@ -59,6 +60,8 @@ class Test2Activity : BaseActivity() {
             count()  // 输出结果：0
             count()  // 输出结果：1
             count()  // 输出结果：2
+
+            JavaFunTest.test()
         }
     }
 

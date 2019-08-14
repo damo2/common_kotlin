@@ -298,7 +298,7 @@ public class WheelView extends View {
 
         ViewConfiguration configuration = ViewConfiguration.get(context);
         //        clickDistance = configuration.getScaledTouchSlop();
-        clickTimeout = configuration.getTapTimeout();
+        clickTimeout = ViewConfiguration.getTapTimeout();
         mMinimumFlingVelocity = configuration.getScaledMinimumFlingVelocity();
         mMaximumFlingVelocity = configuration.getScaledMaximumFlingVelocity();
 

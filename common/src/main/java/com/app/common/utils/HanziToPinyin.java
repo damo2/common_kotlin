@@ -25,7 +25,7 @@ public class HanziToPinyin {
                 Locale[] var1 = Collator.getAvailableLocales();
 
                 for (Locale var5 : var1) {
-                    if (var5.equals(Locale.CHINA) || var5.getLanguage().equals("zh") && var5.getCountry().equals("HANS")) {
+                    if (var5.equals(Locale.CHINA) || "zh".equals(var5.getLanguage()) && "HANS".equals(var5.getCountry())) {
                         sInstance = new HanziToPinyin(true);
                         return sInstance;
                     }

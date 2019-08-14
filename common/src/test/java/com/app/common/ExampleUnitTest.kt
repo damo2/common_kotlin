@@ -1,21 +1,13 @@
 package com.app.common
 
-import com.app.common.encrypt.type.Base64
 import com.app.common.encrypt.type.RSAEncrypt
 import com.app.common.encrypt.type.RSAUtils
-import com.app.common.json.gsonFromJsonExt
+import com.app.common.json.toBeanExt
 import com.app.common.json.toJsonExt
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.security.KeyFactory
-import java.security.NoSuchAlgorithmException
-import java.security.interfaces.RSAPrivateKey
-import java.security.interfaces.RSAPublicKey
-import java.security.spec.InvalidKeySpecException
-import java.security.spec.PKCS8EncodedKeySpec
-import java.security.spec.X509EncodedKeySpec
 
 
 /**
@@ -50,6 +42,9 @@ class ExampleUnitTest {
         var isGirl: Boolean = false
         @SerializedName("isUser")
         var isUser: Boolean = false
+
+        @SerializedName("son")
+        var son: User? = null
     }
 
     @Test
@@ -62,15 +57,16 @@ class ExampleUnitTest {
                 "    \"type\": 1,\n" +
                 "    \"isGirl\": true\n" +
                 "}"
-        val user = json.gsonFromJsonExt<User>()
-        println(Gson().toJson(user))
+
+        val user0 = json.toBeanExt<User>()
+        println(Gson().toJson(user0))
 
         val json2 = "{\n" +
                 "    \"isGirl\": \"a\"\n" +
                 "}"
 
         try {
-            val user2 = json.gsonFromJsonExt<User>()
+            val user2 = json.toBeanExt<User>()
             println(Gson().toJson(user2))
             println("isGirl=${user2?.isGirl}")
         } catch (e: Exception) {
@@ -79,12 +75,31 @@ class ExampleUnitTest {
 
 
         try {
-            val user3 = json.gsonFromJsonExt<User>()
+            val user3 = json.toBeanExt<User>()
             println(Gson().toJson(user3))
             println("isGirl=${user3?.isGirl}")
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+
+        val userbeanSonSon = User().apply {
+            name = "zhuan"
+            age = 20
+        }
+        val userbeanSon = User().apply {
+            name = "zhuan"
+            age = 40
+            son = userbeanSonSon
+        }
+        val userbean = User().apply {
+            name = "zhuan"
+            age = 60
+            son = userbeanSon
+        }
+
+        val user = userbean.toJsonExt().toBeanExt<User>()
+        println(Gson().toJson(user))
 
     }
 
@@ -109,8 +124,8 @@ class ExampleUnitTest {
         val list = listOf(msg, msg, msg, msg)
         val jsonList = list.toJsonExt()
         val json = msg.toJsonExt()
-        val message = json.gsonFromJsonExt<MessageBean<ImageBean>>()
-        val messageList = jsonList.gsonFromJsonExt<List<MessageBean<ImageBean>>>()
+        val message = json.toBeanExt<MessageBean<ImageBean>>()
+        val messageList = jsonList.toBeanExt<List<MessageBean<ImageBean>>>()
         print("message#" + message)
         print("messageList#" + messageList)
     }
@@ -119,11 +134,11 @@ class ExampleUnitTest {
     @Throws(Exception::class)
     fun testEncrypt() {
 
-        val data=" 我的内心毫无波动,据说是后台生成的密文是一堆乱码 ,我也没功夫研究后台日至输出,猜测是编码问题,我的内心毫无波动,据说是后台生成的密文是一堆乱码,我也没功夫研究后台日至输出,猜测是编码问题,"
+        val data = " 我的内心毫无波动,据说是后台生成的密文是一堆乱码 ,我也没功夫研究后台日至输出,猜测是编码问题,我的内心毫无波动,据说是后台生成的密文是一堆乱码,我也没功夫研究后台日至输出,猜测是编码问题,"
 
 
         //生成密钥对
-        val keyPair = RSAUtils.generateRSAKeyPair(RSAUtils.DEFAULT_KEY_SIZE)!!
+        val keyPair = RSAUtils.generateRSAKeyPair(1024)!!
         //获取公钥
         val publicKey = RSAUtils.getPublicKey(keyPair)
         //获取私钥
@@ -134,7 +149,7 @@ class ExampleUnitTest {
         println("加密后：$encrypt1");
         //用私钥解密
         val decrypt1 = RSAEncrypt.decrypt(encrypt1, privateKey)
-        println("解密后：$decrypt1" );
+        println("解密后：$decrypt1");
     }
 
 

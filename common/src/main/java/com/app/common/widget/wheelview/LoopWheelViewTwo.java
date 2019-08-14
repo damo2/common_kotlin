@@ -122,7 +122,7 @@ public class LoopWheelViewTwo extends View {
         //初始化WheelSelect
         int rightPadding = 0;
         if (selectTip != null) {
-            if (selectTip.equals("月") || selectTip.equals("日")) {
+            if ("月".equals(selectTip) || "日".equals(selectTip)) {
                 rightPadding = (int) (width * 0.2);
             } else {
                 rightPadding = (int) (width * 0.05);
