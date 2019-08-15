@@ -3,6 +3,7 @@ package com.weiyao.zuzuapp.activity.test
 import com.app.common.extensions.add
 import com.app.common.logger.logd
 import com.app.common.utils.*
+import com.app.common.view.toastInfo
 import com.weiyao.zuzuapp.R
 import com.weiyao.zuzuapp.base.BaseActivity
 import com.weiyao.zuzuapp.testmodule.javafun.JavaFunTest
@@ -62,6 +63,11 @@ class Test2Activity : BaseActivity() {
             count()  // 输出结果：2
 
             JavaFunTest.test()
+        }
+
+        btnEvent.setOnClickListener {
+            logd("button点击")
+            toastInfo("button点击")
         }
     }
 

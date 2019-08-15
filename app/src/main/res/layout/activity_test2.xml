@@ -7,6 +7,7 @@
     android:background="#EEEEEE"
     app:flexWrap="wrap"
     >
+
     <Button
         android:id="@+id/btnData"
         android:layout_width="wrap_content"
@@ -19,5 +20,40 @@
         android:textColor="@color/colorAccent"
         />
 
+    <com.weiyao.zuzuapp.testmodule.viewevent.TestView1
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <com.weiyao.zuzuapp.testmodule.viewevent.TestView2
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="80dp"
+            android:background="#DDDDDD">
+
+            <com.weiyao.zuzuapp.testmodule.viewevent.TestView3
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="80dp"
+                android:background="#AAAAAA"
+                >
+
+                <Button
+                    android:id="@+id/btnEvent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_margin="4dp"
+                    android:background="@color/defaultBg"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="事件分发"
+                    android:textColor="@color/colorAccent"
+                    />
+            </com.weiyao.zuzuapp.testmodule.viewevent.TestView3>
+        </com.weiyao.zuzuapp.testmodule.viewevent.TestView2>
+
+    </com.weiyao.zuzuapp.testmodule.viewevent.TestView1>
 </com.google.android.flexbox.FlexboxLayout>
 
