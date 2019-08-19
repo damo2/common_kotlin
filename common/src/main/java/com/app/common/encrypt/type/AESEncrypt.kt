@@ -61,6 +61,7 @@ class AESEncrypt : IEncrypt {
     @Throws(Exception::class)
     private fun encrypt(key: String, clear: ByteArray): ByteArray {
         val raw = getRawKey(key.toByteArray())
+        //raw必须为128或192或256bits 就是16或24或32byte
         val secretKey = SecretKeySpec(raw, AES)
         val cipher = Cipher.getInstance(CBC_PKCS5_PADDING)
         cipher.init(Cipher.ENCRYPT_MODE, secretKey, IvParameterSpec(ByteArray(cipher.blockSize)))
@@ -84,9 +85,9 @@ class AESEncrypt : IEncrypt {
     fun generateKey(): String? {
         try {
             val localSecureRandom = SecureRandom.getInstance(SHA1PRNG)
-            val bytes_key = ByteArray(20)
-            localSecureRandom.nextBytes(bytes_key)
-            return bytesToHexString(bytes_key)
+            val bytesKey = ByteArray(20)
+            localSecureRandom.nextBytes(bytesKey)
+            return bytesToHexString(bytesKey)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -98,17 +99,16 @@ class AESEncrypt : IEncrypt {
     @Throws(Exception::class)
     private fun getRawKey(seed: ByteArray): ByteArray {
         val kgen = KeyGenerator.getInstance(AES)
-        val sr: SecureRandom?
         // 在4.2以上版本中，SecureRandom获取方式发生了改变
-        val sdk_version = android.os.Build.VERSION.SDK_INT
-        if (sdk_version > 23) {  // Android  6.0 以上
-            sr = SecureRandom.getInstance(SHA1PRNG, CryptoProvider())
+        val sdkVersion = android.os.Build.VERSION.SDK_INT
+        val sr = if (sdkVersion > 23) {  // Android  6.0 以上
+            SecureRandom.getInstance(SHA1PRNG, CryptoProvider())
         } else {   //4.2及以上
-            sr = SecureRandom.getInstance(SHA1PRNG, "Crypto")
+            SecureRandom.getInstance(SHA1PRNG, "Crypto")
         }
         // for Java
         // secureRandom = SecureRandom.getInstance(SHA1PRNG);
-        sr!!.setSeed(seed)
+        sr.setSeed(seed)
         kgen.init(128, sr) //256 bits or 128 bits,192bits
         //AES中128位密钥版本有10个加密循环，192比特密钥版本有12个加密循环，256比特密钥版本则有14个加密循环。
         val skey = kgen.generateKey()
@@ -117,10 +117,10 @@ class AESEncrypt : IEncrypt {
 
     private fun bytesToHexString(src: ByteArray?): String? {
         return buildString {
-            if (src == null || src.size <= 0) {
+            if (src == null || src.isEmpty()) {
                 return null
             }
-            for (i in 0..src.size - 1) {
+            for (i in 0 until src.size) {
                 val v = src[i].toInt() and 0xFF
                 val hv = Integer.toHexString(v)
                 if (hv.length < 2) {
