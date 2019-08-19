@@ -1,11 +1,6 @@
 package com.weiyao.zuzuapp
 
-import android.content.Context
-import android.os.Handler
-import android.os.Looper
-import android.view.View
 import org.junit.Test
-import kotlin.coroutines.coroutineContext
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -15,7 +10,15 @@ import kotlin.coroutines.coroutineContext
 class ListTest {
     @Test
     fun Test() {
-        print(twoSum(intArrayOf(3, 2, 4), 6).toList().toString())
+        val a = add()
+        a()
+        a()
+        a()
+    }
+
+    fun add(): () -> Unit {
+        var i = 0
+        return { println(i++) }
     }
 
     fun twoSum(nums: IntArray, target: Int): IntArray {
