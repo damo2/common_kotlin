@@ -15,6 +15,7 @@ import javax.crypto.Cipher
  * Date: 2019/5/23  20:38
  * mail: 1902065822@qq.com
  * describe:
+ * 使用少量数据加密。
  */
 object RSAUtils {
     private val RSA = "RSA"// 非对称加密密钥算法

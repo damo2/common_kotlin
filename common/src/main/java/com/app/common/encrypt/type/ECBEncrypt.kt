@@ -11,6 +11,7 @@ import javax.crypto.spec.DESKeySpec
  * Date: 2018/7/3  20:50
  * mail: 1902065822@qq.com
  * describe:
+ * ECB模式不安全，不建议使用。
  */
 
 class ECBEncrypt : IEncrypt {

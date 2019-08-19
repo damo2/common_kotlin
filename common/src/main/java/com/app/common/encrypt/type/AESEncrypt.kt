@@ -15,6 +15,7 @@ import javax.crypto.spec.SecretKeySpec
  * Date: 2018/7/3  19:00
  * mail: 1902065822@qq.com
  * describe:
+ * 快速安全的加密方式。
  */
 class AESEncrypt : IEncrypt {
     private val key: String get() = "qwertyuiopasdfgh"

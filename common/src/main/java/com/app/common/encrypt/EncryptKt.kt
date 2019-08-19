@@ -1,6 +1,6 @@
 package com.app.common.encrypt
 
-import com.app.common.encrypt.type.DESEncrypt
+import com.app.common.encrypt.type.AESEncrypt
 
 /**
  * Created by wangru
@@ -10,7 +10,7 @@ import com.app.common.encrypt.type.DESEncrypt
  */
 
 class EncryptKt private constructor() {
-    var mEncrypt: IEncrypt = DESEncrypt()
+    var mEncrypt: IEncrypt = AESEncrypt()
 
     companion object {
         val instance: EncryptKt by lazy {

@@ -10,6 +10,7 @@ import javax.crypto.spec.SecretKeySpec
  * Date: 2018/7/3  20:27
  * mail: 1902065822@qq.com
  * describe:
+ * 默认的是56位的加密密钥，已经不安全，不建议使用。
  */
 
 class DESEncrypt : IEncrypt {

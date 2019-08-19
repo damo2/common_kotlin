@@ -58,11 +58,11 @@ fun Context.getAppIconDrawableExt(packageName: String = this.packageName) = AppI
 
 //---------------------------     单位转换start        --------------------------------
 
-fun Context.dp2px(dpVal: Int): Int = dp2px(dpVal.toFloat()).toInt()
+fun Context.dp2px(dpVal: Int) = dp2px(dpVal.toFloat()).toInt()
 
-fun Context.dp2px(dpVal: Float): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, this.resources.displayMetrics)
+fun Context.dp2px(dpVal: Float) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, this.resources.displayMetrics)
 
-fun Context.sp2px(spVal: Float): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, this.resources.displayMetrics)
+fun Context.sp2px(spVal: Float) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, this.resources.displayMetrics)
 
 
 //---------------------------     获取资源start        --------------------------------
