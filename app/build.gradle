@@ -11,6 +11,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.getkeepsafe.dexcount'
 //流量监控
 apply plugin: 'android-aspectjx'
+
+Properties props = new Properties()
+//加载local.properties 读取签名文件信息
+props.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -33,21 +38,26 @@ android {
         ]
     }
     signingConfigs {
-        zuzu {
-            keyAlias 'zuzu'
-            keyPassword 'zuzu1234'
-            storeFile file('../app/damo.jks')
-            storePassword 'zuzu1234'
+        release {
+            try {
+                keyAlias props['RELEASE_KEY_ALIAS']
+                keyPassword props['RELEASE_KEY_PASSWORD']
+                storeFile file(props['RELEASE_STORE_FILE'])
+                storePassword props['RELEASE_STORE_PASSWORD']
+            }
+            catch (e) {
+                throw new InvalidUserDataException("请在 local.properties 添加签名配置 RELEASE_KEY_ALIAS、RELEASE_KEY_PASSWORD、RELEASE_STORE_FILE、RELEASE_STORE_PASSWORD。\n$e")
+            }
         }
     }
     buildTypes {
         debug {
 //            applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
-            signingConfig signingConfigs.zuzu
+            signingConfig signingConfigs.release
         }
         release {
-            signingConfig signingConfigs.zuzu
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -140,6 +150,10 @@ dependencies {
     //保存恢复数据
     kapt 'com.evernote:android-state-processor:1.4.1'
     implementation project(':libloginshared')
+
+    // ViewModel和LiveData依赖
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
 }
 
 allprojects {
@@ -161,9 +175,9 @@ allprojects {
 }
 
 //如果有用到kapt添加如下配置
-    kapt {
-        useBuildCache = true
-        javacOptions {
-            option("-Xmaxerrs", 500)
-        }
+kapt {
+    useBuildCache = true
+    javacOptions {
+        option("-Xmaxerrs", 500)
     }
+}
