@@ -17,12 +17,19 @@ android {
         abortOnError false
     }
     buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    //@Parcelize 是一个实验室功能
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {

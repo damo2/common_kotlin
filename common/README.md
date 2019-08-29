@@ -4,7 +4,7 @@
     <meta-data
              android:name="APPLICATION_ID"
              android:value="${applicationId}"/>
-      
+
 通过 applicationIdExt获取applicationId
 
 ###### 打印日志
@@ -15,8 +15,9 @@
     //使用
     logd("开始")
     loge("异常")
-     
-           
+
+
+​           
 ###### 吐司
     toastInfo("信息")
 
@@ -40,7 +41,7 @@
     var isShowGuide: Boolean by Preference(this, ConstantsKey.KEY_IS_SHOW_GUIDE, false)
     //取值 isShowGuide
     //设置值 isShowGuide=true
-
+    
     //注意 对象UserInfo 及里面的对象都要实现Serializable
      var mUserInfoBean: UserInfo by Preference<UserInfo>(this, "userinfo", UserInfo())
 
@@ -60,9 +61,9 @@
 ###### CommonAdapter使用
     //kotlin
     val adapter = CommonAdapter(this, R.layout.$itemLayoutId$, $data$, holderConvert = { holder, data, position, payloads ->
-
+    
     })
-
+    
     //java
     private EmptyWrapper mAdapterWrapper;
     CommonAdapter<String> mAdapter = new CommonAdapter<String>(getApplicationContext(), R.layout.item, mRedPacketThemeList) {
@@ -98,7 +99,7 @@
     @POST("https://www.dudulifo.com/user/phonelogin")
     @FormUrlEncoded
     fun login(@FieldMap map: HashMap<String, String>): Observable<BaseBean<UserInfo>>
-    
+
 ##### 初始化
     object ApiManager {
         var apiService by NotNullSingle<ApiService>()
@@ -112,7 +113,7 @@
             }.createService(ApiService::class.java)
         }
     }
-    
+
 ##### 请求
     //请求
     ApiManager.apiService
@@ -135,7 +136,7 @@
                             context = activity,//isShowLoad 为true时必传
                             isToast = true//是否toast异常，处理了异常时无效
                     )
-
+    
      //文件下载
      RequestFileManager.downloadFile(
                          "http://wangru.oss-cn-qingdao.aliyuncs.com/test/erp-v1.0.0-20190404.apk",
@@ -174,8 +175,9 @@
 
 ### 只能赋值一次，且不能为空
     var context by NotNullSingle<Context>()
-    
-    
+
+
+​    
 
 <br><br><br>
 
@@ -186,15 +188,15 @@
         //都不为空才执行
         print(num1a + num2a)
     }
-    
+
 #### 防止快速点击
     tvAnko.setOnClickExtNoFast {
         startActivity<AnkoActivity>()
     }
-    
+
 #### 限制最多输入字数
     edtInput.limitLengthExt(5,{ toastInfo("最多输入字数为5")})
-    
+
 #### 单例
     //没有参数 （或者使用 lazy 委托）
     class Manager {
@@ -212,13 +214,20 @@
     }
     //使用
     Manager.getInstance(context)
-    
+
+##### 注解
+
+```
+@KeepNotProguard
+class User(var name:String)//添加注解不混淆
+```
+
 ##### 日期
         val date = Date()       //现在时间
-
+    
         val beforeDay = date - 1    //前一天
         val lastDay = date + 1      //后一天
-
+    
         val beforeHour = date - hour(1)     //前一个小时
         val lastHour = date + month(1)       //后一个月
         val beforeHour = date - minute(1)     //前一分钟
@@ -229,7 +238,7 @@
         date--      //本月的第一天
         
         if(date > beforeDay){}   //比较日期
-    
+
 <br><br><br>
 ### **自定义view**
 <img src="https://github.com/damo2/common/blob/master/file/ic0.jpg?raw=true" width="150">  
@@ -266,7 +275,7 @@
             </shape>
         </item>
     </selector>
-    
+
 ##### 圆角view
 RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、RoundTextView 相同设置
 
@@ -295,11 +304,12 @@ RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、R
             app:borderColor="#81D4FA"
             app:borderSize="8dp"
             />
-            
-            
-            
-         
-            
+
+
+​            
+​            
+​         
+​            
 ### 扩展属性和方法   
 [代码](/common/src/main/java/com/app/common/extensions)   
 [工具类](/common/src/main/java/com/app/common/utils)  
@@ -316,8 +326,8 @@ RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、R
  Activity.statusHind()   | 隐藏状态栏
  Activity.statusTranslucent() | 沉浸式状态栏
  Activity.viewIsVisibleExt(view) | view是否在屏幕中可见
- 
- 
+
+
 ###### Context 扩展属性和方法
  属性和方法  | 描述  
  ---- | ----- 
@@ -340,8 +350,8 @@ RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、R
  Context.getNetWorkTypeNameExt() | 获取当前的网络类型(WIFI,2G,3G,4G)
  Context.is4GExt() | 判断网络是否是4G
  Context.isWifiExt() | 判断wifi是否连接
- 
- 
+
+
 ###### String 扩展属性和方法
  属性和方法  | 描述  
  ---- | ----- 
@@ -351,7 +361,7 @@ RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、R
  String.setColorExt(color)  | String 设置颜色
  String.getNumExt(default)  | 获取String里面的数字
  String.toIntExt(default)  | String转int失败
- 
+
 ###### View 扩展属性和方法
  属性和方法  | 描述  
  ---- | ----- 
@@ -363,7 +373,7 @@ RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、R
  View.setWidthHeightExt(width,height)  | 设置宽高
  View.getActivityExt() | 获取 activity
  View.toBitmapExt() | view转成bitmap
- 
+
 ###### EditText 扩展属性和方法
  属性和方法  | 描述  
  ---- | ----- 
@@ -371,7 +381,7 @@ RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、R
  EditText.limitLengthExt(length,outCallback)  | 限制输入长度
  EditText.setOnlyDecimalExt(isShow)  | 只能输入数字和小数点，小数点只能1个且小数点后最多只能2位 
  EditText.setPwdShowOrHindExt()  | 设置密码显示或隐藏
- 
+
 ###### File 扩展属性和方法
  属性和方法  | 描述  
  ---- | ----- 
@@ -384,7 +394,7 @@ RoundButtonView、RoundFrameLayout、RoundLinearLayout、RoundRelativeLayout、R
  String.fileExtensionExt  | 文件后缀
  File.appendExt(txt,isCreate)  | 向文件中追加文本 
  File.getVideoInfoExt((duration: Int, width: Int, height: Int) -> Unit) | 获取视频信息           
-            
+
 ## 参考及使用
     圆角view https://github.com/H07000223/FlycoRoundView
     通用adapter https://github.com/hongyangAndroid/baseAdapter
