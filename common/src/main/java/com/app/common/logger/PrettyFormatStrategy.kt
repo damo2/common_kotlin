@@ -72,7 +72,7 @@ class PrettyFormatStrategy(builder: Builder) : FormatStrategy {
     }
 
     private fun logHeaderContent(logType: Logger.Level, @Nullable tag: String, methodCount: Int) {
-        var methodCount = methodCount
+        var count = methodCount
         val trace = Thread.currentThread().stackTrace
         if (showThreadInfo) {
             logChunk(logType, tag, HORIZONTAL_LINE + " Thread: " + Thread.currentThread().name)
@@ -83,11 +83,11 @@ class PrettyFormatStrategy(builder: Builder) : FormatStrategy {
         val stackOffset = getStackOffset(trace) + methodOffset
 
         //corresponding method count with the current stack may exceeds the stack trace. Trims the count
-        if (methodCount + stackOffset > trace.size) {
-            methodCount = trace.size - stackOffset - 1
+        if (count + stackOffset > trace.size) {
+            count = trace.size - stackOffset - 1
         }
 
-        for (i in methodCount downTo 1) {
+        for (i in count downTo 1) {
             val stackIndex = i + stackOffset
             if (stackIndex >= trace.size) {
                 continue

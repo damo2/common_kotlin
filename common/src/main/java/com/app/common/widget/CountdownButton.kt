@@ -11,7 +11,7 @@ import com.app.common.save.PreferenceNonNull
 
 /**
  * 点击倒计时。
- * 退出依然倒计时（isExitTiming 为true） 时 CountdownButton必须设置id，
+ * 退出依然倒计时（isExitTiming 为true） 时 CountdownButton必须设置id，eg: android:id="@+id/btnGetCode"
  * id为倒计时唯一标识，如果id名字一样倒计时时间也一样。
  */
 class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, attrs) {

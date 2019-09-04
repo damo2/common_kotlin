@@ -11,6 +11,8 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
 import com.app.common.extensions.applicationIdExt
+import com.app.common.logger.logd
+import com.app.common.logger.loge
 
 import java.io.File
 
@@ -32,7 +34,11 @@ object UriUtil {
             }
 
 
-    fun getPath(context: Context, uri: Uri): String? {
+    fun getPath(context: Context, uri: Uri?): String? {
+        if (uri == null) {
+            loge("uri is null")
+            return null;
+        }
         val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {

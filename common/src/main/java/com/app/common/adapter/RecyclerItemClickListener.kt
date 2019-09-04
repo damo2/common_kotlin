@@ -41,9 +41,6 @@ class RecyclerItemClickListener// 点击回调
     }
 
     override fun onInterceptTouchEvent(view: RecyclerView, e: MotionEvent): Boolean {
-        if (view == null || e == null) {
-            return false
-        }
         val childView = view.findChildViewUnder(e.x, e.y)
         if (childView != null && mListener != null && mGestureDetector.onTouchEvent(e)) {
             // 触发单击事件

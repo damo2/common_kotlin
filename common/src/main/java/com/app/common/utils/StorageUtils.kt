@@ -99,7 +99,7 @@ object StorageUtils {
     private fun getPrivateCachePathSub(context: Context, childPath: String? = null): String {
         val baseDir: String = if (isExternalStorageWritable()) {
             if (context.externalCacheDir != null) {
-                context.externalCacheDir.absolutePath//  /mnt/sdcard/Android/data/com.my.app/cache
+                context.externalCacheDir?.absolutePath?: context.cacheDir.absolutePath//  /mnt/sdcard/Android/data/com.my.app/cache
             } else {
                 Environment.getExternalStorageDirectory().path//  /mnt/sdcard
             }

@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
  * 读取系统主题中的 android.R.attr.listDivider作为Item间的分割线
  */
 class DividerItemDecoration(context: Context, orientation: Int = VERTICAL_LIST) : RecyclerView.ItemDecoration() {
-    private val mDivider: Drawable
+    private val mDivider: Drawable?
 
     private var mOrientation: Int = 0
 
@@ -56,9 +56,9 @@ class DividerItemDecoration(context: Context, orientation: Int = VERTICAL_LIST) 
             val params = child
                     .layoutParams as RecyclerView.LayoutParams
             val top = child.bottom + params.bottomMargin
-            val bottom = top + mDivider.intrinsicHeight
-            mDivider.setBounds(left, top, right, bottom)
-            mDivider.draw(c)
+            val bottom = top + (mDivider?.intrinsicHeight ?: 0)
+            mDivider?.setBounds(left, top, right, bottom)
+            mDivider?.draw(c)
         }
     }
 
@@ -72,17 +72,17 @@ class DividerItemDecoration(context: Context, orientation: Int = VERTICAL_LIST) 
             val params = child
                     .layoutParams as RecyclerView.LayoutParams
             val left = child.right + params.rightMargin
-            val right = left + mDivider.intrinsicHeight
-            mDivider.setBounds(left, top, right, bottom)
-            mDivider.draw(c)
+            val right = left + (mDivider?.intrinsicHeight ?: 0)
+            mDivider?.setBounds(left, top, right, bottom)
+            mDivider?.draw(c)
         }
     }
 
     override fun getItemOffsets(outRect: Rect, itemPosition: Int, parent: RecyclerView) {
         if (mOrientation == VERTICAL_LIST) {
-            outRect.set(0, 0, 0, mDivider.intrinsicHeight)
+            outRect.set(0, 0, 0, mDivider?.intrinsicHeight ?: 0)
         } else {
-            outRect.set(0, 0, mDivider.intrinsicWidth, 0)
+            outRect.set(0, 0, mDivider?.intrinsicWidth ?: 0, 0)
         }
     }
 

@@ -56,7 +56,7 @@ object UpdateFile {
                     val values = ContentValues()
                     values.put(MediaStore.Images.Media.DATA, file.absolutePath)
                     values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-                    val uri = context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                    context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
                 } catch (e: Exception) {

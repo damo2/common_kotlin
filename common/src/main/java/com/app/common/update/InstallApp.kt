@@ -36,7 +36,7 @@ class InstallApp(var apkFile: File) {
             haveInstallPermission = activity.packageManager.canRequestPackageInstalls()
             if (!haveInstallPermission) {
                 //弹框提示用户手动打开
-                showAlert(activity, "安装权限", "需要打开允许来自此来源，请去设置中开启此权限", DialogInterface.OnClickListener { dialog, which ->
+                showAlert(activity, "安装权限", "需要打开允许来自此来源，请去设置中开启此权限", DialogInterface.OnClickListener { _, _ ->
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         //此方法需要API>=26才能使用
                         toInstallPermissionSettingIntent(activity)

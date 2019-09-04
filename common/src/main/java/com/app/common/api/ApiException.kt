@@ -7,4 +7,4 @@ package com.app.common.api
  * describe:
  */
 
-class ApiException constructor(var code: Int, msg: String?, result: String?) : RuntimeException(msg)
+class ApiException constructor(var code: Int, msg: String?) : RuntimeException(msg)

@@ -1,12 +1,16 @@
 package com.weiyao.zuzuapp.activity.test
 
+import android.annotation.SuppressLint
+import android.os.Parcelable
 import com.app.common.extensions.add
 import com.app.common.logger.logd
 import com.app.common.utils.*
+import com.app.common.view.asyncLayout.AsyncLayoutLoader
 import com.app.common.view.toastInfo
 import com.weiyao.zuzuapp.R
 import com.weiyao.zuzuapp.base.BaseActivity
 import com.weiyao.zuzuapp.testmodule.javafun.JavaFunTest
+import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.activity_test2.*
 import java.math.BigDecimal
 import java.util.*
@@ -69,7 +73,10 @@ class Test2Activity : BaseActivity() {
             logd("button点击")
             toastInfo("button点击")
         }
+        AsyncLayoutLoader.getLayoutLoader(R.layout.activity_test2)
+
     }
+
 
     /**
      * 计数统计
@@ -83,3 +90,7 @@ class Test2Activity : BaseActivity() {
 
 
 }
+
+//@SuppressLint("ParcelCreator")
+//@Parcelize
+//open class BaseBean() : Parcelable {}

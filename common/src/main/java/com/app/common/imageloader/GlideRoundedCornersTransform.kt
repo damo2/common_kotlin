@@ -127,8 +127,8 @@ class GlideRoundedCornersTransform(var context: Context, var mRadius: Float, var
     }
 
 
-    override fun equals(o: Any?): Boolean {
-        return o is GlideRoundedCornersTransform
+    override fun equals(other: Any?): Boolean {
+        return other is GlideRoundedCornersTransform
     }
 
 

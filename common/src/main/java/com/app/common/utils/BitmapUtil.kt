@@ -138,16 +138,16 @@ object BitmapUtil {
     /**
      * 质量压缩
      */
-    fun compressImage(image: Bitmap, sizeMax: Int = CompressConst.IMAGE_MAXSIZE_SYS): Bitmap {
-        val baos = ByteArrayOutputStream()
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos)// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+    fun compressImage(image: Bitmap, sizeMax: Int = CompressConst.IMAGE_MAXSIZE_SYS): Bitmap? {
+        val outputStream = ByteArrayOutputStream()
+        image.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         var options = 100
-        while (baos.toByteArray().size / 1024 > sizeMax && options > 8) { // 循环判断如果压缩后图片是否大于200kb,大于继续压缩
-            baos.reset()// 重置baos即清空baos
-            image.compress(Bitmap.CompressFormat.JPEG, options, baos)// 这里压缩options%，把压缩后的数据存放到baos中
+        while (outputStream.toByteArray().size / 1024 > sizeMax && options > 8) { // 循环判断如果压缩后图片是否大于200kb,大于继续压缩
+            outputStream.reset()// 重置baos即清空baos
+            image.compress(Bitmap.CompressFormat.JPEG, options, outputStream)// 这里压缩options%，把压缩后的数据存放到baos中
             options -= 8// 每次都减少10
         }
-        val isBm = ByteArrayInputStream(baos.toByteArray())// 把压缩后的数据baos存放到ByteArrayInputStream中
+        val isBm = ByteArrayInputStream(outputStream.toByteArray())// 把压缩后的数据baos存放到ByteArrayInputStream中
         return BitmapFactory.decodeStream(isBm, null, null)
     }
 
@@ -164,7 +164,7 @@ object BitmapUtil {
     /**
      * 按尺寸等比例压缩（根据路径获取图片并压缩）
      */
-    fun compressByPx(srcPath: String): Bitmap {
+    fun compressByPx(srcPath: String): Bitmap? {
         val newOpts = BitmapFactory.Options()
         // 开始读入图片，此时把options.inJustDecodeBounds 设回true了
         newOpts.inJustDecodeBounds = true
@@ -181,7 +181,7 @@ object BitmapUtil {
     /**
      * 按大小等比例压缩（根据Bitmap图片压缩）
      */
-    fun compressBySize(image: Bitmap, sizeMax: Int = CompressConst.IMAGE_MAXSIZE_SYS): Bitmap {
+    fun compressBySize(image: Bitmap, sizeMax: Int = CompressConst.IMAGE_MAXSIZE_SYS): Bitmap? {
         val baos = ByteArrayOutputStream()
         var option = 100
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos)
@@ -283,8 +283,8 @@ object BitmapUtil {
      * @param uri
      * @return
      */
-    fun getPhotoPath(context: Context, uri: Uri?): String {
-        var filePath = ""
+    fun getPhotoPath(context: Context, uri: Uri?): String? {
+        var filePath: String? = null
         if (uri != null) {
             Log.d(TAG, uri.toString())
             val scheme = uri.scheme
@@ -313,7 +313,6 @@ object BitmapUtil {
             } else if (TextUtils.equals("file", scheme)) {// 小米云相册处理方式
                 filePath = uri.path
             }
-
         }
         return filePath
     }

@@ -43,7 +43,7 @@ class RequestApiManager() {
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
                     .baseUrl(baseUrl)
-                    .client(client)
+                    .client(client!!)
                     .addConverterFactory(GsonConverterFactory.create())
 //                .addConverterFactory(CustomGsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

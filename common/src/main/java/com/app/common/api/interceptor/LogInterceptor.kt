@@ -39,6 +39,6 @@ class LogInterceptor : BaseInterceptor(requestCallback = {
         Log.i("LogInterceptor", "intercept#request:\n$info")
     } catch (e: Exception) {
     }
-}, resultCallback = { result, request ->
+}, resultCallback = { result, _ ->
     Log.i("LogInterceptor", "intercept#result:\n${result}")
 })

@@ -21,7 +21,7 @@ import java.nio.charset.Charset
 open class BaseInterceptor(var requestCallback: ((request: Request) -> Unit)? = null,
                            var resultCallback: ((result: String, request: Request) -> Unit)? = null) : Interceptor {
     companion object {
-        val TAG = javaClass.simpleName
+        val TAG = this::class.java.simpleName
         private val UTF8 = Charset.forName("UTF-8")
     }
 

@@ -158,17 +158,19 @@
                   )
 
 ### RxBus使用
+
+###### 发送方：
+    RxBus.post(new User("张三"))
+ 
 ###### 接收方：
     RxBus.toFlowable().subscribe { event ->
             if (event is DownApkEvent) {
             //todo same thing
             }
-        }.apply {
+     }.apply {
             //todo 结束时取消监听
-        }
+     }
 
-###### 发送方：
-    RxBus.post(new User("张三"))
 
 
 ### 弱引用
@@ -178,7 +180,7 @@
     var context by NotNullSingle<Context>()
 
 
-​    
+​ 
 
 <br><br><br>
 

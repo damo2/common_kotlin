@@ -154,6 +154,9 @@ dependencies {
     // ViewModel和LiveData依赖
     implementation "android.arch.lifecycle:extensions:1.1.0"
     annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+
+    //CacheWebView
+    implementation 'ren.yale.android:cachewebviewlib:2.1.8'
 }
 
 allprojects {

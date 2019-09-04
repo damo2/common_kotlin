@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * 分割线
  */
-class GridBaseItemDecoration(context: Context, private val spanCount: Int, var spacingH: Int, var spacingV: Int, private val includeEdge: Boolean) : RecyclerView.ItemDecoration() {
+class GridBaseItemDecoration(private val spanCount: Int, var spacingH: Int, var spacingV: Int, private val includeEdge: Boolean) : RecyclerView.ItemDecoration() {
 
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {

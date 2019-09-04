@@ -36,24 +36,23 @@ object ColorUtils {
      * @return 计算出的color值
      */
     fun computeColor(@ColorInt fromColor: Int, @ColorInt toColor: Int, fraction: Float): Int {
-        var fraction = fraction
-        fraction = LangUtils.constrain(fraction, 0f, 1f)
+        val fract = LangUtils.constrain(fraction, 0f, 1f)
 
         val minColorA = Color.alpha(fromColor)
         val maxColorA = Color.alpha(toColor)
-        val resultA = ((maxColorA - minColorA) * fraction).toInt() + minColorA
+        val resultA = ((maxColorA - minColorA) * fract).toInt() + minColorA
 
         val minColorR = Color.red(fromColor)
         val maxColorR = Color.red(toColor)
-        val resultR = ((maxColorR - minColorR) * fraction).toInt() + minColorR
+        val resultR = ((maxColorR - minColorR) * fract).toInt() + minColorR
 
         val minColorG = Color.green(fromColor)
         val maxColorG = Color.green(toColor)
-        val resultG = ((maxColorG - minColorG) * fraction).toInt() + minColorG
+        val resultG = ((maxColorG - minColorG) * fract).toInt() + minColorG
 
         val minColorB = Color.blue(fromColor)
         val maxColorB = Color.blue(toColor)
-        val resultB = ((maxColorB - minColorB) * fraction).toInt() + minColorB
+        val resultB = ((maxColorB - minColorB) * fract).toInt() + minColorB
 
         return Color.argb(resultA, resultR, resultG, resultB)
     }

@@ -60,7 +60,7 @@ abstract class AppBaseDialogFragment : DialogFragment() {
     }
 
     private fun initThis() {
-        dialog?.setOnKeyListener { dialog, keyCode, event ->
+        dialog?.setOnKeyListener { _, keyCode, _ ->
             // KEYCODE_BACK 拦截返回true
             keyCode == KeyEvent.KEYCODE_BACK && !mIsBackCancelable
         }

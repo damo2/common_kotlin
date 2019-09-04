@@ -224,7 +224,6 @@ class WheelViewOne : ScrollView {
     }
 
     override fun setBackgroundDrawable(background: Drawable?) {
-        var background = background
 
         if (viewWidth == 0) {
             //            viewWidth = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
@@ -238,7 +237,7 @@ class WheelViewOne : ScrollView {
             paint!!.strokeWidth = dip2px(1f).toFloat()
         }
 
-        background = object : Drawable() {
+        val drawable = object : Drawable() {
             override fun draw(canvas: Canvas) {
                 //                canvas.drawLine(viewWidth * 1 / 6, obtainSelectedAreaBorder()[0], viewWidth * 5 / 6, obtainSelectedAreaBorder()[0], paint);
                 //                canvas.drawLine(viewWidth * 1 / 6, obtainSelectedAreaBorder()[1], viewWidth * 5 / 6, obtainSelectedAreaBorder()[1], paint);
@@ -259,7 +258,7 @@ class WheelViewOne : ScrollView {
                 return PixelFormat.UNKNOWN
             }
         }
-        super.setBackgroundDrawable(background)
+        super.setBackgroundDrawable(drawable)
 
     }
 

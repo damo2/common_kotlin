@@ -21,7 +21,7 @@ object EditTextUtils {
      * 禁止输入空格
      */
     fun inhibitInputSpace(editText: EditText) {
-        val filter = InputFilter { source, start, end, dest, dstart, dend ->
+        val filter = InputFilter { source, _, _, _, _, _ ->
             //返回null表示接收输入的字符,返回空字符串表示不接受输入的字符
             if (" " == source) "" else null
         }

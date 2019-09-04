@@ -75,17 +75,16 @@ class FullyStaggeredGridLayoutManager(spanCount: Int, orientation: Int) : Stagge
             try {
                 val view = recycler.getViewForPosition(position)// fix 动态添加时报IndexOutOfBoundsException
 
-                if (view != null) {
-                    val lp = view.layoutParams as RecyclerView.LayoutParams
-                    val childWidthSpec = ViewGroup.getChildMeasureSpec(widthSpec, paddingLeft + paddingRight, lp.width)
-                    val childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec, paddingTop + paddingBottom, lp.height)
-                    // 子view进行测量，然后可以通过getMeasuredWidth()获得测量的宽，高类似
-                    view.measure(childWidthSpec, childHeightSpec)
-                    // 将item的宽高放入数组中
-                    measuredDimension[0] = view.measuredWidth + lp.leftMargin + lp.rightMargin
-                    measuredDimension[1] = view.measuredHeight + lp.topMargin + lp.bottomMargin
-                    recycler.recycleView(view)
-                }
+                val lp = view.layoutParams as RecyclerView.LayoutParams
+                val childWidthSpec = ViewGroup.getChildMeasureSpec(widthSpec, paddingLeft + paddingRight, lp.width)
+                val childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec, paddingTop + paddingBottom, lp.height)
+                // 子view进行测量，然后可以通过getMeasuredWidth()获得测量的宽，高类似
+                view.measure(childWidthSpec, childHeightSpec)
+                // 将item的宽高放入数组中
+                measuredDimension[0] = view.measuredWidth + lp.leftMargin + lp.rightMargin
+                measuredDimension[1] = view.measuredHeight + lp.topMargin + lp.bottomMargin
+                recycler.recycleView(view)
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }

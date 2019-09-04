@@ -232,12 +232,12 @@ object ActivityUtils {
      * @return the activity by context.
      */
     fun getActivityByContext(@NonNull context: Context): Activity? {
-        var context = context
-        while (context is ContextWrapper) {
-            if (context is Activity) {
-                return context
+        var cxt = context
+        while (cxt is ContextWrapper) {
+            if (cxt is Activity) {
+                return cxt
             }
-            context = context.baseContext
+            cxt = cxt.baseContext
         }
         return null
     }

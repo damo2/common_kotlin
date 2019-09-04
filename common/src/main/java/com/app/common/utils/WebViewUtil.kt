@@ -64,7 +64,7 @@ object WebViewUtil {
             }
         }
         //支持下载
-        webView.setDownloadListener { paramAnonymousString1, paramAnonymousString2, paramAnonymousString3, paramAnonymousString4, paramAnonymousLong ->
+        webView.setDownloadListener { paramAnonymousString1, _, _, _, _ ->
             val intent = Intent()
             intent.action = "android.intent.action.VIEW"
             intent.data = Uri.parse(paramAnonymousString1)

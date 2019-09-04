@@ -14,10 +14,10 @@ import com.app.common.logger.logd
 object RSAEncrypt : IEncrypt {
 
     //公钥加密
-    override fun encrypt(data: String, publicKey: String): String = Base64.encode((RSAUtils.encryptByPublicKeyForSpilt(data.toByteArray(), Base64.decode(publicKey))))
+    override fun encrypt(data: String, key: String): String = Base64.encode((RSAUtils.encryptByPublicKeyForSpilt(data.toByteArray(), Base64.decode(key))))
 
     //私钥解密
-    override fun decrypt(data: String, privateKey: String): String = String(RSAUtils.decryptByPrivateKeyForSpilt(Base64.decode(data), Base64.decode(privateKey)))
+    override fun decrypt(data: String, key: String): String = String(RSAUtils.decryptByPrivateKeyForSpilt(Base64.decode(data), Base64.decode(key)))
 
 
     fun testEncrypt() {
