@@ -7,6 +7,7 @@ import android.widget.Button
 import com.app.common.CommonConst
 import com.app.common.R
 import com.app.common.save.Preference
+import com.app.common.save.PreferenceNonNull
 
 /**
  * 点击倒计时。
@@ -26,7 +27,7 @@ class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, a
     //是否退出依然倒计时，默认false
     private val isExitTiming: Boolean
     //倒计时开始时间
-    private var countdownTime: Long by Preference(context, "countdown_time_$id", 0, CommonConst.PREFERENCE_FILENAME)
+    private var countdownTime: Long? by Preference(context, "countdown_time_$id", 0, CommonConst.PREFERENCE_FILENAME)
 
     companion object {
         const val DOWNFORMAT_DEFAULT = "%s 秒"
@@ -40,7 +41,8 @@ class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, a
         total = typedArray.getInteger(R.styleable.CountdownButton_cb_totalTime, TOTAL_DEFAULT)
         interval = typedArray.getInteger(R.styleable.CountdownButton_cb_timeInterval, INTERVAL_DEFAULT)
         endTxt = typedArray.getString(R.styleable.CountdownButton_cb_endTxt)
-        downFormat = typedArray.getString(R.styleable.CountdownButton_cb_downFormat) ?: DOWNFORMAT_DEFAULT
+        downFormat = typedArray.getString(R.styleable.CountdownButton_cb_downFormat)
+                ?: DOWNFORMAT_DEFAULT
         bgResource = typedArray.getResourceId(R.styleable.CountdownButton_cb_bg, R.drawable.countdown_button)
         isExitTiming = typedArray.getBoolean(R.styleable.CountdownButton_cb_isExitTiming, false)
 
@@ -54,7 +56,7 @@ class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, a
             startCountdown()
         }
         if (isExitTiming) {
-            val time = total - (System.currentTimeMillis() - countdownTime)
+            val time = total - (System.currentTimeMillis() - (countdownTime ?: 0))
             if (time > 0) {
                 val timeCount = TimeCount(time, interval.toLong())
                 timeCount.start()

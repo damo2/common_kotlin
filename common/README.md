@@ -37,13 +37,14 @@
 
 ###### SharedPreferences 保存信息
  eg:
-
-    var isShowGuide: Boolean by Preference(this, ConstantsKey.KEY_IS_SHOW_GUIDE, false)
+    1.PreferenceNonNull  取值不能为空
+    var isShowGuide: Boolean by PreferenceNonNull(context, ConstantsKey.KEY_IS_SHOW_GUIDE, false)
     //取值 isShowGuide
     //设置值 isShowGuide=true
     
+    2.Preference 取值可为空
     //注意 对象UserInfo 及里面的对象都要实现Serializable
-     var mUserInfoBean: UserInfo by Preference<UserInfo>(this, "userinfo", UserInfo())
+     var mUserInfoBean: UserInfo? by Preference<UserInfo>(context, "userinfo", UserInfo::class.java)
 
 ###### SDPathUtils 获取目录
     //SD目录
