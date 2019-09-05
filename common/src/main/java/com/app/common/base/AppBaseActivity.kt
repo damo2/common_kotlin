@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.app.common.api.util.LifeCycleEvent
 import com.app.common.utils.FixMemLeak
 import com.app.common.utils.MyContextWrapper
+import com.app.common.utils.OsUtil
 import com.app.common.view.LoadingDialogFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -102,7 +103,9 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
 
     override fun onDestroy() {
         mCompositeDisposable.clear()
-        FixMemLeak.fixLeak(applicationContext)
+        if(OsUtil.isEmui) {
+            FixMemLeak.fixLeak(applicationContext)
+        }
         mLifecycleSubject.onNext(LifeCycleEvent.DESTROY)
         super.onDestroy()
     }
