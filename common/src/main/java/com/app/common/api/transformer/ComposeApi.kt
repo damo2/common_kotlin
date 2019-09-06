@@ -1,7 +1,6 @@
 package com.app.common.api.transformer
 
 import com.app.common.api.ApiException
-import com.app.common.json.GsonUtil
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -27,7 +26,7 @@ fun <T> composeCommonBean(): ObservableTransformer<T, T> {
                         else -> 12000
                     }
                     if (code != 12000) {
-`                        throw ApiException(code, msg)
+                        throw ApiException(code, msg)
                     }
                     t
                 }
