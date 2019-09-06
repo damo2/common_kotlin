@@ -28,7 +28,7 @@ fun <T> Observable<T>.composeDefault(): Observable<T> =
                         is BaseBean<*> -> {
                             msg = t.msg
                             if (t.code != 12000) {
-                                throw ApiException(t.code, msg, GsonUtil().toJson(t))
+                                throw ApiException(t.code, msg)
                             }
                         }
                     }
