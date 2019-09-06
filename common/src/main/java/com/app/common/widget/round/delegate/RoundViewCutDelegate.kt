@@ -83,6 +83,9 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
             isRippleEnable = a.getBoolean(R.styleable.RoundViewLayout_isRippleEnable, true)
             a.recycle()
         }
+        if (mView.background == null) {
+            mView.setBackgroundColor(mContext.resources.getColor(R.color.common_transparent))
+        }
     }
 
 
@@ -93,9 +96,6 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
 
     fun setBackgroundSelector() {
         logd("setBackgroundSelector")
-        if (mView.background == null) {
-            mView.setBackgroundColor(mContext.resources.getColor(R.color.common_transparent))
-        }
         if (backgroundColor == 0) {
             (mView.background as? ColorDrawable)?.color?.let {
                 backgroundColor = it
