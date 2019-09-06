@@ -86,6 +86,11 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
         if (mView.background == null) {
             mView.setBackgroundColor(mContext.resources.getColor(R.color.common_transparent))
         }
+        if (backgroundColor == 0) {
+            (mView.background as? ColorDrawable)?.color?.let {
+                backgroundColor = it
+            }
+        }
     }
 
 
@@ -96,11 +101,6 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
 
     fun setBackgroundSelector() {
         logd("setBackgroundSelector")
-        if (backgroundColor == 0) {
-            (mView.background as? ColorDrawable)?.color?.let {
-                backgroundColor = it
-            }
-        }
         mView.backgroundTintList = getPressedColorSelector(backgroundColor, backgroundPressColor)
     }
 
