@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import com.app.common.imageloader.ImageLoader
+import com.app.common.imageloader.imageLoader
 import com.app.common.utils.ActivityStack
 import com.app.common.view.ToastX
 import com.evernote.android.state.StateSaver
@@ -62,7 +62,7 @@ open class AppBaseApplication(private val isAddActivityListener: Boolean = true)
         Log.d(TAG, "内存清理$level")
         super.onTrimMemory(level)
         if (level >= ComponentCallbacks2.TRIM_MEMORY_MODERATE) {
-            ImageLoader.loader().clearMemory(this)
+            imageLoader().clearMemory(this)
         }
     }
 

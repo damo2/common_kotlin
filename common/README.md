@@ -32,7 +32,7 @@
     var  bean :BaseBean<SelectTypeBeam>?  = GsonConvert.fromJsonToBeanDataList(jsonStr, BaseBean::class.java, SelectTypeBeam::class.java)
 
 ###### 图片加载
-    ImageLoader.loader().load(this, "http://chuantu.biz/t6/345/1532056593x-1404817629.jpg", ivIcon,
+    imageLoader().load(context, "http://chuantu.biz/t6/345/1532056593x-1404817629.jpg", ivIcon,
                     centerCrop = true,placeholder = R.drawable.ic_launcher)
 
 ###### SharedPreferences 保存信息
