@@ -27,7 +27,7 @@ fun <T> composeCommonBean(): ObservableTransformer<T, T> {
                         else -> 12000
                     }
                     if (code != 12000) {
-                        throw ApiException(code, msg, GsonUtil().toJson(t))
+`                        throw ApiException(code, msg)
                     }
                     t
                 }

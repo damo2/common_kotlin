@@ -7,8 +7,6 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.RippleDrawable
-import android.graphics.drawable.StateListDrawable
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
@@ -95,7 +93,9 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
 
     fun setBackgroundSelector() {
         logd("setBackgroundSelector")
-        val bg = StateListDrawable()
+        if (mView.background == null) {
+            mView.setBackgroundColor(mContext.resources.getColor(R.color.common_transparent))
+        }
         if (backgroundColor == 0) {
             (mView.background as? ColorDrawable)?.color?.let {
                 backgroundColor = it
