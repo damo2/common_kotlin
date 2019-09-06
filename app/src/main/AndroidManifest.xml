@@ -45,13 +45,18 @@
         </receiver> <!-- ******************  极光推送 end ************************ -->
 
         <activity
-            android:name=".MainActivity">
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme"
+            />
         <activity android:name=".activity.anko.AnkoActivity"/>
         <activity android:name=".activity.test.TestActivity"/>
         <activity android:name=".activity.test.Test2Activity"/>
@@ -60,10 +65,10 @@
 
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="true"
+            android:launchMode="singleTask"
             android:taskAffinity="net.sourceforge.simcpux"
-            android:launchMode="singleTask"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <service
             android:name=".service.TestJobSchedulerService"
