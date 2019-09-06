@@ -11,7 +11,8 @@
     </style>
 
     <style name="AppTheme.Welcome" parent="AppBaseTheme">
-        <item name="android:windowBackground">@drawable/welcome_layler_drawable</item>
+        <item name="android:windowBackground">@drawable/welcome_layer_drawable</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>
