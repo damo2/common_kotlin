@@ -28,17 +28,24 @@ class LogInterceptor : BaseInterceptor(requestCallback = {
             }
         }
 
-        //URLDecoder.decode URLDecode解码
-        val info = "Request{" +
-                "method=[${it.method()}]" +
-                ", url=[${URLDecoder.decode(it.url().toString())}]\n" +
-                ", headers=[" + it.headers().toString() + "]" +
-                ", isHttps=" + it.isHttps +
-                ", Params=[${URLDecoder.decode(urlStr, "utf-8")}]" +
-                '}'
-        Log.i("LogInterceptor", "intercept#request:\n$info")
+        try {//URLDecoder.decode URLDecode解码
+            val info = "Request{" +
+                    "method=[${it.method()}]" +
+                    ", url=[${URLDecoder.decode(it.url().toString())}]\n" +
+                    ", headers=[" + it.headers().toString() + "]" +
+                    ", isHttps=" + it.isHttps +
+                    ", Params=[${URLDecoder.decode(urlStr, "utf-8")}]" +
+                    '}'
+            Log.i("LogInterceptor", "intercept#request:\n$info")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     } catch (e: Exception) {
     }
 }, resultCallback = { result, _ ->
-    Log.i("LogInterceptor", "intercept#result:\n${result}")
+    try {
+        Log.i("LogInterceptor", "intercept#result:\n${result}")
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
 })
