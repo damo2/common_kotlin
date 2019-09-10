@@ -35,12 +35,12 @@ class Preference<T : Serializable> private constructor(val context: Context, val
 
 
     private fun findPreference(name: String): T? = with(prefs) {
-        val res: Any = when (clazz) {
-            Long::class.java -> getLong(name, if (default is Long) default else 0L)
-            String::class.java -> getString(name, if (default is String) default else null)
-            Int::class.java -> getInt(name, if (default is Int) default else 0)
-            Boolean::class.java -> getBoolean(name, if (default is Boolean) default else false)
-            Float::class.java -> getFloat(name, if (default is Float) default else 0f)
+        val res: Any = when (clazz.simpleName.toLowerCase()) {
+            Long::class.java.simpleName.toLowerCase() -> getLong(name, if (default is Long) default else 0L)
+            String::class.java.simpleName.toLowerCase() -> getString(name, if (default is String) default else null)
+            Int::class.java.simpleName.toLowerCase() -> getInt(name, if (default is Int) default else 0)
+            Boolean::class.java.simpleName.toLowerCase() -> getBoolean(name, if (default is Boolean) default else false)
+            Float::class.java.simpleName.toLowerCase() -> getFloat(name, if (default is Float) default else 0f)
             else -> deSerialization(getString(name, serialize(default)))
         }
         res as? T
