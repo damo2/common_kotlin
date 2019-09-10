@@ -44,9 +44,7 @@ object ViewUtils {
     }
 
     fun setPadding(view: View, left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) {
-        setPadding(view, left ?: view.paddingLeft, top ?: view.paddingTop, right
-                ?: view.paddingRight, bottom
-                ?: view.paddingBottom)
+        view.setPadding(left ?: view.paddingLeft, right ?: view.paddingRight, top ?: view.paddingTop, bottom ?: view.paddingBottom)
     }
 
 
