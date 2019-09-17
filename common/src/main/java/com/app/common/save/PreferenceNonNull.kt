@@ -14,7 +14,7 @@ import kotlin.reflect.KProperty
  * describe:
  * 属性将自己的get和set方法委托给了这个类的getValue和setValue。
  * eg:
- * var save : UserInfo by Preference<UserInfo>(this,"userinfo", UserInfo("zhuangshan","123"))
+ * var save : UserInfo by PreferenceNonNull<UserInfo>(this,"userinfo", UserInfo("zhuangshan","123"))
  * @see T 必须添加 serialVersionUID
  */
 class PreferenceNonNull<T : Serializable>(val context: Context, val key: String, val default: T, val fileName: String = "app") : ReadWriteProperty<Any?, T> {

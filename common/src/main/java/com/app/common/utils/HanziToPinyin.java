@@ -37,8 +37,8 @@ public class HanziToPinyin {
         }
     }
 
-    private HanziToPinyin.Token getToken(char var1) {
-        HanziToPinyin.Token var2 = new HanziToPinyin.Token();
+    private Token getToken(char var1) {
+        Token var2 = new Token();
         String var3 = Character.toString(var1);
         var2.source = var3;
         int var4 = -1;
@@ -134,7 +134,7 @@ public class HanziToPinyin {
                     var5 = 1;
                     var4.append(var7);
                 } else {
-                    HanziToPinyin.Token var8 = this.getToken(var7);
+                    Token var8 = this.getToken(var7);
                     if (var8.type == 2) {
                         if (var4.length() > 0) {
                             this.addToken(var4, var2, var5);
@@ -163,9 +163,9 @@ public class HanziToPinyin {
         }
     }
 
-    private void addToken(StringBuilder var1, ArrayList<HanziToPinyin.Token> var2, int var3) {
+    private void addToken(StringBuilder var1, ArrayList<Token> var2, int var3) {
         String var4 = var1.toString();
-        var2.add(new HanziToPinyin.Token(var3, var4, var4));
+        var2.add(new Token(var3, var4, var4));
         var1.setLength(0);
     }
 

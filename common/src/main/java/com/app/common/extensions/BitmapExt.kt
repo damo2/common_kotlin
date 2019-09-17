@@ -17,8 +17,8 @@ import com.app.common.utils.CompressConst
  */
 
 //保存文件（需要判断权限）
-@RequiresPermission(allOf = [(Manifest.permission.READ_EXTERNAL_STORAGE), (Manifest.permission.WRITE_EXTERNAL_STORAGE)])
-fun Bitmap.saveFileExt(path: String, sucCallback: (() -> Unit)? = null) = BitmapUtil.saveFile(this, path, sucCallback)
+//@RequiresPermission(allOf = [(Manifest.permission.READ_EXTERNAL_STORAGE), (Manifest.permission.WRITE_EXTERNAL_STORAGE)])
+fun Bitmap.saveFileExt(path: String, isRecycle: Boolean, sucCallback: (() -> Unit)? = null) = BitmapUtil.saveFile(this, path, isRecycle, sucCallback)
 
 //从一个view创建Bitmap。
 fun View.createBitmapFromViewExt(scale: Float) = BitmapUtil.createBitmapFromView(this, scale)

@@ -263,14 +263,17 @@ object BitmapUtil {
     }
 
     //保存文件（需要判断权限）
-    @RequiresPermission(allOf = [(Manifest.permission.READ_EXTERNAL_STORAGE), (Manifest.permission.WRITE_EXTERNAL_STORAGE)])
-    fun saveFile(bitmap: Bitmap, path: String, sucCallback: (() -> Unit)? = null) {
+//    @RequiresPermission(allOf = [(Manifest.permission.READ_EXTERNAL_STORAGE), (Manifest.permission.WRITE_EXTERNAL_STORAGE)])
+    fun saveFile(bitmap: Bitmap, path: String, isRecycle: Boolean, sucCallback: (() -> Unit)? = null) {
         val file = File(path)
         if (file.parentFile != null && file.parentFile.exists()) {
             file.parentFile.mkdirs()
         }
         BufferedOutputStream(FileOutputStream(file)).use { bos ->
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+            if (isRecycle && !bitmap.isRecycled) {
+                bitmap.recycle()
+            }
             //TODO 保存图片后记得发送广播通知更新数据库
             sucCallback?.invoke()
         }

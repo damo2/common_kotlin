@@ -81,7 +81,7 @@ public class Functions {
     /**
      * 添加带参数的函数
      *
-     * @param function {@link com.app.common.base.function.Functions.FunctionWithParam}
+     * @param function {@link FunctionWithParam}
      * @return
      */
     public Functions addFunction(FunctionWithParam function) {
@@ -99,7 +99,7 @@ public class Functions {
     /**
      * 添加带返回值的函数
      *
-     * @param function {@link com.app.common.base.function.Functions.FunctionWithResult}
+     * @param function {@link FunctionWithResult}
      * @return
      */
     public Functions addFunction(FunctionNoParamAndResult function) {
@@ -117,7 +117,7 @@ public class Functions {
     /**
      * 添加既有参数又有返回值的函数
      *
-     * @param function {@link com.app.common.base.function.Functions.FunctionWithParamAndResult}
+     * @param function {@link FunctionWithParamAndResult}
      * @return
      */
     public Functions addFunction(FunctionWithParamAndResult function) {

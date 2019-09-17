@@ -3,7 +3,6 @@ package com.app.common.extensions
 import android.Manifest
 import android.content.Context
 import android.content.res.Resources
-import android.util.TypedValue
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.Nullable
@@ -60,9 +59,9 @@ fun Context.getAppIconDrawableExt(packageName: String = this.packageName) = AppI
 
 fun Context.dp2px(dpVal: Int) = dp2px(dpVal.toFloat()).toInt()
 
-fun Context.dp2px(dpVal: Float) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, this.resources.displayMetrics)
+fun Context.dp2px(dpVal: Float) = resources.displayMetrics.density * dpVal + 0.5f
 
-fun Context.sp2px(spVal: Float) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, this.resources.displayMetrics)
+fun Context.sp2px(spVal: Float) = resources.displayMetrics.scaledDensity * spVal + 0.5f
 
 
 //---------------------------     获取资源start        --------------------------------
