@@ -70,7 +70,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
     fun showLoadingDialog(isCanCancel: Boolean = true) {
         if (!mLoadingDialog.isShowing()) {
             mIsShowLoading = true
-            mLoadingDialog.setIsBackCanceled(isCanCancel)
+            mLoadingDialog.isBackCanceled = isCanCancel
             mLoadingDialog.showDialog(supportFragmentManager, "loading", isResume)
         }
     }
@@ -103,7 +103,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
 
     override fun onDestroy() {
         mCompositeDisposable.clear()
-        if(OsUtil.isEmui) {
+        if (OsUtil.isEmui) {
             FixMemLeak.fixLeak(applicationContext)
         }
         mLifecycleSubject.onNext(LifeCycleEvent.DESTROY)

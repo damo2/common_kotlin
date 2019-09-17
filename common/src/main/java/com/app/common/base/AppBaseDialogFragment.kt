@@ -18,12 +18,13 @@ import com.app.common.logger.Logger
  * describe:
  */
 abstract class AppBaseDialogFragment : DialogFragment() {
+    protected val mTag = javaClass.simpleName
     protected lateinit var mRootView: View
     protected var mActivity: Activity? = null
     protected var mIsPrepare = false
-    protected var mIsBackCancelable = true//返回能取消
 
-    protected val mTag = javaClass.simpleName
+    var isBackCanceled = true //返回能取消
+    var isTouchOutCanceled = true //点击外部可取消
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,9 +37,8 @@ abstract class AppBaseDialogFragment : DialogFragment() {
         super.onCreate(savedInstanceState)
         //设置style
         setStyle(STYLE_NORMAL, R.style.BaseDialogFragment)
-
-//        dialog?.setCanceledOnTouchOutside(false)//设置点击外部不可取消
-//        isCancelable = false //设置不可取消
+        //设置点击外部不可取消
+        dialog?.setCanceledOnTouchOutside(isTouchOutCanceled)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,7 +62,7 @@ abstract class AppBaseDialogFragment : DialogFragment() {
     private fun initThis() {
         dialog?.setOnKeyListener { _, keyCode, _ ->
             // KEYCODE_BACK 拦截返回true
-            keyCode == KeyEvent.KEYCODE_BACK && !mIsBackCancelable
+            keyCode == KeyEvent.KEYCODE_BACK && !isBackCanceled
         }
     }
 
@@ -153,11 +153,6 @@ abstract class AppBaseDialogFragment : DialogFragment() {
             windowParams.dimAmount = 0.0f
             it.attributes = windowParams
         }
-    }
-
-    //设置返回键不取消
-    fun setIsBackCanceled(isBackCancelable: Boolean) {
-        mIsBackCancelable = isBackCancelable
     }
 
     override fun onDismiss(dialog: DialogInterface) {
