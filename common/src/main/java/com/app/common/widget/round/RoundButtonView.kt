@@ -43,7 +43,7 @@ class RoundButtonView : Button {
         if (mRoundViewDelegate.isRadiusHalfHeight) {
             mRoundViewDelegate.radius = height / 2f
         } else {
-            mRoundViewDelegate.setBgSelector();
+            mRoundViewDelegate.setBackgroundSelector();
         }
     }
 

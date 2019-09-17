@@ -1,6 +1,7 @@
 package com.app.common.widget.round
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.TextView
 import com.app.common.widget.round.delegate.RoundViewDelegate
@@ -43,8 +44,16 @@ class RoundTextView : TextView {
         if (mRoundViewDelegate.isRadiusHalfHeight) {
             mRoundViewDelegate.radius = height / 2f
         } else {
-            mRoundViewDelegate.setBgSelector();
+            mRoundViewDelegate.setBackgroundSelector();
         }
+    }
+
+    override fun draw(canvas: Canvas) {
+        val saveCount = canvas.save()
+        val path = mRoundViewDelegate.getPathChanged()
+        canvas.clipPath(path)
+        super.draw(canvas)
+        canvas.restoreToCount(saveCount)
     }
 
     /** use delegate to set attr  */

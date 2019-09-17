@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.RelativeLayout
-import com.app.common.widget.round.delegate.RoundViewCutDelegate
+import com.app.common.widget.round.delegate.RoundViewDelegate
 
 
 /**
@@ -13,7 +13,7 @@ import com.app.common.widget.round.delegate.RoundViewCutDelegate
  */
 
 class RoundRelativeLayout : RelativeLayout {
-    private lateinit var delegate: RoundViewCutDelegate
+    private lateinit var delegate: RoundViewDelegate
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         initValue(attrs)
@@ -24,13 +24,12 @@ class RoundRelativeLayout : RelativeLayout {
     }
 
     private fun initValue(attrs: AttributeSet) {
-
-        delegate = RoundViewCutDelegate(this, context, attrs)
+        delegate = RoundViewDelegate(this, context, attrs)
     }
 
     override fun draw(canvas: Canvas) {
         val saveCount = canvas.save()
-        val path = delegate.setDrawChange()
+        val path = delegate.getPathChanged()
         canvas.clipPath(path)
         super.draw(canvas)
         canvas.restoreToCount(saveCount)

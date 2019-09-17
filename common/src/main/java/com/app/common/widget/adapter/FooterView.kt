@@ -17,12 +17,11 @@ import java.lang.ref.WeakReference
  */
 
 class FooterView(context: Context) : RelativeLayout(context) {
-    private val contextReference: WeakReference<Context>
+    private val contextReference: WeakReference<Context> = WeakReference(context)
     private val tv: TextView
     private val progressBar: ProgressBar
 
     init {
-        contextReference = WeakReference(context)
         LayoutInflater.from(context).inflate(R.layout.item_foot, this)
         tv = findViewById<TextView>(R.id.tv_foot_name)
         progressBar = findViewById<ProgressBar>(R.id.progressBar_footer)

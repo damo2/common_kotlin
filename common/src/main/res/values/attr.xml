@@ -20,6 +20,8 @@
     <attr name="borderSize" format="dimension"/>
     <attr name="backgroundColor" format="color"/>
     <attr name="backgroundPressColor" format="color"/>
+    <attr name="background" format="reference"/>
+    <attr name="backgroundPress" format="reference"/>
     <attr name="isCircle" format="boolean"/>
     <attr name="isRippleEnable" format="boolean"/>
     <attr name="textPressColor" format="color"/>
@@ -35,6 +37,8 @@
         <attr name="borderSize"/>
         <attr name="backgroundColor"/>
         <attr name="backgroundPressColor"/>
+        <attr name="backgroundDrawable"/>
+        <attr name="backgroundPress"/>
         <attr name="textPressColor"/>
         <attr name="isRippleEnable"/>
     </declare-styleable>

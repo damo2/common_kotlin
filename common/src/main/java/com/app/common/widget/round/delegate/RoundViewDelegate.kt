@@ -3,6 +3,8 @@ package com.app.common.widget.round.delegate
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Path
+import android.graphics.RectF
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
@@ -26,85 +28,30 @@ class RoundViewDelegate(private val mView: View, private val mContext: Context, 
     private val RadiusDefault = 5f
 
     var radius: Float = 0f
-        set(value) {
-            field = value
-            setBgSelector()
-        }
     var radiusTopLeft = 0f
-        set(value) {
-            field = value
-            setBgSelector()
-        }
     var radiusTopRight = 0f
-        set(value) {
-            field = value
-            setBgSelector()
-        }
     var radiusBottomLeft = 0f
-        set(value) {
-            field = value
-            setBgSelector()
-        }
     var radiusBottomRight = 0f
-        set(value) {
-            field = value
-            setBgSelector()
-        }
     var borderColor = 0
-        set(value) {
-            field = value
-            setBgSelector()
-        }
     var borderPressColor = 0
-        set(value) {
-            field = value
-            setBgSelector()
-        }
     var borderSize = 0
-        set(value) {
-            field = value
-            setBgSelector()
-        }
+
     //圆角为高的一半，圆形view
     var isRadiusHalfHeight: Boolean = false
-        set(value) {
-            field = value
-            setBgSelector()
-        }
     //宽高相等，以长边为准
     var isWidthHeightEqual: Boolean = false
-        set(value) {
-            field = value
-            setBgSelector()
-        }
 
     //颜色
     var backgroundColor: Int = 0
-        set(value) {
-            field = value
-            setBgSelector()
-        }
     var backgroundPressColor: Int = 0
-        set(value) {
-            field = value
-            setBgSelector()
-        }
+
+    //背景图片
+    var background: Int = 0
+    var backgroundPress: Int = 0
     var textPressColor: Int = 0
-        set(value) {
-            field = value
-            setBgSelector()
-        }
     //是否水波纹
     var isRippleEnable: Boolean = false
-        set(value) {
-            field = value
-            setBgSelector()
-        }
 
-
-    private val radiusArr = FloatArray(8)
-    private val gdBackground = GradientDrawable()
-    private val gdBackgroundPress = GradientDrawable()
 
     init {
         initAttr()
@@ -124,45 +71,86 @@ class RoundViewDelegate(private val mView: View, private val mContext: Context, 
             //背景颜色
             backgroundColor = a.getColor(R.styleable.RoundView_backgroundColor, 0)
             backgroundPressColor = a.getColor(R.styleable.RoundView_backgroundPressColor, 0)
+            background = a.getResourceId(R.styleable.RoundView_backgroundDrawable, 0)
+            backgroundPress = a.getResourceId(R.styleable.RoundView_backgroundPress, 0)
             //文字颜色
             textPressColor = a.getColor(R.styleable.RoundView_textPressColor, 0)
             //是否水波纹
             isRippleEnable = a.getBoolean(R.styleable.RoundView_isRippleEnable, true)
             a.recycle()
         }
-    }
 
+        val isRepeatBg = backgroundColor != 0 && background != 0
+        val isRepeatBgPress = backgroundPressColor != 0 && backgroundPress != 0
+        if (isRepeatBg || isRepeatBgPress) {
+            throw Error("颜色和图片资源不能同时设置")
+        }
 
-    fun setBgSelector() {
-        val bg = StateListDrawable()
+        if (mView.background == null) {
+//            mView.setBackgroundColor(mContext.resources.getColor(R.color.common_transparent))
+        }
         if (backgroundColor == 0) {
             (mView.background as? ColorDrawable)?.color?.let {
                 backgroundColor = it
             }
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && isRippleEnable) {
-            setDrawable(gdBackground, backgroundColor, borderColor)
-            val rippleDrawable = RippleDrawable(
-                    getPressedColorSelector(backgroundColor, backgroundPressColor), gdBackground, null)
-            mView.background = rippleDrawable
-        } else {
-            setDrawable(gdBackground, backgroundColor, borderColor)
-            bg.addState(intArrayOf(-android.R.attr.state_pressed), gdBackground)
-            if (backgroundPressColor != Integer.MAX_VALUE || borderPressColor != Integer.MAX_VALUE) {
-                setDrawable(gdBackgroundPress, if (backgroundPressColor == Integer.MAX_VALUE) backgroundColor else backgroundPressColor,
-                        if (borderPressColor == Integer.MAX_VALUE) borderColor else borderPressColor)
-                bg.addState(intArrayOf(android.R.attr.state_pressed), gdBackgroundPress)
-            }
+        if (backgroundPressColor != 0 || borderPressColor != 0 || textPressColor != 0) {
+            mView.isClickable = true
+//            if (mView is TextView) {
+//                mView.isFocusable = true
+//                mView.isFocusableInTouchMode = true
+//            }
+        }
+    }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {//16
-                mView.background = bg
+
+    fun setBackgroundSelector() {
+        if (backgroundColor != 0 || backgroundPressColor != 0) {
+            val gdBackground = getDrawableByColor(backgroundColor, borderColor)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && isRippleEnable) {
+                mView.background = RippleDrawable(getPressedColorSelector(backgroundColor, backgroundPressColor), gdBackground, null)
             } else {
-                mView.setBackgroundDrawable(bg)
+                val gdBackgroundPress = getDrawableByColor(backgroundPressColor, borderPressColor)
+                StateListDrawable().apply {
+                    addState(intArrayOf(-android.R.attr.state_pressed), gdBackground)
+                    addState(intArrayOf(android.R.attr.state_pressed), gdBackgroundPress)
+                }.let {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {//16
+                        mView.background = it
+                    } else {
+                        mView.setBackgroundDrawable(it)
+                    }
+                }
+
             }
         }
 
+        if (background != 0 || backgroundPress != 0) {
+            StateListDrawable().apply {
+                if (background == 0) {
+                    background = backgroundPress
+                }
+                if (backgroundPress == 0) {
+                    backgroundPress = background
+                }
+                if (background != 0) {
+                    addState(intArrayOf(-android.R.attr.state_pressed), mContext.getDrawable(background))
+                }
+                if (backgroundPress != 0) {
+                    addState(intArrayOf(android.R.attr.state_pressed), mContext.getDrawable(backgroundPress))
+                }
+            }.let {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {//16
+                    mView.background = it
+                } else {
+                    mView.setBackgroundDrawable(it)
+                }
+            }
+        }
+
+
         if (mView is TextView || mView is Button) {
-            if (textPressColor != Integer.MAX_VALUE) {
+            if (textPressColor != Integer.MAX_VALUE && textPressColor != 0) {
                 val textColors = (mView as TextView).textColors
                 //              Log.d("AAA", textColors.getColorForState(new int[]{-android.R.attr.state_pressed}, -1) + "");
                 val colorStateList = ColorStateList(
@@ -173,25 +161,20 @@ class RoundViewDelegate(private val mView: View, private val mContext: Context, 
         }
     }
 
-    private fun setDrawable(gd: GradientDrawable, color: Int, strokeColor: Int) {
-        gd.setColor(color)
-
+    private fun getDrawableByColor(color: Int, strokeColor: Int): GradientDrawable {
+        val gd = GradientDrawable()
+        if (color != 0) {
+            gd.setColor(color)
+        }
         if (radiusTopLeft > 0 || radiusTopRight > 0 || radiusBottomLeft > 0 || radiusBottomRight > 0) {
             /**The corners are ordered top-left, top-right, bottom-right, bottom-left */
-            radiusArr[0] = radiusTopLeft.toFloat()
-            radiusArr[1] = radiusTopLeft.toFloat()
-            radiusArr[2] = radiusTopRight.toFloat()
-            radiusArr[3] = radiusTopRight.toFloat()
-            radiusArr[4] = radiusBottomRight.toFloat()
-            radiusArr[5] = radiusBottomRight.toFloat()
-            radiusArr[6] = radiusBottomLeft.toFloat()
-            radiusArr[7] = radiusBottomLeft.toFloat()
-            gd.cornerRadii = radiusArr
+            gd.cornerRadii = floatArrayOf(radiusTopLeft, radiusTopLeft, radiusTopRight, radiusTopRight, radiusBottomRight, radiusBottomRight, radiusBottomLeft, radiusBottomLeft)
         } else {
-            gd.cornerRadius = radius.toFloat()
+            gd.cornerRadius = radius
         }
 
-        gd.setStroke(borderSize.toInt(), strokeColor)
+        gd.setStroke(borderSize, strokeColor)
+        return gd
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -200,6 +183,24 @@ class RoundViewDelegate(private val mView: View, private val mContext: Context, 
                 arrayOf(intArrayOf(android.R.attr.state_pressed), intArrayOf(android.R.attr.state_focused), intArrayOf(android.R.attr.state_activated), intArrayOf()),
                 intArrayOf(pressedColor, pressedColor, pressedColor, normalColor)
         )
+    }
+
+
+    fun getPathChanged(): Path {
+        val path = Path().apply {
+            fillType = Path.FillType.EVEN_ODD
+        }
+        val mWidth = mView.width
+        val mHeight = mView.height
+        path.reset()
+        if (radius > 0) {
+            path.addRoundRect(RectF(0f, 0f, mWidth.toFloat(), mHeight.toFloat()), radius, radius, Path.Direction.CW)
+        } else {
+            path.addRoundRect(RectF(0f, 0f, mWidth.toFloat(), mHeight.toFloat()),
+                    floatArrayOf(radiusTopLeft, radiusTopLeft, radiusTopRight, radiusTopRight, radiusBottomRight, radiusBottomRight, radiusBottomLeft, radiusBottomLeft),
+                    Path.Direction.CW)
+        }
+        return path
     }
 
 }

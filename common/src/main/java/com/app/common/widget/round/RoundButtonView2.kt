@@ -1,14 +1,15 @@
 package com.app.common.widget.round
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
-import android.widget.FrameLayout
+import android.widget.Button
 import com.app.common.widget.round.delegate.RoundViewDelegate
 
 /**
- * 自定义控件：圆角FrameLayout
+ * 自定义控件：圆角TextView
  */
-class RoundFrameLayoutOld : FrameLayout {
+class RoundButtonView2 : Button {
     private lateinit var mRoundViewDelegate: RoundViewDelegate
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -17,6 +18,10 @@ class RoundFrameLayoutOld : FrameLayout {
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
         initValue(attrs)
+    }
+
+    constructor(context: Context) : super(context) {
+        initValue(null)
     }
 
     private fun initValue(attrs: AttributeSet?) {
@@ -41,6 +46,14 @@ class RoundFrameLayoutOld : FrameLayout {
         } else {
             mRoundViewDelegate.setBackgroundSelector();
         }
+    }
+
+    override fun draw(canvas: Canvas) {
+        val saveCount = canvas.save()
+        val path = mRoundViewDelegate.getPathChanged()
+        canvas.clipPath(path)
+        super.draw(canvas)
+        canvas.restoreToCount(saveCount)
     }
 
     /** use delegate to set attr  */

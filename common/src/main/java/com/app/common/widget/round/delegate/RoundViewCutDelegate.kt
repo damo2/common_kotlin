@@ -47,23 +47,9 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
         }
     //颜色
     var backgroundColor: Int = 0
-        set(value) {
-            field = value
-            setBackgroundSelector()
-        }
     var backgroundPressColor: Int = 0
-        set(value) {
-            field = value
-            setBackgroundSelector()
-        }
     //是否水波纹
     var isRippleEnable: Boolean = true
-        set(value) {
-            field = value
-            setBackgroundSelector()
-        }
-    private val gdBackground = GradientDrawable()
-    private val gdBackgroundPress = GradientDrawable()
 
     init {
         initAttr()
@@ -83,9 +69,9 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
             isRippleEnable = a.getBoolean(R.styleable.RoundViewLayout_isRippleEnable, true)
             a.recycle()
         }
-        if (mView.background == null) {
-            mView.setBackgroundColor(mContext.resources.getColor(R.color.common_transparent))
-        }
+//        if (mView.background == null) {
+//            mView.setBackgroundColor(mContext.resources.getColor(R.color.common_transparent))
+//        }
         if (backgroundColor == 0) {
             (mView.background as? ColorDrawable)?.color?.let {
                 backgroundColor = it
