@@ -82,7 +82,7 @@
             app:borderPressColor="#0277BD"
             app:borderSize="1dp"
             app:isRippleEnable="false"
-            app:radius="4dp"
+            app:radius="2dp"
             app:textPressColor="#FFFFFF"
             />
 
@@ -100,10 +100,10 @@
             android:focusable="true"
             android:orientation="horizontal"
             app:backgroundPressColor="#9575CD"
-            app:radiusBottomLeft="12dp"
-            app:radiusBottomRight="12dp"
-            app:radiusTopLeft="12dp"
-            app:radiusTopRight="12dp">
+            app:radiusBottomLeft="6dp"
+            app:radiusBottomRight="6dp"
+            app:radiusTopLeft="6dp"
+            app:radiusTopRight="6dp">
 
             <ImageView
                 android:layout_width="40dp"

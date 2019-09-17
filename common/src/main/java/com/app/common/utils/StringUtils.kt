@@ -19,6 +19,8 @@ object StringUtils {
     //是否是邮箱
     fun isEmail(str: String?): Boolean = !str.isNullOrBlank() && Pattern.compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*").matcher(str).matches()
 
+    fun isMobile(str: String?) :Boolean= !str.isNullOrBlank() && Pattern.compile("[1]\\d{10}").matcher(str).matches()
+
     //密码半角（所有英文字符英文符号）
     fun isPasswordHalfAngle(str: String?): Boolean = !str.isNullOrBlank() && Pattern.compile("^[\u0000-\u00FF]+$").matcher(str).matches()
 

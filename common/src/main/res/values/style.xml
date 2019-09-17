@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base application theme. -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--Appbar背景色-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--状态栏颜色-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--checkbox等控件被选中时的颜色-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--页面背景色-->
+        <!--<item name="android:windowBackground">@color/defaultBackgroundColor</item>-->
+        <!--控件字体颜色-->
+        <!--<item name="android:textColorPrimary">@color/textColorPrimary</item>-->
+        <!--文本字体颜色-->
+        <!--<item name="android:textColor">@color/colorTxtDefault</item>-->
+        <!--<item name="android:textColorHint">@color/colorHintDefault</item>-->
+        <!-- true应用内容不会和系统窗口重叠-->
+        <!--<item name="android:fitsSystemWindows">true</item>-->
+        <!--<item name="android:listDivider">@color/cuttingLineColor</item>-->
+    </style>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+    </style>
+
     <style name="BaseDialogFragment" parent="Theme.AppCompat.Light.Dialog">
     </style>
 
     <style name="BottomDialog" parent="BaseDialogFragment">
         <!--<item name="android:windowAnimationStyle">@style/BottomDialogAnimation</item>-->
     </style>
-
 </resources>

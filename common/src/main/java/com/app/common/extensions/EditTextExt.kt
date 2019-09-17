@@ -24,3 +24,5 @@ fun EditText.setOnlyDecimalExt() = EditTextUtils.setOnlyDecimal(this)
 
 /** EditText设置密码显示或隐藏  */
 fun EditText.setPwdShowOrHindExt(isShow: Boolean) = EditTextUtils.setPwdShowOrHind(this, isShow)
+
+fun EditText.setFocusEnableExt(isAble: Boolean) = EditTextUtils.setFocusEnable(this, isAble)

@@ -1,6 +1,7 @@
 package com.app.common.api.transformer
 
 import com.app.common.api.ApiException
+import com.app.common.json.GsonUtil
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

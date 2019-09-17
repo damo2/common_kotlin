@@ -11,6 +11,9 @@ fun String?.equalsNotExt(str: String?, isIgnoerNull: Boolean = true) = !equalsEx
 //是否是邮箱
 fun String?.isEmailExt(): Boolean = StringUtils.isEmail(this)
 
+//是否是手机号
+fun String?.isMobileExt(): Boolean = StringUtils.isMobile(this)
+
 //密码半角（所有英文字符英文符号）
 fun String?.isPasswordHalfAngleExt(): Boolean = StringUtils.isPasswordHalfAngle(this)
 

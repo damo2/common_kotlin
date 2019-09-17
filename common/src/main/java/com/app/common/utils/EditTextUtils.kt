@@ -120,4 +120,13 @@ object EditTextUtils {
         edt.transformationMethod = if (isShow) HideReturnsTransformationMethod.getInstance() else PasswordTransformationMethod.getInstance()
         edt.setSelection(pos)
     }
+
+
+    /**
+     * EditText 能否获取焦点
+     */
+    fun setFocusEnable(edt: EditText, isAble: Boolean) {
+        edt.isFocusable = isAble
+        edt.isFocusableInTouchMode = isAble
+    }
 }

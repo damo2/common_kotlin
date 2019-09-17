@@ -5,6 +5,7 @@ import android.app.Activity
 import android.os.Build
 import android.view.View
 import com.app.common.utils.ActivityUtils
+import com.app.common.utils.StatusBarUtil
 
 
 //屏幕宽
@@ -64,3 +65,16 @@ fun Activity.createNavBarExt() = ActivityUtils.createNavBar(this)
  * @param view    View[ToolBar、TitleBar、navigationView.getHeaderView(0)]
  */
 fun Activity.setBarPaddingTopExt(view: View) = ActivityUtils.setBarPaddingTop(this, view)
+
+
+//设置全屏
+fun Activity.setFullScreenExt() = StatusBarUtil.setFullScreen(this)
+
+//设置状态栏为透明
+fun Activity.setTranslucentStatusExt() = StatusBarUtil.setTranslucentStatus(this)
+
+//设置状态栏颜色
+fun Activity.setStatusBarColorExt(colorId: Int) = StatusBarUtil.setStatusBarColor(this, colorId)
+
+//设置状态栏模式
+fun Activity.setStatusBarModeExt(isTextDark: Boolean, colorId: Int) = StatusBarUtil.setStatusBarMode(this, isTextDark, colorId)

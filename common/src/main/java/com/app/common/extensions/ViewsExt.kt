@@ -55,6 +55,8 @@ private fun <T : View> T.clickEnable(): Boolean {
 
 fun View.setMarginExt(left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) = ViewUtils.setMargin(this, left, top, right, bottom)
 
+fun View.setMarginDpExt(left: Float? = null, top: Float? = null, right: Float? = null, bottom: Float? = null) = ViewUtils.setMargin(this, if (left == null) left else context.dp2px(left).toInt(), if (top == null) top else context.dp2px(top).toInt(), if (right == null) right else context.dp2px(right).toInt(), if (bottom == null) bottom else context.dp2px(bottom).toInt())
+
 fun View.setPaddingExt(left: Int? = null, top: Int? = null, right: Int? = null, bottom: Int? = null) = ViewUtils.setPadding(this, left, top, right, bottom)
 
 fun View.setWidthHeightExt(width: Int? = null, height: Int? = null) = ViewUtils.setWidthHeight(this, width)

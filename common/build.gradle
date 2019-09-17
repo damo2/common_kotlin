@@ -66,6 +66,8 @@ dependencies {
     kapt 'com.evernote:android-state-processor:1.4.1'
     //权限
     implementation 'pub.devrel:easypermissions:1.0.0'
+    //状态栏
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 
 }
 
