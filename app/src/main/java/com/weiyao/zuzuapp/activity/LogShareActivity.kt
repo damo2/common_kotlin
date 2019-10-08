@@ -33,7 +33,6 @@ class LogShareActivity : BaseActivity() {
         super.initData()
     }
 
-    @SuppressLint("SetTextI18n")
     override fun initListener() {
         super.initListener()
         btnQQLogin.setOnClickListener {
@@ -90,7 +89,7 @@ class LogShareActivity : BaseActivity() {
         }
 
         btnWeiboShare.setOnClickListener {
-            SinaShare.shareToWeibo(this, "百度", "百度一下，你就知道", getDrawable(R.drawable.ic_app).toBitmapExt())
+            SinaShare.shareToWeibo(this, "http://www.baidu.com", "百度", "百度一下，你就知道", getDrawable(R.drawable.ic_app).toBitmapExt())
         }
     }
 
