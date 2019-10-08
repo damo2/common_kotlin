@@ -13,6 +13,7 @@ import com.app.common.file.UpdateFile
 import com.app.common.utils.ActivityUtils
 import com.app.common.utils.AppInfoUtils
 import com.app.common.utils.NetUtils
+import com.app.common.utils.ResourceUtils
 import java.io.File
 
 //-------------------   appinfo -----------------
@@ -119,3 +120,4 @@ fun Context.getNetWorkTypeNameExt() = NetUtils.getNetWorkTypeName(this)
 
 //---------------------------       其他       --------------------------------
 
+fun Context.getAssetsTxtExt(fileName: String) = ResourceUtils.getTxtFromAssets(this, fileName)

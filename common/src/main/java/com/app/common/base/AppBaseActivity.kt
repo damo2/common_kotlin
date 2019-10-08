@@ -34,6 +34,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
         bindLayout()?.let {
             setContentView(it)
         }
+        initState(savedInstanceState)
         initData()
         initView()
         initValue()
@@ -42,9 +43,10 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
 
     abstract fun bindLayout(): Int?
     override fun initTop() {}
+    override fun initState(savedInstanceState: Bundle?) {}
+    override fun initData() {}
     override fun initView() {}
     override fun initValue() {}
-    override fun initData() {}
     override fun initListener() {}
     override fun getLifecycleSubject(): PublishSubject<LifeCycleEvent> = mLifecycleSubject
     override fun getMyContext(): Context = application ?: AppBaseApplication.instanceBase
@@ -104,7 +106,7 @@ abstract class AppBaseActivity : AppCompatActivity(), IBase {
     override fun onDestroy() {
         mCompositeDisposable.clear()
         if (OsUtil.isEmui) {
-            FixMemLeak.fixLeak(applicationContext)
+//            FixMemLeak.fixLeak(applicationContext)
         }
         mLifecycleSubject.onNext(LifeCycleEvent.DESTROY)
         super.onDestroy()

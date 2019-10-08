@@ -1,6 +1,7 @@
 package com.app.common.base
 
 import android.content.Context
+import android.os.Bundle
 import com.app.common.api.util.LifeCycleEvent
 import io.reactivex.subjects.PublishSubject
 
@@ -13,6 +14,7 @@ import io.reactivex.subjects.PublishSubject
 
 interface IBase {
     fun initTop()
+    fun initState(savedInstanceState: Bundle?)
     fun initData()
     fun initView()
     fun initValue()

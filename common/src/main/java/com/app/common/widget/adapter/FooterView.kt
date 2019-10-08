@@ -8,7 +8,7 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.app.common.R
-import com.app.common.adapter.statu.RefreshStatuEnum
+import com.app.common.adapter.statu.RefreshStatu
 
 import java.lang.ref.WeakReference
 
@@ -27,27 +27,27 @@ class FooterView(context: Context) : RelativeLayout(context) {
         progressBar = findViewById<ProgressBar>(R.id.progressBar_footer)
     }
 
-    fun setStatu(refreshStatuEnum: RefreshStatuEnum?) {
+    fun setStatu(refreshStatuEnum: RefreshStatu?) {
         when (refreshStatuEnum) {
-            RefreshStatuEnum.REFRESH_SUC, RefreshStatuEnum.FIRST_SUC -> {
+            RefreshStatu.REFRESH_SUC, RefreshStatu.FIRST_SUC -> {
                 visibility = View.VISIBLE
                 progressBar.visibility = View.VISIBLE
                 tv.text = context.getString(R.string.loading)
             }
-            RefreshStatuEnum.LOAD -> {
+            RefreshStatu.LOAD -> {
                 visibility = View.VISIBLE
                 progressBar.visibility = View.VISIBLE
                 tv.text = context.getString(R.string.loading)
             }
-            RefreshStatuEnum.LOAD_SUC -> {
+            RefreshStatu.LOAD_SUC -> {
                 visibility = View.VISIBLE
                 progressBar.visibility = View.GONE
                 tv.text = context.getString(R.string.loadOver)
                 Handler().postDelayed({
-                    setStatu(RefreshStatuEnum.LOAD)
+                    setStatu(RefreshStatu.LOAD)
                 }, 600)
             }
-            RefreshStatuEnum.LOAD_FAIL -> {
+            RefreshStatu.LOAD_FAIL -> {
                 visibility = View.VISIBLE
                 progressBar.visibility = View.GONE
                 tv.text = context.getString(R.string.loadFail)
@@ -55,12 +55,12 @@ class FooterView(context: Context) : RelativeLayout(context) {
                     visibility = View.GONE
                 }, 600)
             }
-            RefreshStatuEnum.LOAD_OVER_ALL -> {
+            RefreshStatu.LOAD_OVER_ALL -> {
                 visibility = View.VISIBLE
                 progressBar.visibility = View.GONE
                 tv.text = context.getString(R.string.loadOverAll)
             }
-            RefreshStatuEnum.NULL -> {
+            RefreshStatu.NULL -> {
                 visibility = View.GONE
             }
             else -> {

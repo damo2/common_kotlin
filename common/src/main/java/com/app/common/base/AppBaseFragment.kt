@@ -53,6 +53,7 @@ abstract class AppBaseFragment : Fragment(), IBase {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mLifecycleSubject.onNext(LifeCycleEvent.CREATE)
+        initState(savedInstanceState)
         initData()
         initView()
         mIsPrepare = true
@@ -68,6 +69,7 @@ abstract class AppBaseFragment : Fragment(), IBase {
 
     protected abstract fun bindLayout(): Int
     override fun initTop() {}
+    override fun initState(savedInstanceState: Bundle?) {}
     override fun initData() {}
     override fun initView() {}
     override fun initValue() {}

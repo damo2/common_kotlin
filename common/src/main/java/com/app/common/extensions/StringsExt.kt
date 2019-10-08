@@ -1,6 +1,8 @@
 package com.app.common.extensions
 
+import android.content.Context
 import android.text.SpannableString
+import com.app.common.utils.ClipboardUtil
 import com.app.common.utils.StringUtils
 
 //是否相等
@@ -25,4 +27,7 @@ fun String?.getNumExt(default: Int = -1): Int = StringUtils.getNum(this, default
 
 //String转int失败，默认-1
 fun String?.toIntExt(default: Int = -1): Int = StringUtils.toInt(this, default)
+
+//复制到剪切板
+fun String.toClipboardExt(context: Context) = ClipboardUtil.copyText(context, this)
 

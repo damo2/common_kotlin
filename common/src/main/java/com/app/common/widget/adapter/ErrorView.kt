@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.app.common.R
-import com.app.common.adapter.statu.RefreshStatuEnum
+import com.app.common.adapter.statu.RefreshStatu
 
 import java.lang.ref.WeakReference
 
@@ -25,17 +25,17 @@ class ErrorView(context: Context, parent: ViewGroup? = null) : RelativeLayout(co
         tv = findViewById<TextView>(R.id.tv_error_tip)
     }
 
-    fun setStatu(refreshStatuEnum: RefreshStatuEnum?) {
+    fun setStatu(refreshStatuEnum: RefreshStatu?) {
         if (refreshStatuEnum == null) {
             visibility = View.GONE
             return
         }
         when (refreshStatuEnum) {
-            RefreshStatuEnum.FIRST_FAIL -> {
+            RefreshStatu.FIRST_FAIL -> {
                 visibility = View.VISIBLE
                 tv.text = context.getString(R.string.loadFailToRefresh)
             }
-            RefreshStatuEnum.NULL -> {
+            RefreshStatu.NULL -> {
                 visibility = View.VISIBLE
                 tv.text = context.getString(R.string.loadNull)
             }

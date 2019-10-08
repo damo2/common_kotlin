@@ -4,20 +4,20 @@ import LoggerPrinter
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 
-fun logw(message: Any) {
-    Logger.w(message.toString())
+fun logw(message: Any?) {
+    Logger.w(message?.toString() ?: return)
 }
 
-fun logd(message: Any) {
-    Logger.d(message.toString())
+fun logd(message: Any?) {
+    Logger.d(message?.toString() ?: return)
 }
 
-fun logi(message: Any) {
-    Logger.i(message.toString())
+fun logi(message: Any?) {
+    Logger.i(message?.toString() ?: return)
 }
 
-fun loge(message: Any) {
-    Logger.e(message.toString())
+fun loge(message: Any?) {
+    Logger.e(message?.toString() ?: return)
 }
 
 object Logger {
