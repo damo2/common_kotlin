@@ -20,7 +20,7 @@ import com.sina.weibo.sdk.share.WbShareHandler
 object SinaShare {
 
     //activity 实现WbShareCallback接口回调
-    fun shareToWeibo(activity: Activity, title: String, description: String, bitmap: Bitmap) {
+    fun shareToWeibo(activity: Activity, title: String, description: String, bitmap: Bitmap?) {
         //注册新浪微博 只注册一次
         WbSdk.install(activity.applicationContext, AuthInfo(activity.applicationContext, Const.SINA_APP_KEY, Const.SINA_REDIRECT_URL, Const.SINA_APP_SCOPE))
 

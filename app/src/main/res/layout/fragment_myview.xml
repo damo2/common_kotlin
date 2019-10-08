@@ -80,9 +80,9 @@
             app:backgroundPressColor="#9575CD"
             app:borderColor="#81D4FA"
             app:borderPressColor="#0277BD"
-            app:borderSize="1dp"
+            app:borderSize="0.5dp"
             app:isRippleEnable="false"
-            app:radius="2dp"
+            app:radius="8dp"
             app:textPressColor="#FFFFFF"
             />
 

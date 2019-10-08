@@ -2,7 +2,7 @@ package com.weiyao.zuzuapp.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import com.app.common.extensions.drawableToBitmapExt
+import com.app.common.extensions.toBitmapExt
 import com.app.common.json.GsonUtil
 import com.app.common.view.toastInfo
 import com.damo.loginshared.qq.QQLogin
@@ -37,7 +37,7 @@ class LogShareActivity : BaseActivity() {
     override fun initListener() {
         super.initListener()
         btnQQLogin.setOnClickListener {
-            qqLogin.login(this,{ isSuc, qqDataBean ->
+            qqLogin.login(this, { isSuc, qqDataBean ->
                 if (isSuc) {
                     toastInfo("授权成功")
                     tvInfo.text = GsonUtil().toJson(qqDataBean)
@@ -86,11 +86,11 @@ class LogShareActivity : BaseActivity() {
         }
 
         btnWeixinShare.setOnClickListener {
-            WechatShare.shareToWechat(mContext, WechatShare.WX_FRIEND, "http://www.baidu.com", "百度", "百度一下，你就知道", getDrawable(R.drawable.ic_app).drawableToBitmapExt())
+            WechatShare.shareToWechat(mContext, WechatShare.WX_FRIEND, "http://www.baidu.com", "百度", "百度一下，你就知道", getDrawable(R.drawable.ic_app).toBitmapExt())
         }
 
         btnWeiboShare.setOnClickListener {
-            SinaShare.shareToWeibo(this, "百度", "百度一下，你就知道", getDrawable(R.drawable.ic_app).drawableToBitmapExt())
+            SinaShare.shareToWeibo(this, "百度", "百度一下，你就知道", getDrawable(R.drawable.ic_app).toBitmapExt())
         }
     }
 

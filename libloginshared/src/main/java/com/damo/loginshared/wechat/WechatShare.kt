@@ -48,7 +48,7 @@ object WechatShare {
      * @param description 分享的具体内容
      * @param thumb       分享时显示的图片（R.drawable.icon_logo）  不能超过32k
      */
-    fun shareToWechat(context: Context,@WechatShareType.MyState flag: Int, url: String, title: String, description: String, thumb: Bitmap) {
+    fun shareToWechat(context: Context,@WechatShareType.MyState flag: Int, url: String, title: String, description: String, thumb: Bitmap?) {
         val api: IWXAPI = WXAPIFactory.createWXAPI(context, Const.WX_APPID, true).apply { registerApp(Const.WX_APPID) }
         var content = description
         if (flag != WechatShareType.WX_CIRCLE && flag != WechatShareType.WX_FRIEND) {

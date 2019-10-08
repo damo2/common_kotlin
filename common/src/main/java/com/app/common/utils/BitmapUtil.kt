@@ -209,7 +209,8 @@ object BitmapUtil {
     /**
      * drawable 转 Bitmap
      */
-    fun drawableToBitmap(drawable: Drawable): Bitmap {
+    fun drawableToBitmap(drawable: Drawable?): Bitmap? {
+        if (drawable == null) return null
         // 取 drawable 的长宽
         val w = drawable.intrinsicWidth
         val h = drawable.intrinsicHeight

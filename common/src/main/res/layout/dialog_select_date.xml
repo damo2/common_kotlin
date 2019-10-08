@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+    >
+
+    <com.app.common.widget.wheelview.WheelView
+        android:id="@+id/wheelViewYear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:isCyclic="false"
+        app:itemNumber="5"
+        app:lineColor="#e5e5e5"
+        app:normalTextColor="#666666"
+        app:normalTextSize="12sp"
+        app:selectedTextColor="#FF333333"
+        app:selectedTextSize="12sp"
+        app:unitHeight="30dp"/>
+
+    <com.app.common.widget.wheelview.WheelView
+        android:id="@+id/wheelViewMonth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:isCyclic="false"
+        app:itemNumber="5"
+        app:lineColor="#e5e5e5"
+        app:normalTextColor="#666666"
+        app:normalTextSize="12sp"
+        app:selectedTextColor="#FF333333"
+        app:selectedTextSize="12sp"
+        app:unitHeight="30dp"/>
+
+    <com.app.common.widget.wheelview.WheelView
+        android:id="@+id/wheelViewDay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:isCyclic="false"
+        app:itemNumber="5"
+        app:lineColor="#e5e5e5"
+        app:normalTextColor="#666666"
+        app:normalTextSize="12sp"
+        app:selectedTextColor="#FF333333"
+        app:selectedTextSize="12sp"
+        app:unitHeight="30dp"
+        />
+</LinearLayout>
