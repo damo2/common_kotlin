@@ -59,11 +59,11 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
     private fun initAttr() {
         attrs?.let {
             val a = mContext.obtainStyledAttributes(attrs, R.styleable.RoundViewLayout)
-            radius = mContext.dp2px(a.getDimension(R.styleable.RoundViewLayout_radius, 0f))
-            radiusTopLeft = mContext.dp2px(a.getDimension(R.styleable.RoundViewLayout_radiusTopLeft, 0f))
-            radiusTopRight = mContext.dp2px(a.getDimension(R.styleable.RoundViewLayout_radiusTopRight, 0f))
-            radiusBottomLeft = mContext.dp2px(a.getDimension(R.styleable.RoundViewLayout_radiusBottomLeft, 0f))
-            radiusBottomRight = mContext.dp2px(a.getDimension(R.styleable.RoundViewLayout_radiusBottomRight, 0f))
+            radius = a.getDimension(R.styleable.RoundView_radius, 0f)
+            radiusTopLeft =a.getDimension(R.styleable.RoundView_radiusTopLeft, 0f)
+            radiusTopRight =a.getDimension(R.styleable.RoundView_radiusTopRight, 0f)
+            radiusBottomLeft = a.getDimension(R.styleable.RoundView_radiusBottomLeft, 0f)
+            radiusBottomRight = a.getDimension(R.styleable.RoundView_radiusBottomRight, 0f)
             backgroundColor = a.getColor(R.styleable.RoundViewLayout_backgroundColor, 0)
             backgroundPressColor = a.getColor(R.styleable.RoundViewLayout_backgroundPressColor, 0)
             isRippleEnable = a.getBoolean(R.styleable.RoundViewLayout_isRippleEnable, true)

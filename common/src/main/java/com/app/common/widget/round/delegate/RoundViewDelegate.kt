@@ -15,7 +15,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.app.common.R
-import com.app.common.extensions.dp2px
 
 
 /**
@@ -25,7 +24,7 @@ import com.app.common.extensions.dp2px
  */
 class RoundViewDelegate(private val mView: View, private val mContext: Context, var attrs: AttributeSet?) {
     //默认圆角大小
-    private val RadiusDefault = 5f
+    private val RadiusDefault = 0f
 
     var radius: Float = 0f
     var radiusTopLeft = 0f
@@ -60,14 +59,14 @@ class RoundViewDelegate(private val mView: View, private val mContext: Context, 
     private fun initAttr() {
         attrs?.let {
             val a = mContext.obtainStyledAttributes(attrs, R.styleable.RoundView)
-            radius = mContext.dp2px(a.getDimension(R.styleable.RoundView_radius, RadiusDefault))
-            radiusTopLeft = mContext.dp2px(a.getDimension(R.styleable.RoundView_radiusTopLeft, 0f))
-            radiusTopRight = mContext.dp2px(a.getDimension(R.styleable.RoundView_radiusTopRight, 0f))
-            radiusBottomLeft = mContext.dp2px(a.getDimension(R.styleable.RoundView_radiusBottomLeft, 0f))
-            radiusBottomRight = mContext.dp2px(a.getDimension(R.styleable.RoundView_radiusBottomRight, 0f))
+            radius = a.getDimension(R.styleable.RoundView_radius, RadiusDefault)
+            radiusTopLeft = a.getDimension(R.styleable.RoundView_radiusTopLeft, 0f)
+            radiusTopRight = a.getDimension(R.styleable.RoundView_radiusTopRight, 0f)
+            radiusBottomLeft = a.getDimension(R.styleable.RoundView_radiusBottomLeft, 0f)
+            radiusBottomRight = a.getDimension(R.styleable.RoundView_radiusBottomRight, 0f)
             borderColor = a.getColor(R.styleable.RoundView_borderColor, 0)
             borderPressColor = a.getColor(R.styleable.RoundView_borderPressColor, 0)
-            borderSize = mContext.dp2px(a.getDimension(R.styleable.RoundView_borderSize, 0f)).toInt()
+            borderSize = a.getDimension(R.styleable.RoundView_borderSize, 0f).toInt()
             //背景颜色
             backgroundColor = a.getColor(R.styleable.RoundView_backgroundColor, 0)
             backgroundPressColor = a.getColor(R.styleable.RoundView_backgroundPressColor, 0)
@@ -106,6 +105,7 @@ class RoundViewDelegate(private val mView: View, private val mContext: Context, 
 
     fun setBackgroundSelector() {
         if (backgroundColor != 0 || backgroundPressColor != 0) {
+            if (backgroundPressColor == 0) backgroundPressColor = backgroundColor
             val gdBackground = getDrawableByColor(backgroundColor, borderColor)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && isRippleEnable) {
                 mView.background = RippleDrawable(getPressedColorSelector(backgroundColor, backgroundPressColor), gdBackground, null)
@@ -166,13 +166,11 @@ class RoundViewDelegate(private val mView: View, private val mContext: Context, 
         if (color != 0) {
             gd.setColor(color)
         }
-        if (radiusTopLeft > 0 || radiusTopRight > 0 || radiusBottomLeft > 0 || radiusBottomRight > 0) {
-            /**The corners are ordered top-left, top-right, bottom-right, bottom-left */
-            gd.cornerRadii = floatArrayOf(radiusTopLeft, radiusTopLeft, radiusTopRight, radiusTopRight, radiusBottomRight, radiusBottomRight, radiusBottomLeft, radiusBottomLeft)
-        } else {
-            gd.cornerRadius = radius
-        }
-
+        radiusTopLeft = if (radiusTopLeft > 0) radiusTopLeft else radius
+        radiusTopRight = if (radiusTopRight > 0) radiusTopRight else radius
+        radiusBottomRight = if (radiusBottomRight > 0) radiusBottomRight else radius
+        radiusBottomLeft = if (radiusBottomLeft > 0) radiusBottomLeft else radius
+        gd.cornerRadii = floatArrayOf(radiusTopLeft, radiusTopLeft, radiusTopRight, radiusTopRight, radiusBottomRight, radiusBottomRight, radiusBottomLeft, radiusBottomLeft)
         gd.setStroke(borderSize, strokeColor)
         return gd
     }

@@ -1,14 +1,16 @@
 package com.app.common.widget.round
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
-import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import com.app.common.widget.round.delegate.RoundViewDelegate
 
 /**
  * 自定义控件：圆角TextView
  */
-class RoundButtonView : Button {
+class RoundEditText : EditText {
     private lateinit var mRoundViewDelegate: RoundViewDelegate
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -42,15 +44,21 @@ class RoundButtonView : Button {
         super.onLayout(changed, left, top, right, bottom)
         if (mRoundViewDelegate.isRadiusHalfHeight) {
             mRoundViewDelegate.radius = height / 2f
-            mRoundViewDelegate.setBackgroundSelector()
         } else {
-            mRoundViewDelegate.setBackgroundSelector()
+            mRoundViewDelegate.setBackgroundSelector();
         }
+    }
+
+    override fun draw(canvas: Canvas) {
+        val saveCount = canvas.save()
+        val path = mRoundViewDelegate.getPathChanged()
+        canvas.clipPath(path)
+        super.draw(canvas)
+        canvas.restoreToCount(saveCount)
     }
 
     /** use delegate to set attr  */
     fun getDelegate(): RoundViewDelegate {
         return mRoundViewDelegate
     }
-
 }

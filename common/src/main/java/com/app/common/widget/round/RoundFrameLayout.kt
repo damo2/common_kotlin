@@ -6,12 +6,13 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.app.common.widget.round.delegate.RoundViewCutDelegate
+import com.app.common.widget.round.delegate.RoundViewDelegate
 
 /**
  * 自定义控件：圆角LinearLayout
  */
 class RoundFrameLayout : FrameLayout {
-    private lateinit var delegate: RoundViewCutDelegate
+    private lateinit var delegate: RoundViewDelegate
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         initValue(attrs)
@@ -22,13 +23,12 @@ class RoundFrameLayout : FrameLayout {
     }
 
     private fun initValue(attrs:AttributeSet) {
-
-        delegate = RoundViewCutDelegate(this, context, attrs)
+        delegate = RoundViewDelegate(this, context, attrs)
     }
 
     override fun draw(canvas: Canvas) {
         val saveCount = canvas.save()
-        val path = delegate.setDrawChange()
+        val path = delegate.getPathChanged()
         canvas.clipPath(path)
         super.draw(canvas)
         canvas.restoreToCount(saveCount)
