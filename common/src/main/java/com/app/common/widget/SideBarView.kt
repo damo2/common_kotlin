@@ -10,13 +10,13 @@ import android.view.MotionEvent
 import android.view.View
 import com.app.common.extensions.sp2px
 
-
-class SideBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
+/**
+ *侧边栏快速索引
+ */
+class SideBarView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
 
     private val paint = Paint()
-
     private var choose = -1
-
     private var onChooseLetterChangedListener: OnChooseLetterChangedListener? = null
 
     override fun onDraw(canvas: Canvas) {
@@ -51,7 +51,7 @@ class SideBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
             MotionEvent.ACTION_DOWN -> if (oldChoose != c && onChooseLetterChangedListener != null) {
                 if (c > -1 && c < letters.size) {
                     //获取触摸位置的字符
-                    onChooseLetterChangedListener!!.onChooseLetter(letters[c])
+                    onChooseLetterChangedListener?.onChooseLetter(letters[c])
                     choose = c
                     invalidate()
                 }
@@ -59,7 +59,7 @@ class SideBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
             MotionEvent.ACTION_MOVE -> if (oldChoose != c && onChooseLetterChangedListener != null) {
                 if (c > -1 && c < letters.size) {
                     //获取触摸位置的字符
-                    onChooseLetterChangedListener!!.onChooseLetter(letters[c])
+                    onChooseLetterChangedListener?.onChooseLetter(letters[c])
                     choose = c
                     invalidate()
                 }
@@ -68,7 +68,7 @@ class SideBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
                 choose = -1
                 if (onChooseLetterChangedListener != null) {
                     //手指离开
-                    onChooseLetterChangedListener!!.onNoChooseLetter()
+                    onChooseLetterChangedListener?.onNoChooseLetter()
                 }
                 invalidate()
             }
@@ -86,19 +86,14 @@ class SideBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
     }
 
     interface OnChooseLetterChangedListener {
-        /**
-         * 滑动时
-         */
+        //滑动时
         fun onChooseLetter(s: String)
 
-        /**
-         * 手指离开
-         */
+        //手指离开
         fun onNoChooseLetter()
     }
 
     companion object {
-
         var letters = arrayOf("#", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
     }
 }
