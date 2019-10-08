@@ -9,5 +9,5 @@ import android.content.Context
  * describe:
  */
 object ResourceUtils {
-    fun getFileFromAssets(context: Context, fileName: String): String = context.assets.open(fileName).bufferedReader().use { it.readText() }
+    fun getTxtFromAssets(context: Context, fileName: String): String = context.assets.open(fileName).bufferedReader().use { it.readText() }
 }

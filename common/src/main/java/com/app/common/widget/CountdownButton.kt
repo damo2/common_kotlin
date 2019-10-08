@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.widget.Button
 import com.app.common.CommonConst
 import com.app.common.R
+import com.app.common.extensions.setOnClickExtNoFast
 import com.app.common.save.Preference
 
 /**
@@ -53,7 +54,7 @@ class CountdownButton(context: Context, attrs: AttributeSet) : Button(context, a
 
     private fun initView() {
         setBackgroundResource(bgResource)
-        setOnClickListener {
+        setOnClickExtNoFast {
             startCountdown()
         }
         if (isExitTiming) {

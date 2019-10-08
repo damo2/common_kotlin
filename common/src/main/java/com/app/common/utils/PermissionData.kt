@@ -41,4 +41,8 @@ object PermissionData {
      */
     val VOICE = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO)
     const val VOICE_CODE = 106
+
+
+    val MAP_LOCATION = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION)
+    const val MAP_LOCATION_CODE = 109
 }
