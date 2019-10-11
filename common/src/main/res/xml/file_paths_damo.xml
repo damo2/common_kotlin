@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!--
+<root-path/> 代表设备的根目录;
+<files-path/> 代表context.getFilesDir()
+<cache-path/> 代表context.getCacheDir()
+<external-path/> 代表Environment.getExternalStorageDirectory()
+<external-files-path>代表context.getExternalFilesDirs()
+<external-cache-path>代表getExternalCacheDirs()
+
+name 属性用于给 path 属性所指定的子目录名称取一个别名。后续生成 content:// URI 时，会使用这个别名代替真实目录名。这样做的目的，很显然是为了提高安全性
+path 属性用于指定当前子元素所代表目录下需要共享的子目录名称。注意：path 属性值不能使用具体的独立文件名，只能是目录名。
+    -->
+    <external-path
+        name="external"
+        path="."/>
+    <root-path
+        name="root"
+        path=""/>
+</paths>
+
+

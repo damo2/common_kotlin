@@ -8,8 +8,8 @@ import com.weiyao.zuzuapp.activity.LogShareActivity
 import com.weiyao.zuzuapp.activity.test.Test2Activity
 import com.weiyao.zuzuapp.activity.test.TestActivity
 import com.weiyao.zuzuapp.base.BaseFragment
-import com.weiyao.zuzuapp.service.TestJobSchedulerService
 import com.weiyao.zuzuapp.testmodule.daili.ProxyDemo
+import com.weiyao.zuzuapp.testmodule.service.TestJobSchedulerService
 import kotlinx.android.synthetic.main.fragment_other.*
 import org.jetbrains.anko.startActivity
 import kotlin.random.Random

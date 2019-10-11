@@ -34,7 +34,7 @@ fun String.compressByPxExt() = BitmapUtil.compressByPx(this)
 
 fun Bitmap.compressBySizeExt(sizeMax: Int = CompressConst.IMAGE_MAXSIZE_SYS) = BitmapUtil.compressBySize(this, sizeMax)
 
-fun Drawable?.toBitmapExt() = BitmapUtil.drawableToBitmap(this)
+fun Drawable.toBitmapExt() = BitmapUtil.drawableToBitmap(this)
 
 fun Uri.toBitmapExt(context: Context) = BitmapUtil.uriToBitmap(context, this)
 

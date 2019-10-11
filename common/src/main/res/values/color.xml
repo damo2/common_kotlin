@@ -12,7 +12,7 @@
 
     <color name="common_loadBg">#66333333</color>
 
-    <color name="color_55A8FD">#55A8FD</color>
+    <color name="dk_color_55A8FD">#55A8FD</color>
 
     <color name="sidebar_txt_default">#646464</color>
     <color name="sidebar_txt_press">#518df1</color>

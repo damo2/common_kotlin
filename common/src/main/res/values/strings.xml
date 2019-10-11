@@ -7,5 +7,6 @@
     <string name="loadFail">加载失败</string>
     <string name="loadFailToRefresh">加载失败,请下拉刷新</string>
 
+    <string name="The_video_to_start">录像开始</string>
 
 </resources>

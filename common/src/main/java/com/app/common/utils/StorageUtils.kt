@@ -59,6 +59,8 @@ object StorageUtils {
         return filePath
     }
 
+    fun getPublicStorageDirFile(child: String, type: String? = null) = File(getPublicStorageDir(child, type))
+
     /**
      * 获取SD卡公有目录的文件路径,SD卡卸载就取系统目录
      */
@@ -99,7 +101,8 @@ object StorageUtils {
     private fun getPrivateCachePathSub(context: Context, childPath: String? = null): String {
         val baseDir: String = if (isExternalStorageWritable()) {
             if (context.externalCacheDir != null) {
-                context.externalCacheDir?.absolutePath?: context.cacheDir.absolutePath//  /mnt/sdcard/Android/data/com.my.app/cache
+                context.externalCacheDir?.absolutePath
+                        ?: context.cacheDir.absolutePath//  /mnt/sdcard/Android/data/com.my.app/cache
             } else {
                 Environment.getExternalStorageDirectory().path//  /mnt/sdcard
             }

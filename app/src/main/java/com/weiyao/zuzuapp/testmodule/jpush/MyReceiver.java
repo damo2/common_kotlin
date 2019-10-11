@@ -1,4 +1,4 @@
-package com.weiyao.zuzuapp.jpush;
+package com.weiyao.zuzuapp.testmodule.jpush;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
