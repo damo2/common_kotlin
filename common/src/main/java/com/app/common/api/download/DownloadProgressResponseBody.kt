@@ -10,12 +10,13 @@ import java.io.IOException
  * Created by wr
  * Date: 2018/11/1  10:52
  * describe:
+ * 下载进度
  */
 
 class DownloadProgressResponseBody(private val responseBody: ResponseBody,
-                                   private val progressCallback: (totalLength: Long, contentLength: Long, done: Boolean) -> Unit) : ResponseBody() {
+                                   private val progressCallback: (totalLength: Long, downLength: Long, done: Boolean) -> Unit) : ResponseBody() {
     private var bufferedSource: BufferedSource? = null
-
+    var downLength = 0L
     override fun contentType(): MediaType? {
         return responseBody.contentType()
     }
@@ -33,14 +34,12 @@ class DownloadProgressResponseBody(private val responseBody: ResponseBody,
 
     private fun source(source: Source): Source {
         return object : ForwardingSource(source) {
-            internal var totalBytesRead = 0L
-
             @Throws(IOException::class)
             override fun read(sink: Buffer, byteCount: Long): Long {
                 val bytesRead = super.read(sink, byteCount)
                 // read() returns the number of bytes read, or -1 if this source is exhausted.
-                totalBytesRead += if (bytesRead != -1L) bytesRead else 0
-                progressCallback(totalBytesRead, responseBody.contentLength(), bytesRead == -1L)
+                downLength += if (bytesRead != -1L) bytesRead else 0
+                progressCallback(responseBody.contentLength(), downLength, bytesRead == -1L)
                 return bytesRead
             }
         }

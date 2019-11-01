@@ -29,7 +29,7 @@ object RequestFileManager {
 
     //下载
     fun downloadFile(url: String, filePath: String, downSuccessCallback: ((file: File) -> Unit)? = null, downFailCallback: ((e: Throwable) -> Unit)? = null,
-                     progressCallback: (totalLength: Long, contentLength: Long, done: Boolean) -> Unit) {
+                     progressCallback: (totalLength: Long, downLength: Long, done: Boolean) -> Unit) {
         val fileDownLoadObserver = FileDownLoadObserver(downSuccessCallback, downFailCallback)
         getDownRetrofit(progressCallback)
                 .create(CommonApiService::class.java)
@@ -76,7 +76,7 @@ object RequestFileManager {
                 .subscribe(fileUpLoadObserver)
     }
 
-    private fun getDownRetrofit(progressCallback: (totalLength: Long, contentLength: Long, done: Boolean) -> Unit): Retrofit {
+    private fun getDownRetrofit(progressCallback: (totalLength: Long, downLength: Long, done: Boolean) -> Unit): Retrofit {
         val client = OkHttpClient.Builder()
                 .connectTimeout(CommonConst.DOWNLOAD_OUTTIME, TimeUnit.MILLISECONDS)
                 .addInterceptor(DownloadProgressInterceptor(progressCallback))

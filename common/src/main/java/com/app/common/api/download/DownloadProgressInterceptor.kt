@@ -9,9 +9,10 @@ import java.io.IOException
  * Created by wr
  * Date: 2018/11/1  10:56
  * describe:
+ * 下载进度拦截器
  */
 
-class DownloadProgressInterceptor(private var progressCallback: (totalLength: Long, contentLength: Long, done: Boolean) -> Unit) : Interceptor {
+class DownloadProgressInterceptor(private var progressCallback: (totalLength: Long, downLength: Long, done: Boolean) -> Unit) : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response? {

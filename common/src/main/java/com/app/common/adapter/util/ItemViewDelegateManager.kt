@@ -1,6 +1,7 @@
 package com.app.common.adapter.util
 
 import androidx.collection.SparseArrayCompat
+import com.app.common.json.toJsonExt
 
 
 /**
@@ -63,7 +64,7 @@ class ItemViewDelegateManager<T> {
             }
         }
         throw IllegalArgumentException(
-                "No ItemViewDelegate added that matches position=$position in data source")
+                "No ItemViewDelegate added that matches position=$position item=${item.toJsonExt()} in data source")
     }
 
     fun convert(holder: ViewHolder, item: T, position: Int, payloads: List<Any>?) {

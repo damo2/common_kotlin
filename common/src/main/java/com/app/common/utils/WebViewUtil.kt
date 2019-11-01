@@ -30,12 +30,12 @@ import com.app.common.extensions.isConnectedExt
  *   webview.loadUrl("file:"+getCacheDir()+File.separator+"index.html")  //打开/data/data/pkg/cache目录目录下的index.html文件
  */
 object WebViewUtil {
-    fun initWeb(context: Context, webView: WebView, isCache: Boolean): WebSettings {
-        initWebView(webView, context)
+    fun initWeb(context: Context, webView: WebView, isCache: Boolean, isDownAble: Boolean = true): WebSettings {
+        initWebView(webView, context, isDownAble)
         return initWebSettings(context, webView, isCache)
     }
 
-    private fun initWebView(webView: WebView, context: Context) {
+    private fun initWebView(webView: WebView, context: Context, isDownAble: Boolean) {
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null)//硬件解码
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null)//软件解码
@@ -63,12 +63,15 @@ object WebViewUtil {
                 return true
             }
         }
-        //支持下载
-        webView.setDownloadListener { paramAnonymousString1, _, _, _, _ ->
-            val intent = Intent()
-            intent.action = "android.intent.action.VIEW"
-            intent.data = Uri.parse(paramAnonymousString1)
-            context.startActivity(intent)
+        if (isDownAble) {
+            //支持下载
+            webView.setDownloadListener { paramAnonymousString1, _, _, _, _ ->
+                val intent = Intent()
+                intent.action = "android.intent.action.VIEW"
+                intent.data = Uri.parse(paramAnonymousString1)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                context.startActivity(intent)
+            }
         }
 
     }

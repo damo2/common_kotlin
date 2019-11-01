@@ -45,3 +45,6 @@ fun File.getVideoInfoExt(videoInfo: (duration: Int, width: Int, height: Int) -> 
 fun File.appendExt(txt: String, isCreate: Boolean = true) = FileUtils.append(this, txt, isCreate)
 
 fun File.bitmapExt(): Bitmap? = FileUtils.bitmap(this)
+
+//拼接目录，最后"/"结尾
+fun dirAppendExt(vararg str: String?) = FileUtils.dirAppend(str)

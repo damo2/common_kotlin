@@ -3,7 +3,6 @@ package com.app.common.utils
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.MediaMetadataRetriever
-import com.app.common.extensions.headerExt
 import com.app.common.file.FileMetaData
 import com.app.common.file.HexKt
 import java.io.File
@@ -89,5 +88,19 @@ object FileUtils {
             }
         }
         videoInfo(Integer.valueOf(duration), Integer.valueOf(width), Integer.valueOf(height))
+    }
+
+    fun dirAppend(str: Array<out String?>): String {
+        val strBuilder = StringBuilder()
+        str.forEach {
+            if (it != null) {
+                strBuilder.append(it)
+                //最后一个字符不是"/"
+                if (strBuilder.lastIndexOf("/") != strBuilder.length - 1) {
+                    strBuilder.append("/")
+                }
+            }
+        }
+        return strBuilder.toString()
     }
 }

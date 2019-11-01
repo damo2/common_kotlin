@@ -25,7 +25,7 @@ class OtherFragment : BaseFragment() {
 
     data class UserBean(var name: String, var age: Int)
 
-    var userBean by Dao<UserBean>(UserBean::class.java, "user")
+    var userBean by Dao<UserBean>("user",UserBean::class.java)
 
     override fun bindLayout() = R.layout.fragment_other
 

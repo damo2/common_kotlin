@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import com.app.common.widget.round.delegate.RoundViewCutDelegate
 import com.app.common.widget.round.delegate.RoundViewDelegate
 
 /**
@@ -36,7 +35,7 @@ class RoundLinearLayout : LinearLayout {
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
-        delegate.setBackgroundSelector();
+        delegate.resetView();
     }
 
 }

@@ -29,6 +29,8 @@
                 android:resource="@xml/file_paths_damo"/>
         </provider>
 
+        <activity android:name=".widget.RecorderVideo"/>
+
         <service android:name=".update.UpdateService"/>
     </application>
 </manifest>

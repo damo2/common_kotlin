@@ -44,7 +44,7 @@ class RoundTextView : TextView {
         if (mRoundViewDelegate.isRadiusHalfHeight) {
             mRoundViewDelegate.radius = height / 2f
         } else {
-            mRoundViewDelegate.setBackgroundSelector();
+            mRoundViewDelegate.resetView();
         }
     }
 

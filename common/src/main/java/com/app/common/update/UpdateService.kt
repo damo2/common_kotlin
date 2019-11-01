@@ -13,7 +13,6 @@ import com.app.common.bean.DownApkEvent
 import com.app.common.logger.Logger
 import com.app.common.logger.logd
 import com.app.common.rxbus2.RxBus
-import com.app.common.utils.ActivityStack
 
 /**
  * 更新app
@@ -66,8 +65,8 @@ class UpdateService : Service() {
                 stopSelf()
                 isDowning = false
                 logd(e.message ?: "下载apk异常")
-            }, { totalLength, contentLength, done ->
-                val curProgress = (totalLength * 100 / contentLength).toInt()
+            }, { totalLength, downLength, done ->
+                val curProgress = (downLength * 100 / totalLength).toInt()
                 if (curProgress != progress) {
                     progress = curProgress
                     mNotificationUtils.updateDownLoad(progress)

@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.EditText
-import android.widget.TextView
 import com.app.common.widget.round.delegate.RoundViewDelegate
 
 /**
@@ -45,7 +44,7 @@ class RoundEditText : EditText {
         if (mRoundViewDelegate.isRadiusHalfHeight) {
             mRoundViewDelegate.radius = height / 2f
         } else {
-            mRoundViewDelegate.setBackgroundSelector();
+            mRoundViewDelegate.resetView();
         }
     }
 

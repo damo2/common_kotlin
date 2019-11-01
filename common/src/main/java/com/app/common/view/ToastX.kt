@@ -28,6 +28,10 @@ fun toastErrorNet(e: Throwable) {
     AppBaseApplication.toast.netError(e)
 }
 
+fun toastCancel() {
+    AppBaseApplication.toast.cancelToastX()
+}
+
 class ToastX constructor(val mContext: Context) : Toast(mContext) {
     private var mToastX: ToastX? = null
 

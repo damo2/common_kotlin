@@ -33,9 +33,8 @@ class Preference<T : Serializable> private constructor(val context: Context, val
         putPreference(key, value)
     }
 
-
     private fun findPreference(name: String): T? = with(prefs) {
-        val res: Any = when (clazz.simpleName.toLowerCase()) {
+        val res: Any? = when (clazz.simpleName.toLowerCase()) {
             Long::class.java.simpleName.toLowerCase() -> getLong(name, if (default is Long) default else 0L)
             String::class.java.simpleName.toLowerCase() -> getString(name, if (default is String) default else null)
             Int::class.java.simpleName.toLowerCase() -> getInt(name, if (default is Int) default else 0)

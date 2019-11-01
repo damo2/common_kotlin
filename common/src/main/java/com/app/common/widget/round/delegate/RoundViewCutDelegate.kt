@@ -86,7 +86,7 @@ class RoundViewCutDelegate(private val mView: View, private val mContext: Contex
     }
 
     fun setBackgroundSelector() {
-        logd("setBackgroundSelector")
+        logd("resetView")
         mView.backgroundTintList = getPressedColorSelector(backgroundColor, backgroundPressColor)
     }
 

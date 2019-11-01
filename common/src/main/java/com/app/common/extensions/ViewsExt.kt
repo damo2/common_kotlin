@@ -3,6 +3,7 @@ package com.app.common.extensions
 import android.app.Dialog
 import android.graphics.Bitmap
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.common.R
 import com.app.common.utils.ActivityUtils
@@ -73,3 +74,5 @@ fun RecyclerView.addScrollPauseLoadExt() = RecyclerViewUtils.addScrollPauseLoad(
 
 fun Dialog.showExt() = DialogUtil.safeShowDialog(this)
 fun Dialog.dismissExt() = DialogUtil.safeDismissDialog(this)
+
+fun TextView.textExt() = this.text.trim().toString()

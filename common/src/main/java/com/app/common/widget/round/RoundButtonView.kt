@@ -42,9 +42,9 @@ class RoundButtonView : Button {
         super.onLayout(changed, left, top, right, bottom)
         if (mRoundViewDelegate.isRadiusHalfHeight) {
             mRoundViewDelegate.radius = height / 2f
-            mRoundViewDelegate.setBackgroundSelector()
+            mRoundViewDelegate.resetView()
         } else {
-            mRoundViewDelegate.setBackgroundSelector()
+            mRoundViewDelegate.resetView()
         }
     }
 

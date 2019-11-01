@@ -20,7 +20,7 @@ class LogInterceptor : BaseInterceptor(requestCallback = {
             if ("POST" == method) {
                 if (it.body() is FormBody) {
                     val body = it.body() as FormBody
-                    for (i in 0..(body.size() - 1)) {
+                    for (i in 0 until body.size()) {
                         append(body.encodedName(i) + "=" + body.encodedValue(i) + ",")
                     }
                     delete(length - 1, length);
@@ -42,9 +42,9 @@ class LogInterceptor : BaseInterceptor(requestCallback = {
         }
     } catch (e: Exception) {
     }
-}, resultCallback = { result, _ ->
+}, resultCallback = { result, request ->
     try {
-        Log.i("LogInterceptor", "intercept#result:\n${result}")
+        Log.i("LogInterceptor", "intercept#url=${request.url()}\nresult:\n${result}")
     } catch (e: Exception) {
         e.printStackTrace()
     }

@@ -103,7 +103,7 @@ class RoundViewDelegate(private val mView: View, private val mContext: Context, 
     }
 
 
-    fun setBackgroundSelector() {
+    fun resetView() {
         if (backgroundColor != 0 || backgroundPressColor != 0) {
             if (backgroundPressColor == 0) backgroundPressColor = backgroundColor
             val gdBackground = getDrawableByColor(backgroundColor, borderColor)
