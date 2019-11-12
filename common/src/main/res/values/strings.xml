@@ -9,4 +9,6 @@
 
     <string name="The_video_to_start">录像开始</string>
 
+    <!--digits-->
+    <string name="common_num">0123456789</string>
 </resources>

@@ -33,7 +33,7 @@ fun <T> Observable<T>.subscribeExtApi(onNext: (result: T) -> Unit,
                                       onError: ((e: Throwable) -> Unit)? = null,
                                       onComplete: (() -> Unit)? = null,
                                       onSubscribe: ((disposable: Disposable) -> Unit)? = null,
-                                      context: Context? = null,
+                                      context: Any? = null,
                                       isShowLoad: Boolean = false,
                                       isCanCancel: Boolean = true,
                                       isToast: Boolean = true): Disposable {
@@ -85,7 +85,7 @@ private fun errorToast(e: Throwable, block: () -> Unit) {
     e.printStackTrace()
 }
 
-private fun addDisposable(context: Context?, disposable: Disposable) {
+private fun addDisposable(context: Any?, disposable: Disposable) {
     context?.let {
         when (it) {
             is AppBaseActivity -> it.addSubscription(disposable)
@@ -94,18 +94,18 @@ private fun addDisposable(context: Context?, disposable: Disposable) {
     }
 }
 
-private fun showDialog(context: Context?, isShowLoad: Boolean, isCanCancel: Boolean = true, disposable: Disposable) {
+private fun showDialog(context: Any?, isShowLoad: Boolean, isCanCancel: Boolean = true, disposable: Disposable) {
     context?.let {
         if (isShowLoad) {
             when (it) {
-                is AppBaseActivity -> it.showLoadingDialog(isCanCancel)
-                is AppBaseFragment -> it.showLoadingDialog(isCanCancel)
+                is AppBaseActivity -> if (!it.isFinishing) it.showLoadingDialog(isCanCancel)
+                is AppBaseFragment -> if (!it.isVisible) it.showLoadingDialog(isCanCancel)
             }
         }
     }
 }
 
-private fun dismissLoad(context: Context?, isShowLoad: Boolean) {
+private fun dismissLoad(context: Any?, isShowLoad: Boolean) {
     if (isShowLoad) {
         context?.let {
             when (it) {

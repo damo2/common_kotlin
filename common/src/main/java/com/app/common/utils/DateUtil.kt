@@ -166,3 +166,5 @@ operator fun Date.compareTo(compareDate: Date): Int {
 fun Date.stringFormat(formatType: String = "yyyy/MM/dd HH:mm:ss"): String {
     return SimpleDateFormat(formatType, Locale.US).format(this)
 }
+
+fun Int.toAddZeroExt() = if (this < 10) "0$this" else "$this"
