@@ -75,4 +75,8 @@ object RequestApiManager {
             return chain.proceed(request)
         }
     }
+
+    //这里返回一个泛型类，主要返回的是定义的接口类
+    fun <T> Retrofit.createService(clazz: Class<T>): T = this.create(clazz)
+
 }

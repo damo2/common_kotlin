@@ -106,12 +106,10 @@
         var apiService by NotNullSingle<ApiService>()
         //application 初始化
         fun initApiService() {
-            apiService = RequestApiManager.instance.apply {
-                initRetrofit({ clientBuilder ->
-                    //添加拦截器
-                }, { retrofitBuilder ->
-                }, ConstApi.BaseUrl)
-            }.createService(ApiService::class.java)
+            apiService = RequestApiManager.initRetrofit({ clientBuilder ->
+                //添加拦截器
+            }, { retrofitBuilder ->
+            }, baseUrl = "http://www.test.com").create(ApiService::class.java)
         }
     }
 

@@ -10,11 +10,10 @@ import com.app.common.api.RequestApiManager
  */
 object ApiManager {
     val apiService: ApiService by lazy {
-        RequestApiManager.instance.apply {
-            initRetrofit({ clientBuilder ->
-                //添加拦截器
-            }, { retrofitBuilder ->
-            }, "http://www.test.com")
-        }.createService(ApiService::class.java)
+        RequestApiManager.initRetrofit({ clientBuilder ->
+            //添加拦截器
+        }, { retrofitBuilder ->
+        }, baseUrl = "http://www.test.com")
+                .create(ApiService::class.java)
     }
 }
