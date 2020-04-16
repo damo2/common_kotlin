@@ -73,24 +73,25 @@
                             holder.getView(R.id.tv_name).setText(str);
                         }
                     };
-             FullyGridLayoutManager mLayoutManager = new FullyGridLayoutManager(mContext, 2);
-             //设置是否能滚动
-             // mLayoutManager.setScrollEnabled(false);
-             mRecyclerView.setLayoutManager(mLayoutManager);
-             mRecyclerView.addItemDecoration(new GridBaseItemDecoration(mContext, 2, 16, 16, false));
-             //添加加载更多
-             LoadMoreWrapper mFootWrapper = new LoadMoreWrapper(mAdapter);
-             View view = new View(this);
-             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, DensityUtils.dp2pxFI(mContext, 10));
-             view.setLayoutParams(params);
-             mFootWrapper.setLoadMoreView(view);
-             //添加空白页
-             mAdapterWrapper = new EmptyWrapper(mFootWrapper);
-             TextView tv = new TextView(mActivity);
-             tv.setText("请下拉刷新重试");
-             mAdapterWrapper.setEmptyView(tv);
-             mRecyclerView.setAdapter(mAdapterWrapper);
-
+             
+    FullyGridLayoutManager mLayoutManager = new FullyGridLayoutManager(mContext, 2);
+    //设置是否能滚动
+    // mLayoutManager.setScrollEnabled(false);
+    mRecyclerView.setLayoutManager(mLayoutManager);
+    mRecyclerView.addItemDecoration(new GridBaseItemDecoration(mContext, 2, 16, 16, false));
+    //添加加载更多
+    LoadMoreWrapper mFootWrapper = new LoadMoreWrapper(mAdapter);
+    View view = new View(this);
+    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, DensityUtils.dp2pxFI(mContext, 10));
+    view.setLayoutParams(params);
+    mFootWrapper.setLoadMoreView(view);
+    //添加空白页
+    mAdapterWrapper = new EmptyWrapper(mFootWrapper);
+    TextView tv = new TextView(mActivity);
+    tv.setText("请下拉刷新重试");
+    mAdapterWrapper.setEmptyView(tv);
+    mRecyclerView.setAdapter(mAdapterWrapper);
+         
 
 ### 网络请求
 
