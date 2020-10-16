@@ -148,9 +148,9 @@
                          });
       //文件上传
       RequestFileManager.uploadFileByKey(
-                          "http://www.wxjishu.com:9999/file/upload",
+                          "http://www.test.com:9999/fileupload",
                           "file",
-                          File(StorageUtils.getPublicStoragePath("test/wanban.apk")),
+                          File(StorageUtils.getPublicStoragePath("test/test.apk")),
                           { str -> Logger.d("上传结果=$str") },
                           { e -> Logger.d("异常=$e") },
                           { progress,total -> Logger.d("up=$progress total=$total") }

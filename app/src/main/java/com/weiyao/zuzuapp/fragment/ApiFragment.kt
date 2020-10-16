@@ -31,7 +31,7 @@ class ApiFragment : BaseFragment() {
         btnDownload.setOnClickListener {
             RequestFileManager.downloadFile(
                     "https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk",
-                    StorageUtils.getPublicStoragePath("test/wanban.apk"),
+                    StorageUtils.getPublicStoragePath("test/test.apk"),
                     { file -> toastInfo("下载成功") },
                     { e -> toastInfo("下载失败${e.message}") },
                     { totalLength, contentLength, done ->
@@ -41,9 +41,9 @@ class ApiFragment : BaseFragment() {
 
         btnUp.setOnClickListener {
             RequestFileManager.uploadFileByKey(
-                    "http://www.wxjishu.com:9999/file/upload",
+                    "http://test.com/upfile",
                     "file",
-                    File(StorageUtils.getPublicStoragePath("test/wanban.apk")),
+                    File(StorageUtils.getPublicStoragePath("test/test.apk")),
                     { str -> toastInfo("上传成功$str") },
                     { e -> toastInfo("上传失败$e") },
                     { progress, total -> logd("up=$progress total=$total") }
